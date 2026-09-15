@@ -1,0 +1,15 @@
+# Node & Web Build
+node_modules/
+dist/
+.docusaurus/
+.next/
+build/
+out/
+
+# OS & Temp
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+!.env.example
