@@ -1,6 +1,6 @@
 # CLI Commands Reference
 
-Complete command reference for `naagmani` CLI (v2.0.0).
+Complete command reference for `naagmani` CLI (v1.0.0).
 
 ---
 

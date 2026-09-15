@@ -18,7 +18,7 @@ Verify installation:
 
 ```bash
 naagmani --version
-# Output: naagmani version 2.0.0
+# Output: naagmani CLI v1.0.0
 ```
 
 ---

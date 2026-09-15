@@ -39,7 +39,7 @@ The canonical protocol definition and JSON Schema reside in the public [`naagman
     "protocol_version": "naagmani.plugin/v1",
     "host": {
       "name": "naagmani-core",
-      "version": "2.0.0"
+      "version": "1.0.0"
     },
     "config": {
       "mask_emails": true,
