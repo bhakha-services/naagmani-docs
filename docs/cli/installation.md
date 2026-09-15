@@ -11,7 +11,7 @@ The **Naagmani CLI** (`naagmani`) is the official developer tool for scaffolding
 The global npm package automatically installs the pre-compiled native Go binary for your OS/architecture:
 
 ```bash
-npm install -g @naagmani/cli
+npm install -g naagmani
 ```
 
 Verify installation:

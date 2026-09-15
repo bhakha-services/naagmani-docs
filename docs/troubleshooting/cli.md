@@ -6,8 +6,8 @@ Solutions for command-line interface execution, building, and validation issues.
 
 ## 1. `naagmani: EACCES: permission denied`
 
-- **Cause**: Trying to install `@naagmani/cli` globally without appropriate npm permissions on Linux/macOS.
-- **Fix**: Use `npx @naagmani/cli` or configure npm to use a non-root directory for global packages:
+- **Cause**: Trying to install `naagmani` globally without appropriate npm permissions on Linux/macOS.
+- **Fix**: Use `npx naagmani` or configure npm to use a non-root directory for global packages:
   ```bash
   mkdir -p ~/.npm-global
   npm config set prefix '~/.npm-global'

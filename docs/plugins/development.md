@@ -6,7 +6,7 @@ This guide walks you through building a custom Naagmani plugin from scratch usin
 
 ## 1. Prerequisites
 
-- **Naagmani CLI** installed: `npm install -g @naagmani/cli` or binary install.
+- **Naagmani CLI** installed: `npm install -g naagmani` or binary install.
 - Go (1.22+), Node.js (18+), or Python (3.10+) depending on your target language.
 
 ---

@@ -57,7 +57,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install -g @naagmani/cli
+      - run: npm install -g naagmani
       - run: naagmani validate --strict
       - run: naagmani publish --access public
         env:
