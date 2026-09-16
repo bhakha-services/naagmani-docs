@@ -1,6 +1,6 @@
 # Developer Portal Overview & Quickstart
 
-Naagmani v2 operates as an "Android OS for AI" with strict separation of concerns between runtime execution and tenant control plane management.
+Naagmani v1 operates as an "Android OS for AI" with strict separation of concerns between runtime execution and tenant control plane management.
 
 ---
 
