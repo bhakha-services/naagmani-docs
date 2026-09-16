@@ -39,6 +39,17 @@ export const navigationData: NavSection[] = [
     ],
   },
   {
+    title: 'DEVELOPER PORTAL',
+    items: [
+      { title: 'Portal Overview & Quickstart', href: '/docs/developer-portal/overview' },
+      { title: 'BYOK & Credential Pools', href: '/docs/developer-portal/credential-pools' },
+      { title: 'Plugin Protocol (v1)', href: '/docs/developer-portal/plugin-protocol' },
+      { title: 'MCP Integration', href: '/docs/developer-portal/mcp-integration' },
+      { title: 'FinOps & Budget Controls', href: '/docs/developer-portal/finops-budgets' },
+      { title: 'CLI Developer Guide', href: '/docs/developer-portal/cli-workflow' },
+    ],
+  },
+  {
     title: 'CONCEPTS',
     items: [
       { title: 'Organizations', href: '/docs/concepts/organizations' },

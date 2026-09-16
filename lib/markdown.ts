@@ -1,4 +1,5 @@
 import { Marked } from 'marked';
+import { createHighlighter, type Highlighter } from 'shiki';
 
 function slugify(text: string): string {
   return text
@@ -9,7 +10,71 @@ function slugify(text: string): string {
     .replace(/\s+/g, '-');
 }
 
-export function compileMarkdown(content: string, currentSlug: string[]): string {
+const SUPPORTED_LANGS = [
+  'json',
+  'jsonc',
+  'javascript',
+  'typescript',
+  'tsx',
+  'jsx',
+  'bash',
+  'sh',
+  'python',
+  'rust',
+  'yaml',
+  'toml',
+  'sql',
+  'html',
+  'css',
+  'markdown',
+  'dockerfile',
+  'go',
+  'c',
+  'cpp',
+  'diff',
+  'graphql',
+  'proto',
+  'text',
+];
+
+const LANG_ALIASES: Record<string, string> = {
+  js: 'javascript',
+  mjs: 'javascript',
+  cjs: 'javascript',
+  ts: 'typescript',
+  mts: 'typescript',
+  cts: 'typescript',
+  shell: 'bash',
+  zsh: 'bash',
+  py: 'python',
+  rs: 'rust',
+  yml: 'yaml',
+  md: 'markdown',
+  mdx: 'markdown',
+  docker: 'dockerfile',
+  golang: 'go',
+};
+
+let highlighterPromise: Promise<Highlighter> | null = null;
+
+async function getHighlighter(): Promise<Highlighter> {
+  if (!highlighterPromise) {
+    highlighterPromise = createHighlighter({
+      themes: ['github-dark', 'github-light'],
+      langs: SUPPORTED_LANGS,
+    });
+  }
+  return highlighterPromise;
+}
+
+function normalizeLang(lang?: string): string {
+  if (!lang) return 'text';
+  const clean = lang.trim().toLowerCase();
+  return LANG_ALIASES[clean] || clean;
+}
+
+export async function compileMarkdown(content: string, currentSlug: string[]): Promise<string> {
+  const highlighter = await getHighlighter();
   const marked = new Marked();
 
   // Custom renderer with explicit return types
@@ -87,23 +152,60 @@ export function compileMarkdown(content: string, currentSlug: string[]): string 
     },
 
     code(this: any, { text, lang }: { text: string; lang?: string }): string {
-      const language = lang || 'text';
-      const escaped = text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
+      const rawLang = (lang || 'text').trim().toLowerCase();
 
-      return `<div class="code-block-wrapper relative my-5 rounded-lg border border-zinc-800 bg-[#09090B] overflow-hidden group shadow-lg">
-        <div class="flex items-center justify-between px-4 py-2 border-b border-zinc-800 bg-zinc-950/70 text-xs text-zinc-400 font-mono">
+      if (rawLang === 'mermaid') {
+        const encoded = encodeURIComponent(text);
+        const escaped = text
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+
+        return `<div class="mermaid-diagram-wrapper my-6 not-prose" data-mermaid="${encoded}">
+          <div class="p-8 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-950/60 flex items-center justify-center text-sm text-zinc-400">
+            <div class="flex items-center gap-2">
+              <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Rendering diagram...</span>
+            </div>
+          </div>
+          <pre class="hidden"><code>${escaped}</code></pre>
+        </div>`;
+      }
+
+      const targetLang = normalizeLang(rawLang);
+      const loadedLangs = highlighter.getLoadedLanguages();
+      const safeLang = loadedLangs.includes(targetLang) ? targetLang : 'text';
+
+      let highlightedHtml = '';
+      try {
+        highlightedHtml = highlighter.codeToHtml(text, {
+          lang: safeLang,
+          themes: {
+            light: 'github-light',
+            dark: 'github-dark',
+          },
+        });
+      } catch (err) {
+        const escaped = text
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+        highlightedHtml = `<pre class="shiki"><code>${escaped}</code></pre>`;
+      }
+
+      return `<div class="code-block-wrapper relative my-5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#09090B] overflow-hidden group shadow-lg not-prose">
+        <div class="flex items-center justify-between px-4 py-2 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-100/80 dark:bg-zinc-950/70 text-xs text-zinc-600 dark:text-zinc-400 font-mono">
           <span class="flex items-center gap-2">
             <span class="inline-block w-2 h-2 rounded-full bg-emerald-500/80"></span>
-            ${language}
+            ${rawLang}
           </span>
-          <button onclick="navigator.clipboard.writeText(this.closest('.code-block-wrapper').querySelector('code').innerText); this.innerText='Copied!'; setTimeout(() => this.innerText='Copy', 2000)" class="px-2 py-1 rounded hover:bg-zinc-800 text-zinc-400 hover:text-emerald-400 transition-colors flex items-center gap-1">
+          <button onclick="navigator.clipboard.writeText(this.closest('.code-block-wrapper').querySelector('code').innerText); this.innerText='Copied!'; setTimeout(() => this.innerText='Copy', 2000)" class="px-2 py-1 rounded hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-1">
             Copy
           </button>
         </div>
-        <pre class="p-4 overflow-x-auto text-sm text-zinc-100 font-mono leading-relaxed"><code>${escaped}</code></pre>
+        <div class="shiki-code-container p-4 overflow-x-auto text-sm font-mono leading-relaxed">
+          ${highlightedHtml}
+        </div>
       </div>`;
     },
 

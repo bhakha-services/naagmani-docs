@@ -7,6 +7,7 @@ import { Breadcrumbs } from '@/components/breadcrumbs';
 import { TableOfContents } from '@/components/toc';
 import { Pager } from '@/components/pager';
 import { StatusBadge } from '@/components/status-badge';
+import { MermaidRenderer } from '@/components/mermaid';
 import { getPager } from '@/lib/navigation';
 
 interface PageProps {
@@ -80,7 +81,7 @@ export default async function DocPage({ params }: PageProps) {
     notFound();
   }
 
-  const compiledHtml = compileMarkdown(doc.content, slug);
+  const compiledHtml = await compileMarkdown(doc.content, slug);
   const pager = getPager(doc.slugPath);
 
   // Generate breadcrumb items
@@ -148,6 +149,9 @@ export default async function DocPage({ params }: PageProps) {
           className="prose dark:prose-invert max-w-none"
           dangerouslySetInnerHTML={{ __html: compiledHtml }}
         />
+
+        {/* Client-side Mermaid Diagram Renderer */}
+        <MermaidRenderer />
 
         {/* Next / Previous Page Navigation */}
         <Pager prev={pager.prev} next={pager.next} />

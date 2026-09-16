@@ -14,8 +14,14 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
 
       {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 md:hidden bg-black/70 backdrop-blur-sm animate-in fade-in duration-150">
-          <div className="fixed inset-y-0 left-0 w-4/5 max-w-xs bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800 p-6 shadow-2xl overflow-y-auto">
+        <div
+          className="fixed inset-0 z-50 md:hidden bg-black/70 backdrop-blur-sm animate-in fade-in duration-150"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <div
+            className="fixed inset-y-0 left-0 w-4/5 max-w-xs bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800 p-6 shadow-2xl overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="flex items-center justify-between pb-4 mb-4 border-b border-zinc-200 dark:border-zinc-800">
               <span className="font-bold text-sm text-zinc-900 dark:text-zinc-100 font-mono">
                 DOCUMENTATION

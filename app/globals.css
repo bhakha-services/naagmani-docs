@@ -61,6 +61,29 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  /* Universal pointer cursor for clickable elements */
+  button,
+  [role="button"],
+  a,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  input[type="checkbox"],
+  input[type="radio"],
+  select,
+  summary,
+  [onclick],
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [role="button"][aria-disabled="true"],
+  input:disabled,
+  select:disabled {
+    cursor: not-allowed;
+  }
 }
 
 /* Custom scrollbars */
@@ -187,3 +210,54 @@
   border-top: 1px solid hsl(var(--border));
   margin: 2.5rem 0;
 }
+
+/* Mermaid diagram styling */
+.mermaid-diagram-wrapper {
+  margin: 2rem 0;
+}
+
+.mermaid-svg-container svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
+}
+
+/* Shiki Syntax Highlighting & Code Blocks */
+.shiki-code-container pre.shiki {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.shiki-code-container pre.shiki code {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  font-size: inherit !important;
+  color: inherit !important;
+  display: grid;
+}
+
+.shiki-code-container pre.shiki .line {
+  min-height: 1.25rem;
+}
+
+/* Dual theme support for Shiki */
+html.dark .shiki,
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
+}
+
+html:not(.dark) .shiki,
+html:not(.dark) .shiki span {
+  color: var(--shiki-light) !important;
+}
+
+

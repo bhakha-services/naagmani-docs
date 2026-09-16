@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navigationData, NavSection } from '@/lib/navigation';
-import { ChevronDown, ChevronRight, BookOpen, Layers, Terminal, Shield, Zap, Cpu, ShoppingBag, AlertCircle, Sparkles } from 'lucide-react';
+import { ChevronDown, ChevronRight, BookOpen, Layers, Terminal, Shield, Zap, Cpu, ShoppingBag, AlertCircle, Sparkles, LayoutDashboard } from 'lucide-react';
 
 interface SidebarProps {
   className?: string;
@@ -13,6 +13,7 @@ interface SidebarProps {
 
 const sectionIcons: Record<string, any> = {
   'GET STARTED': Sparkles,
+  'DEVELOPER PORTAL': LayoutDashboard,
   'CONCEPTS': Layers,
   'API REFERENCE': Terminal,
   'PLUGINS & HDKs': Cpu,

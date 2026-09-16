@@ -80,14 +80,17 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-150">
+    <div
+      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-150"
+      onClick={onClose}
+    >
       <div
         className="relative w-full max-w-2xl rounded-xl border border-zinc-800 bg-zinc-950 shadow-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Input Bar */}
         <div className="flex items-center px-4 py-3.5 border-b border-zinc-800 gap-3">
-          <Search className="w-5 h-5 text-zinc-400" />
+          <Search className="w-5 h-5 text-zinc-400 shrink-0" />
           <input
             type="text"
             placeholder="Search documentation, APIs, SDKs, CLI..."
@@ -100,15 +103,22 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
           {query && (
             <button
               onClick={() => setQuery('')}
-              className="text-zinc-500 hover:text-zinc-300 p-1 rounded"
+              className="text-zinc-500 hover:text-zinc-300 p-1 rounded transition-colors"
               aria-label="Clear search"
             >
               <X className="w-4 h-4" />
             </button>
           )}
-          <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[11px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 rounded">
-            ESC
-          </kbd>
+          <button
+            onClick={onClose}
+            className="text-zinc-400 hover:text-zinc-200 p-1 rounded hover:bg-zinc-800/60 transition-colors flex items-center gap-1"
+            aria-label="Close search dialog"
+          >
+            <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[11px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 rounded">
+              ESC
+            </kbd>
+            <X className="w-4 h-4 sm:hidden" />
+          </button>
         </div>
 
         {/* Results List */}
