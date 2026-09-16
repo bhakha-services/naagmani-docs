@@ -1,23 +1,21 @@
-# Plugin Visibility & Scopes
+# Plugin Visibility & Trust Scopes
 
-Naagmani supports granular visibility tiers for published plugins to meet open-source and proprietary enterprise requirements.
+Naagmani separates visibility boundaries (who can view and download) from trust status (official vs community).
 
 ---
 
-## Visibility Tiers
+## Visibility Scopes
 
-| Tier | Flag | Description | Who Can Access |
+| Scope | Description | Access Boundary | Download Protection |
 | :--- | :--- | :--- | :--- |
-| **Public** | `--access public` | Listed in global public Marketplace. | Any Naagmani developer worldwide. |
-| **Organization Private** | `--access private` | Scoped to your organization registry. | Only authenticated members of your organization. |
-| **Project Scoped** | `--access internal` | Private to a single project workspace. | Only project members with developer/admin roles. |
+| **Community (Public)** | Publicly discoverable in the Marketplace across all workspaces and organizations. | Any authenticated developer. | Publicly downloadable artifact. |
+| **Organization Private** | Isolated strictly to the owning organization. Does not leak into public catalogs. | Authenticated members of the owning organization. | Protected endpoint (`GET /v1/plugins/artifacts/{filename}`) verifying org membership. |
+| **Official (Verified)** | Standard capabilities curated and endorsed by platform administrators. | Publicly discoverable. | Requires system administrator privilege (`is_system_admin: true`) to publish. |
 
 ---
 
-## Changing Visibility
+## Private Artifact Security
 
-Organization administrators can toggle plugin visibility in the Developer Portal under **Registry Settings** or via CLI:
-
-```bash
-naagmani marketplace visibility @acme/internal-rag --access private
-```
+Private plugin archives are protected at both discovery and download layers:
+- Catalog queries filter private plugins to only those owned by the requester's active organization.
+- Direct artifact downloads at `GET /v1/plugins/artifacts/{filename}` verify the requester's JWT authorization and organization membership or registered machine-to-machine installation token.
