@@ -7,6 +7,7 @@ export interface CodeTabItem {
   label: string;
   lang: string;
   code: string;
+  highlightedHtml?: string;
 }
 
 interface CodeTabsProps {
@@ -28,10 +29,10 @@ export function CodeTabs({ tabs, defaultTab = 0 }: CodeTabsProps) {
   };
 
   return (
-    <div className="my-6 rounded-lg border border-zinc-800 bg-[#09090B] overflow-hidden shadow-md">
+    <div className="my-6 rounded-xl border border-zinc-800 bg-[#09090B] overflow-hidden shadow-lg">
       {/* Tab Header */}
-      <div className="flex items-center justify-between px-3 py-2 border-b border-zinc-800 bg-zinc-950/80">
-        <div className="flex items-center gap-1 overflow-x-auto">
+      <div className="flex items-center justify-between px-3.5 py-2.5 border-b border-zinc-800 bg-zinc-950/80">
+        <div className="flex items-center gap-1.5 overflow-x-auto">
           {tabs.map((tab, idx) => (
             <button
               key={tab.label}
@@ -39,7 +40,7 @@ export function CodeTabs({ tabs, defaultTab = 0 }: CodeTabsProps) {
               className={`px-3 py-1 text-xs font-mono rounded-md transition-all ${
                 activeTab === idx
                   ? 'bg-zinc-800 text-emerald-400 font-semibold border border-zinc-700/80 shadow-sm'
-                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900'
+                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/60'
               }`}
             >
               {tab.label}
@@ -67,9 +68,16 @@ export function CodeTabs({ tabs, defaultTab = 0 }: CodeTabsProps) {
       </div>
 
       {/* Code Display */}
-      <pre className="p-4 text-xs md:text-sm font-mono text-zinc-100 overflow-x-auto leading-relaxed">
-        <code>{currentTab?.code}</code>
-      </pre>
+      {currentTab?.highlightedHtml ? (
+        <div
+          className="shiki-code-container p-4 text-xs md:text-sm font-mono overflow-x-auto leading-relaxed"
+          dangerouslySetInnerHTML={{ __html: currentTab.highlightedHtml }}
+        />
+      ) : (
+        <pre className="p-4 text-xs md:text-sm font-mono text-zinc-100 overflow-x-auto leading-relaxed">
+          <code>{currentTab?.code}</code>
+        </pre>
+      )}
     </div>
   );
 }

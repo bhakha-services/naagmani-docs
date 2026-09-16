@@ -73,6 +73,29 @@ function normalizeLang(lang?: string): string {
   return LANG_ALIASES[clean] || clean;
 }
 
+export async function highlightCodeSnippet(code: string, lang: string): Promise<string> {
+  const highlighter = await getHighlighter();
+  const targetLang = normalizeLang(lang);
+  const loadedLangs = highlighter.getLoadedLanguages();
+  const safeLang = loadedLangs.includes(targetLang) ? targetLang : 'text';
+
+  try {
+    return highlighter.codeToHtml(code, {
+      lang: safeLang,
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
+    });
+  } catch (err) {
+    const escaped = code
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+    return `<pre class="shiki"><code>${escaped}</code></pre>`;
+  }
+}
+
 export async function compileMarkdown(content: string, currentSlug: string[]): Promise<string> {
   const highlighter = await getHighlighter();
   const marked = new Marked();

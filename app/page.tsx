@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Navbar } from '@/components/navbar';
 import { CodeTabs } from '@/components/code-tabs';
+import { highlightCodeSnippet } from '@/lib/markdown';
 import {
   ArrowRight,
   Terminal,
@@ -186,7 +187,14 @@ const quickstartSteps = [
   },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const highlightedExamples = await Promise.all(
+    apiExamples.map(async (example) => ({
+      ...example,
+      highlightedHtml: await highlightCodeSnippet(example.code, example.lang),
+    }))
+  );
+
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Navbar />
@@ -250,7 +258,7 @@ export default function HomePage() {
                   Instant Drop-in Integration
                 </span>
               </div>
-              <CodeTabs tabs={apiExamples} defaultTab={0} />
+              <CodeTabs tabs={highlightedExamples} defaultTab={0} />
             </div>
           </div>
         </section>
