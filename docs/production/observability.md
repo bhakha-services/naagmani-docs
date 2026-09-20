@@ -31,7 +31,7 @@ telemetry:
     enabled: true
     endpoint: "otel-collector.monitoring:4317"
     protocol: "grpc"
-    sampling_rate: 1.0 # 100% of traces in staging, 0.1 for high-volume prod
+    sampling_rate: 1.0 # 100% of traces in test, 0.1 for high-volume prod
 ```
 
 ---

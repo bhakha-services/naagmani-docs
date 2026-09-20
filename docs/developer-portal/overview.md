@@ -33,7 +33,7 @@ graph TD
 
 3. **Developer Portal (`:3000`)**:
    - Customer web console for managing API keys, providers, model routing policies, and usage metrics.
-   - Project-based workspace isolation and environment switching (Production, Staging, Development).
+   - Project-based workspace isolation and environment switching (Production, Test).
 
 ---
 

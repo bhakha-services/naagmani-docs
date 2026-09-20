@@ -8,7 +8,7 @@ Before diving into quickstarts and configuration, review the foundational terms 
 
 1. **Organization (`org_...`)**: The root enterprise boundary. Billing, member accounts, global compliance policies, and plugin entitlements are defined at the organization level.
 2. **Project (`proj_...`)**: A distinct product, service, or team workspace within an organization (e.g. `customer-support-bot`, `internal-search`).
-3. **Environment (`env_...`)**: An isolated deployment tier within a project (e.g. `development`, `staging`, `production`). API keys and provider credentials are scoped to specific environments.
+3. **Environment (`env_...`)**: An isolated deployment tier within a project (e.g. `test`, `production`). API keys and provider credentials are scoped to specific environments.
 
 ---
 

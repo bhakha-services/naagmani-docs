@@ -9,7 +9,7 @@ Learn how to search, install, and configure marketplace plugins in your Naagmani
 1. In the Developer Portal, navigate to **Marketplace**.
 2. Browse or search for the desired plugin (e.g. `dlp-sanitizer`).
 3. Click **Install to Project**.
-4. Select target project and environments (`production`, `staging`, `development`).
+4. Select target project and environments (`production`, `test`).
 5. Review requested permissions (`network:outbound`, `env:read`).
 6. Configure plugin settings in the interactive JSON schema form.
 7. Click **Deploy**.

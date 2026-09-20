@@ -12,8 +12,8 @@ Naagmani uses scoped API keys with distinct prefixes to provide clear visibility
 
 | Prefix | Environment | Purpose |
 | :--- | :--- | :--- |
-| `nmn_live_` | Production (`prod`) | Production workloads and live consumer traffic. |
-| `nmn_test_` | Staging / Development (`dev`, `staging`) | Testing, local development, and CI/CD pipelines. |
+| `nmn_live_` | Production (`production`) | Production workloads and live consumer traffic. |
+| `nmn_test_` | Test (`test`) | Testing, local development, and CI/CD pipelines. |
 
 > [!IMPORTANT]
 > API keys are shown **only once** upon generation in the Naagmani Developer Portal. Store them securely in an environment variable management tool or secret store.
@@ -57,7 +57,7 @@ Naagmani API keys can be provisioned with granular access controls:
 1. Navigate to **Projects** > Select your Project > **API Keys**.
 2. Click **Create API Key**.
 3. Specify a descriptive label (e.g., `ci-testing-runner`, `backend-api-prod`).
-4. Select the target environment (`production`, `staging`, or `development`).
+4. Select the target environment (`production` or `test`).
 5. Choose required permission scopes.
 6. Copy and store the generated key.
 

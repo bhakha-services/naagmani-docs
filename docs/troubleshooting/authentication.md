@@ -7,7 +7,7 @@ Diagnosing authentication, key scoping, and credential issues.
 ## 1. Test Key Used in Production Environment
 
 - **Symptom**: Requests return `403 Forbidden: Test keys (nmn_test_) are not permitted in production routes.`
-- **Cause**: An API key generated for `development` or `staging` was supplied to a production gateway endpoint.
+- **Cause**: An API key generated for `test` was supplied to a production gateway endpoint.
 - **Fix**: Generate and use a production-scoped key (`nmn_live_...`).
 
 ---
