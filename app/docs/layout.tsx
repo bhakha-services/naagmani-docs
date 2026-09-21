@@ -39,10 +39,10 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         </div>
       )}
 
-      {/* Main Container */}
-      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex-1 flex">
+      {/* Main Container - Fluid & Ultrawide Responsive */}
+      <div className="max-w-[1920px] 4xl:max-w-[2400px] mx-auto w-full px-4 sm:px-6 lg:px-8 2xl:px-12 flex-1 flex">
         {/* Desktop Left Sidebar */}
-        <div className="hidden md:block w-64 lg:w-72 flex-shrink-0 border-r border-zinc-200 dark:border-zinc-800/80 pr-6 py-8 sticky top-16 max-h-[calc(100vh-4rem)] overflow-y-auto">
+        <div className="hidden md:block w-64 lg:w-72 2xl:w-80 flex-shrink-0 border-r border-zinc-200 dark:border-zinc-800/80 pr-6 2xl:pr-8 py-8 sticky top-16 max-h-[calc(100vh-4rem)] overflow-y-auto">
           <Sidebar />
         </div>
 

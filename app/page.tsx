@@ -205,8 +205,8 @@ export default async function HomePage() {
           {/* Subtle Ambient Glow */}
           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none" />
 
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
+          <div className="max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 relative">
+            <div className="flex flex-col items-center text-center max-w-4xl 2xl:max-w-5xl mx-auto">
               {/* Release Pill */}
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 mb-6 animate-in fade-in duration-300">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -218,12 +218,12 @@ export default async function HomePage() {
               </div>
 
               {/* Hero Title */}
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 leading-[1.15]">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl 2xl:text-7xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 leading-[1.15]">
                 The AI Runtime for your applications.
               </h1>
 
               {/* Supporting Text */}
-              <p className="mt-6 text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl">
+              <p className="mt-6 text-lg sm:text-xl 2xl:text-2xl text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl 2xl:max-w-4xl">
                 Instead of managing isolated AI providers, custom routing, security keys, plugins, and token metering separately — standardize everything behind one high-performance, OpenAI-compatible AI gateway.
               </p>
 
@@ -252,7 +252,7 @@ export default async function HomePage() {
             </div>
 
             {/* Interactive API Demonstration Box */}
-            <div className="mt-14 max-w-4xl mx-auto">
+            <div className="mt-14 max-w-4xl 2xl:max-w-5xl 3xl:max-w-6xl mx-auto">
               <div className="text-center mb-3">
                 <span className="text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                   Instant Drop-in Integration
@@ -265,7 +265,7 @@ export default async function HomePage() {
 
         {/* Quickstart Flow Section */}
         <section className="py-16 md:py-24 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-950/40">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
             <div className="text-center max-w-2xl mx-auto mb-12">
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
                 Go from docs to production in minutes
@@ -305,13 +305,13 @@ export default async function HomePage() {
 
         {/* Core Infrastructure Pillars Grid */}
         <section className="py-16 md:py-24 border-b border-zinc-200 dark:border-zinc-800">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
               <div>
                 <span className="text-xs font-mono font-semibold uppercase tracking-wider text-emerald-500">
                   Infrastructure Architecture
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mt-2">
+                <h2 className="text-2xl sm:text-3xl 2xl:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mt-2">
                   Complete AI Runtime Capabilities
                 </h2>
               </div>
@@ -323,23 +323,23 @@ export default async function HomePage() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 2xl:gap-8">
               {pillars.map((pillar) => {
                 const Icon = pillar.icon;
                 return (
                   <Link
                     key={pillar.title}
                     href={pillar.href}
-                    className="group p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/30 hover:border-emerald-500/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/60 transition-all flex flex-col justify-between"
+                    className="group p-6 2xl:p-8 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/30 hover:border-emerald-500/50 hover:bg-zinc-50 dark:hover:bg-zinc-900/60 transition-all flex flex-col justify-between"
                   >
                     <div>
-                      <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-emerald-500 group-hover:bg-emerald-500/10 group-hover:text-emerald-400 transition-colors mb-4">
-                        <Icon className="w-5 h-5" />
+                      <div className="w-10 h-10 2xl:w-12 2xl:h-12 rounded-xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-emerald-500 group-hover:bg-emerald-500/10 group-hover:text-emerald-400 transition-colors mb-4">
+                        <Icon className="w-5 h-5 2xl:w-6 2xl:h-6" />
                       </div>
-                      <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors">
+                      <h3 className="text-base 2xl:text-lg font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors">
                         {pillar.title}
                       </h3>
-                      <p className="mt-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                      <p className="mt-2 text-xs sm:text-sm 2xl:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
                         {pillar.description}
                       </p>
                     </div>
@@ -356,47 +356,47 @@ export default async function HomePage() {
 
         {/* Public Ecosystem Section */}
         <section className="py-16 bg-zinc-50/50 dark:bg-zinc-950/40">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-8 sm:p-12 flex flex-col lg:flex-row items-center justify-between gap-8">
-              <div className="max-w-xl">
+          <div className="max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
+            <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-8 sm:p-12 2xl:p-16 flex flex-col lg:flex-row items-center justify-between gap-8">
+              <div className="max-w-xl 2xl:max-w-2xl">
                 <span className="text-xs font-mono font-semibold uppercase tracking-wider text-emerald-500">
                   Open Ecosystem
                 </span>
-                <h3 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mt-2">
+                <h3 className="text-2xl 2xl:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mt-2">
                   Plug into the Naagmani SDK & CLI Ecosystem
                 </h3>
-                <p className="mt-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                <p className="mt-3 text-sm 2xl:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   Scaffold custom plugins with native Go, TypeScript, or Python HDKs. Manage local clusters, test schemas, and deploy policies using our pre-compiled single binary CLI.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
                     href="/docs/cli/installation"
-                    className="px-4 py-2 rounded-lg text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-500 transition-colors"
+                    className="px-4 py-2 2xl:px-5 2xl:py-2.5 rounded-lg text-xs 2xl:text-sm font-semibold bg-emerald-600 text-white hover:bg-emerald-500 transition-colors"
                   >
                     Install CLI
                   </Link>
                   <Link
                     href="/docs/sdk/go"
-                    className="px-4 py-2 rounded-lg text-xs font-semibold border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:border-emerald-500 transition-colors"
+                    className="px-4 py-2 2xl:px-5 2xl:py-2.5 rounded-lg text-xs 2xl:text-sm font-semibold border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:border-emerald-500 transition-colors"
                   >
                     Go HDK
                   </Link>
                   <Link
                     href="/docs/sdk/node"
-                    className="px-4 py-2 rounded-lg text-xs font-semibold border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:border-emerald-500 transition-colors"
+                    className="px-4 py-2 2xl:px-5 2xl:py-2.5 rounded-lg text-xs 2xl:text-sm font-semibold border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:border-emerald-500 transition-colors"
                   >
                     Node HDK
                   </Link>
                   <Link
                     href="/docs/sdk/python"
-                    className="px-4 py-2 rounded-lg text-xs font-semibold border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:border-emerald-500 transition-colors"
+                    className="px-4 py-2 2xl:px-5 2xl:py-2.5 rounded-lg text-xs 2xl:text-sm font-semibold border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:border-emerald-500 transition-colors"
                   >
                     Python HDK
                   </Link>
                 </div>
               </div>
 
-              <div className="w-full lg:w-auto flex flex-col gap-3 font-mono text-xs text-zinc-400 bg-zinc-950 p-6 rounded-xl border border-zinc-800 shadow-md">
+              <div className="w-full lg:w-auto flex flex-col gap-3 font-mono text-xs 2xl:text-sm text-zinc-400 bg-zinc-950 p-6 2xl:p-8 rounded-xl border border-zinc-800 shadow-md">
                 <span className="text-emerald-400 font-semibold"># Install via npm</span>
                 <code className="text-zinc-200 bg-zinc-900 px-3 py-2 rounded border border-zinc-800">
                   npm install -g naagmani
@@ -413,7 +413,7 @@ export default async function HomePage() {
 
       {/* Footer */}
       <footer className="border-t border-zinc-200 dark:border-zinc-800 py-12 bg-white dark:bg-[#09090B] text-xs text-zinc-500 dark:text-zinc-400">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="max-w-[1920px] 4xl:max-w-[2400px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="font-semibold text-zinc-800 dark:text-zinc-200">Naagmani Docs</span>
             <span>—</span>

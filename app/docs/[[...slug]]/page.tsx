@@ -125,20 +125,20 @@ export default async function DocPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Main Documentation Area */}
-      <main className="flex-1 min-w-0 px-4 sm:px-8 py-8 lg:py-10 max-w-4xl">
+      {/* Main Documentation Area - Responsive scaling for standard, wide and ultrawide screens */}
+      <main className="flex-1 min-w-0 px-4 sm:px-8 2xl:px-12 py-8 lg:py-10 max-w-5xl 2xl:max-w-[1250px] 3xl:max-w-[1400px]">
         <Breadcrumbs items={breadcrumbItems} />
 
         {/* Page Header */}
         <div className="pb-6 mb-6 border-b border-zinc-200 dark:border-zinc-800">
           <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
+            <h1 className="text-3xl sm:text-4xl 2xl:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
               {doc.title}
             </h1>
             {doc.status && <StatusBadge status={doc.status} />}
           </div>
           {doc.description && (
-            <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            <p className="text-base sm:text-lg 2xl:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed">
               {doc.description}
             </p>
           )}
@@ -146,7 +146,7 @@ export default async function DocPage({ params }: PageProps) {
 
         {/* Markdown Content */}
         <div
-          className="prose dark:prose-invert max-w-none"
+          className="prose dark:prose-invert max-w-none 2xl:prose-lg"
           dangerouslySetInnerHTML={{ __html: compiledHtml }}
         />
 
@@ -158,7 +158,7 @@ export default async function DocPage({ params }: PageProps) {
       </main>
 
       {/* Right Sidebar: Table of Contents */}
-      <div className="hidden xl:block w-64 flex-shrink-0 pl-6 py-10">
+      <div className="hidden xl:block w-64 2xl:w-72 3xl:w-80 flex-shrink-0 pl-6 2xl:pl-8 py-10 sticky top-16 max-h-[calc(100vh-4rem)] overflow-y-auto">
         <TableOfContents headings={doc.headings} />
       </div>
     </>

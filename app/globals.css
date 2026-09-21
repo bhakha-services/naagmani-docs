@@ -104,7 +104,6 @@
 
 /* Markdown typography enhancements */
 .prose {
-  max-width: 78ch;
   color: hsl(var(--foreground));
 }
 

@@ -24,7 +24,7 @@ export function Navbar({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void
   return (
     <>
       <header className="sticky top-0 z-40 w-full border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-[#09090B]/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+        <div className="max-w-[1920px] 4xl:max-w-[2400px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 h-16 flex items-center justify-between gap-4">
           {/* Left: Brand & Mobile Menu Button */}
           <div className="flex items-center gap-3">
             {onMobileMenuToggle && (
