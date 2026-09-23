@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Navbar } from '@/components/navbar';
 import { CodeTabs } from '@/components/code-tabs';
 import { highlightCodeSnippet } from '@/lib/markdown';
+import { siteConfig } from '@/lib/config';
 import {
   ArrowRight,
   Terminal,
@@ -19,11 +20,11 @@ import {
   ExternalLink,
 } from 'lucide-react';
 
-const apiExamples = [
+const getApiExamples = (apiUrl: string) => [
   {
     label: 'cURL',
     lang: 'bash',
-    code: `curl -X POST https://api.naagmani.app/v1/chat/completions \\
+    code: `curl -X POST ${apiUrl}/v1/chat/completions \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer nm_live_9f8a7e6d5c4b3a21" \\
   -d '{
@@ -42,7 +43,7 @@ const apiExamples = [
 
 // Naagmani is 100% OpenAI-compatible
 const client = new OpenAI({
-  baseURL: 'https://api.naagmani.app/v1',
+  baseURL: '${apiUrl}/v1',
   apiKey: process.env.NAAGMANI_API_KEY, // e.g. nm_live_...
 });
 
@@ -65,7 +66,7 @@ for await (const chunk of response) {
 import os
 
 client = OpenAI(
-    base_url="https://api.naagmani.app/v1",
+    base_url="${apiUrl}/v1",
     api_key=os.environ.get("NAAGMANI_API_KEY"),
 )
 
@@ -95,7 +96,7 @@ import (
 
 func main() {
 	config := openai.DefaultConfig(os.Getenv("NAAGMANI_API_KEY"))
-	config.BaseURL = "https://api.naagmani.app/v1"
+	config.BaseURL = "${apiUrl}/v1"
 
 	client := openai.NewClientWithConfig(config)
 	resp, err := client.CreateChatCompletion(
@@ -188,8 +189,9 @@ const quickstartSteps = [
 ];
 
 export default async function HomePage() {
+  const examples = getApiExamples(siteConfig.apiUrl);
   const highlightedExamples = await Promise.all(
-    apiExamples.map(async (example) => ({
+    examples.map(async (example) => ({
       ...example,
       highlightedHtml: await highlightCodeSnippet(example.code, example.lang),
     }))
@@ -430,7 +432,7 @@ export default async function HomePage() {
               Security
             </Link>
             <a
-              href="https://github.com/bhakha-services/naagmani-cli"
+              href={siteConfig.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-emerald-500 transition-colors flex items-center gap-1"

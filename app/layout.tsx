@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
+import { siteConfig } from '@/lib/config';
 
 export const viewport: Viewport = {
   themeColor: [
@@ -12,36 +13,19 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://docs.naagmani.app'),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: 'Naagmani Documentation — AI Runtime Platform',
+    default: siteConfig.title,
     template: '%s — Naagmani Documentation',
   },
-  description:
-    'Official developer documentation, architectural guides, API references, CLI manuals, and Plugin SDK guides for Naagmani — The AI Runtime for your applications.',
-  keywords: [
-    'AI runtime',
-    'AI infrastructure',
-    'AI gateway',
-    'AI API gateway',
-    'LLM gateway',
-    'LLM routing',
-    'AI model routing',
-    'AI provider routing',
-    'AI developer platform',
-    'AI API infrastructure',
-    'AI plugins',
-    'MCP gateway',
-    'AI security',
-    'AI firewall',
-    'LLM observability',
-    'AI usage tracking',
-    'AI cost management',
-    'AI API management',
-  ],
-  authors: [{ name: 'Naagmani Team', url: 'https://docs.naagmani.app' }],
-  creator: 'Naagmani Team',
-  publisher: 'Bhakha Services',
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.author, url: siteConfig.url }],
+  creator: siteConfig.creator,
+  publisher: siteConfig.publisher,
+  alternates: {
+    canonical: siteConfig.url,
+  },
   robots: {
     index: true,
     follow: true,
@@ -55,27 +39,27 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    locale: 'en_US',
-    url: 'https://docs.naagmani.app',
-    siteName: 'Naagmani Documentation',
-    title: 'Naagmani Documentation — The AI Runtime for your applications',
-    description:
-      'Standardize model connectivity, bring-your-own-key security, polyglot plugin execution, real-time FinOps metering, and resilient AI routing with a single OpenAI-compatible gateway.',
+    locale: siteConfig.locale,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: siteConfig.title,
+    description: siteConfig.description,
     images: [
       {
-        url: '/og-image.png',
+        url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: 'Naagmani Documentation — The AI Runtime for your applications',
+        alt: siteConfig.title,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Naagmani Documentation — The AI Runtime for your applications',
-    description:
-      'Developer documentation, API reference, CLI guides, and Plugin SDKs for the Naagmani AI Operating System.',
-    images: ['/og-image.png'],
+    title: siteConfig.title,
+    description: siteConfig.description,
+    creator: siteConfig.twitterHandle,
+    site: siteConfig.twitterHandle,
+    images: [siteConfig.ogImage],
   },
   icons: {
     icon: '/favicon.ico',
@@ -94,22 +78,22 @@ export default function RootLayout({
     '@graph': [
       {
         '@type': 'Organization',
-        '@id': 'https://docs.naagmani.app/#organization',
+        '@id': `${siteConfig.url}/#organization`,
         name: 'Naagmani',
-        url: 'https://docs.naagmani.app',
+        url: siteConfig.url,
         logo: {
           '@type': 'ImageObject',
-          url: 'https://docs.naagmani.app/icon.png',
+          url: `${siteConfig.url}/icon.png`,
         },
       },
       {
         '@type': 'WebSite',
-        '@id': 'https://docs.naagmani.app/#website',
-        url: 'https://docs.naagmani.app',
-        name: 'Naagmani Documentation',
+        '@id': `${siteConfig.url}/#website`,
+        url: siteConfig.url,
+        name: siteConfig.name,
         description: 'Official developer documentation and API reference for the Naagmani AI Operating System.',
         publisher: {
-          '@id': 'https://docs.naagmani.app/#organization',
+          '@id': `${siteConfig.url}/#organization`,
         },
       },
       {

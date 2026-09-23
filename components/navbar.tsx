@@ -7,6 +7,7 @@ import { useTheme } from 'next-themes';
 import { Logo } from './logo';
 import { Search, Sun, Moon, Github, Menu, X } from 'lucide-react';
 import { SearchDialog } from './search-dialog';
+import { siteConfig } from '@/lib/config';
 
 export function Navbar({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void }) {
   const pathname = usePathname();
@@ -86,7 +87,7 @@ export function Navbar({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void
 
             {/* GitHub Link */}
             <a
-              href="https://github.com/bhakha-services/naagmani-cli"
+              href={siteConfig.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex p-2 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"

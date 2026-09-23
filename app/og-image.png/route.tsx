@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og';
+import { siteConfig } from '@/lib/config';
 
 export const runtime = 'nodejs';
 
@@ -113,7 +114,7 @@ export async function GET() {
           }}
         >
           <span style={{ fontSize: '18px', color: '#71717A', fontFamily: 'monospace' }}>
-            docs.naagmani.app
+            {siteConfig.domain}
           </span>
           <span style={{ fontSize: '18px', color: '#10B981', fontWeight: 600 }}>
             OpenAI-Compatible AI Infrastructure

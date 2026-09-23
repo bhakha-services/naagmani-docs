@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { siteConfig } from '@/lib/config';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/search-private', '/_next/'],
     },
-    sitemap: 'https://docs.naagmani.app/sitemap.xml',
+    sitemap: `${siteConfig.url}/sitemap.xml`,
   };
 }

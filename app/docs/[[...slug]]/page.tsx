@@ -9,6 +9,7 @@ import { Pager } from '@/components/pager';
 import { StatusBadge } from '@/components/status-badge';
 import { MermaidRenderer } from '@/components/mermaid';
 import { getPager } from '@/lib/navigation';
+import { siteConfig } from '@/lib/config';
 
 interface PageProps {
   params: Promise<{
@@ -39,7 +40,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const canonicalUrl = `https://docs.naagmani.app${doc.slugPath}`;
+  const canonicalUrl = `${siteConfig.url}${doc.slugPath}`;
 
   return {
     title: doc.title,
@@ -52,9 +53,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: doc.description,
       url: canonicalUrl,
       type: 'article',
+      locale: siteConfig.locale,
+      siteName: siteConfig.name,
       images: [
         {
-          url: '/og-image.png',
+          url: `${siteConfig.url}/og-image.png`,
           width: 1200,
           height: 630,
           alt: `${doc.title} — Naagmani Documentation`,
@@ -65,6 +68,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: 'summary_large_image',
       title: `${doc.title} — Naagmani Documentation`,
       description: doc.description,
+      creator: siteConfig.twitterHandle,
+      site: siteConfig.twitterHandle,
+      images: [`${siteConfig.url}/og-image.png`],
     },
   };
 }
@@ -102,7 +108,7 @@ export default async function DocPage({ params }: PageProps) {
     '@type': 'TechArticle',
     headline: doc.title,
     description: doc.description,
-    url: `https://docs.naagmani.app${doc.slugPath}`,
+    url: `${siteConfig.url}${doc.slugPath}`,
     author: {
       '@type': 'Organization',
       name: 'Naagmani Team',
@@ -110,11 +116,11 @@ export default async function DocPage({ params }: PageProps) {
     publisher: {
       '@type': 'Organization',
       name: 'Naagmani',
-      url: 'https://docs.naagmani.app',
+      url: siteConfig.url,
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://docs.naagmani.app${doc.slugPath}`,
+      '@id': `${siteConfig.url}${doc.slugPath}`,
     },
   };
 
