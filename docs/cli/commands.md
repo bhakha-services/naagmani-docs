@@ -1,67 +1,59 @@
 # CLI Commands Reference
 
-Complete command reference for `naagmani` CLI (v1.0.0).
+Complete command matrix for the `naagmani` command-line interface.
 
 ---
 
-## Core Commands
+## Core Command Categories
 
-| Command | Description |
-| :--- | :--- |
-| `naagmani init <name>` | Scaffold a new plugin, policy, or project configuration from templates. |
-| `naagmani create <type>` | Interactive wizard to generate plugins, routes, or mock providers. |
-| `naagmani dev` | Run local interactive development server with hot reload and stdio inspector. |
-| `naagmani validate` | Validate `plugin.json` manifest against the `naagmani.plugin/v1` specification. |
-| `naagmani build` | Build plugin binary or bundle assets as defined in manifest. |
-| `naagmani package` | Bundle plugin directory into a `.tgz` distribution tarball. |
-| `naagmani publish` | Publish packaged plugin to the Naagmani Plugin Registry. |
-| `naagmani doctor` | Inspect host environment, installed compilers, network, and permissions. |
-| `naagmani login` | Authenticate CLI with Naagmani Cloud. |
-| `naagmani logout` | Clear local stored authentication tokens. |
-| `naagmani whoami` | Display active user, organization, and project context. |
-| `naagmani marketplace` | Search and explore available community & enterprise plugins. |
-| `naagmani policy` | Manage and deploy routing, rate limit, and security policies. |
-| `naagmani usage` | Query token consumption, latency, and cost summaries from the terminal. |
-| `naagmani versions` | List published versions for a plugin. |
-| `naagmani update` | Update installed plugins or CLI to the latest release. |
-| `naagmani rollback` | Rollback active plugin version in an environment. |
+### `naagmani auth`
+Manage authentication credentials and active sessions.
+- `naagmani auth login`: Browser-based OAuth2 login.
+- `naagmani auth logout`: Clear cached session credentials.
+- `naagmani auth status`: Display active identity and token TTL.
 
 ---
 
-## Command Details & Flags
+### `naagmani projects`
+Manage projects and environment namespaces.
+- `naagmani projects list`: List all projects in active organization.
+- `naagmani projects create <name>`: Provision a new project.
+- `naagmani projects switch <project_id>`: Set default project context.
 
-### `naagmani init`
-```bash
-naagmani init <project-name> [flags]
+---
 
-Flags:
-  -t, --template string    Template to use: node, go, python (default "node")
-      --org string         Organization slug
-```
+### `naagmani tokens`
+Generate and revoke Project Service Tokens.
+- `naagmani tokens create --name <name> --capabilities <list> --ttl <sec>`: Generate a new PST.
+- `naagmani tokens list`: Show all active service tokens.
+- `naagmani tokens revoke <token_id>`: Instantly revoke token credentials.
 
-### `naagmani dev`
-```bash
-naagmani dev [flags]
+---
 
-Flags:
-  -p, --port int           Local port for mock API gateway (default 8080)
-      --watch              Watch file changes and auto-reload (default true)
-      --config string      Path to custom dev config file
-```
+### `naagmani attempts`
+Query execution traces and downstream model cascades.
+- `naagmani attempts list --limit 20`: Fetch recent request attempts.
+- `naagmani attempts inspect <attempt_id>`: Display detailed hop timings, TTFT, and sanitized error payloads.
 
-### `naagmani validate`
-```bash
-naagmani validate [path] [flags]
+---
 
-Flags:
-      --strict             Enable strict linting for performance and security best practices
-```
+### `naagmani proxy`
+Start a local reverse proxy for development testing.
+- `naagmani proxy --port 8080`: Spin up a local gateway connected to the remote control plane.
 
-### `naagmani publish`
-```bash
-naagmani publish [path] [flags]
+---
 
-Flags:
-      --access string      Access visibility: public or private (default "private")
-      --tag string         Distribution tag (default "latest")
-```
+## Global Flags
+
+| Flag | Shorthand | Description |
+| :--- | :--- | :--- |
+| **`--json`** | `-j` | Output all responses in machine-readable JSON format. |
+| **`--config`** | `-c` | Path to custom YAML configuration file. |
+| **`--verbose`** | `-v` | Enable debug logs and HTTP payload traces. |
+
+---
+
+## Next Steps
+
+- [Plugin Management with CLI](/docs/cli/plugins)
+- [CLI Diagnostics](/docs/cli/troubleshooting)

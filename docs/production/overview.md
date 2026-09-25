@@ -1,17 +1,19 @@
 # Production Operations Overview
 
-Running mission-critical AI workloads in production requires high availability, predictable latencies, automated fallbacks, and comprehensive monitoring.
+Deploying Naagmani in mission-critical, enterprise production environments requires robust high-availability, rate limiting, comprehensive observability, and scalable infrastructure.
 
 ---
 
-## Production Checklist
+## Key Production Capabilities
 
-Before launching user-facing AI features into production with Naagmani:
+- **Zero-Downtime Hot Upgrades**: Hot-reload routing policies and credentials without dropping active HTTP/SSE connections.
+- **Distributed Rate Limiting**: Redis-backed token bucket algorithm for cluster-wide enforcement.
+- **Multi-Region Active-Active**: Deploy across multiple geographic regions with global latency routing.
 
-- [ ] **Environment Separation**: Ensure production workloads use `nmn_live_` API keys and are configured under the `production` environment.
-- [ ] **Configure Fallbacks**: Set up multi-provider routing (e.g. OpenAI primary + Anthropic backup) to prevent downtime during upstream outages.
-- [ ] **Enforce Rate Limits**: Configure per-user and per-service rate limits to prevent runaway traffic loops.
-- [ ] **Spend Caps**: Set monthly budget caps and soft alert thresholds.
-- [ ] **Observability**: Configure OpenTelemetry or Prometheus metrics export to your monitoring dashboards.
-- [ ] **Timeout Budgets**: Establish tight socket timeouts on client calls to avoid hung frontend threads.
-- [ ] **Security Guardrails**: Activate DLP and Prompt Firewall plugins in the request pipeline.
+---
+
+## Next Steps
+
+- [High Availability & Failover](/docs/production/reliability)
+- [Rate Limiting & Quotas](/docs/production/rate-limits)
+- [Observability & Prometheus Metrics](/docs/production/observability)

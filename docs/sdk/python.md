@@ -1,51 +1,85 @@
-# Python HDK (`naagmani-hdk`)
+# Python SDK Reference
 
-The Python HDK provides standard Pythonic decorators, Pydantic type validation, and standard I/O serving for creating Naagmani plugins.
+The **Naagmani Python SDK** (`naagmani`) offers native async/sync clients, Pydantic v2 schemas, LangChain integration adapters, and full streaming support.
 
 ---
 
 ## Installation
 
 ```bash
-pip install naagmani-hdk
+pip install naagmani
 ```
 
 ---
 
-## Quick Example
+## 1. Synchronous Completion
 
 ```python
-from naagmani_hdk import Plugin, HookContext, HookResult
+import os
+from naagmani import Naagmani
 
-plugin = Plugin(name="python-rag-plugin", version="0.1.0")
+client = Naagmani(
+    api_key=os.getenv("NAAGMANI_API_KEY", "nst_live_9b2d8819..."),
+    base_url="http://localhost:8080/v1" # or https://gateway.naagmani.app/v1
+)
 
-@plugin.hook("pre_prompt")
-def on_pre_prompt(context: HookContext, payload: dict) -> HookResult:
-    context.logger.info(f"Received request in environment: {context.environment}")
-    
-    # Retrieve supplementary context from vector store / internal database
-    retrieved_context = "System Reference Doc: All refunds require manager approval."
-    
-    messages = payload.get("messages", [])
-    messages.insert(0, {
-        "role": "system",
-        "content": f"Context for answer:\n{retrieved_context}"
-    })
-    
-    return HookResult(
-        status="ok",
-        action="modify",
-        payload={"messages": messages}
-    )
+response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[
+        {"role": "system", "content": "You are a senior Python performance specialist."},
+        {"role": "user", "content": "Explain Python 3.13 free-threading (GIL removal)."}
+    ],
+    temperature=0.7
+)
 
-if __name__ == "__main__":
-    plugin.serve()
+print(response.choices[0].message.content)
+print(f"Usage: {response.usage.total_tokens} tokens")
 ```
 
 ---
 
-## Features
+## 2. Asynchronous Streaming
 
-- **Pydantic Validation**: Automatic schema parsing and validation of JSON-RPC payloads.
-- **Fast Startup**: Minimal external dependencies to keep worker spawn time under 50ms.
-- **Stderr Logging**: Integrated Python logging mapped safely to `stderr`.
+```python
+import asyncio
+from naagmani import AsyncNaagmani
+
+async def main():
+    aclient = AsyncNaagmani(api_key="nst_live_9b2d8819...", base_url="http://localhost:8080/v1")
+    
+    stream = await aclient.chat.completions.create(
+        model="claude-3-5-sonnet-20241022",
+        messages=[{"role": "user", "content": "Write a FastAPI CRUD endpoint."}],
+        stream=True
+    )
+    
+    async for chunk in stream:
+        delta = chunk.choices[0].delta.content or ""
+        print(delta, end="", flush=True)
+
+asyncio.run(main())
+```
+
+---
+
+## 3. LangChain & LlamaIndex Integration
+
+```python
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(
+    model="gpt-4o",
+    openai_api_key="nst_live_9b2d8819...",
+    openai_api_base="http://localhost:8080/v1"
+)
+
+response = llm.invoke("Summarize the benefits of AI API gateways.")
+print(response.content)
+```
+
+---
+
+## Next Steps
+
+- [CLI Manual](/docs/cli/installation)
+- [API Reference Overview](/docs/api/overview)

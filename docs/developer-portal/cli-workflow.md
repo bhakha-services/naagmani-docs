@@ -1,52 +1,40 @@
 # Naagmani CLI Developer Guide
 
-The official Naagmani CLI provides comprehensive tooling for scaffold creation, local testing, manifest validation, packaging, and publishing plugins to the marketplace.
+Integrate Naagmani directly into terminal workflows, CI/CD pipelines, and local developer environments using the official Naagmani CLI.
 
 ---
 
-## Installation & Setup
-
-Install the CLI globally via npm or execute directly with `npx`:
+## Installation
 
 ```bash
-# Global installation
-npm install -g naagmani
+# Install via Go
+go install github.com/bhakha-services/naagmani-cli/cmd/naagmani@latest
 
-# Verify installation
-naagmani --version
-```
-
----
-
-## Authentication
-
-Authenticate the CLI with your Naagmani Cloud account:
-
-```bash
-naagmani login --email dev@example.com --password mysecretpassword
+# Or download binary release
+curl -sSL https://get.naagmani.app | bash
 ```
 
 ---
 
-## Plugin Development Workflow
+## Core Workflows
 
-### 1. Scaffold a New Plugin
 ```bash
-naagmani plugin create pii-masker --language node
+# 1. Log into your Naagmani Organization
+naagmani auth login
+
+# 2. List your projects
+naagmani projects list
+
+# 3. Create a scoped Project Service Token
+naagmani tokens create --project "support-ai" --env "production" --name "ci-token"
+
+# 4. Test an inference request
+naagmani chat --model "gpt-4o" --prompt "Hello from CLI!"
 ```
 
-### 2. Validate Manifest Rules
-```bash
-cd pii-masker
-naagmani plugin validate
-```
+---
 
-### 3. Test Plugin Locally
-```bash
-naagmani plugin test --input ./fixtures/test-prompt.json
-```
+## Next Steps
 
-### 4. Publish to Marketplace
-```bash
-naagmani plugin publish --scope organization
-```
+- Full CLI command reference: [CLI Commands Reference](../cli/commands.md)
+- CLI troubleshooting: [CLI Troubleshooting](../cli/troubleshooting.md)

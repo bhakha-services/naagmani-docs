@@ -1,51 +1,31 @@
-# Plugins Architecture Overview
+# Plugin System & Lifecycle
 
-Plugins in Naagmani are modular extensions that intercept, augment, secure, or monitor the AI request/response lifecycle.
-
----
-
-## Why Plugins?
-
-In traditional AI applications, developers manually implement security guards, retrieval augmentations, redactions, logging, and tool calling within custom application code.
-
-Naagmani moves these cross-cutting capabilities into an isolated, composable **Plugin Pipeline**:
+Naagmani's plugin engine allows developers to intercept, modify, and guard AI requests using an out-of-process, language-independent architecture (`naagmani.plugin/v1`).
 
 ```mermaid
-sequenceDiagram
-    participant Client
-    participant Engine as Naagmani Core Runtime
-    participant Plugin as Plugin Pipeline (DLP, Firewall, RAG)
-    participant Provider as AI Provider (OpenAI/Claude)
-
-    Client->>Engine: POST /v1/chat/completions
-    Engine->>Plugin: pre_prompt Hook (DLP / Guardrails)
-    Plugin-->>Engine: Sanitized Prompt + Injected Context
-    Engine->>Provider: Upstream LLM Call
-    Provider-->>Engine: Raw Model Output
-    Engine->>Plugin: post_generation Hook (Hallucination / Secret Check)
-    Plugin-->>Engine: Validated Final Output
-    Engine-->>Client: HTTP 200 Response
+graph LR
+    Client --> Hook1["Before Ingest Hook"]
+    Hook1 --> Guard["Guardrails & DLP"]
+    Guard --> Hook2["Before Dispatch Hook"]
+    Hook2 --> LLM["Provider Inference"]
+    LLM --> Hook3["After Complete Hook"]
+    Hook3 --> Client
 ```
 
 ---
 
-## Key Characteristics
+## Key Capabilities
 
-1. **Protocol Standard (`naagmani.plugin/v1`)**: All plugins communicate with the Naagmani Runtime over standard JSON-RPC 2.0 via standard I/O (`stdio`).
-2. **Language Agnostic**: Plugins can be written in any language. Official HDKs exist for **Go**, **Node.js/TypeScript**, and **Python**.
-3. **Isolated Execution**: Plugins run in isolated sub-processes with explicit capability permissions declared in a `plugin.json` manifest.
-4. **Zero-Overhead Local IPC**: Communication between the Naagmani runtime and plugin processes is optimized for low latency (< 2ms typical IPC overhead).
-5. **Chainable Execution**: Multiple plugins can be combined into an execution pipeline with deterministic order and error handling policies.
+1. **Multi-Language SDKs**: Author plugins in **Go**, **TypeScript/Node.js**, or **Python**.
+2. **Isolated Sandboxing**: Plugins run in isolated worker processes, ensuring custom code cannot crash the core gateway engine.
+3. **Execution Hooks**:
+   - `before_ingest`: Inspect incoming headers, validate custom tokens.
+   - `before_dispatch`: Mask sensitive PII/DLP data, inject system context, RAG vector retrieval.
+   - `after_complete`: Sanitize model responses, log analytics, trigger downstream webhooks.
 
 ---
 
-## Plugin Types
+## Next Steps
 
-| Type | Common Use Cases |
-| :--- | :--- |
-| **Security & Guardrails** | Prompt injection defense, PII/secret masking (DLP), toxic content moderation. |
-| **Data & Retrieval** | Knowledge base retrieval (RAG), dynamic context injection, memory retrieval. |
-| **Tool Calling & MCP** | Model Context Protocol (MCP) server bridging, database query tools, API orchestration. |
-| **Observability & Auditing** | Regulatory compliance archiving, custom vector analytics, user feedback logging. |
-
-For detailed protocol specifications and SDK development guides, see the [Plugins Documentation](../plugins/overview.md).
+- Deep dive into plugin development: [Plugin Development Guide](../plugins/overview.md)
+- Plugin manifest specification: [Plugin Manifest](../plugins/manifest.md)

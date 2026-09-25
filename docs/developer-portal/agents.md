@@ -1,87 +1,39 @@
----
-title: "Autonomous Agents & Assistants"
-description: "Configure, orchestrate, and deploy multi-turn LLM agents with tools, skills, and guardrails in Naagmani."
----
-
 # Autonomous Agents & Assistants
 
-Naagmani provides a complete lifecycle framework for designing, evaluating, and operating autonomous AI agents in production. Agents in Naagmani combine Large Language Models (LLMs) with skills, tools, MCP servers, and governance guardrails to handle multi-step reasoning and complex automation.
+Build, configure, and deploy autonomous AI agents capable of reasoning, calling tools, and querying external data sources.
 
----
+- **Portal Page**: `/projects/[projectId]/agents`
 
-## What is a Naagmani Agent?
-
-An **Agent** is a stateful orchestration entity configured within a Project. Unlike single-turn LLM completions, an agent possesses:
-
-- **Identity & Persona**: Configured via system instructions, persona prompts, and domain guidelines.
-- **Model Intelligence**: Backed by any foundational model configured in your provider credential pool (e.g., GPT-4o, Claude 3.5 Sonnet, DeepSeek-V3).
-- **Tool Access**: Direct access to local function schemas, REST API endpoints, and remote Model Context Protocol (MCP) servers.
-- **Dynamic Skills**: Curated prompt workflows and step-by-step routines for specific tasks.
-- **Policy Enforcement**: Built-in limits for maximum iterations, tool execution timeouts, token budgets, and output guardrails.
-
----
-
-## Agent Architecture
-
-```
-[User / Application Request]
-             │
-             ▼
-    ┌─────────────────┐
-    │  Agent Runtime  │ ◄── [System Prompt & Memory]
-    └────────┬────────┘
-             │ (Reasoning loop)
-    ┌────────▼────────┐
-    │  Model Engine   │ ◄── [Provider Credential Pools]
-    └────────┬────────┘
-             │ (Tool Call Decisions)
-    ┌────────▼────────────────────────────────────┐
-    │              Execution Layer                │
-    ├──────────────┬───────────────┬──────────────┤
-    │ Local Tools  │  MCP Servers  │ Custom Skills│
-    └──────────────┴───────────────┴──────────────┘
-             │
-             ▼
-    ┌─────────────────┐
-    │ Governance Gate │ ◄── [PII, Cost, Guardrails]
-    └────────┬────────┘
-             │
-             ▼
-    [Agent Response & Action Output]
+```mermaid
+graph TD
+    Agent["Autonomous Agent (Support Bot)"]
+    Agent --> LLM["Model & Parameters (claude-3-5-sonnet, Temp: 0.2)"]
+    Agent --> Prompt["System Instructions & Persona"]
+    Agent --> Skills["Attached Skills (Search KnowledgeBase)"]
+    Agent --> Tools["Bound Tools & MCP Servers (SQL, GitHub)"]
+    Agent --> Guard["Guardrail Policies (PII Redaction)"]
 ```
 
 ---
 
-## Core Capabilities
+## Agent Configuration Parameters
 
-### 1. Multi-Turn Reasoning
-Agents iterate through thought-action-observation cycles. If a tool call fails or produces partial results, the agent evaluates the error and adjusts its approach autonomously.
-
-### 2. Guardrails & Limits
-Prevent infinite loops and runaway costs by setting strict thresholds:
-- **Max Iterations**: Restrict how many decision cycles an agent can execute per invocation (e.g., 5-10 turns).
-- **Max Tool Calls**: Cap total API requests per task.
-- **Timeout**: Set maximum execution time in seconds.
-- **Cost / Token Caps**: Limit consumption per task.
-
-### 3. Integrated Tool Calling & MCP
-Agents automatically receive definitions of registered Tools and connected MCP servers in standard JSON schema format, compatible with OpenAI, Anthropic, and Gemini function calling specs.
+1. **System Prompt**: Defines the core identity, reasoning guidelines, and behavioral boundaries for the agent.
+2. **Model Selection**: Choose specific models or virtual tier aliases (e.g., `smart-tier` for reasoning).
+3. **Temperature & Top-P**: Fine-tune determinism vs creativity.
+4. **Tool Attachments**: Bind registered custom tools or external MCP server capabilities.
+5. **Skill Attachments**: Attach structured few-shot prompt templates and operational skills.
 
 ---
 
-## Testing in Agent Playground
+## Testing in the Playground
 
-You can interactively test and debug your agents in the **Agent Playground**:
-1. Navigate to **Projects** > **[Your Project]** > **Agent Playground**.
-2. Select the target agent or configure transient parameters.
-3. Test tool triggers, inspect raw function call requests and responses, and verify token usage in real time.
+Once configured, click **Open in Playground** to interactively test the agent's multi-turn reasoning and tool invocation trace.
 
 ---
 
-## Managing Agents in the Developer Portal
+## Next Steps
 
-In the Developer Portal under **Projects > Agents**, you can:
-- View all active and archived agents for your project.
-- Inspect attached tools, skills, and model configurations.
-- Launch directly into the **Agent Playground** to run simulated user conversations.
-- Audit run histories and token metrics in the project analytics.
+- Test agents interactively: [Agent Playground](agent-playground.md)
+- Register custom tools: [Tools & Working Flow](tools.md)
+- Connect MCP servers: [MCP Servers & Transports](mcp-servers.md)

@@ -1,30 +1,38 @@
 # Agent Playground & Interactive Testing
 
-The **Agent Playground** provides a sandbox environment to test autonomous agent reasoning loops, multi-turn conversations, tool executions, and skill behaviors in real-time before deploying to production.
+The **Agent Playground** provides an interactive execution testbed to debug autonomous agents, inspect tool invocations, and observe reasoning steps before deploying to production.
+
+- **Portal Page**: `/projects/[projectId]/playground`
+
+```mermaid
+sequenceDiagram
+    actor Dev as Developer
+    participant PG as Agent Playground
+    participant Agent as Autonomous Agent
+    participant Tool as Bound Tool (e.g. DB Query)
+
+    Dev->>PG: Send Prompt: "What was customer #102's last order?"
+    PG->>Agent: Execute Agent Reasoning Loop
+    Agent-->>PG: Generate Thought: "I need to call query_customer_orders"
+    PG->>Tool: Execute Tool {"customerId": 102}
+    Tool-->>PG: Return Tool Output {"orderId": "ord_99", "amount": "$45.00"}
+    PG->>Agent: Feed Tool Output back to Model
+    Agent-->>PG: Synthesize Final Response
+    PG-->>Dev: Display Formatted Message + Tool Trace Ladder
+```
 
 ---
 
-## 1. Features & Capabilities
+## Key Features
 
-- **Interactive Multi-Turn Chat**: Test complex conversational flows with state persistence.
-- **Live Tool Invocation Inspector**: Inspect JSON-RPC tool parameters emitted by the LLM, sandbox execution results, and latency metrics in real-time.
-- **Skill Activation & Testing**: Toggle project-bound skills and observe how agent reasoning changes.
-- **Streaming & Token Telemetry**: Observe first-token latency (TTFT), completion tokens, and estimated FinOps cost per turn.
-
----
-
-## 2. Using the Agent Playground
-
-1. Navigate to **Projects** $\rightarrow$ `[Your Project]` $\rightarrow$ **Agent Playground** (`/projects/[projectId]/playground`).
-2. Select the target **Environment** (e.g., Development, Production) and **Model Provider**.
-3. Choose the active **Skills** and **MCP Tools** you wish to expose to the agent during this session.
-4. Input your test prompt and click **Send**.
-5. Inspect the generated tool calls and responses in the side drawer.
+1. **Multi-Turn Chat History**: Test conversation continuity and context memory.
+2. **Execution Step Inspector**: View exact tool arguments, raw tool responses, and model thoughts.
+3. **Parameter Overrides**: Tweak temperature, max tokens, and system instructions on the fly.
+4. **Token & Latency Accounting**: Real-time display of tokens consumed during multi-step tool calls.
 
 ---
 
-## 3. Related Documentation
+## Next Steps
 
-- [Tools Architecture & Working Flow](./tools.md)
-- [Agent Skills & Orchestration](./skills.md)
-- [Model Context Protocol (MCP) Servers](./mcp-servers.md)
+- Define agent skills: [Skills & Orchestration](skills.md)
+- Connect MCP tools: [MCP Servers & Transports](mcp-servers.md)

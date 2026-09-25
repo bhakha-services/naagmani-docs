@@ -1,131 +1,87 @@
 # Plugin Development Guide
 
-This guide walks you through building a custom Naagmani plugin from scratch using the official HDKs (Hardware/Host Development Kits).
+In this tutorial, we will build an enterprise **DLP & Regex Masking Plugin** using Go and the official Naagmani HDK.
 
 ---
 
-## 1. Prerequisites
-
-- **Naagmani CLI** installed: `npm install -g naagmani` or binary install.
-- Go (1.22+), Node.js (18+), or Python (3.10+) depending on your target language.
-
----
-
-## 2. Scaffolding a New Plugin
-
-Use the `naagmani init` or `naagmani create` command to generate a complete starter template:
+## Step 1: Initialize Project
 
 ```bash
-# Initialize a TypeScript/Node.js plugin
-naagmani init my-custom-plugin --template node
-
-# Or Go plugin
-naagmani init my-custom-plugin --template go
-
-# Or Python plugin
-naagmani init my-custom-plugin --template python
-```
-
-This creates the standard project layout:
-
-```text
-my-custom-plugin/
-├── plugin.json
-├── package.json (or go.mod / pyproject.toml)
-├── src/ (or main.go / plugin.py)
-└── README.md
+mkdir pii-masking-plugin && cd pii-masking-plugin
+go mod init github.com/myorg/pii-masking-plugin
+go get github.com/naagmani/naagmani-hdk-go@latest
 ```
 
 ---
 
-## 3. Implementing Hook Handlers
+## Step 2: Define `plugin.json`
 
-### TypeScript Example (`@naagmani/hdk`)
-
-```typescript
-import { Plugin, HookContext, PrePromptPayload, HookResult } from "@naagmani/hdk";
-
-const plugin = new Plugin({
-  name: "my-custom-plugin",
-  version: "1.0.0"
-});
-
-plugin.onPrePrompt(async (context: HookContext, payload: PrePromptPayload): Promise<HookResult> => {
-  // Inspect and modify messages
-  const sanitizedMessages = payload.messages.map(msg => ({
-    ...msg,
-    content: typeof msg.content === "string" 
-      ? msg.content.replace(/SECRET_\w+/g, "[MASKED]") 
-      : msg.content
-  }));
-
-  return {
-    status: "ok",
-    action: "modify",
-    payload: { messages: sanitizedMessages }
-  };
-});
-
-plugin.start();
+```json
+{
+  "id": "com.myorg.pii-masking",
+  "name": "PII Masking Filter",
+  "version": "1.0.0",
+  "entrypoint": "./bin/plugin",
+  "hooks": [
+    { "name": "pre_route", "priority": 100, "on_failure": "fail-close" }
+  ],
+  "permissions": ["request:read_body", "request:mutate_body"]
+}
 ```
 
 ---
 
-### Go Example (`hdk/go`)
+## Step 3: Implement Hook in Go
 
 ```go
 package main
 
 import (
 	"context"
-	"strings"
-
-	"github.com/bhakha-services/naagmani-plugins/hdk/go/hdk"
+	"regexp"
+	"github.com/naagmani/naagmani-hdk-go/plugin"
 )
 
-type MyPlugin struct{}
-
-func (p *MyPlugin) HandlePrePrompt(ctx context.Context, req *hdk.PrePromptRequest) (*hdk.PrePromptResponse, error) {
-	for i := range req.Messages {
-		req.Messages[i].Content = strings.ReplaceAll(req.Messages[i].Content, "SECRET_KEY", "[MASKED]")
-	}
-	return &hdk.PrePromptResponse{
-		Status:   hdk.StatusOk,
-		Action:   hdk.ActionModify,
-		Messages: req.Messages,
-	}, nil
-}
+var emailRegex = regexp.MustCompile(`[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}`)
 
 func main() {
-	server := hdk.NewServer(&MyPlugin{})
-	if err := server.Serve(); err != nil {
-		panic(err)
-	}
+	p := plugin.New("com.myorg.pii-masking")
+
+	p.OnPreRoute(func(ctx context.Context, req *plugin.PreRouteRequest) (*plugin.PreRouteResponse, error) {
+		for i, msg := range req.Messages {
+			// Redact email addresses
+			req.Messages[i].Content = emailRegex.ReplaceAllString(msg.Content, "[REDACTED_EMAIL]")
+		}
+
+		return &plugin.PreRouteResponse{
+			Action:   plugin.ActionContinue,
+			Messages: req.Messages,
+		}, nil
+	})
+
+	// Starts standard IPC loop
+	p.Serve()
 }
 ```
 
 ---
 
-### Python Example (`naagmani-hdk`)
+## Step 4: Build & Test Locally
 
-```python
-from naagmani_hdk import Plugin, HookContext, HookResult
+```bash
+# Compile binary
+go build -o bin/plugin main.go
 
-plugin = Plugin(name="my-custom-plugin", version="1.0.0")
-
-@plugin.hook("pre_prompt")
-def handle_pre_prompt(context: HookContext, payload: dict) -> HookResult:
-    messages = payload.get("messages", [])
-    for msg in messages:
-        if isinstance(msg.get("content"), str):
-            msg["content"] = msg["content"].replace("SECRET_KEY", "[MASKED]")
-    
-    return HookResult(
-        status="ok",
-        action="modify",
-        payload={"messages": messages}
-    )
-
-if __name__ == "__main__":
-    plugin.serve()
+# Test using CLI simulator
+naagmani plugins test ./ --sample-prompt "Reach me at test@example.com"
+# Output:
+# [OK] Intercepted in 0.8ms
+# [OUTPUT] "Reach me at [REDACTED_EMAIL]"
 ```
+
+---
+
+## Next Steps
+
+- [Testing & Validation Guide](/docs/plugins/testing)
+- [Packaging & Publishing](/docs/plugins/publishing)

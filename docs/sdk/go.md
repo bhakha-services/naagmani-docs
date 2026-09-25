@@ -1,20 +1,18 @@
-# Go HDK (`hdk/go`)
+# Go SDK & HDK Reference
 
-The Go Host Development Kit (HDK) provides high-performance, strongly typed abstractions for building Naagmani plugins in Go.
+The official **Naagmani Go SDK** (`naagmani-sdk-go`) and **Plugin HDK** (`naagmani-hdk-go`) provide high-performance, idiomatic Go clients for both the Data Plane Gateway and Control Plane APIs.
 
 ---
 
 ## Installation
 
-Add the Go HDK package to your `go.mod`:
-
 ```bash
-go get github.com/bhakha-services/naagmani-plugins/hdk/go
+go get github.com/naagmani/naagmani-go@latest
 ```
 
 ---
 
-## Quick Example
+## 1. Chat Completion Client
 
 ```go
 package main
@@ -22,46 +20,81 @@ package main
 import (
 	"context"
 	"fmt"
-	"strings"
+	"log"
 
-	"github.com/bhakha-services/naagmani-plugins/hdk/go/hdk"
+	"github.com/naagmani/naagmani-go"
+	"github.com/naagmani/naagmani-go/chat"
 )
 
-type MyPlugin struct{}
-
-func (p *MyPlugin) HandlePrePrompt(ctx context.Context, req *hdk.PrePromptRequest) (*hdk.PrePromptResponse, error) {
-	for i := range req.Messages {
-		if strings.Contains(req.Messages[i].Content, "DROP TABLE") {
-			return &hdk.PrePromptResponse{
-				Status: hdk.StatusReject,
-				Action: hdk.ActionAbort,
-				Error: &hdk.HookError{
-					Code:    "SQL_INJECTION_RISK",
-					Message: "Prompt contains prohibited SQL statements.",
-				},
-			}, nil
-		}
-	}
-
-	return &hdk.PrePromptResponse{
-		Status:   hdk.StatusOk,
-		Action:   hdk.ActionPass,
-		Messages: req.Messages,
-	}, nil
-}
-
 func main() {
-	server := hdk.NewServer(&MyPlugin{})
-	if err := server.Serve(); err != nil {
-		fmt.Printf("Plugin server error: %v\n", err)
+	client := naagmani.NewClient(
+		naagmani.WithAPIKey("nst_live_9b2d8819..."),
+		naagmani.WithBaseURL("http://localhost:8080/v1"), // or https://gateway.naagmani.app/v1
+	)
+
+	req := &chat.CompletionRequest{
+		Model: "gpt-4o",
+		Messages: []chat.Message{
+			{Role: "system", Content: "You are a helpful Go engineering assistant."},
+			{Role: "user", Content: "Explain Goroutines and channels concisely."},
+		},
+		Temperature: 0.7,
 	}
+
+	resp, err := client.Chat.CreateCompletion(context.Background(), req)
+	if err != nil {
+		log.Fatalf("Error: %v", err)
+	}
+
+	fmt.Println(resp.Choices[0].Message.Content)
+	fmt.Printf("Total Tokens Used: %d
+", resp.Usage.TotalTokens)
 }
 ```
 
 ---
 
-## Key Interfaces
+## 2. Real-Time Streaming (SSE)
 
-- `hdk.PrePromptHandler`: Implement `HandlePrePrompt(ctx, req)` for input interception.
-- `hdk.PostGenerationHandler`: Implement `HandlePostGeneration(ctx, req)` for output inspection.
-- `hdk.ErrorHandler`: Implement `HandleError(ctx, req)` for alert forwarding.
+```go
+stream, err := client.Chat.CreateCompletionStream(context.Background(), req)
+if err != nil {
+    log.Fatal(err)
+}
+defer stream.Close()
+
+for {
+    chunk, err := stream.Recv()
+    if err != nil {
+        break // Stream completed
+    }
+    fmt.Print(chunk.Choices[0].Delta.Content)
+}
+```
+
+---
+
+## 3. Project Service Tokens Management
+
+```go
+import "github.com/naagmani/naagmani-go/tokens"
+
+token, err := client.Tokens.Create(context.Background(), &tokens.CreateRequest{
+    Name:         "ci-build-agent",
+    Capabilities: []string{"inference:chat", "tools:execute"},
+    TTLSeconds:   86400, // 24 hours
+})
+if err != nil {
+    log.Fatal(err)
+}
+fmt.Printf("Generated Secret: %s
+", token.SecretKey)
+```
+
+---
+
+## Next Steps
+
+- [Node.js / TypeScript SDK](/docs/sdk/node)
+- [Python SDK](/docs/sdk/python)
+- [API Reference](/docs/api/overview)

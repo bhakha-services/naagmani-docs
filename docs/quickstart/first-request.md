@@ -1,105 +1,83 @@
 # Sending Your First Request
 
-Naagmani OS implements the standard **OpenAI Chat Completions API format** (`/v1/chat/completions`). Any application or SDK that supports custom OpenAI `baseURL` endpoints will work seamlessly.
+Now that you have an API key, let's execute your first AI completion through Naagmani.
 
 ---
 
-## 1. Using `curl`
+## Code Examples
+
+### 1. cURL
 
 ```bash
 curl -X POST "http://localhost:8080/v1/chat/completions" \
-  -H "Authorization: Bearer $NAAGMANI_API_KEY" \
+  -H "Authorization: Bearer nsk_live_YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "gpt-4o",
     "messages": [
-      {
-        "role": "system",
-        "content": "You are a helpful assistant."
-      },
-      {
-        "role": "user",
-        "content": "Explain quantum computing in one sentence."
-      }
-    ]
+      { "role": "system", "content": "You are a helpful engineering assistant." },
+      { "role": "user", "content": "Explain what an AI gateway runtime does in 2 sentences." }
+    ],
+    "temperature": 0.7
   }'
 ```
 
-### Example Response
-```json
-{
-  "id": "chatcmpl-01j8xyz987",
-  "object": "chat.completion",
-  "created": 1726400000,
-  "model": "gpt-4o",
-  "choices": [
-    {
-      "index": 0,
-      "message": {
-        "role": "assistant",
-        "content": "Quantum computing leverages the principles of superposition and entanglement to perform complex computations exponentially faster than classical computers."
-      },
-      "finish_reason": "stop"
-    }
-  ],
-  "usage": {
-    "prompt_tokens": 24,
-    "completion_tokens": 26,
-    "total_tokens": 50
-  }
-}
-```
-
 ---
 
-## 2. Using Python (Official OpenAI SDK)
-
-```python
-import os
-from openai import OpenAI
-
-client = OpenAI(
-    base_url="http://localhost:8080/v1",
-    api_key=os.environ.get("NAAGMANI_API_KEY"),
-)
-
-response = client.chat.completions.create(
-    model="gpt-4o",
-    messages=[
-        {"role": "user", "content": "Hello Naagmani Gateway!"}
-    ],
-)
-
-print(response.choices[0].message.content)
-```
-
----
-
-## 3. Using Node.js / TypeScript (Official OpenAI SDK)
+### 2. TypeScript / Node.js (Using OpenAI SDK)
 
 ```typescript
 import OpenAI from "openai";
 
 const client = new OpenAI({
-  baseURL: "http://localhost:8080/v1",
-  apiKey: process.env.NAAGMANI_API_KEY,
+  apiKey: process.env.NAAGMANI_API_KEY || "nsk_live_YOUR_API_KEY",
+  baseURL: "http://localhost:8080/v1", // Point directly to Naagmani Gateway
 });
 
 async function main() {
   const completion = await client.chat.completions.create({
-    model: "gpt-4o",
-    messages: [{ role: "user", content: "Hello from TypeScript!" }],
+    model: "claude-3-5-sonnet-20241022", // Switch models seamlessly!
+    messages: [
+      { role: "system", content: "You are a helpful engineering assistant." },
+      { role: "user", content: "Hello Naagmani! What models can I route to?" },
+    ],
   });
 
-  console.log(completion.choices[0].message.content);
+  console.log("Response:", completion.choices[0].message.content);
+  console.log("Tokens used:", completion.usage?.total_tokens);
 }
 
-main();
+main().catch(console.error);
 ```
 
 ---
 
-## 4. Using Go
+### 3. Python (Using OpenAI SDK)
+
+```python
+from openai import OpenAI
+import os
+
+client = OpenAI(
+    api_key=os.environ.get("NAAGMANI_API_KEY", "nsk_live_YOUR_API_KEY"),
+    base_url="http://localhost:8080/v1"  # Point directly to Naagmani Gateway
+)
+
+response = client.chat.completions.create(
+    model="gemini-2.5-flash",
+    messages=[
+        {"role": "system", "content": "You are an AI platform architect."},
+        {"role": "user", "content": "Why should applications use an AI gateway?"}
+    ]
+)
+
+print("Response:", response.choices[0].message.content)
+print("Usage:", response.usage)
+```
+
+---
+
+### 4. Go
 
 ```go
 package main
@@ -114,26 +92,56 @@ import (
 )
 
 func main() {
-	payload := map[string]any{
+	payload := map[string]interface{}{
 		"model": "gpt-4o",
 		"messages": []map[string]string{
-			{"role": "user", "content": "Hello from Go!"},
+			{"role": "user", "content": "Explain Naagmani in one sentence."},
 		},
 	}
 	body, _ := json.Marshal(payload)
 
-	req, _ := http.NewRequest("POST", "http://localhost:8080/v1/chat/completions", bytes.NewReader(body))
+	req, _ := http.NewRequest("POST", "http://localhost:8080/v1/chat/completions", bytes.NewBuffer(body))
 	req.Header.Set("Authorization", "Bearer "+os.Getenv("NAAGMANI_API_KEY"))
 	req.Header.Set("Content-Type", "application/json")
 
-	resp, err := http.DefaultClient.Do(req)
+	client := &http.Client{}
+	resp, err := client.Do(req)
 	if err != nil {
 		panic(err)
 	}
 	defer resp.Body.Close()
 
 	respBody, _ := io.ReadAll(resp.Body)
-	fmt.Println(string(respBody))
+	fmt.Println("Status:", resp.Status)
+	fmt.Println("Response:", string(respBody))
+}
+```
+
+---
+
+## Expected Response Structure
+
+```json
+{
+  "id": "chatcmpl_01J8F0A2B3C4D5E6F7G8H9J0K1",
+  "object": "chat.completion",
+  "created": 1790355262,
+  "model": "gpt-4o",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "An AI gateway runtime sits between client applications and AI providers to manage model routing, credentials, and traffic governance."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 28,
+    "completion_tokens": 24,
+    "total_tokens": 52
+  }
 }
 ```
 
@@ -141,5 +149,5 @@ func main() {
 
 ## Next Steps
 
-- Stream tokens in real time: [Streaming Guide](streaming.md)
-- Learn about model routing: [Routing Concepts](../concepts/routing.md)
+- Stream tokens in real time: [Streaming Responses](streaming.md)
+- Inspect execution latency & failovers: [Execution Trace Telemetry](provider-attempts.md)

@@ -1,30 +1,26 @@
-# Audit Logs & Compliance Trail
+# Security Audit Logs & Compliance
 
-Naagmani maintains an immutable, append-only **Audit Log** recording every administrative action, API key generation, provider configuration change, tool invocation, and guardrail violation.
-
----
-
-## 1. Audit Log Architecture
-
-- **Tamper-Evident Storage**: Audit entries are indexed with cryptographic hashes and stored in write-once partitions.
-- **Enterprise Scoping**: Accessible at both the **Organization** level (organization-wide compliance view) and **Project** level (fine-grained team inspection).
-- **High Telemetry Retention**: Logs capture user identity, IP address, request payload metadata, tool invocation latency, tokens consumed, and HTTP status codes.
+Every critical action performed across the Naagmani ecosystem is immutably logged for compliance audits (SOC 2, ISO 27001, HIPAA).
 
 ---
 
-## 2. Inspecting Audit Logs in Developer Portal
+## Logged Event Types
 
-1. Navigate to **Audit Logs** (`/audit-logs` for organization-wide or `/projects/[projectId]/audit-logs` for project workspace).
-2. Filter logs by:
-   - **Date Range**: Preset windows or custom ranges.
-   - **Action Type**: E.g., `api_key.create`, `tool.execute`, `policy.violation`.
-   - **User / Principal**: Filter by specific team member or service account.
-3. Export logs in CSV or JSON format for enterprise SIEM integration (Splunk, Datadog).
+- **Authentication Events**: Logins, SSO token exchanges, failed password attempts.
+- **Credential Mutations**: Key additions, rotations, and revocations.
+- **Budget Changes**: Modification of organization, project, or member limits.
+- **Plugin Deployments**: Activation, version upgrades, and security rule changes.
 
 ---
 
-## 3. Related Documentation
+## Developer Portal Audit Log Viewer
 
-- [Security Overview](./overview.md)
-- [Authorization & RBAC](./authorization.md)
-- [Data Protection](./data-protection.md)
+Inspect historical audit records with full actor attribution:
+- **Audit Logs**: [http://localhost:3000/audit-logs](http://localhost:3000/audit-logs)
+
+---
+
+## Next Steps
+
+- [Production Operations Overview](/docs/production/overview)
+- [High Availability & Failover](/docs/production/reliability)

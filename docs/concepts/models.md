@@ -1,53 +1,36 @@
-# Models & Aliases
+# Models & Virtual Aliases
 
-Naagmani abstracts model identifiers using semantic aliases and virtual model targets, allowing applications to decouple prompt engineering from brittle model version strings.
-
----
-
-## Model Naming Formats
-
-Naagmani accepts three formats for the `model` parameter:
-
-### 1. Direct Model Name
-Target an explicit upstream model directly:
-- `gpt-4o`
-- `claude-3-7-sonnet-20250219`
-- `deepseek-chat`
-- `gemini-2.5-pro`
-
-### 2. Provider-Prefixed Model
-Disambiguate models when multiple providers host identical open-weights models:
-- `openai/gpt-4o`
-- `anthropic/claude-3-5-sonnet`
-- `groq/llama-3.3-70b-versatile`
-- `deepseek/deepseek-reasoner`
-
-### 3. Virtual Model Aliases (Recommended)
-Use logical tier aliases configured in your project dashboard or policy:
-- `smart` → Dynamically routes to the best frontier reasoning model (e.g., Claude 3.7 Sonnet or GPT-4o).
-- `fast` → Dynamically routes to low-latency models (e.g., Gemini 2.5 Flash, Claude 3.5 Haiku, GPT-4o mini).
-- `economy` → Routes to cost-optimized high-throughput endpoints.
-- `code` → Routes to models optimized for code completion and syntax correctness.
+Naagmani allows engineering teams to decouple application code from specific underlying model strings using **Virtual Model Aliases**.
 
 ---
 
-## Model Capabilities Mapping
+## What is a Virtual Model Alias?
 
-Naagmani normalizes capabilities across models so clients do not need custom payload translation:
+Instead of hardcoding `gpt-4o` or `claude-3-5-sonnet-20241022` into your backend repositories, your applications request virtual tier aliases:
 
-| Capability | Supported Providers / Models | Normalization Behavior |
-| :--- | :--- | :--- |
-| **Tool / Function Calling** | OpenAI, Anthropic, Gemini, Mistral | Standardized JSON Schema definition and call structure. |
-| **Structured Outputs** | OpenAI, Anthropic, Gemini | Enforced via provider-native schema constraints or grammar filtering. |
-| **Streaming (SSE)** | All supported providers | Standardized OpenAI-compatible server-sent events (`data: {...}`). |
-| **Vision / Multimodal** | GPT-4o, Claude 3.5/3.7, Gemini 2.5 | Normalized image URLs and base64 payloads. |
-| **Reasoning / Thinking Tokens** | o1, o3-mini, Claude 3.7 (thinking), DeepSeek-R1 | Preserved or separated into dedicated `reasoning_content` blocks. |
+```mermaid
+graph LR
+    App["Application Code"] -->|model: smart-tier| Router["Naagmani Router"]
+    Router -->|Rule: Primary| C35["Claude 3.5 Sonnet"]
+    Router -->|Rule: Fallback| G4O["OpenAI GPT-4o"]
+```
+
+### Common Alias Patterns:
+- **`smart-tier`**: Resolves to state-of-the-art reasoning models (e.g., Claude 3.5 Sonnet $\rightarrow$ GPT-4o).
+- **`fast-tier`**: Resolves to ultra-low-latency, lightweight models (e.g., Gemini 2.5 Flash $\rightarrow$ GPT-4o-mini).
+- **`cheap-tier`**: Resolves to high-throughput, cost-efficient models (e.g., DeepSeek V3).
 
 ---
 
-## Model Deprecation & Lifecycle
+## Benefits of Virtual Aliases
 
-When an upstream provider deprecates a model snapshot:
-1. Virtual model aliases automatically transition to the recommended successor without code changes.
-2. Naagmani logs deprecation warnings in your request telemetry headers:
-   `X-Naagmani-Warning: Model 'gpt-4-0613' is deprecated upstream.`
+1. **Instant Model Upgrades**: When a new model version is released (e.g. GPT-5), update the alias target in the Developer Portal with zero application downtime or deployments.
+2. **Zero Code Refactoring**: Switch primary providers across hundreds of microservices instantly.
+3. **Environment-Specific Routing**: Route `smart-tier` to an inexpensive model in Development and the premier flagship model in Production.
+
+---
+
+## Next Steps
+
+- Configure routing rules: [Smart Model Routing](routing.md)
+- Test models interactively: [Model Playground](../developer-portal/model-playground.md)

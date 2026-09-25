@@ -1,48 +1,37 @@
 # Embeddings API
 
-The `/v1/embeddings` endpoint generates high-dimensional vector embeddings for text inputs, supporting batching, dimension truncation, and provider-agnostic vector generation.
+Generate high-dimensional vector representations for semantic search, RAG retrieval, and clustering.
 
-> [!NOTE]
-> **Status: `PLANNED`**
-> The `/v1/embeddings` route is currently scheduled for an upcoming release. The schema below represents the standard interface design.
-
----
-
-## Endpoint Details
-
-- **Method**: `POST`
-- **Path**: `/v1/embeddings`
-- **Content-Type**: `application/json`
+**Endpoint**: `POST /v1/embeddings`  
+**Surface**: Gateway Data Plane (`:8080`)
 
 ---
 
 ## Request Parameters
 
 | Parameter | Type | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `model` | `string` | **Yes** | Target embedding model (e.g. `text-embedding-3-small`, `text-embedding-3-large`, `text-embedding-004`). |
-| `input` | `string` or `array` | **Yes** | Input text string or array of strings to embed. |
-| `dimensions` | `integer` | No | Optional dimensionality reduction for supported models (e.g. 512, 1536, 3072). |
-| `encoding_format` | `string` | No | `float` (default) or `base64`. |
+| :--- | :--- | :---: | :--- |
+| **`model`** | `string` | Yes | Embedding model (e.g. `text-embedding-3-small`, `text-embedding-3-large`). |
+| **`input`** | `string` / `array` | Yes | Input text or array of strings to embed. |
+| **`dimensions`** | `integer` | No | Desired vector dimensions (supported models only). |
 
 ---
 
-## Example Request (cURL)
+## Example cURL Request
 
 ```bash
-curl -X POST https://api.naagmani.com/v1/embeddings \
+curl -X POST "http://localhost:8080/v1/embeddings" \
+  -H "Authorization: Bearer nsk_live_YOUR_KEY" \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer NAAGMANI_API_KEY" \
   -d '{
     "model": "text-embedding-3-small",
-    "input": [
-      "Naagmani is an AI Operating System and infrastructure platform.",
-      "High-performance routing and plugin lifecycle execution."
-    ]
+    "input": "Naagmani AI Operating System"
   }'
 ```
 
-### Example Response
+---
+
+## Response Example
 
 ```json
 {
@@ -51,18 +40,13 @@ curl -X POST https://api.naagmani.com/v1/embeddings \
     {
       "object": "embedding",
       "index": 0,
-      "embedding": [-0.0069292834, -0.005336422, "...1534 more floats..."]
-    },
-    {
-      "object": "embedding",
-      "index": 1,
-      "embedding": [0.012938472, -0.024928174, "...1534 more floats..."]
+      "embedding": [-0.00692, -0.00533, 0.01254, "... 1536 floats"]
     }
   ],
   "model": "text-embedding-3-small",
   "usage": {
-    "prompt_tokens": 22,
-    "total_tokens": 22
+    "prompt_tokens": 5,
+    "total_tokens": 5
   }
 }
 ```

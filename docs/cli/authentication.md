@@ -1,57 +1,56 @@
 # CLI Authentication
 
-Authenticate your local machine with the Naagmani Platform to enable plugin publishing, policy deployments, and metric queries.
+To execute operations against the Naagmani Control Plane, the CLI must authenticate your developer identity.
 
 ---
 
-## Interactive Login
+## Interactive Browser Login (Recommended)
+
+Run `login` to open an OAuth2 browser confirmation flow:
 
 ```bash
-naagmani login
-```
-
-This command opens your browser to authenticate with the Naagmani Developer Portal. Upon approval, an access token is saved locally to `~/.naagmani/config.json`.
-
----
-
-## Non-Interactive / CI/CD Login
-
-In automated CI/CD runners (e.g. GitHub Actions, GitLab CI), set the `NAAGMANI_API_KEY` environment variable:
-
-```bash
-export NAAGMANI_API_KEY="nmn_live_xxxxxxxxxxxxxxxxxxxxxxxx"
-```
-
-Or pass via flag:
-
-```bash
-naagmani whoami --token $NAAGMANI_API_KEY
+naagmani auth login
+# Output:
+# Attempting to automatically open the SSO authorization page in your default browser...
+# If the browser does not open, visit:
+# https://developer.naagmani.app/cli-auth?code=ABCD-1234
+#
+# Waiting for authorization... [OK]
+# Successfully authenticated as alice@company.com (Org: org_ad094812-07ef)
 ```
 
 ---
 
-## Verifying Identity
+## Headless / CI Authentication
 
-Check the currently authenticated user, active organization, and project scope:
+For CI/CD pipelines and automated environments, provide a Project Service Token or Personal Access Key via environment variables:
 
 ```bash
-naagmani whoami
-```
+export NAAGMANI_API_KEY="nst_live_9b2d8819..."
+export NAAGMANI_ORG_ID="org_ad094812-07ef-4db5-b2ba-6585bd9df55e"
+export NAAGMANI_API_URL="http://localhost:8081" # or https://api.naagmani.app
 
-Example output:
-```text
-Authenticated as: developer@example.com
-Organization: Acme Corp (org_987asdf)
-Active Project: Customer-AI-Assistant (proj_12345)
-Role: Admin
+# Verify context
+naagmani auth status
 ```
 
 ---
 
-## Logging Out
+## Managing Workspaces & Contexts
 
-Clear stored local credentials:
+Switch seamlessly between different organizations and projects:
 
 ```bash
-naagmani logout
+# List available contexts
+naagmani context list
+
+# Switch to production
+naagmani context use production-org
 ```
+
+---
+
+## Next Steps
+
+- [Commands Reference](/docs/cli/commands)
+- [Plugin Management](/docs/cli/plugins)

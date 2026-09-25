@@ -1,37 +1,48 @@
-# Plugin Hooks
+# Execution Hooks
 
-Hooks are explicit interception points during request processing where plugins can inspect, transform, augment, or abort an AI workflow.
+Naagmani offers discrete hook interception points along the complete request/response lifecycle.
+
+```mermaid
+flowchart TD
+    A[Client Request] --> B[pre_auth]
+    B --> C[pre_route]
+    C --> D[pre_model_call]
+    D --> E[Upstream AI Execution]
+    E --> F[post_model_call]
+    F --> G[post_response]
+    G --> H[Client Response]
+    
+    E -.->|Error Encountered| I[on_error]
+```
 
 ---
 
-## Available Lifecycle Hooks
+## Supported Hook Points
 
-| Hook Name | Stage | Input Payload | Can Modify? | Common Purpose |
-| :--- | :--- | :--- | :--- | :--- |
-| `pre_prompt` | Before upstream LLM call | Messages, Tools, Model parameters | **Yes** | DLP sanitization, RAG context injection, prompt injection defense. |
-| `post_generation` | After upstream LLM response | Generated Choices, Tool Calls, Usage | **Yes** | Hallucination checks, output secret masking, format enforcement. |
-| `on_error` | Upon upstream or pipeline failure | Error code, Error message, Context | No | Alerting, audit logging, custom error translation. |
+| Hook Name | When It Executes | Can Mutate Payload? | Common Use Cases |
+| :--- | :--- | :--- | :--- |
+| **`pre_auth`** | Before token validation and project context resolution. | Headers only | Custom JWT decryption, IP whitelisting. |
+| **`pre_route`** | After project auth, before selecting the upstream provider/model. | Yes (Full) | Semantic routing, RAG context enrichment, PII masking. |
+| **`pre_model_call`** | Immediately before dispatching payload to the selected provider adapter. | Yes (Provider payload) | Model-specific prompt formatting, token clipping. |
+| **`post_model_call`** | Immediately after provider response or first stream chunk. | Yes | Output moderation, toxic content filtering. |
+| **`post_response`** | Final stage before sending bytes to client. | Yes | Watermarking, telemetry calculation. |
+| **`on_error`** | Triggered when upstream provider returns 4xx/5xx or timeouts. | Error payload | Custom error formatting, alert webhooks. |
 
 ---
 
-## Hook Signatures & Behaviors
+## Hook Priority & Ordering
 
-### 1. `pre_prompt`
-Executed immediately after client authentication and policy validation, before sending the request to the upstream AI provider.
+Multiple plugins can attach to the same hook point. They execute strictly ordered by their `priority` integer in descending order:
 
-- **Action Options**:
-  - `pass`: Allow request to proceed unchanged.
-  - `modify`: Return updated `messages`, `tools`, or `temperature`.
-  - `abort`: Block the request immediately with a custom error code and message.
+1. `Plugin A` (`priority: 100`)
+2. `Plugin B` (`priority: 50`)
+3. `Plugin C` (`priority: 10`)
 
-### 2. `post_generation`
-Executed immediately after the upstream provider finishes generating the response (or after the final stream token has completed).
+Each plugin receives the output resulting from the preceding plugin in the pipeline.
 
-- **Action Options**:
-  - `pass`: Allow generated response to return to client unchanged.
-  - `modify`: Return scrubbed or transformed response content.
-  - `abort`: Intercept output (e.g. if proprietary source code or PII was generated) and replace with a safety notice.
+---
 
-### 3. `on_error`
-Executed whenever an upstream provider returns a non-retryable error or a timeout occurs.
-- Used primarily by observability, telemetry, and monitoring plugins.
+## Next Steps
+
+- [Permissions & Security](/docs/plugins/permissions)
+- [Plugin Development Guide](/docs/plugins/development)

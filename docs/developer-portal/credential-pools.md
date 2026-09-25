@@ -1,40 +1,29 @@
-# BYOK & Credential Pool Failover
+# BYOK & Credential Pools
 
-Bring Your Own Key (BYOK) stores AES-256-GCM encrypted provider credentials with automatic fallback when rate limits (HTTP 429) or upstream provider outages occur.
+Store your direct commercial provider credentials securely in the **Bring-Your-Own-Key (BYOK)** encrypted vault and configure failover pools.
 
----
-
-## Hierarchical Credential Resolution
-
-Naagmani resolves API credentials in a strict 3-tier hierarchy:
+- **Portal Page**: [http://localhost:3000/providers](http://localhost:3000/providers)
 
 ```mermaid
 graph TD
-    Request[Incoming Inference Request] --> Env[1. Environment Scope]
-    Env -->|If not found| Proj[2. Project Scope]
-    Proj -->|If not found| Org[3. Organization Scope]
-    Org --> Pool[Active Credential Pool]
+    Pool["OpenAI Credential Pool"]
+    Pool --> Key1["Primary API Key (Account A) - Weight 80%"]
+    Pool --> Key2["Secondary API Key (Account B) - Weight 20%"]
 ```
-
-### Key Principles
-
-- **Scope Precedence**: Keys defined at the Environment level override Project keys, which in turn override Organization-wide defaults.
-- **Intra-Provider Failover**: When a provider key encounters a `429 Rate Limit` or `5xx Server Error`, Naagmani immediately retries the request against alternative healthy credentials within the same pool.
-- **Adaptive Cooldown**: Exhausted keys are automatically removed from rotation for a dynamically calculated cooldown window based on `Retry-After` headers.
 
 ---
 
-## Adding Credentials via API
+## Configuring Provider Credentials
 
-You can programmatically configure credential pools using the Naagmani Cloud Provider API:
+1. Navigate to **Providers** in the Developer Portal ([http://localhost:3000/providers](http://localhost:3000/providers)).
+2. Click on the desired provider (e.g. **OpenAI**, **Anthropic**, **Google**, or **DeepSeek**).
+3. Enter your provider API Key and optional Organization ID.
+4. Click **Connect Provider**.
+5. Keys are encrypted with AES-256-GCM.
 
-```json
-POST /v1/providers
-{
-  "provider": "openai",
-  "name": "Production Tier 4 Key",
-  "credential": "sk-proj-...",
-  "priority": 1,
-  "weight": 100
-}
-```
+---
+
+## Next Steps
+
+- Configure routing cascades: [Smart Routing Policies](routing-policies.md)
+- View attempt telemetry: [Provider Attempt Accounting](attempts.md)

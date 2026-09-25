@@ -13,6 +13,7 @@ export interface DocPage {
   slugPath: string;
   title: string;
   description: string;
+  hasExplicitDescription?: boolean;
   content: string;
   headings: DocHeading[];
   status?: 'available' | 'beta' | 'planned';
@@ -133,6 +134,7 @@ export async function getDocBySlug(slug: string[]): Promise<DocPage | null> {
     slugPath,
     title,
     description,
+    hasExplicitDescription: Boolean(frontmatter.description),
     content,
     headings,
     status,

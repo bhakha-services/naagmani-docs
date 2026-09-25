@@ -1,0 +1,758 @@
+[
+  {
+    "file": "api/authentication.md",
+    "lines": 96,
+    "bytes": 2483,
+    "title": "No Title",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "api/chat-completions.md",
+    "lines": 116,
+    "bytes": 3582,
+    "title": "Chat Completions API",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "api/embeddings.md",
+    "lines": 69,
+    "bytes": 1848,
+    "title": "Embeddings API",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "api/errors.md",
+    "lines": 49,
+    "bytes": 2266,
+    "title": "Error Handling & Status Codes",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "api/overview.md",
+    "lines": 41,
+    "bytes": 1878,
+    "title": "API Overview",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "api/responses.md",
+    "lines": 80,
+    "bytes": 1919,
+    "title": "Responses API",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "cli/authentication.md",
+    "lines": 58,
+    "bytes": 1056,
+    "title": "CLI Authentication",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "cli/commands.md",
+    "lines": 68,
+    "bytes": 2495,
+    "title": "CLI Commands Reference",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "cli/installation.md",
+    "lines": 53,
+    "bytes": 1352,
+    "title": "CLI Installation",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "cli/plugins.md",
+    "lines": 50,
+    "bytes": 1022,
+    "title": "CLI Plugin Management",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "cli/troubleshooting.md",
+    "lines": 43,
+    "bytes": 1535,
+    "title": "CLI Troubleshooting",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "concepts/api-keys.md",
+    "lines": 81,
+    "bytes": 2855,
+    "title": "API Keys",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "concepts/billing.md",
+    "lines": 46,
+    "bytes": 1801,
+    "title": "Billing & Budgets",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "concepts/environments.md",
+    "lines": 27,
+    "bytes": 1046,
+    "title": "Environments",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "concepts/models.md",
+    "lines": 54,
+    "bytes": 2343,
+    "title": "Models & Aliases",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "concepts/organizations.md",
+    "lines": 20,
+    "bytes": 892,
+    "title": "Organizations",
+    "hasMermaid": false,
+    "hasCode": false,
+    "hasPortalLink": false
+  },
+  {
+    "file": "concepts/plugins.md",
+    "lines": 52,
+    "bytes": 2470,
+    "title": "Plugins Architecture Overview",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "concepts/project-service-tokens.md",
+    "lines": 95,
+    "bytes": 3957,
+    "title": "Project Service Tokens",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "concepts/projects.md",
+    "lines": 19,
+    "bytes": 782,
+    "title": "Projects",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "concepts/providers.md",
+    "lines": 44,
+    "bytes": 2167,
+    "title": "Providers",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "concepts/routing.md",
+    "lines": 71,
+    "bytes": 2456,
+    "title": "Routing & Fallbacks",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "concepts/usage.md",
+    "lines": 64,
+    "bytes": 2047,
+    "title": "Usage & Telemetry",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "developer-portal/agent-playground.md",
+    "lines": 31,
+    "bytes": 1433,
+    "title": "Agent Playground & Interactive Testing",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "developer-portal/agents.md",
+    "lines": 88,
+    "bytes": 3673,
+    "title": "Autonomous Agents & Assistants",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "developer-portal/cli-workflow.md",
+    "lines": 53,
+    "bytes": 956,
+    "title": "Naagmani CLI Developer Guide",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "developer-portal/credential-pools.md",
+    "lines": 41,
+    "bytes": 1376,
+    "title": "BYOK & Credential Pool Failover",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "developer-portal/finops-budgets.md",
+    "lines": 31,
+    "bytes": 1190,
+    "title": "FinOps Spend Controls & Quotas",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "developer-portal/guardrails.md",
+    "lines": 39,
+    "bytes": 1640,
+    "title": "AI Guardrails & Governance",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "developer-portal/mcp-integration.md",
+    "lines": 32,
+    "bytes": 1232,
+    "title": "Model Context Protocol (MCP) Integration",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "developer-portal/mcp-policies.md",
+    "lines": 55,
+    "bytes": 1954,
+    "title": "MCP Tool Policies & Enterprise Governance",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "developer-portal/mcp-servers.md",
+    "lines": 139,
+    "bytes": 5094,
+    "title": "Model Context Protocol (MCP) Servers & Integration",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "developer-portal/model-playground.md",
+    "lines": 30,
+    "bytes": 1233,
+    "title": "Model Playground & Prompt Engineering",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "developer-portal/overview.md",
+    "lines": 62,
+    "bytes": 2327,
+    "title": "Developer Portal Overview & Quickstart",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "developer-portal/plugin-protocol.md",
+    "lines": 59,
+    "bytes": 1722,
+    "title": "Out-of-Process Plugin Protocol (v1)",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "developer-portal/service-tokens.md",
+    "lines": 47,
+    "bytes": 1880,
+    "title": "Service Tokens in Developer Portal",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "developer-portal/skills.md",
+    "lines": 48,
+    "bytes": 2133,
+    "title": "Agent Skills & Orchestration",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "developer-portal/tools.md",
+    "lines": 107,
+    "bytes": 5597,
+    "title": "Tools Architecture & Working Flow",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "features/service-tokens.md",
+    "lines": 377,
+    "bytes": 15985,
+    "title": "Project Service Tokens",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "integrations/anthropic.md",
+    "lines": 41,
+    "bytes": 1170,
+    "title": "Anthropic Integration",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "integrations/deepseek.md",
+    "lines": 42,
+    "bytes": 1082,
+    "title": "DeepSeek Integration",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "integrations/google.md",
+    "lines": 48,
+    "bytes": 1274,
+    "title": "Google Gemini Integration",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "integrations/openai.md",
+    "lines": 51,
+    "bytes": 1482,
+    "title": "OpenAI Integration",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "integrations/other-providers.md",
+    "lines": 52,
+    "bytes": 1156,
+    "title": "Other Providers & Self-Hosted Models",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "introduction/architecture.md",
+    "lines": 52,
+    "bytes": 2571,
+    "title": "Product Architecture",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "introduction/concepts.md",
+    "lines": 29,
+    "bytes": 1752,
+    "title": "Foundational Concepts",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "introduction/what-is-naagmani.md",
+    "lines": 46,
+    "bytes": 3019,
+    "title": "What is Naagmani?",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "introduction/why-naagmani.md",
+    "lines": 29,
+    "bytes": 1897,
+    "title": "Why Naagmani?",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "marketplace/installing-plugins.md",
+    "lines": 45,
+    "bytes": 1120,
+    "title": "Installing & Configuring Plugins",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "marketplace/overview.md",
+    "lines": 26,
+    "bytes": 1310,
+    "title": "Marketplace Overview",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "marketplace/plugin-visibility.md",
+    "lines": 22,
+    "bytes": 1311,
+    "title": "Plugin Visibility & Trust Scopes",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "marketplace/publishing.md",
+    "lines": 52,
+    "bytes": 2060,
+    "title": "Publishing to Marketplace",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "plugins/architecture.md",
+    "lines": 55,
+    "bytes": 1909,
+    "title": "Plugin Architecture",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "plugins/development.md",
+    "lines": 132,
+    "bytes": 2907,
+    "title": "Plugin Development Guide",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "plugins/hooks.md",
+    "lines": 38,
+    "bytes": 1783,
+    "title": "Plugin Hooks",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "plugins/lifecycle.md",
+    "lines": 47,
+    "bytes": 1898,
+    "title": "Plugin Lifecycle",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "plugins/manifest.md",
+    "lines": 100,
+    "bytes": 2943,
+    "title": "Plugin Manifest (`plugin.json`)",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "plugins/overview.md",
+    "lines": 39,
+    "bytes": 2324,
+    "title": "Plugin System Overview",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "plugins/permissions.md",
+    "lines": 39,
+    "bytes": 1595,
+    "title": "Plugin Permissions & Sandbox",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "plugins/protocol.md",
+    "lines": 143,
+    "bytes": 3107,
+    "title": "Plugin Protocol (`naagmani.plugin/v1`)",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "plugins/publishing.md",
+    "lines": 101,
+    "bytes": 4126,
+    "title": "Packaging & Publishing Plugins",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "plugins/testing.md",
+    "lines": 58,
+    "bytes": 1614,
+    "title": "Plugin Testing & Validation",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "production/observability.md",
+    "lines": 51,
+    "bytes": 1629,
+    "title": "Observability & Monitoring",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "production/overview.md",
+    "lines": 18,
+    "bytes": 1079,
+    "title": "Production Operations Overview",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "production/rate-limits.md",
+    "lines": 46,
+    "bytes": 1487,
+    "title": "Rate Limiting & Concurrency Control",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "production/reliability.md",
+    "lines": 35,
+    "bytes": 1091,
+    "title": "High Availability & Reliability",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "production/routing.md",
+    "lines": 43,
+    "bytes": 1215,
+    "title": "Production Routing Strategies",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "production/scaling.md",
+    "lines": 52,
+    "bytes": 1397,
+    "title": "Scaling & High Concurrency",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "quickstart/api-key.md",
+    "lines": 42,
+    "bytes": 1101,
+    "title": "Creating an API Key",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "quickstart/first-request.md",
+    "lines": 146,
+    "bytes": 2953,
+    "title": "Sending Your First Request",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "quickstart/overview.md",
+    "lines": 15,
+    "bytes": 681,
+    "title": "Quickstart Overview",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "quickstart/streaming.md",
+    "lines": 92,
+    "bytes": 2164,
+    "title": "Streaming Responses",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "sdk/go.md",
+    "lines": 68,
+    "bytes": 1461,
+    "title": "Go HDK (`hdk/go`)",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "sdk/node.md",
+    "lines": 68,
+    "bytes": 1462,
+    "title": "Node.js / TypeScript HDK (`@naagmani/hdk`)",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "sdk/python.md",
+    "lines": 52,
+    "bytes": 1335,
+    "title": "Python HDK (`naagmani-hdk`)",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "security/audit-logs.md",
+    "lines": 31,
+    "bytes": 1368,
+    "title": "Audit Logs & Compliance Trail",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "security/authentication.md",
+    "lines": 22,
+    "bytes": 1065,
+    "title": "Security: Authentication",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "security/authorization.md",
+    "lines": 31,
+    "bytes": 984,
+    "title": "Security: Authorization & RBAC",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "security/data-protection.md",
+    "lines": 31,
+    "bytes": 1452,
+    "title": "Security: Data Protection & Privacy",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "security/isolation.md",
+    "lines": 21,
+    "bytes": 1046,
+    "title": "Security: Isolation & Sandboxing",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "security/overview.md",
+    "lines": 28,
+    "bytes": 1589,
+    "title": "Security Architecture & Overview",
+    "hasMermaid": true,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "troubleshooting/authentication.md",
+    "lines": 29,
+    "bytes": 957,
+    "title": "Troubleshooting: Authentication",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "troubleshooting/cli.md",
+    "lines": 35,
+    "bytes": 991,
+    "title": "Troubleshooting: CLI Issues",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  },
+  {
+    "file": "troubleshooting/common-errors.md",
+    "lines": 39,
+    "bytes": 1545,
+    "title": "Troubleshooting: Common Errors",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": true
+  },
+  {
+    "file": "troubleshooting/plugins.md",
+    "lines": 27,
+    "bytes": 1264,
+    "title": "Troubleshooting: Plugins",
+    "hasMermaid": false,
+    "hasCode": true,
+    "hasPortalLink": false
+  }
+]

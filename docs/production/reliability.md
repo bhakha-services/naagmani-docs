@@ -1,34 +1,30 @@
-# High Availability & Reliability
+# High Availability & Failover
 
-Strategies for ensuring 99.99% availability for enterprise AI applications using Naagmani.
-
----
-
-## Zero-Downtime Provider Failover
-
-Upstream foundation model providers experience regular outages, degraded latency spikes, and transient 500 errors. Naagmani handles upstream failures transparently:
+Naagmani ensures 99.99% uptime for AI workloads by automatically managing provider outages, rate-limit 429s, and network degradation.
 
 ```mermaid
-graph TD
-    Client[Application Client] --> Gateway[Naagmani Gateway]
-    Gateway --> Primary{Provider A Healthy?}
-    Primary -->|Yes| P_A[Execute on OpenAI]
-    Primary -->|No / 429 / 5xx / Timeout| P_B[Automatic Failover to Anthropic]
-    P_B --> Res[Return Successful Response to Client]
-```
-
-### Key Configuration
-```yaml
-routing_policy:
-  failover:
-    enabled: true
-    max_retries: 2
-    retry_statuses: [429, 500, 502, 503, 504]
-    timeout_ms: 15000
+flowchart TD
+    A[Client Request] --> B[Naagmani Active Gateway]
+    B --> C{Primary: OpenAI}
+    C -->|200 OK| D[Fast Return]
+    C -->|503 Outage / 429 Limit| E[Automated Failover]
+    E --> F{Secondary: Anthropic Claude}
+    F -->|200 OK| D
+    F -->|Timeout| G{Tertiary: Google Gemini}
+    G -->|200 OK| D
 ```
 
 ---
 
-## Circuit Breakers
+## Smart Retry Strategies
 
-When an upstream endpoint consistently fails (e.g. 5 errors in 10 seconds), Naagmani trips the circuit breaker for that provider, routing 100% of subsequent requests immediately to healthy backup providers without waiting for individual request timeouts.
+1. **Exponential Backoff with Jitter**: Prevents thundering herd problems on upstream recovery.
+2. **Circuit Breaker Pattern**: Temporarily halts traffic to failing providers to avoid latency cascades.
+3. **Attempt Telemetry Tracking**: Logs every hop for automated SLA reporting.
+
+---
+
+## Next Steps
+
+- [Rate Limiting & Quotas](/docs/production/rate-limits)
+- [Traffic Routing Strategies](/docs/production/routing)

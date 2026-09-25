@@ -1,50 +1,52 @@
-# OpenAI Integration
+# OpenAI Integration Guide
 
-Naagmani provides deep integration with OpenAI models, supporting standard chat completions, structured outputs, function calling, vision, reasoning models, and prompt caching.
-
----
-
-## Supported Models
-
-| Model | ID | Context Window | Capabilities |
-| :--- | :--- | :--- | :--- |
-| **GPT-4o** | `gpt-4o` | 128k tokens | Vision, Audio, Tool Calling, Structured Outputs |
-| **GPT-4o mini** | `gpt-4o-mini` | 128k tokens | High-speed, Cost-optimized, Vision |
-| **o1** | `o1` | 200k tokens | Advanced Reasoning, Thinking tokens |
-| **o3-mini** | `o3-mini` | 200k tokens | Fast Reasoning, STEM & Coding tasks |
-| **Embeddings** | `text-embedding-3-small`, `text-embedding-3-large` | 8k tokens | Dimensionality reduction (256-3072) |
+Naagmani provides seamless, native proxying and intelligent fallback routing for all official OpenAI models, including `gpt-4o`, `gpt-4o-mini`, `o1`, `o1-mini`, and `text-embedding-3-large`.
 
 ---
 
-## Configuration (BYOK)
+## Configuration
 
-To connect your own OpenAI API key:
+1. Open **Credential Pools** in the Developer Portal: [http://localhost:3000/credentials](http://localhost:3000/credentials)
+2. Click **Add Provider Credential**.
+3. Select **OpenAI**, input your `sk-proj-...` API key, and configure rate limits or priority weighting.
 
-### Via Naagmani Developer Portal
-1. Navigate to **Integrations** > **OpenAI**.
-2. Paste your OpenAI API Key (`sk-...`) and optional Organization ID / Project ID.
-3. Save configuration.
-
-### Via YAML Configuration
-```yaml
-providers:
-  openai:
-    api_key: "${OPENAI_API_KEY}"
-    organization_id: "org-xxxx" # Optional
+```json
+{
+  "provider": "openai",
+  "api_key": "sk-proj-...",
+  "base_url": "https://api.openai.com/v1",
+  "weight": 100,
+  "max_rpm": 5000
+}
 ```
 
 ---
 
-## Calling OpenAI Models via Naagmani
+## Supported Features
+
+- **Chat Completions & Reasoning Tokens**: Full support for reasoning effort parameters in `o1` series models.
+- **Function / Tool Calling**: Schema-validated JSON tool invocations.
+- **Server-Sent Events (SSE)**: Byte-level chunk forwarding with sub-millisecond overhead.
+- **Embeddings**: High-throughput vectorized outputs.
+
+---
+
+## Example Invocations
 
 ```bash
-curl -X POST https://api.naagmani.com/v1/chat/completions \
-  -H "Authorization: Bearer NAAGMANI_API_KEY" \
+curl -X POST http://localhost:8080/v1/chat/completions \
+  -H "Authorization: Bearer nst_live_9b2d8819..." \
   -H "Content-Type: application/json" \
   -d '{
     "model": "gpt-4o",
-    "messages": [
-      {"role": "user", "content": "Explain quantum entanglement simply."}
-    ]
+    "messages": [{"role": "user", "content": "Explain vector indexing."}],
+    "temperature": 0.7
   }'
 ```
+
+---
+
+## Next Steps
+
+- [Anthropic Claude Integration](/docs/integrations/anthropic)
+- [Smart Routing & Cascading](/docs/concepts/routing)

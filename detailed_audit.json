@@ -1,0 +1,1433 @@
+[
+  {
+    "file": "api/authentication.md",
+    "section": "api",
+    "title": "Untitled",
+    "headingsCount": 4,
+    "headings": [
+      "Supported Credential Types",
+      "Authentication Methods",
+      "Example Requests",
+      "Authentication Errors"
+    ],
+    "lineCount": 96,
+    "wordCount": 305,
+    "hasCurl": true,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "api/chat-completions.md",
+    "section": "api",
+    "title": "Chat Completions API",
+    "headingsCount": 3,
+    "headings": [
+      "Endpoint Details",
+      "Request Body Parameters",
+      "Examples"
+    ],
+    "lineCount": 116,
+    "wordCount": 509,
+    "hasCurl": true,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "api/embeddings.md",
+    "section": "api",
+    "title": "Embeddings API",
+    "headingsCount": 3,
+    "headings": [
+      "Endpoint Details",
+      "Request Parameters",
+      "Example Request (cURL)"
+    ],
+    "lineCount": 69,
+    "wordCount": 234,
+    "hasCurl": true,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "api/errors.md",
+    "section": "api",
+    "title": "Error Handling & Status Codes",
+    "headingsCount": 3,
+    "headings": [
+      "Error Response Structure",
+      "HTTP Status Codes",
+      "Error Codes Reference"
+    ],
+    "lineCount": 49,
+    "wordCount": 344,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "api/overview.md",
+    "section": "api",
+    "title": "API Overview",
+    "headingsCount": 4,
+    "headings": [
+      "Base URLs",
+      "Key Endpoints",
+      "Protocol Standards",
+      "SDK & Client Compatibility"
+    ],
+    "lineCount": 41,
+    "wordCount": 269,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "api/responses.md",
+    "section": "api",
+    "title": "Responses API",
+    "headingsCount": 4,
+    "headings": [
+      "Overview",
+      "Endpoint Details",
+      "Request Format",
+      "Response Format"
+    ],
+    "lineCount": 80,
+    "wordCount": 220,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "cli/authentication.md",
+    "section": "cli",
+    "title": "CLI Authentication",
+    "headingsCount": 4,
+    "headings": [
+      "Interactive Login",
+      "Non-Interactive / CI/CD Login",
+      "Verifying Identity",
+      "Logging Out"
+    ],
+    "lineCount": 58,
+    "wordCount": 132,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": true,
+    "hasApiRef": true
+  },
+  {
+    "file": "cli/commands.md",
+    "section": "cli",
+    "title": "CLI Commands Reference",
+    "headingsCount": 2,
+    "headings": [
+      "Core Commands",
+      "Command Details & Flags"
+    ],
+    "lineCount": 68,
+    "wordCount": 362,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "cli/installation.md",
+    "section": "cli",
+    "title": "CLI Installation",
+    "headingsCount": 2,
+    "headings": [
+      "Installation Methods",
+      "System Diagnostics"
+    ],
+    "lineCount": 53,
+    "wordCount": 144,
+    "hasCurl": true,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "cli/plugins.md",
+    "section": "cli",
+    "title": "CLI Plugin Management",
+    "headingsCount": 4,
+    "headings": [
+      "Searching Plugins",
+      "Installing & Registering Plugins",
+      "Inspecting Plugin Versions & History",
+      "Rolling Back a Version"
+    ],
+    "lineCount": 50,
+    "wordCount": 116,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "cli/troubleshooting.md",
+    "section": "cli",
+    "title": "CLI Troubleshooting",
+    "headingsCount": 4,
+    "headings": [
+      "1. `naagmani: command not found`",
+      "2. Manifest Validation Failed (`naagmani validate`)",
+      "3. Dev Mode Process Exited Prematurely (`naagmani dev`)",
+      "4. Permission Denied on Binary Execution (Linux / macOS)"
+    ],
+    "lineCount": 43,
+    "wordCount": 224,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "concepts/api-keys.md",
+    "section": "concepts",
+    "title": "API Keys",
+    "headingsCount": 5,
+    "headings": [
+      "Overview",
+      "Authentication Mechanism",
+      "Key Scopes & Permissions",
+      "Managing API Keys",
+      "Best Practices"
+    ],
+    "lineCount": 81,
+    "wordCount": 417,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": true,
+    "hasApiRef": true
+  },
+  {
+    "file": "concepts/billing.md",
+    "section": "concepts",
+    "title": "Billing & Budgets",
+    "headingsCount": 4,
+    "headings": [
+      "Spend Governance",
+      "Budget Types",
+      "Cost Calculation Models",
+      "Invoices & Breakdown Reports"
+    ],
+    "lineCount": 46,
+    "wordCount": 268,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": true,
+    "hasApiRef": true
+  },
+  {
+    "file": "concepts/environments.md",
+    "section": "concepts",
+    "title": "Environments",
+    "headingsCount": 2,
+    "headings": [
+      "Standard Tiers",
+      "Environment Isolation"
+    ],
+    "lineCount": 27,
+    "wordCount": 139,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "concepts/models.md",
+    "section": "concepts",
+    "title": "Models & Aliases",
+    "headingsCount": 3,
+    "headings": [
+      "Model Naming Formats",
+      "Model Capabilities Mapping",
+      "Model Deprecation & Lifecycle"
+    ],
+    "lineCount": 54,
+    "wordCount": 321,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "concepts/organizations.md",
+    "section": "concepts",
+    "title": "Organizations",
+    "headingsCount": 2,
+    "headings": [
+      "Organization Scope & Governance",
+      "Next Steps"
+    ],
+    "lineCount": 20,
+    "wordCount": 109,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "concepts/plugins.md",
+    "section": "concepts",
+    "title": "Plugins Architecture Overview",
+    "headingsCount": 3,
+    "headings": [
+      "Why Plugins?",
+      "Key Characteristics",
+      "Plugin Types"
+    ],
+    "lineCount": 52,
+    "wordCount": 309,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "concepts/project-service-tokens.md",
+    "section": "concepts",
+    "title": "Project Service Tokens",
+    "headingsCount": 6,
+    "headings": [
+      "Overview",
+      "Token Structure",
+      "Token Lifecycle",
+      "Supported Capabilities",
+      "Using Service Tokens"
+    ],
+    "lineCount": 95,
+    "wordCount": 504,
+    "hasCurl": true,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "concepts/projects.md",
+    "section": "concepts",
+    "title": "Projects",
+    "headingsCount": 2,
+    "headings": [
+      "Capabilities of a Project",
+      "Next Steps"
+    ],
+    "lineCount": 19,
+    "wordCount": 104,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "concepts/providers.md",
+    "section": "concepts",
+    "title": "Providers",
+    "headingsCount": 3,
+    "headings": [
+      "Supported Providers",
+      "BYOK (Bring Your Own Key) vs. Naagmani Managed",
+      "Provider Fallbacks & Resilience"
+    ],
+    "lineCount": 44,
+    "wordCount": 326,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "concepts/routing.md",
+    "section": "concepts",
+    "title": "Routing & Fallbacks",
+    "headingsCount": 3,
+    "headings": [
+      "Routing Strategies",
+      "Retries and Circuit Breaking",
+      "Routing Configuration Example"
+    ],
+    "lineCount": 71,
+    "wordCount": 326,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "concepts/usage.md",
+    "section": "concepts",
+    "title": "Usage & Telemetry",
+    "headingsCount": 3,
+    "headings": [
+      "Token Accounting",
+      "Response Headers",
+      "Exporting Metrics"
+    ],
+    "lineCount": 64,
+    "wordCount": 262,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "developer-portal/agent-playground.md",
+    "section": "developer-portal",
+    "title": "Agent Playground & Interactive Testing",
+    "headingsCount": 3,
+    "headings": [
+      "1. Features & Capabilities",
+      "2. Using the Agent Playground",
+      "3. Related Documentation"
+    ],
+    "lineCount": 31,
+    "wordCount": 191,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "developer-portal/agents.md",
+    "section": "developer-portal",
+    "title": "Autonomous Agents & Assistants",
+    "headingsCount": 5,
+    "headings": [
+      "What is a Naagmani Agent?",
+      "Agent Architecture",
+      "Core Capabilities",
+      "Testing in Agent Playground",
+      "Managing Agents in the Developer Portal"
+    ],
+    "lineCount": 84,
+    "wordCount": 463,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": true,
+    "hasApiRef": true
+  },
+  {
+    "file": "developer-portal/cli-workflow.md",
+    "section": "developer-portal",
+    "title": "Naagmani CLI Developer Guide",
+    "headingsCount": 3,
+    "headings": [
+      "Installation & Setup",
+      "Authentication",
+      "Plugin Development Workflow"
+    ],
+    "lineCount": 53,
+    "wordCount": 131,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "developer-portal/credential-pools.md",
+    "section": "developer-portal",
+    "title": "BYOK & Credential Pool Failover",
+    "headingsCount": 2,
+    "headings": [
+      "Hierarchical Credential Resolution",
+      "Adding Credentials via API"
+    ],
+    "lineCount": 41,
+    "wordCount": 181,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "developer-portal/finops-budgets.md",
+    "section": "developer-portal",
+    "title": "FinOps Spend Controls & Quotas",
+    "headingsCount": 1,
+    "headings": [
+      "FinOps Telemetry & Enforcement"
+    ],
+    "lineCount": 31,
+    "wordCount": 163,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "developer-portal/guardrails.md",
+    "section": "developer-portal",
+    "title": "AI Guardrails & Governance",
+    "headingsCount": 3,
+    "headings": [
+      "1. Guardrail Inspection Pipeline",
+      "2. Managing Guardrails in Developer Portal",
+      "3. Related Documentation"
+    ],
+    "lineCount": 39,
+    "wordCount": 197,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": true,
+    "hasApiRef": true
+  },
+  {
+    "file": "developer-portal/mcp-integration.md",
+    "section": "developer-portal",
+    "title": "Model Context Protocol (MCP) Integration",
+    "headingsCount": 2,
+    "headings": [
+      "MCP Tool Invocation Flow",
+      "Capabilities & Governance"
+    ],
+    "lineCount": 32,
+    "wordCount": 157,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "developer-portal/mcp-policies.md",
+    "section": "developer-portal",
+    "title": "MCP Tool Policies & Enterprise Governance",
+    "headingsCount": 4,
+    "headings": [
+      "1. Policy Enforcement Architecture",
+      "2. Policy Controls",
+      "3. Configuring Policies in Developer Portal",
+      "4. Related Documentation"
+    ],
+    "lineCount": 55,
+    "wordCount": 236,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": true,
+    "hasApiRef": false
+  },
+  {
+    "file": "developer-portal/mcp-servers.md",
+    "section": "developer-portal",
+    "title": "Model Context Protocol (MCP) Servers & Integration",
+    "headingsCount": 6,
+    "headings": [
+      "1. Architectural Overview & Hierarchy",
+      "2. Supported Transports",
+      "3. Authentication & Secret Management",
+      "4. Tool Discovery Handshake (`tools.list`)",
+      "5. Step-by-Step Developer Runbook"
+    ],
+    "lineCount": 139,
+    "wordCount": 641,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": true,
+    "hasApiRef": true
+  },
+  {
+    "file": "developer-portal/model-playground.md",
+    "section": "developer-portal",
+    "title": "Model Playground & Prompt Engineering",
+    "headingsCount": 3,
+    "headings": [
+      "1. Capabilities",
+      "2. Using Model Playground in Developer Portal",
+      "3. Related Documentation"
+    ],
+    "lineCount": 30,
+    "wordCount": 148,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": true,
+    "hasApiRef": false
+  },
+  {
+    "file": "developer-portal/overview.md",
+    "section": "developer-portal",
+    "title": "Developer Portal Overview & Quickstart",
+    "headingsCount": 2,
+    "headings": [
+      "Architecture Topology",
+      "Getting Started"
+    ],
+    "lineCount": 62,
+    "wordCount": 294,
+    "hasCurl": true,
+    "hasMermaid": true,
+    "hasPortal": true,
+    "hasApiRef": true
+  },
+  {
+    "file": "developer-portal/plugin-protocol.md",
+    "section": "developer-portal",
+    "title": "Out-of-Process Plugin Protocol (v1)",
+    "headingsCount": 3,
+    "headings": [
+      "Architecture & Priority Pipeline",
+      "Plugin Execution Hooks",
+      "Example HDK Plugin Implementation"
+    ],
+    "lineCount": 59,
+    "wordCount": 211,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "developer-portal/service-tokens.md",
+    "section": "developer-portal",
+    "title": "Service Tokens in Developer Portal",
+    "headingsCount": 4,
+    "headings": [
+      "Navigating to Service Tokens",
+      "Creating a Service Token",
+      "Rotating a Service Token",
+      "Revoking a Token"
+    ],
+    "lineCount": 47,
+    "wordCount": 267,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": true,
+    "hasApiRef": true
+  },
+  {
+    "file": "developer-portal/skills.md",
+    "section": "developer-portal",
+    "title": "Agent Skills & Orchestration",
+    "headingsCount": 3,
+    "headings": [
+      "1. Capabilities Triad",
+      "2. Configuring Skills in the Developer Portal",
+      "3. Related Documentation"
+    ],
+    "lineCount": 48,
+    "wordCount": 261,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": true,
+    "hasApiRef": true
+  },
+  {
+    "file": "developer-portal/tools.md",
+    "section": "developer-portal",
+    "title": "Tools Architecture & Working Flow",
+    "headingsCount": 5,
+    "headings": [
+      "1. Capabilities Triad: Skills vs Tools vs Plugins",
+      "2. Complete Tool Working Flow & Runtime Lifecycle",
+      "3. Tool Security Risk Classification",
+      "4. Managing Tools in Developer Portal",
+      "5. Related Documentation"
+    ],
+    "lineCount": 107,
+    "wordCount": 718,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": true,
+    "hasApiRef": true
+  },
+  {
+    "file": "features/service-tokens.md",
+    "section": "features",
+    "title": "Project Service Tokens",
+    "headingsCount": 10,
+    "headings": [
+      "Why Use Project Service Tokens?",
+      "Token Anatomy & Security",
+      "Granular Capability Scopes",
+      "Spending Budget & Member Attribution Architecture",
+      "How to Create and Manage Tokens"
+    ],
+    "lineCount": 377,
+    "wordCount": 1840,
+    "hasCurl": true,
+    "hasMermaid": false,
+    "hasPortal": true,
+    "hasApiRef": true
+  },
+  {
+    "file": "integrations/anthropic.md",
+    "section": "integrations",
+    "title": "Anthropic Integration",
+    "headingsCount": 3,
+    "headings": [
+      "Supported Models",
+      "Configuration (BYOK)",
+      "Extended Thinking Support"
+    ],
+    "lineCount": 41,
+    "wordCount": 160,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "integrations/deepseek.md",
+    "section": "integrations",
+    "title": "DeepSeek Integration",
+    "headingsCount": 3,
+    "headings": [
+      "Supported Models",
+      "Configuration (BYOK)",
+      "Reasoning Content Output"
+    ],
+    "lineCount": 42,
+    "wordCount": 137,
+    "hasCurl": true,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "integrations/google.md",
+    "section": "integrations",
+    "title": "Google Gemini Integration",
+    "headingsCount": 3,
+    "headings": [
+      "Supported Models",
+      "Configuration (BYOK)",
+      "Multimodal Request Example"
+    ],
+    "lineCount": 48,
+    "wordCount": 167,
+    "hasCurl": true,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "integrations/openai.md",
+    "section": "integrations",
+    "title": "OpenAI Integration",
+    "headingsCount": 3,
+    "headings": [
+      "Supported Models",
+      "Configuration (BYOK)",
+      "Calling OpenAI Models via Naagmani"
+    ],
+    "lineCount": 51,
+    "wordCount": 208,
+    "hasCurl": true,
+    "hasMermaid": false,
+    "hasPortal": true,
+    "hasApiRef": true
+  },
+  {
+    "file": "integrations/other-providers.md",
+    "section": "integrations",
+    "title": "Other Providers & Self-Hosted Models",
+    "headingsCount": 3,
+    "headings": [
+      "1. Self-Hosted Inference Engines",
+      "2. High-Throughput Hardware Providers",
+      "3. Mistral AI & Cohere"
+    ],
+    "lineCount": 52,
+    "wordCount": 120,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "introduction/architecture.md",
+    "section": "introduction",
+    "title": "Product Architecture",
+    "headingsCount": 2,
+    "headings": [
+      "Architectural Components",
+      "Next Steps"
+    ],
+    "lineCount": 52,
+    "wordCount": 287,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "introduction/concepts.md",
+    "section": "introduction",
+    "title": "Foundational Concepts",
+    "headingsCount": 3,
+    "headings": [
+      "Multi-Tenancy Hierarchy",
+      "Core Runtime Concepts",
+      "Next Steps"
+    ],
+    "lineCount": 29,
+    "wordCount": 218,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "introduction/what-is-naagmani.md",
+    "section": "introduction",
+    "title": "What is Naagmani?",
+    "headingsCount": 2,
+    "headings": [
+      "Core Capabilities",
+      "Next Steps"
+    ],
+    "lineCount": 46,
+    "wordCount": 335,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "introduction/why-naagmani.md",
+    "section": "introduction",
+    "title": "Why Naagmani?",
+    "headingsCount": 2,
+    "headings": [
+      "How Naagmani Solves These Challenges",
+      "Next Steps"
+    ],
+    "lineCount": 29,
+    "wordCount": 274,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "marketplace/installing-plugins.md",
+    "section": "marketplace",
+    "title": "Installing & Configuring Plugins",
+    "headingsCount": 3,
+    "headings": [
+      "1. Installing via Naagmani Developer Portal",
+      "2. Installing via CLI",
+      "3. Configuring Plugin Pipelines"
+    ],
+    "lineCount": 45,
+    "wordCount": 139,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": true,
+    "hasApiRef": false
+  },
+  {
+    "file": "marketplace/overview.md",
+    "section": "marketplace",
+    "title": "Marketplace Overview",
+    "headingsCount": 2,
+    "headings": [
+      "Ecosystem Categories",
+      "Quality & Verification"
+    ],
+    "lineCount": 26,
+    "wordCount": 174,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "marketplace/plugin-visibility.md",
+    "section": "marketplace",
+    "title": "Plugin Visibility & Trust Scopes",
+    "headingsCount": 2,
+    "headings": [
+      "Visibility Scopes",
+      "Private Artifact Security"
+    ],
+    "lineCount": 22,
+    "wordCount": 177,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "marketplace/publishing.md",
+    "section": "marketplace",
+    "title": "Publishing to Marketplace",
+    "headingsCount": 3,
+    "headings": [
+      "Publishing Workflow",
+      "Publishing Options",
+      "Artifact Ingestion & Integrity"
+    ],
+    "lineCount": 52,
+    "wordCount": 258,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": true,
+    "hasApiRef": false
+  },
+  {
+    "file": "plugins/architecture.md",
+    "section": "plugins",
+    "title": "Plugin Architecture",
+    "headingsCount": 3,
+    "headings": [
+      "High-Level Architecture",
+      "Inter-Process Communication (IPC)",
+      "Performance & Latency"
+    ],
+    "lineCount": 55,
+    "wordCount": 238,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "plugins/development.md",
+    "section": "plugins",
+    "title": "Plugin Development Guide",
+    "headingsCount": 3,
+    "headings": [
+      "1. Prerequisites",
+      "2. Scaffolding a New Plugin",
+      "3. Implementing Hook Handlers"
+    ],
+    "lineCount": 132,
+    "wordCount": 324,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "plugins/hooks.md",
+    "section": "plugins",
+    "title": "Plugin Hooks",
+    "headingsCount": 2,
+    "headings": [
+      "Available Lifecycle Hooks",
+      "Hook Signatures & Behaviors"
+    ],
+    "lineCount": 38,
+    "wordCount": 269,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "plugins/lifecycle.md",
+    "section": "plugins",
+    "title": "Plugin Lifecycle",
+    "headingsCount": 5,
+    "headings": [
+      "Lifecycle Phases",
+      "1. Process Spawning & Handshake",
+      "2. Request Processing Loop",
+      "3. Health Checks (`ping`)",
+      "4. Teardown (`shutdown`)"
+    ],
+    "lineCount": 47,
+    "wordCount": 271,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "plugins/manifest.md",
+    "section": "plugins",
+    "title": "Plugin Manifest (`plugin.json`)",
+    "headingsCount": 2,
+    "headings": [
+      "Schema Overview",
+      "Manifest Fields Reference"
+    ],
+    "lineCount": 100,
+    "wordCount": 361,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "plugins/overview.md",
+    "section": "plugins",
+    "title": "Plugin System Overview",
+    "headingsCount": 3,
+    "headings": [
+      "What is a Naagmani Plugin?",
+      "Ecosystem Repositories",
+      "Key Design Principles"
+    ],
+    "lineCount": 39,
+    "wordCount": 284,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "plugins/permissions.md",
+    "section": "plugins",
+    "title": "Plugin Permissions & Sandbox",
+    "headingsCount": 3,
+    "headings": [
+      "Permission Scopes",
+      "Declaring Permissions in `plugin.json`",
+      "Runtime Enforcement"
+    ],
+    "lineCount": 39,
+    "wordCount": 217,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "plugins/protocol.md",
+    "section": "plugins",
+    "title": "Plugin Protocol (`naagmani.plugin/v1`)",
+    "headingsCount": 3,
+    "headings": [
+      "Wire Format",
+      "RPC Methods",
+      "RPC Message Payloads"
+    ],
+    "lineCount": 143,
+    "wordCount": 375,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "plugins/publishing.md",
+    "section": "plugins",
+    "title": "Packaging & Publishing Plugins",
+    "headingsCount": 5,
+    "headings": [
+      "1. Plugin Architecture & Bundle Requirements",
+      "2. Packaging a Plugin Locally",
+      "3. Publishing Methods",
+      "4. Visibility & Trust Model",
+      "5. Version Immutability & Safety"
+    ],
+    "lineCount": 101,
+    "wordCount": 533,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": true,
+    "hasApiRef": false
+  },
+  {
+    "file": "plugins/testing.md",
+    "section": "plugins",
+    "title": "Plugin Testing & Validation",
+    "headingsCount": 3,
+    "headings": [
+      "1. Schema Validation",
+      "2. Interactive Local Dev Mode",
+      "3. Unit & Integration Testing"
+    ],
+    "lineCount": 58,
+    "wordCount": 200,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "production/observability.md",
+    "section": "production",
+    "title": "Observability & Monitoring",
+    "headingsCount": 2,
+    "headings": [
+      "OpenTelemetry (OTel) Integration",
+      "Prometheus Metrics"
+    ],
+    "lineCount": 51,
+    "wordCount": 213,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "production/overview.md",
+    "section": "production",
+    "title": "Production Operations Overview",
+    "headingsCount": 1,
+    "headings": [
+      "Production Checklist"
+    ],
+    "lineCount": 18,
+    "wordCount": 150,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "production/rate-limits.md",
+    "section": "production",
+    "title": "Rate Limiting & Concurrency Control",
+    "headingsCount": 3,
+    "headings": [
+      "Rate Limit Dimensions",
+      "Rate Limit Headers",
+      "Handling HTTP 429 Responses"
+    ],
+    "lineCount": 46,
+    "wordCount": 206,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "production/reliability.md",
+    "section": "production",
+    "title": "High Availability & Reliability",
+    "headingsCount": 2,
+    "headings": [
+      "Zero-Downtime Provider Failover",
+      "Circuit Breakers"
+    ],
+    "lineCount": 35,
+    "wordCount": 138,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "production/routing.md",
+    "section": "production",
+    "title": "Production Routing Strategies",
+    "headingsCount": 3,
+    "headings": [
+      "1. Weighted A/B Canary Routing",
+      "2. Dynamic Latency Optimization",
+      "3. Geographic Edge Routing"
+    ],
+    "lineCount": 43,
+    "wordCount": 151,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "production/scaling.md",
+    "section": "production",
+    "title": "Scaling & High Concurrency",
+    "headingsCount": 3,
+    "headings": [
+      "Horizontal Gateway Scaling",
+      "Horizontal Pod Autoscaler (HPA) Example",
+      "Memory & Socket Tuning"
+    ],
+    "lineCount": 52,
+    "wordCount": 172,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "quickstart/api-key.md",
+    "section": "quickstart",
+    "title": "Creating an API Key",
+    "headingsCount": 4,
+    "headings": [
+      "1. Key Formats",
+      "2. Generating Keys via the CLI",
+      "3. Best Practices",
+      "Next Steps"
+    ],
+    "lineCount": 42,
+    "wordCount": 146,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "quickstart/first-request.md",
+    "section": "quickstart",
+    "title": "Sending Your First Request",
+    "headingsCount": 5,
+    "headings": [
+      "1. Using `curl`",
+      "2. Using Python (Official OpenAI SDK)",
+      "3. Using Node.js / TypeScript (Official OpenAI SDK)",
+      "4. Using Go",
+      "Next Steps"
+    ],
+    "lineCount": 146,
+    "wordCount": 312,
+    "hasCurl": true,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "quickstart/overview.md",
+    "section": "quickstart",
+    "title": "Quickstart Overview",
+    "headingsCount": 1,
+    "headings": [
+      "Prerequisites"
+    ],
+    "lineCount": 15,
+    "wordCount": 92,
+    "hasCurl": true,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "quickstart/streaming.md",
+    "section": "quickstart",
+    "title": "Streaming Responses",
+    "headingsCount": 4,
+    "headings": [
+      "1. Using `curl`",
+      "2. Using Python Streaming",
+      "3. Using TypeScript Streaming",
+      "Next Steps"
+    ],
+    "lineCount": 92,
+    "wordCount": 208,
+    "hasCurl": true,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "sdk/go.md",
+    "section": "sdk",
+    "title": "Go HDK (`hdk/go`)",
+    "headingsCount": 3,
+    "headings": [
+      "Installation",
+      "Quick Example",
+      "Key Interfaces"
+    ],
+    "lineCount": 68,
+    "wordCount": 158,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "sdk/node.md",
+    "section": "sdk",
+    "title": "Node.js / TypeScript HDK (`@naagmani/hdk`)",
+    "headingsCount": 3,
+    "headings": [
+      "Installation",
+      "Quick Example (TypeScript)",
+      "Logging & Diagnostics"
+    ],
+    "lineCount": 68,
+    "wordCount": 172,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "sdk/python.md",
+    "section": "sdk",
+    "title": "Python HDK (`naagmani-hdk`)",
+    "headingsCount": 3,
+    "headings": [
+      "Installation",
+      "Quick Example",
+      "Features"
+    ],
+    "lineCount": 52,
+    "wordCount": 142,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "security/audit-logs.md",
+    "section": "security",
+    "title": "Audit Logs & Compliance Trail",
+    "headingsCount": 3,
+    "headings": [
+      "1. Audit Log Architecture",
+      "2. Inspecting Audit Logs in Developer Portal",
+      "3. Related Documentation"
+    ],
+    "lineCount": 31,
+    "wordCount": 172,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": true,
+    "hasApiRef": true
+  },
+  {
+    "file": "security/authentication.md",
+    "section": "security",
+    "title": "Security: Authentication",
+    "headingsCount": 2,
+    "headings": [
+      "API Key Architecture",
+      "Secret Storage (BYOK Vault)"
+    ],
+    "lineCount": 22,
+    "wordCount": 149,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "security/authorization.md",
+    "section": "security",
+    "title": "Security: Authorization & RBAC",
+    "headingsCount": 2,
+    "headings": [
+      "Organizational Roles",
+      "Policy-Based Access Control"
+    ],
+    "lineCount": 31,
+    "wordCount": 134,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "security/data-protection.md",
+    "section": "security",
+    "title": "Security: Data Protection & Privacy",
+    "headingsCount": 3,
+    "headings": [
+      "Data in Transit & at Rest",
+      "Data Loss Prevention (DLP) Sanitization",
+      "Compliance Readiness"
+    ],
+    "lineCount": 31,
+    "wordCount": 206,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "security/isolation.md",
+    "section": "security",
+    "title": "Security: Isolation & Sandboxing",
+    "headingsCount": 2,
+    "headings": [
+      "Tenant Isolation",
+      "Plugin Process Sandboxing"
+    ],
+    "lineCount": 21,
+    "wordCount": 143,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "security/overview.md",
+    "section": "security",
+    "title": "Security Architecture & Overview",
+    "headingsCount": 2,
+    "headings": [
+      "Defense-in-Depth Architecture",
+      "Core Security Pillars"
+    ],
+    "lineCount": 28,
+    "wordCount": 193,
+    "hasCurl": false,
+    "hasMermaid": true,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "troubleshooting/authentication.md",
+    "section": "troubleshooting",
+    "title": "Troubleshooting: Authentication",
+    "headingsCount": 3,
+    "headings": [
+      "1. Test Key Used in Production Environment",
+      "2. Missing Key Scope",
+      "3. Clock Skew / Expired JWT (CLI / Portal)"
+    ],
+    "lineCount": 29,
+    "wordCount": 143,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": true
+  },
+  {
+    "file": "troubleshooting/cli.md",
+    "section": "troubleshooting",
+    "title": "Troubleshooting: CLI Issues",
+    "headingsCount": 3,
+    "headings": [
+      "1. `naagmani: EACCES: permission denied`",
+      "2. Validation Errors on Windows",
+      "3. Diagnostic Health Check (`naagmani doctor`)"
+    ],
+    "lineCount": 35,
+    "wordCount": 128,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  },
+  {
+    "file": "troubleshooting/common-errors.md",
+    "section": "troubleshooting",
+    "title": "Troubleshooting: Common Errors",
+    "headingsCount": 4,
+    "headings": [
+      "1. `401 Unauthorized` / `invalid_api_key`",
+      "2. `429 Too Many Requests` / `insufficient_quota`",
+      "3. `503 Service Unavailable` / `provider_unavailable`",
+      "4. `504 Gateway Timeout`"
+    ],
+    "lineCount": 39,
+    "wordCount": 213,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": true,
+    "hasApiRef": true
+  },
+  {
+    "file": "troubleshooting/plugins.md",
+    "section": "troubleshooting",
+    "title": "Troubleshooting: Plugins",
+    "headingsCount": 3,
+    "headings": [
+      "1. JSON-RPC Parsing Error / Broken Stdout Channel",
+      "2. Handshake Timeout (`initialize` Failed)",
+      "3. Permission Denied (`plugin_permission_denied`)"
+    ],
+    "lineCount": 27,
+    "wordCount": 163,
+    "hasCurl": false,
+    "hasMermaid": false,
+    "hasPortal": false,
+    "hasApiRef": false
+  }
+]

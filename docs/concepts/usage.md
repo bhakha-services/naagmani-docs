@@ -1,63 +1,34 @@
-# Usage & Telemetry
+# Usage & Token Metering
 
-Naagmani provides real-time telemetry, token accounting, and cost tracking across all downstream applications and microservices.
+Naagmani provides authoritative, real-time telemetry on every token consumed across your organization.
 
 ---
 
-## Token Accounting
+## Key Telemetry Metrics
 
-Every request routed through Naagmani is precisely metered:
-
-- **Prompt Tokens**: Number of input tokens processed by the upstream tokenizer.
-- **Completion Tokens**: Number of output tokens generated.
-- **Reasoning Tokens**: Dedicated thinking or internal reasoning tokens (e.g., o1, DeepSeek-R1, Claude 3.7 Extended Thinking).
-- **Cached Tokens**: Tokens read from provider prompt caches (e.g., Anthropic Prompt Caching, OpenAI Prompt Caching).
-
-### Usage in API Responses
-
-API responses include a standardized `usage` object:
-
-```json
-{
-  "id": "chatcmpl_89fd7s9df87sd",
-  "object": "chat.completion",
-  "model": "gpt-4o",
-  "usage": {
-    "prompt_tokens": 150,
-    "completion_tokens": 42,
-    "total_tokens": 192,
-    "prompt_tokens_details": {
-      "cached_tokens": 128
-    },
-    "completion_tokens_details": {
-      "reasoning_tokens": 0
-    }
-  }
-}
+```mermaid
+graph LR
+    Req["Request"] --> TTFT["Time to First Token (TTFT)"]
+    Req --> Duration["Total Adapter Duration"]
+    Req --> Tokens["Prompt / Completion / Total Tokens"]
+    Req --> Cost["COGS Provider Cost ($ USD)"]
 ```
 
----
-
-## Response Headers
-
-Naagmani returns telemetry metadata directly in response headers:
-
-| Header | Description |
-| :--- | :--- |
-| `X-Naagmani-Request-Id` | Unique tracing identifier for the request. |
-| `X-Naagmani-Provider` | The upstream provider that fulfilled the request (e.g., `anthropic`, `openai`). |
-| `X-Naagmani-Model` | The actual upstream model executed. |
-| `X-Naagmani-Latency-Ms` | Total execution latency in milliseconds. |
-| `X-Naagmani-Cost-USD` | Estimated cost in USD for the transaction. |
-| `X-Naagmani-Plugin-Latency-Ms` | Cumulative execution time spent in active plugin hooks. |
+1. **Token Counts**: Prompt tokens, Completion tokens, and Total tokens parsed from provider payloads or computed via tokenizer accumulators.
+2. **Time to First Token (TTFT)**: Crucial metric for user-facing streaming applications measuring the delay before the first token chunk arrives.
+3. **Calculated COGS (Cost of Goods Sold)**: Real-time calculation of provider costs using published per-million token pricing models.
+4. **Authoritative Usage Flag**: Distinguishes between provider-verified token counts and estimated streaming heuristics.
 
 ---
 
-## Exporting Metrics
+## Inspecting Telemetry
 
-Naagmani supports streaming real-time usage data and traces to industry-standard observability backends:
+- **Usage Dashboard**: View aggregate trends, charts, and project breakdowns at [http://localhost:3000/usage](http://localhost:3000/usage).
+- **Attempts Table**: Inspect granular per-request dispatch logs at [http://localhost:3000/attempts](http://localhost:3000/attempts).
 
-- **OpenTelemetry (OTel)**: Native OTel traces and metrics export.
-- **Prometheus**: Scrape gateway metrics via `/metrics`.
-- **Datadog / New Relic**: Pre-built metric forwarding adapters.
-- **Webhooks**: Real-time event streams for custom ingestion pipelines.
+---
+
+## Next Steps
+
+- Learn about spending budgets: [FinOps & Budget Hierarchy](billing.md)
+- API Reference for attempts: [Provider Attempts API](../api/attempts.md)

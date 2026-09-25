@@ -1,51 +1,89 @@
 # Product Architecture
 
-The Naagmani platform consists of four primary decoupled architectural layers:
+Naagmani is architected as a high-throughput, decoupled platform split cleanly across a **Control Plane**, a **Data Plane Gateway**, and an **Observability & Management Suite**.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│ 1. Client Applications (Web, Mobile, Microservices, Agents) │
-└──────────────────────────────┬──────────────────────────────┘
-                               │ HTTP / JSON-RPC / SSE
-                               ▼
-┌─────────────────────────────────────────────────────────────┐
-│ 2. Naagmani OS (High-Performance Runtime Gateway)           │
-│  • Request Ingress & Authentication                         │
-│  • Plugin Interception Pipeline (Pre- & Post-Processing)    │
-│  • Smart Router & Health Evaluator                          │
-│  • BYOK Vault & Provider Adapters                           │
-└──────────────┬───────────────────────────────┬──────────────┘
-               │ JSON-RPC stdio                │ Policy & Config Sync
-               ▼                               ▼
-┌──────────────────────────────┐ ┌────────────────────────────┐
-│ 3. Plugin Runtime Subprocess │ │ 4. Naagmani Cloud Control  │
-│  • Go / Node.js / Python     │ │    Plane                   │
-│  • Speaks naagmani.plugin/v1 │ │  • Multi-tenant Identity   │
-│  • DLP, MCP, Firewall, RAG   │ │  • Billing & Entitlements  │
-└──────────────────────────────┘ └────────────────────────────┘
+```mermaid
+graph TB
+    subgraph ClientLayer["Developer & Client Layer"]
+        SDK["Naagmani SDKs (Go, TypeScript, Python)"]
+        CLI["Naagmani CLI (naagmani)"]
+        Portal["Developer Portal (Port 3000)"]
+    end
+
+    subgraph ControlPlane["Naagmani Control Plane (Port 8081)"]
+        AuthSvc["Auth & Tenant Service"]
+        OrgSvc["Organization & Project Hierarchy"]
+        TokenSvc["Service Token & Vault Manager"]
+        AuditSvc["Audit Logger & Event Store"]
+        FinOpsSvc["FinOps & Budget Ledger"]
+    end
+
+    subgraph DataPlane["Naagmani OS Gateway Data Plane (Port 8080)"]
+        Proxy["OpenAI-Compatible Ingress Proxy"]
+        Guard["Security & Guardrail Pipeline"]
+        Router["Smart Routing & Failover Engine"]
+        MCPGw["Model Context Protocol Gateway"]
+        AttemptLog["Provider Attempt Telemetry Engine"]
+    end
+
+    subgraph UpstreamProviders["Upstream AI Execution"]
+        CloudLLM["Cloud Providers (OpenAI, Anthropic, Gemini, DeepSeek)"]
+        LocalLLM["Private Models (vLLM, Ollama, TGI)"]
+        MCPServers["External MCP Servers (Filesystem, SQL, GitHub)"]
+    end
+
+    ClientLayer --> ControlPlane
+    ClientLayer --> DataPlane
+    ControlPlane <--> DataPlane
+    DataPlane --> UpstreamProviders
 ```
 
 ---
 
-## Architectural Components
+## Architectural Planes
 
-### 1. Naagmani OS Runtime Gateway
-The native, low-latency execution kernel responsible for handling client inference requests:
-- **Unified Proxy**: Exposes `/v1/chat/completions`, `/v1/embeddings`, and `/v1/responses`.
-- **BYOK Credential Vault**: Injects decrypted provider credentials into outbound requests without exposing them to the client or plugin subprocesses.
-- **Failover & Router Engine**: Evaluates model availability, latency, and costs to dynamically select the best upstream provider endpoint.
+### 1. Data Plane Gateway (`naagmani-os`)
+- **Port**: `8080` (Default Gateway Port)
+- **Role**: Ultra-low-latency reverse proxy executing prompt translation, SSE streaming accumulation, routing failovers, guardrail filters, and MCP tool orchestration.
+- **Performance**: Written in Go with sub-millisecond dispatch overhead.
 
-### 2. Plugin Execution Sandbox
-Plugins execute in isolated subprocesses communicating over standard `stdio` via the frozen `naagmani.plugin/v1` protocol.
-- **Isolation**: A crashed or misbehaving plugin cannot take down the gateway.
-- **Language Independence**: Developers build plugins using official HDKs for Go, Node.js/TypeScript, and Python.
+### 2. Control Plane (`naagmani-cloud`)
+- **Port**: `8081` (Cloud API Port)
+- **Role**: Authoritative state management for Organizations, Projects, Environments, Members, BYOK Vault secrets, Service Token issuance, and FinOps budget ledgers.
+- **Storage**: Backed by PostgreSQL and Redis for fast token validation and rate limiting.
 
-### 3. Naagmani Cloud Control Plane
-Manages organization multi-tenancy, projects, environments, team permissions, commercial plugin entitlements, and aggregated FinOps billing metrics.
+### 3. Developer Portal (`naagmani-developer`)
+- **Port**: `3000` (Web Console)
+- **Role**: Premium web console for managing API keys, service tokens, routing policies, provider attempts trace inspector, and interactive playgrounds.
+
+---
+
+## Request Lifecycle
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor App as Client Application
+    participant GW as Naagmani Gateway (:8080)
+    participant CP as Control Plane (:8081)
+    participant AI as Upstream Provider (Anthropic)
+    participant Fallback as Fallback Provider (OpenAI)
+
+    App->>GW: POST /v1/chat/completions (Bearer nsk_live_...)
+    GW->>CP: Validate Token, Quota & Capabilities
+    CP-->>GW: Token Valid (Org: Acme, Project: Copilot, Limit OK)
+    GW->>AI: Dispatch Request (claude-3-5-sonnet)
+    AI-->>GW: HTTP 529 Overloaded Error
+    Note over GW: Attempt #1 Failed -> Trigger Cascade
+    GW->>Fallback: Failover Dispatch (gpt-4o)
+    Fallback-->>GW: HTTP 200 OK + Stream Chunks
+    GW-->>App: Forward OpenAI-compatible SSE Stream
+    GW->>CP: Record Provider Attempt #1 (Failed) & #2 (Succeeded) + Token COGS
+```
 
 ---
 
 ## Next Steps
 
-- Review the data models: [Core Concepts](concepts.md)
-- Start sending traffic: [Quickstart Guide](../quickstart/overview.md)
+- Review core entities: [Foundational Concepts](concepts.md)
+- Follow the hands-on tutorial: [Quickstart Guide](../quickstart/overview.md)

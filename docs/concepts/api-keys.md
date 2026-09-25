@@ -1,80 +1,38 @@
-# API Keys
+# API Keys & Vault Security
 
-API keys authenticate programmatic requests to the Naagmani Gateway and CLI tools. Every API key in Naagmani is scoped to a specific project and environment.
-
----
-
-## Overview
-
-Naagmani uses scoped API keys with distinct prefixes to provide clear visibility into environment targets and prevent accidental cross-environment execution.
-
-### Key Prefix Format
-
-| Prefix | Environment | Purpose |
-| :--- | :--- | :--- |
-| `nmn_live_` | Production (`production`) | Production workloads and live consumer traffic. |
-| `nmn_test_` | Test (`test`) | Testing, local development, and CI/CD pipelines. |
-
-> [!IMPORTANT]
-> API keys are shown **only once** upon generation in the Naagmani Developer Portal. Store them securely in an environment variable management tool or secret store.
+Naagmani uses **API Keys** to authenticate incoming traffic from client applications, SDKs, and backend services to the Gateway Data Plane.
 
 ---
 
-## Authentication Mechanism
+## Key Architecture & Vaulting
 
-Include your API key in the `Authorization` header as a Bearer token:
-
-```http
-Authorization: Bearer nmn_live_xxxxxxxxxxxxxxxxxxxxxxxx
+```mermaid
+graph TD
+    User["Client App"] -->|Bearer nsk_live_...| GW["Naagmani Gateway"]
+    GW -->|Lookup SHA-256 Hash| HashStore["In-Memory Cache / Redis"]
+    GW -->|Decrypt Upstream Provider Key| Vault["AES-256-GCM Key Vault"]
+    GW -->|Forward Upstream Request| Provider["OpenAI / Anthropic"]
 ```
 
-Alternatively, the header `X-API-Key` is supported:
+### 1. Zero Secret Storage
+When an API key (`nsk_live_...`) is generated:
+- The full key is displayed **once** to the user and never stored in plain text.
+- Naagmani computes a cryptographic **SHA-256 hash** of the token for fast database lookup and verification.
 
-```http
-X-API-Key: nmn_live_xxxxxxxxxxxxxxxxxxxxxxxx
-```
-
----
-
-## Key Scopes & Permissions
-
-Naagmani API keys can be provisioned with granular access controls:
-
-| Scope | Description |
-| :--- | :--- |
-| `inference` | Allows calling chat completions, responses, and embeddings endpoints. |
-| `plugins:read` | Allows querying installed plugins and executing plugin-assisted routes. |
-| `plugins:write` | Allows uploading, registering, and configuring plugin manifests (typically CLI usage). |
-| `usage:read` | Allows querying usage metrics and telemetry endpoints. |
-| `admin` | Full administrative access to the project and its resources. |
+### 2. Provider Key Masking
+Client applications never need upstream OpenAI, Anthropic, or Gemini API keys. The gateway securely injects the vaulted provider credentials on the fly, eliminating secret leakage risks in frontend builds.
 
 ---
 
-## Managing API Keys
+## Key Lifecycle Management
 
-### Via Naagmani Developer Portal
-
-1. Navigate to **Projects** > Select your Project > **API Keys**.
-2. Click **Create API Key**.
-3. Specify a descriptive label (e.g., `ci-testing-runner`, `backend-api-prod`).
-4. Select the target environment (`production` or `test`).
-5. Choose required permission scopes.
-6. Copy and store the generated key.
-
-### Key Rotation & Revocation
-
-- **Immediate Revocation**: Deleting a key in the portal revokes authorization across all gateway edge nodes within 30 seconds.
-- **Zero-Downtime Rotation**:
-  1. Generate a new API key with identical scopes.
-  2. Deploy the new key to your application environments.
-  3. Verify traffic on the new key via Naagmani metrics.
-  4. Revoke the old API key.
+- **Create Key**: Generate keys with human-readable names and environment tags.
+- **Revoke Key**: Instantly revoke keys from the Developer Portal. Revocation takes effect across all gateway instances in under 1 second.
+- **Audit Logging**: Every key creation, modification, and revocation is recorded in the immutable compliance audit log.
 
 ---
 
-## Best Practices
+## Next Steps
 
-1. **Environment Separation**: Never use a `nmn_live_` key in automated test suites or local development.
-2. **Secret Management**: Inject keys via environment variables (e.g., `NAAGMANI_API_KEY`) rather than hardcoding.
-3. **Least Privilege**: Grant only the scopes necessary for each microservice or pipeline.
-4. **Regular Rotation**: Rotate API keys periodically (e.g., every 90 days) using zero-downtime rotation.
+- Learn about scoped machine tokens: [Project Service Tokens](project-service-tokens.md)
+- Manage keys in the UI: [Developer Portal API Keys](../quickstart/api-key.md)

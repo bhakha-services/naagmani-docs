@@ -1,20 +1,18 @@
-# Security: Isolation & Sandboxing
+# Tenant & Sandbox Isolation
 
-Naagmani enforces strict tenant and execution isolation across all layers of the platform.
-
----
-
-## Tenant Isolation
-
-1. **Logical Separation**: Every request is tagged with Organization and Project IDs, ensuring strict database row-level security and cache partitioning.
-2. **Dedicated Worker Pools**: Enterprise tiers deploy dedicated worker instances and private VPC endpoints with no multi-tenant shared memory or execution space.
+To guarantee security in multi-tenant environments, Naagmani enforces strict isolation across multiple layers:
 
 ---
 
-## Plugin Process Sandboxing
+## Isolation Dimensions
 
-Plugins operate as isolated subprocesses outside the main gateway memory space:
+1. **Organization Isolation**: Logical and cryptographic boundaries preventing cross-tenant data leaks.
+2. **Project & Environment Namespaces**: Distinct credential pools and token lifecycles between `development`, `staging`, and `production`.
+3. **Plugin Process Sandboxing**: Separate OS process trees with limited system calls and no shared memory.
 
-- **Resource Limits**: CPU quotas and memory limits (e.g. max 512MB RAM per worker) prevent runaway memory usage or DoS conditions.
-- **Restricted System Calls**: System call filtering (seccomp on Linux) prevents plugins from spawning unapproved child processes or accessing unauthorized host filesystems.
-- **Network Boundaries**: Outbound socket access is restricted unless the plugin explicitly requests the `network:outbound` permission in its manifest.
+---
+
+## Next Steps
+
+- [Data Protection & DLP](/docs/security/data-protection)
+- [Audit Trail & Compliance](/docs/security/audit-logs)

@@ -143,7 +143,7 @@ export default async function DocPage({ params }: PageProps) {
             </h1>
             {doc.status && <StatusBadge status={doc.status} />}
           </div>
-          {doc.description && (
+          {doc.hasExplicitDescription && doc.description && (
             <p className="text-base sm:text-lg 2xl:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed">
               {doc.description}
             </p>

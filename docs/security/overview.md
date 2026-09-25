@@ -1,27 +1,34 @@
-# Security Architecture & Overview
+# Security & Governance Architecture
 
-Security is a foundational pillar of the Naagmani AI Operating System. Designed from the ground up for zero-trust environments, Naagmani protects sensitive enterprise data, safeguards against malicious prompts, and enforces strict isolation across workloads.
-
----
-
-## Defense-in-Depth Architecture
+Security is the core architectural pillar of Naagmani. Designed for multi-tenant enterprise deployments, Naagmani guarantees absolute credential isolation, least-privilege token access, end-to-end payload encryption, and immutable audit logs.
 
 ```mermaid
-graph TD
-    Client[Client / Application] -->|TLS 1.3 + API Key Auth| Edge[Edge Gateway / Rate Limiter]
-    Edge -->|RBAC Policy Check| Core[Naagmani Engine]
-    Core -->|Sandboxed Subprocess| Guardrails[DLP & Prompt Firewall Plugins]
-    Guardrails -->|Sanitized Payload| Upstream[Upstream LLM Provider]
-    Upstream -->|Raw Response| OutputChecks[Output Moderation & Secret Scrubbing]
-    OutputChecks --> Client
+flowchart TD
+    subgraph SecurityPerimeter ["Naagmani Security Perimeter"]
+        direction TB
+        A[Client Request] --> B[TLS 1.3 Termination & WAF]
+        B --> C[Project Service Token Authenticator]
+        C --> D[RBAC / Cap Enforcement]
+        D --> E[Multi-Tenant Context Isolation]
+        E --> F[AES-256 Vault Decryption]
+        F --> G[PII / DLP Guardrails]
+        G --> H[Audited Upstream Dispatch]
+    end
 ```
 
 ---
 
-## Core Security Pillars
+## Security Highlights
 
-1. **Zero-Trust Authentication**: Every request is authenticated against cryptographically random, environment-scoped API keys with explicit permissions.
-2. **Runtime Isolation**: Plugins execute in isolated, sandboxed sub-processes with least-privilege capability boundaries.
-3. **Data Loss Prevention (DLP)**: Real-time masking and redaction of PII, secrets, API tokens, and internal identifiers before transmission to upstream model providers.
-4. **Data Privacy & No Retention**: Client prompts and completions are streamed in-memory without persistent storage on gateway disks unless customer-configured audit archiving is explicitly enabled.
-5. **Prompt Injection Defense**: Multi-layered heuristic and semantic filtering against jailbreak attempts and system prompt extraction attacks.
+1. **Hardware-Grade Cryptographic Vault**: Provider API keys and connection secrets are encrypted using AES-256-GCM with envelope encryption.
+2. **Short-Lived Service Tokens**: Granular capabilities and automatic TTL expiration.
+3. **Zero-Trust Network Model**: Master keys never leak to client code or plugin daemons.
+4. **Comprehensive Audit Logs**: Every administrative configuration change and credential retrieval event is permanently journaled.
+
+---
+
+## Next Steps
+
+- [Authentication & BYOK Model](/docs/security/authentication)
+- [Role-Based Access Control (RBAC)](/docs/security/authorization)
+- [Tenant Isolation & Sandboxing](/docs/security/isolation)

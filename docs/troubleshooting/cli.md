@@ -1,34 +1,30 @@
-# Troubleshooting: CLI Issues
+# CLI Diagnostics
 
-Solutions for command-line interface execution, building, and validation issues.
-
----
-
-## 1. `naagmani: EACCES: permission denied`
-
-- **Cause**: Trying to install `naagmani` globally without appropriate npm permissions on Linux/macOS.
-- **Fix**: Use `npx naagmani` or configure npm to use a non-root directory for global packages:
-  ```bash
-  mkdir -p ~/.npm-global
-  npm config set prefix '~/.npm-global'
-  export PATH=~/.npm-global/bin:$PATH
-  ```
+Troubleshooting local command execution, network connectivity, and configuration issues.
 
 ---
 
-## 2. Validation Errors on Windows
+## 1. Resetting Cached CLI Credentials
 
-- **Cause**: Windows backslash path separators (`\`) used in `plugin.json` entrypoints.
-- **Fix**: Always use forward slashes (`/`) in `plugin.json` (e.g. `"entrypoint": "dist/index.js"`), which are cross-platform compatible.
-
----
-
-## 3. Diagnostic Health Check (`naagmani doctor`)
-
-When in doubt, run the automated environment diagnostics tool:
-
+If your session is corrupted:
 ```bash
-naagmani doctor
+rm -rf ~/.naagmani/credentials.json
+naagmani auth login
 ```
 
-This validates your Node.js, Go, Python, network proxies, and authentication configuration.
+---
+
+## 2. Debugging HTTP Payloads
+
+Add the `--verbose` flag to any CLI command to display raw request and response headers:
+
+```bash
+naagmani projects list --verbose
+```
+
+---
+
+## Next Steps
+
+- [Common Errors Guide](/docs/troubleshooting/common-errors)
+- [Return to Quickstart](/docs/quickstart/overview)

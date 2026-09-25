@@ -1,44 +1,29 @@
-# Installing & Configuring Plugins
+# Installing Plugins from Marketplace
 
-Learn how to search, install, and configure marketplace plugins in your Naagmani project.
+Adding pre-built capabilities to your Naagmani project takes just one click or a single CLI command.
 
 ---
 
-## 1. Installing via Naagmani Developer Portal
+## 1. Installation via Developer Portal
 
-1. In the Developer Portal, navigate to **Marketplace**.
-2. Browse or search for the desired plugin (e.g. `dlp-sanitizer`).
+1. Navigate to **Plugins & Marketplace**: [http://localhost:3000/plugins](http://localhost:3000/plugins)
+2. Locate your desired plugin (e.g., *PII Redaction Guardrail*).
 3. Click **Install to Project**.
-4. Select target project and environments (`production`, `test`).
-5. Review requested permissions (`network:outbound`, `env:read`).
-6. Configure plugin settings in the interactive JSON schema form.
-7. Click **Deploy**.
+4. Select the target Environment (`production`, `staging`, or `development`).
+5. Configure custom parameters in the auto-generated JSON schema form.
+6. Click **Save & Activate**.
 
 ---
 
-## 2. Installing via CLI
-
-Install directly from your terminal into the active project:
+## 2. Installation via CLI
 
 ```bash
-naagmani marketplace install @naagmani/dlp-sanitizer --env production
+naagmani plugins install com.company.pii-guard --env production
 ```
 
 ---
 
-## 3. Configuring Plugin Pipelines
+## Next Steps
 
-Once installed, declare your plugin execution order in your project configuration (`naagmani.yaml`):
-
-```yaml
-pipeline:
-  plugins:
-    - name: "@naagmani/ai-firewall"
-      enabled: true
-      on_error: "abort"
-    - name: "@naagmani/dlp-sanitizer"
-      enabled: true
-      config:
-        mask_emails: true
-        mask_phone_numbers: true
-```
+- [Publishing Your Own Plugins](/docs/marketplace/publishing)
+- [Plugin Visibility & Scopes](/docs/marketplace/plugin-visibility)

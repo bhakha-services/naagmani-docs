@@ -1,50 +1,35 @@
-# Observability & Monitoring
+# Observability & Prometheus Metrics
 
-Naagmani provides deep visibility into LLM interactions, system health, plugin execution latencies, and token cost economics.
+Gain deep visibility into latency, token usage, error rates, and provider performance.
 
 ---
 
-## OpenTelemetry (OTel) Integration
+## Metrics Export (Prometheus)
 
-Naagmani emits standard OpenTelemetry spans and traces for every inference lifecycle event:
+Naagmani exposes standard Prometheus metrics at `:8081/metrics`:
 
-```mermaid
-gantt
-    title Request Trace Timeline (OTel Span)
-    dateFormat  X
-    axisFormat %s
-    section Core Gateway
-    Authenticate & Route :0, 5
-    section Plugin Pipeline
-    DLP Pre-Prompt Hook  :5, 12
-    RAG Context Lookup   :12, 45
-    section Upstream LLM
-    Anthropic API Call   :45, 620
-    section Output Pipeline
-    Hallucination Check  :620, 635
-```
+```text
+# TYPE naagmani_http_requests_total counter
+naagmani_http_requests_total{status="200",provider="openai",model="gpt-4o"} 14209
+naagmani_http_requests_total{status="429",provider="openai",model="gpt-4o"} 12
 
-### OTel Collector Configuration
-```yaml
-telemetry:
-  opentelemetry:
-    enabled: true
-    endpoint: "otel-collector.monitoring:4317"
-    protocol: "grpc"
-    sampling_rate: 1.0 # 100% of traces in test, 0.1 for high-volume prod
+# TYPE naagmani_ttft_seconds histogram
+naagmani_ttft_seconds_bucket{le="0.25",provider="anthropic"} 8400
+naagmani_ttft_seconds_bucket{le="0.5",provider="anthropic"} 12100
 ```
 
 ---
 
-## Prometheus Metrics
+## Grafana Dashboards
 
-The gateway exposes a `/metrics` Prometheus scrape endpoint providing:
+Pre-built dashboards are provided in the official repository under `/deploy/grafana/` for instant monitoring of:
+- Gateway Throughput & P99 Latency
+- Provider Cascade Failures
+- Real-Time Budget Burn Rate
 
-| Metric Name | Type | Description |
-| :--- | :--- | :--- |
-| `naagmani_requests_total` | Counter | Total requests segmented by model, provider, and status code. |
-| `naagmani_request_duration_seconds` | Histogram | Request latency distributions (p50, p95, p99). |
-| `naagmani_prompt_tokens_total` | Counter | Total prompt tokens consumed. |
-| `naagmani_completion_tokens_total` | Counter | Total completion tokens generated. |
-| `naagmani_plugin_hook_duration_seconds` | Histogram | Execution time spent inside individual plugin hooks. |
-| `naagmani_spend_usd_total` | Counter | Cumulative cost incurred across all providers. |
+---
+
+## Next Steps
+
+- [Scaling & Concurrency](/docs/production/scaling)
+- [Marketplace Overview](/docs/marketplace/overview)

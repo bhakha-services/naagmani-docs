@@ -1,54 +1,76 @@
-# Plugin Architecture
+# Plugin Architecture & Isolation
 
-The Naagmani Plugin architecture separates the high-throughput inference runtime from plugin business logic via an asynchronous process-level IPC channel.
-
----
-
-## High-Level Architecture
+Naagmani is designed with a **Micro-Kernel Gateway Architecture**. The core runtime handles transport multiplexing, token metering, and cryptographically verified vault access, while extensible logic is delegated to isolated worker processes known as **Hook Daemons**.
 
 ```mermaid
-graph TB
-    subgraph Client Space
-        Client[Application / API Client]
+flowchart TD
+    subgraph Gateway ["Naagmani Core Data Plane (Go)"]
+        A[Inbound Client Request] --> B[Pipeline Controller]
+        B --> C{Hook Dispatcher}
+        C -->|IPC / Socket| D[Plugin IPC Supervisor]
+        C -->|Direct| E[Upstream AI Adapter]
     end
 
-    subgraph Naagmani Gateway Runtime
-        Router[Request Router & Policy Engine]
-        Pipeline[Plugin Execution Pipeline]
-        Upstream[Provider Adapter / LLM Gateway]
+    subgraph Sandboxes ["Sandboxed Plugin Workers"]
+        D -->|Stdio/RPC| P1["Plugin A: Auth Validator"]
+        D -->|Unix Socket| P2["Plugin B: DLP Redaction"]
     end
 
-    subgraph Plugin Process Subsystem
-        P1[Plugin 1: DLP Guardrail Process]
-        P2[Plugin 2: RAG Retrieval Process]
-        P3[Plugin 3: Audit Logger Process]
-    end
-
-    Client --> Router
-    Router --> Pipeline
-    Pipeline <-->|stdio JSON-RPC| P1
-    Pipeline <-->|stdio JSON-RPC| P2
-    Pipeline --> Upstream
-    Upstream --> Pipeline
-    Pipeline <-->|stdio JSON-RPC| P3
-    Pipeline --> Router
-    Router --> Client
+    E --> UpstreamLLM[(Anthropic / OpenAI)]
 ```
 
 ---
 
-## Inter-Process Communication (IPC)
+## Execution Isolation Models
 
-Plugins communicate using standard input (`stdin`) and standard output (`stdout`).
+Naagmani supports two execution runtimes for plugins:
 
-- **Framing**: Newline-delimited JSON-RPC 2.0 messages (`\n`).
-- **Transport**: Standard POSIX / Windows process streams.
-- **Diagnostics**: Plugins write human-readable diagnostic logs to standard error (`stderr`), which Naagmani routes to the centralized telemetry sink without corrupting the JSON-RPC channel.
+### 1. Managed Subprocess (IPC / Stdio)
+- **Languages:** Go, Python, Node.js, Rust.
+- **Mechanism:** The Gateway forks the plugin binary and establishes high-speed bidirectional communication via standard input/output or Unix Domain Sockets.
+- **Resource Constraints:** Process memory and CPU limits are enforced via OS-level cgroups / job objects.
+
+### 2. WebAssembly (Wasm / WASI) *(Beta)*
+- **Languages:** Rust, C, TinyGo.
+- **Mechanism:** Direct embedded execution within the Gateway memory space using Wasmer/Wasmtime sandboxing.
+- **Latency:** Sub-millisecond execution (< 0.2ms) with strictly sandboxed memory access.
 
 ---
 
-## Performance & Latency
+## Failure Modes & Resilience
 
-1. **Process Pooling**: Naagmani keeps plugin processes warm in a worker pool to eliminate startup cold starts.
-2. **Streaming Hooks**: For streaming completions, plugins can inspect tokens in real-time or hook into stream lifecycle events (`on_token`, `on_complete`).
-3. **Execution Timeouts**: Each hook invocation has a configurable timeout (default: 5,000ms). If a plugin exceeds its budget, the pipeline can either fail open (skip plugin) or fail closed (abort request) according to project policy.
+Every hook in your `plugin.json` can define its failure policy if the plugin daemon crashes, times out, or returns a 500 error:
+
+| Mode | Gateway Action | Use Case |
+| :--- | :--- | :--- |
+| **`fail-close`** (Default) | The gateway terminates the client request with `502 Bad Gateway` and logs the hook crash in Audit Logs. | Security filters, DLP sanitizers, custom authorization checks. |
+| **`fail-open`** | The gateway logs a warning, bypasses the failed hook, and proceeds with standard model routing. | Observability scrapers, non-critical analytics, experimental enrichment. |
+
+---
+
+## Lifecycle Overview
+
+```mermaid
+sequenceDiagram
+    participant GW as Naagmani Gateway
+    participant P as Plugin Process
+
+    GW->>P: Spawn process (STDIN/STDOUT pipe)
+    GW->>P: Handshake Request {"protocol_version": "v1"}
+    P-->>GW: Handshake ACK {"capabilities": ["pre_route", "post_response"]}
+    
+    loop Every Matching Request
+        GW->>P: Hook Event Payload
+        P-->>GW: Mutated Payload / Action Decision
+    end
+
+    GW->>P: SIGTERM (Graceful shutdown)
+```
+
+---
+
+## Related Guides
+
+- [Plugin Manifest Specification](/docs/plugins/manifest)
+- [Plugin Lifecycle & Heartbeats](/docs/plugins/lifecycle)
+- [Go Plugin Development (HDK)](/docs/sdk/go)

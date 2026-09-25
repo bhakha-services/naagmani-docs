@@ -1,38 +1,32 @@
-# Plugin Permissions & Sandbox
+# Permissions & Security Model
 
-Naagmani employs a principle of least-privilege security model. Plugins operate in constrained sub-processes and must explicitly declare the system capabilities they require in their `plugin.json` manifest.
+To protect sensitive tenant data and model credentials, Naagmani enforces a strict **Least-Privilege Security Sandbox** for all plugins.
 
 ---
 
 ## Permission Scopes
 
-| Permission | Category | Description |
+Plugins must declare all required permissions in their `plugin.json` manifest. Any attempt to read or mutate unpermitted fields will be blocked by the Gateway kernel.
+
+| Scope | Description | Risk Level |
 | :--- | :--- | :--- |
-| `env:read` | Environment | Allows reading specific host environment variables passed in configuration. |
-| `network:outbound` | Network | Allows making outbound TCP/HTTP connections (e.g. to vector databases, remote APIs). |
-| `filesystem:read` | Storage | Allows reading static local files bundled with the plugin. |
-| `filesystem:write` | Storage | Allows writing ephemeral cache files to a sandboxed temporary directory. |
-| `mcp:bridge` | MCP Protocol | Allows connecting to and brokering Model Context Protocol (MCP) server endpoints. |
+| **`request:read_body`** | Read incoming prompt messages and request arguments. | Medium |
+| **`request:mutate_body`** | Modify or rewrite prompt messages, temperature, and parameters. | High |
+| **`request:read_headers`** | Inspect inbound HTTP request headers. | Low |
+| **`response:read_body`** | Inspect generated model responses and tool outputs. | Medium |
+| **`response:mutate_body`**| Modify generated output before it reaches the client. | High |
+| **`vault:read_secrets`** | Request decrypted project credentials (restricted to certified plugins). | Critical |
+| **`telemetry:emit`** | Append custom metrics and trace tags to Attempt Telemetry. | Low |
 
 ---
 
-## Declaring Permissions in `plugin.json`
+## Secret Isolation
 
-```json
-{
-  "name": "rag-vector-retriever",
-  "version": "1.0.0",
-  "permissions": [
-    "network:outbound",
-    "env:read"
-  ]
-}
-```
+Plugins **never** have direct access to provider API keys (e.g. your master OpenAI or Anthropic credentials). The Gateway decrypts vault credentials internally and dispatches requests directly to upstream endpoints.
 
 ---
 
-## Runtime Enforcement
+## Next Steps
 
-1. **Static Validation**: The Naagmani CLI checks declared permissions during `naagmani validate` and `naagmani package`.
-2. **Installation Verification**: When installing or enabling a plugin via the Naagmani Portal or CLI, administrators are prompted to review and approve the requested permissions.
-3. **Execution Sandbox**: On supported platforms (Linux/Docker/Kubernetes), child processes are sandboxed using cgroups, seccomp filters, and restricted network namespaces according to granted permissions.
+- [Building a Plugin: Step-by-Step](/docs/plugins/development)
+- [Testing & Validation](/docs/plugins/testing)

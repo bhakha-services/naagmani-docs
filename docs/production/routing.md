@@ -1,42 +1,23 @@
-# Production Routing Strategies
+# Traffic Routing Strategies
 
-Best practices for deploying advanced routing topologies in enterprise environments.
-
----
-
-## 1. Weighted A/B Canary Routing
-
-Gradually roll out a new frontier model or prompt revision to a fraction of your live traffic:
-
-```yaml
-routing_policy:
-  alias: "smart-chat"
-  strategy: "weighted"
-  weights:
-    - target: "openai/gpt-4o"
-      weight: 90 # 90% traffic to stable baseline
-    - target: "anthropic/claude-3-7-sonnet-20250219"
-      weight: 10 # 10% canary traffic
-```
+Naagmani supports versatile routing policies tailored to specific organizational goals.
 
 ---
 
-## 2. Dynamic Latency Optimization
+## Routing Modes
 
-For interactive chat applications and real-time voice agents, Naagmani can route queries to the provider reporting the lowest Time-to-First-Token (TTFT) over the trailing 60-second window:
+| Strategy | Description | Best For |
+| :--- | :--- | :--- |
+| **Lowest Cost** | Automatically selects the cheapest model capable of handling the prompt context. | Batch processing, ETL classification. |
+| **Lowest Latency** | Dispatches to the provider with the fastest recent TTFT (Time To First Token). | Real-time chat, autocomplete. |
+| **Priority Fallback** | Tries primary provider first, cascading sequentially down fallback list. | Enterprise reliability. |
+| **Weighted Round-Robin** | Distributes load proportionately across multiple keys or providers (e.g. 70/30 split). | Canary testing, A/B model evaluations. |
 
-```yaml
-routing_policy:
-  alias: "voice-assistant"
-  strategy: "lowest_latency"
-  candidates:
-    - "groq/llama-3.3-70b-versatile"
-    - "cerebras/llama3.1-70b"
-    - "google/gemini-2.5-flash"
-```
+Configure policies in the Portal:
+- **Routing Policies**: [http://localhost:3000/routing-policies](http://localhost:3000/routing-policies)
 
 ---
 
-## 3. Geographic Edge Routing
+## Next Steps
 
-Deploy Naagmani Edge Gateway instances across multiple regions (US East, US West, Europe, Asia Pacific). Requests are routed to the nearest geographic edge node with regional provider endpoint connectivity to minimize network round-trips.
+- [Observability & Metrics](/docs/production/observability)

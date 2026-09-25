@@ -1,51 +1,39 @@
-# Scaling & High Concurrency
+# Scaling & Concurrency
 
-Naagmani is built for extreme throughput and low latency, capable of processing tens of thousands of concurrent AI streams with minimal CPU and memory overhead.
-
----
-
-## Horizontal Gateway Scaling
-
-The Naagmani Gateway is stateless:
-- **Stateless Gateway Pods**: Deploy multiple gateway instances behind a standard Layer 7 load balancer (e.g. AWS ALB, NGINX, Cloudflare).
-- **Distributed Cache / Rate Limiter**: Shared rate limits and token buckets are synchronized across gateway nodes using an in-memory Redis cluster.
+Architecting Naagmani clusters for hundreds of thousands of concurrent AI streams.
 
 ---
 
-## Horizontal Pod Autoscaler (HPA) Example
+## Horizontal Scaling Architecture
 
-```yaml
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: naagmani-gateway-hpa
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: naagmani-gateway
-  minReplicas: 3
-  maxReplicas: 50
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 70
-    - type: Pods
-      pods:
-        metric:
-          name: http_requests_per_second
-        target:
-          type: AverageValue
-          averageValue: "1000m"
+Because the Data Plane Gateway is completely **stateless**, you can scale horizontally behind any standard Layer 4/Layer 7 Load Balancer (AWS ALB, NGINX, Cloudflare, Envoy).
+
+```mermaid
+flowchart TD
+    LB[Cloud Load Balancer] --> GW1[Naagmani Gateway Pod 1]
+    LB --> GW2[Naagmani Gateway Pod 2]
+    LB --> GW3[Naagmani Gateway Pod 3]
+    
+    GW1 --> Redis[(Redis Cluster: Rate Limits & Locks)]
+    GW2 --> Redis
+    GW3 --> Redis
+
+    GW1 --> DB[(PostgreSQL / Control Plane)]
+    GW2 --> DB
+    GW3 --> DB
 ```
 
 ---
 
-## Memory & Socket Tuning
+## Performance Tuning Checklist
 
-For high concurrency deployments:
-- Set open file descriptor limits (`ulimit -n 65535`).
-- Ensure keep-alive connection pooling is enabled between the gateway and upstream providers to eliminate TCP handshake latency.
+1. **OS File Descriptors**: Increase `ulimit -n 65535` for high-concurrency SSE connections.
+2. **Keep-Alive Pooling**: Enable HTTP/2 connection reuse to upstream LLM providers.
+3. **Memory Limits**: Allocate 512MB RAM per 10,000 active concurrent connections.
+
+---
+
+## Next Steps
+
+- [Marketplace Overview](/docs/marketplace/overview)
+- [Troubleshooting Common Errors](/docs/troubleshooting/common-errors)

@@ -1,51 +1,34 @@
-# Other Providers & Self-Hosted Models
+# Self-Hosted Models (Ollama, vLLM & LocalAI)
 
-Naagmani allows connecting any OpenAI-compatible AI inference endpoint, including self-hosted open-source model servers and hardware accelerators.
+In addition to managed cloud providers, Naagmani allows you to route traffic to self-hosted, air-gapped, or on-premises model servers.
 
 ---
 
-## 1. Self-Hosted Inference Engines
+## Supported Local Runtimes
 
-### vLLM
-```yaml
-providers:
-  custom_vllm:
-    type: "openai_compatible"
-    base_url: "http://vllm-cluster.internal:8000/v1"
-    api_key: "${VLLM_API_KEY}"
-    models:
-      - "meta-llama/Llama-3.3-70B-Instruct"
-      - "Qwen/Qwen2.5-Coder-32B-Instruct"
-```
+- **vLLM**: High-throughput GPU inference engine.
+- **Ollama**: Lightweight local model runner.
+- **TGI (Text Generation Inference)**: Hugging Face serving engine.
+- **LocalAI**: Drop-in OpenAI alternative.
 
-### Ollama (Local Development)
-```yaml
-providers:
-  ollama:
-    type: "openai_compatible"
-    base_url: "http://localhost:11434/v1"
-    models:
-      - "llama3.2:latest"
-      - "mistral:latest"
+---
+
+## Configuring a Custom Endpoint
+
+In **Credential Pools** ([http://localhost:3000/credentials](http://localhost:3000/credentials)), select **Custom / Self-Hosted**:
+
+```json
+{
+  "provider": "custom_openai",
+  "base_url": "http://gpu-cluster.internal:8000/v1",
+  "auth_header": "Bearer internal-cluster-secret",
+  "models": ["llama-3.3-70b-instruct", "mistral-large-2411"]
+}
 ```
 
 ---
 
-## 2. High-Throughput Hardware Providers
+## Next Steps
 
-### Groq / Cerebras
-Connect ultra-fast inference engines for low-latency voice and interactive chat agents:
-```yaml
-providers:
-  groq:
-    api_key: "${GROQ_API_KEY}"
-    base_url: "https://api.groq.com/openai/v1"
-    models:
-      - "llama-3.3-70b-versatile"
-```
-
----
-
-## 3. Mistral AI & Cohere
-
-Configure native API endpoints for Mistral Large, Codestral, and Cohere Command R+ models using standard API key bindings.
+- [Security Architecture](/docs/security/overview)
+- [High Availability & Failover](/docs/production/reliability)

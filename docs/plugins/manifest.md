@@ -1,99 +1,104 @@
 # Plugin Manifest (`plugin.json`)
 
-Every Naagmani plugin must include a root `plugin.json` manifest file defining its metadata, runtime entry points, hooks, configuration schema, and requested permissions.
+Every Naagmani plugin must contain a root descriptor named `plugin.json`. This manifest defines the plugin's identity, entrypoint, required capabilities, and schema configuration.
 
 ---
 
-## Schema Overview
-
-Here is an annotated `plugin.json` example:
+## Full Manifest Schema
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/bhakha-services/naagmani-plugins/main/spec/plugin-v1/schema.json",
-  "name": "enterprise-dlp-sanitizer",
-  "version": "1.0.0",
-  "description": "Enterprise Data Loss Prevention and PII sanitization plugin for Naagmani.",
-  "author": "Security Engineering Team",
-  "license": "Apache-2.0",
-  "homepage": "https://github.com/example/enterprise-dlp",
-  "repository": "https://github.com/example/enterprise-dlp.git",
+  "$schema": "https://naagmani.app/schemas/v1/plugin.json",
+  "id": "com.company.pii-guard",
+  "name": "PII & Secret Guardrail",
+  "version": "1.2.0",
+  "description": "Scans prompts for API keys, passwords, and PII before dispatching to public models.",
+  "author": {
+    "name": "DevSecOps Team",
+    "email": "security@company.com",
+    "url": "https://company.com"
+  },
   "runtime": {
-    "type": "node",
-    "entrypoint": "dist/index.js",
-    "protocol_version": "naagmani.plugin/v1"
+    "type": "native",
+    "entrypoint": "./bin/pii_guard",
+    "env": {
+      "LOG_LEVEL": "info"
+    }
   },
   "hooks": [
-    "pre_prompt",
-    "post_generation",
-    "on_error"
+    {
+      "name": "pre_route",
+      "priority": 100,
+      "timeout_ms": 250,
+      "on_failure": "fail-close"
+    },
+    {
+      "name": "post_response",
+      "priority": 50,
+      "timeout_ms": 300,
+      "on_failure": "fail-open"
+    }
   ],
   "permissions": [
-    "env:read",
-    "network:outbound"
+    "request:read_body",
+    "request:mutate_body",
+    "response:read_body",
+    "telemetry:emit"
   ],
   "config_schema": {
     "type": "object",
     "properties": {
-      "mask_emails": {
+      "redact_ssn": {
         "type": "boolean",
-        "default": true
+        "default": true,
+        "description": "Mask US Social Security Numbers"
       },
-      "mask_credit_cards": {
-        "type": "boolean",
-        "default": true
-      },
-      "redaction_pattern": {
-        "type": "string",
-        "default": "[REDACTED]"
+      "custom_regex_patterns": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "Additional regular expressions to redact"
       }
     },
-    "required": ["mask_emails"]
+    "required": ["redact_ssn"]
   }
 }
 ```
 
 ---
 
-## Manifest Fields Reference
+## Key Fields Explained
 
-### Top-Level Metadata
+### `id` (string, required)
+Unique reverse-domain identifier (e.g., `com.example.analytics`).
 
-| Field | Type | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `name` | `string` | **Yes** | Unique lowercase alphanumeric identifier (with hyphens). |
-| `version` | `string` | **Yes** | Semantic version string (e.g. `1.0.0`). |
-| `description` | `string` | **Yes** | Brief explanation of plugin functionality. |
-| `author` | `string` | No | Author or organization name. |
-| `license` | `string` | No | SPDX license identifier (e.g. `Apache-2.0`, `MIT`). |
+### `runtime` (object, required)
+- **`type`**: Execution runtime: `native` (compiled binary) or `wasm`.
+- **`entrypoint`**: Relative path to the executable binary or Wasm artifact.
 
----
+### `hooks` (array of objects)
+Defines which execution stages the plugin intercepts:
+- **`name`**: Target hook point (e.g., `pre_route`, `post_response`, `on_error`).
+- **`priority`**: Execution order (higher numbers execute first, e.g. 100 before 50).
+- **`timeout_ms`**: Maximum allowed processing latency before triggering the failure policy.
+- **`on_failure`**: Either `fail-close` (reject request) or `fail-open` (bypass).
 
-### `runtime` Object
-
-Defines how the Naagmani engine launches the plugin process:
-
-| Field | Type | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `type` | `string` | **Yes** | Runtime type: `binary` (Go/Rust/C++), `node` (Node.js/TypeScript), `python` (Python), or `docker`. |
-| `entrypoint` | `string` | **Yes** | Relative path to the executable binary or main script (e.g. `bin/plugin`, `dist/index.js`, `plugin.py`). |
-| `protocol_version` | `string` | **Yes** | Protocol specification version. Must be `naagmani.plugin/v1`. |
+### `permissions` (array of strings)
+Declares access limits for least-privilege enforcement. See [Permissions & Security](/docs/plugins/permissions).
 
 ---
 
-### `hooks` Array
+## Validating Your Manifest
 
-List of lifecycle hook methods implemented by this plugin:
-- `pre_prompt`
-- `post_generation`
-- `on_error`
+You can validate your `plugin.json` using the Naagmani CLI:
+
+```bash
+naagmani plugins validate ./my-plugin
+# Output: [OK] plugin.json schema valid. 2 hooks declared. 0 security warnings.
+```
 
 ---
 
-### `permissions` Array
+## Next Steps
 
-List of explicit security capabilities requested by the plugin:
-- `env:read` — Read specified environment variables.
-- `network:outbound` — Make outbound HTTP/TCP network requests.
-- `filesystem:read` — Read files from plugin directory or designated paths.
-- `filesystem:write` — Write to temporary scratch directories.
+- [Wire Protocol (v1)](/docs/plugins/protocol)
+- [Plugin Execution Hooks](/docs/plugins/hooks)

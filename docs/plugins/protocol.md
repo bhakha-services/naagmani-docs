@@ -1,142 +1,105 @@
-# Plugin Protocol (`naagmani.plugin/v1`)
+# Wire Protocol (v1)
 
-The **Naagmani Plugin Protocol** is the official JSON-RPC 2.0 communication standard between the Naagmani host runtime and plugin processes.
-
-The canonical protocol definition and JSON Schema reside in the public [`naagmani-plugins`](https://github.com/bhakha-services/naagmani-plugins) repository under `spec/plugin-v1/`.
+Naagmani and its plugin worker processes communicate using a line-delimited JSON-RPC or Protocol Buffers protocol over standard streams (`stdin`/`stdout`) or Unix Domain Sockets.
 
 ---
 
-## Wire Format
+## Protocol Lifecycle
 
-- **Framing**: UTF-8 encoded, newline-delimited (`\n`) JSON-RPC 2.0.
-- **Transport**: Host writes to Plugin `stdin`; Plugin writes to Host `stdout`.
-- **Logs**: Plugin writes diagnostic messages to `stderr`.
+1. **Initialization Handshake**: The gateway launches the plugin process and sends an `init` command.
+2. **Readiness Probe**: The plugin responds with its negotiated capabilities and status.
+3. **Event Execution Loop**: The gateway dispatches hook payloads and awaits completion messages.
+4. **Shutdown Signal**: The gateway transmits a `shutdown` event before terminating the process.
 
----
+```mermaid
+sequenceDiagram
+    autonumber
+    participant GW as Gateway Core
+    participant PL as Plugin Worker
 
-## RPC Methods
-
-| Method | Initiator | Description |
-| :--- | :--- | :--- |
-| `initialize` | Host -> Plugin | Handshake negotiation. Passes host metadata and configuration to plugin. |
-| `execute_hook` | Host -> Plugin | Dispatches a lifecycle hook (e.g. `pre_prompt`, `post_generation`). |
-| `ping` | Host -> Plugin | Health check and liveness probe. |
-| `shutdown` | Host -> Plugin | Graceful termination signal before process teardown. |
-
----
-
-## RPC Message Payloads
-
-### 1. `initialize`
-
-#### Request (Host -> Plugin):
-```json
-{
-  "jsonrpc": "2.0",
-  "id": "init-1",
-  "method": "initialize",
-  "params": {
-    "protocol_version": "naagmani.plugin/v1",
-    "host": {
-      "name": "naagmani-core",
-      "version": "1.0.0"
-    },
-    "config": {
-      "mask_emails": true,
-      "redaction_pattern": "[CONFIDENTIAL]"
-    }
-  }
-}
-```
-
-#### Response (Plugin -> Host):
-```json
-{
-  "jsonrpc": "2.0",
-  "id": "init-1",
-  "result": {
-    "protocol_version": "naagmani.plugin/v1",
-    "plugin": {
-      "name": "enterprise-dlp-sanitizer",
-      "version": "1.0.0"
-    },
-    "capabilities": {
-      "hooks": ["pre_prompt", "post_generation"],
-      "streaming": false
-    }
-  }
-}
+    GW->>PL: {"type": "init", "config": {...}, "protocol_version": 1}
+    PL-->>GW: {"type": "ready", "status": "ok", "version": "1.0.0"}
+    
+    Note over GW,PL: Active Request Pipeline
+    GW->>PL: {"type": "hook_event", "hook": "pre_route", "payload": {...}}
+    PL-->>GW: {"type": "hook_response", "action": "continue", "mutations": {...}}
 ```
 
 ---
 
-### 2. `execute_hook`
+## Frame Types
 
-#### Request (Host -> Plugin):
+### 1. Init Message
 ```json
 {
-  "jsonrpc": "2.0",
-  "id": "hook-42",
-  "method": "execute_hook",
-  "params": {
-    "hook": "pre_prompt",
-    "context": {
-      "request_id": "req_87asdf87a6sd",
-      "environment": "production",
-      "model": "gpt-4o"
-    },
-    "payload": {
-      "messages": [
-        {
-          "role": "user",
-          "content": "My email is user@example.com. Please summarize this document."
-        }
-      ]
-    }
+  "type": "init",
+  "protocol_version": 1,
+  "config": {
+    "redact_ssn": true,
+    "environment": "production"
+  },
+  "organization_id": "org_ad094812-07ef-4db5-b2ba-6585bd9df55e",
+  "project_id": "prj_88194488-29a9-4081-b552-47514a60f601"
+}
+```
+
+### 2. Hook Event Message
+```json
+{
+  "type": "hook_event",
+  "event_id": "evt_998124_1790355",
+  "hook": "pre_route",
+  "context": {
+    "request_id": "req_klskuy2d3_1790355262227",
+    "model": "gpt-4o",
+    "token_id": "nst_live_9b2d8819..."
+  },
+  "payload": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "My social security number is 000-12-3456."
+      }
+    ],
+    "temperature": 0.7
   }
 }
 ```
 
-#### Response (Plugin -> Host):
+### 3. Hook Response Message
 ```json
 {
-  "jsonrpc": "2.0",
-  "id": "hook-42",
-  "result": {
-    "status": "ok",
-    "action": "modify",
-    "payload": {
-      "messages": [
-        {
-          "role": "user",
-          "content": "My email is [CONFIDENTIAL]. Please summarize this document."
-        }
-      ]
-    },
-    "metadata": {
-      "redactions_count": 1
-    }
+  "type": "hook_response",
+  "event_id": "evt_998124_1790355",
+  "action": "continue",
+  "mutations": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "My social security number is [REDACTED_SSN]."
+      }
+    ]
+  },
+  "metadata": {
+    "redaction_count": 1,
+    "rule": "US_SSN"
   }
 }
 ```
 
 ---
 
-### 3. `execute_hook` Rejection (Aborting Request)
+## Action Decision Types
 
-If a security plugin detects a critical violation (e.g. prompt injection or disallowed data exfiltration), it can reject the request:
+| Action | Meaning |
+| :--- | :--- |
+| **`continue`** | Proceed to the next hook or upstream model with optional mutations. |
+| **`short_circuit`** | Terminate the pipeline immediately and return the plugin's response directly to the client (e.g. cached response or guardrail rejection). |
+| **`block`** | Terminate the request with an HTTP error code (e.g., `400 Bad Request` or `403 Forbidden`). |
 
-```json
-{
-  "jsonrpc": "2.0",
-  "id": "hook-43",
-  "result": {
-    "status": "reject",
-    "action": "abort",
-    "error": {
-      "code": "PROMPT_INJECTION_DETECTED",
-      "message": "The input was blocked by enterprise security policy."
-    }
-  }
-}
-```
+---
+
+## Next Steps
+
+- [Plugin Lifecycle & Process Monitoring](/docs/plugins/lifecycle)
+- [Plugin Development with Go HDK](/docs/sdk/go)

@@ -1,46 +1,64 @@
-# Plugin Lifecycle
+# Plugin Lifecycle & Process Management
 
-Understanding the lifecycle of a Naagmani plugin ensures robust handling of initialization, continuous execution, failure modes, and graceful teardown.
+Understanding how Naagmani spawns, monitors, hot-reloads, and cleanly terminates plugin daemons ensures zero-downtime operations and predictable latency.
 
 ---
 
-## Lifecycle Phases
+## Lifecycle Stages
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Spawning: Host starts child process
-    Spawning --> Initializing: stdio channels open
-    Initializing --> Ready: initialize RPC handshake success
-    Ready --> ExecutingHook: execute_hook received
-    ExecutingHook --> Ready: result returned
-    Ready --> Ping: Periodic health check
-    Ping --> Ready: Pong response
-    Ready --> Terminating: shutdown RPC received / idle timeout
-    Terminating --> [*]: Process exited (code 0)
+    [*] --> Starting: Spawn Process
+    Starting --> Initializing: Send Handshake
+    Initializing --> Healthy: Handshake ACK
+    Healthy --> Executing: Inbound Hook Event
+    Executing --> Healthy: Hook Response Returned
+    Healthy --> Degraded: Health Check Timeout / Err
+    Degraded --> Terminating: Max Failures Exceeded
+    Healthy --> Terminating: Config Reload / SIGTERM
+    Terminating --> [*]: Process Exit
 ```
 
 ---
 
-## 1. Process Spawning & Handshake
-- The Naagmani host launches the plugin executable as specified in `plugin.json` under `runtime.entrypoint`.
-- The host immediately sends the `initialize` method payload over `stdin`.
-- The plugin must respond with its metadata and confirmed capabilities within 2,000ms.
+## 1. Process Boot & Handshake
+
+When a project environment activates a plugin:
+1. The gateway executes the `entrypoint` binary in a fresh execution context.
+2. The gateway sets the environment variables (`NAAGMANI_ENV`, `PORTAL_API_URL`, `PROJECT_ID`).
+3. The gateway issues an `init` JSON-RPC payload.
+4. If the plugin fails to reply within **3000ms**, the gateway flags the plugin as `DEAD` and triggers the fallback policy.
 
 ---
 
-## 2. Request Processing Loop
-- While in the `Ready` state, the host dispatches `execute_hook` calls as AI traffic moves through the gateway pipeline.
-- The plugin processes the hook synchronously or asynchronously and outputs the JSON-RPC response on `stdout`.
-- The host measures hook latency (`X-Naagmani-Plugin-Latency-Ms`).
+## 2. Heartbeats & Health Checks
+
+For native socket and RPC plugins, Naagmani dispatches a lightweight `ping` event every 15 seconds. If a plugin worker process stops responding:
+- It is removed from the active routing ring.
+- In-flight requests are rerouted according to the `on_failure` rule.
+- A new replacement worker process is automatically spawned up to 3 retry attempts.
 
 ---
 
-## 3. Health Checks (`ping`)
-- The host sends lightweight `ping` RPC messages during periods of inactivity to ensure the worker process remains responsive and has not leaked memory or deadlocked.
+## 3. Hot Reloading Configuration
+
+When an administrator updates plugin settings in the Developer Portal ([http://localhost:3000/plugins](http://localhost:3000/plugins)), Naagmani performs a **hot configuration push**:
+
+```json
+{
+  "type": "config_update",
+  "new_config": {
+    "redact_ssn": true,
+    "similarity_threshold": 0.85
+  }
+}
+```
+
+The plugin updates its internal state in-memory without dropping active connection streams.
 
 ---
 
-## 4. Teardown (`shutdown`)
-- During gateway shutdown or plugin reload, the host sends the `shutdown` method.
-- The plugin flushes any remaining background metrics or logs, closes open database or network sockets, and terminates cleanly with exit code `0`.
-- If the plugin does not exit within 3,000ms after `shutdown`, the host terminates the process with `SIGKILL`.
+## Next Steps
+
+- [Plugin Execution Hooks](/docs/plugins/hooks)
+- [Permissions & Security Model](/docs/plugins/permissions)

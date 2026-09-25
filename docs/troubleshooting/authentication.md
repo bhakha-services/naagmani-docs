@@ -1,28 +1,27 @@
-# Troubleshooting: Authentication
+# Authentication Troubleshooting
 
-Diagnosing authentication, key scoping, and credential issues.
-
----
-
-## 1. Test Key Used in Production Environment
-
-- **Symptom**: Requests return `403 Forbidden: Test keys (nmn_test_) are not permitted in production routes.`
-- **Cause**: An API key generated for `test` was supplied to a production gateway endpoint.
-- **Fix**: Generate and use a production-scoped key (`nmn_live_...`).
+In-depth guide to resolving SSO, JWT token, and Project Service Token authentication issues.
 
 ---
 
-## 2. Missing Key Scope
-
-- **Symptom**: `403 Forbidden: Key lacks required scope 'plugins:write'`
-- **Cause**: Trying to publish a plugin or modify project policies with an inference-only API key.
-- **Fix**: Re-issue the API key with administrative or plugin management scopes.
+## 1. Service Token Prefix Validation
+All Project Service Tokens must start with the `nst_live_` prefix:
+- **Valid:** `nst_live_9b2d88194488...`
+- **Invalid:** `sk-...` or `bearer_...`
 
 ---
 
-## 3. Clock Skew / Expired JWT (CLI / Portal)
+## 2. Inspecting Token Metadata via API
+Verify token capabilities and expiration:
 
-- **Symptom**: CLI login loops or returns `token_expired`.
-- **Fix**:
-  - Run `naagmani logout` followed by `naagmani login`.
-  - Ensure system clock on your local machine is synchronized via NTP.
+```bash
+curl http://localhost:8081/v1/organizations/{org_id}/service-tokens \
+  -H "Authorization: Bearer <ADMIN_SESSION_TOKEN>"
+```
+
+---
+
+## Next Steps
+
+- [Plugin Debugging](/docs/troubleshooting/plugins)
+- [CLI Diagnostics](/docs/troubleshooting/cli)

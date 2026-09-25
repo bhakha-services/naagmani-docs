@@ -1,57 +1,58 @@
-# Plugin Testing & Validation
+# Testing & Validation
 
-Testing your plugin locally before deployment ensures schema conformance, hook performance, and rock-solid error handling.
+Testing your plugins prior to deployment prevents latency spikes, memory leaks, and pipeline failures.
 
 ---
 
-## 1. Schema Validation
+## 1. Unit Testing with HDK Mock Suite
 
-The Naagmani CLI provides built-in validation against the canonical `naagmani.plugin/v1` specification:
+The Go HDK provides an in-memory testing harness to simulate gateway invocations:
+
+```go
+package main
+
+import (
+	"context"
+	"testing"
+	"github.com/naagmani/naagmani-hdk-go/testing/harness"
+	"github.com/stretchr/testify/assert"
+)
+
+func TestEmailRedaction(t *testing.T) {
+	h := harness.New(myPreRouteHandler)
+
+	resp, err := h.ExecutePreRoute(context.Background(), &plugin.PreRouteRequest{
+		Messages: []plugin.Message{
+			{Role: "user", Content: "Contact me at alice@naagmani.app"},
+		},
+	})
+
+	assert.NoError(t, err)
+	assert.Equal(t, "[REDACTED_EMAIL]", resp.Messages[0].Content)
+}
+```
+
+---
+
+## 2. CLI Benchmark & Latency Testing
+
+Use the CLI to test execution speed under load:
 
 ```bash
-naagmani validate
+naagmani plugins benchmark ./ --concurrency 50 --requests 1000
+# Output:
+# ── Benchmark Summary ──────────────────────────
+#   Total Invocations:   1,000
+#   p50 Latency:         0.45 ms
+#   p95 Latency:         0.92 ms
+#   p99 Latency:         1.21 ms
+#   Memory Footprint:    12.4 MB
+#   Status:              PASS (meets < 2ms criteria)
 ```
-
-The validator checks:
-- `plugin.json` structure against JSON Schema.
-- Executable entry point existence and binary execution permissions.
-- Declared hooks consistency.
-- Requested permissions formatting.
 
 ---
 
-## 2. Interactive Local Dev Mode
+## Next Steps
 
-Run your plugin in live development mode with hot-reloading:
-
-```bash
-naagmani dev
-```
-
-In dev mode, the CLI:
-1. Spawns your plugin process.
-2. Performs the `initialize` handshake.
-3. Provides an interactive prompt to dispatch synthetic `execute_hook` payloads (`pre_prompt`, `post_generation`).
-4. Prints standard output JSON-RPC messages and standard error logs side-by-side.
-
----
-
-## 3. Unit & Integration Testing
-
-Because plugins communicate over standard I/O via JSON-RPC, you can test hook logic using standard unit test frameworks (e.g. `go test`, `jest`, `pytest`).
-
-### Python Pytest Example
-
-```python
-import pytest
-from my_plugin import handle_pre_prompt
-from naagmani_hdk import HookContext
-
-def test_pre_prompt_redaction():
-    context = HookContext(request_id="test-1", environment="test")
-    payload = {"messages": [{"role": "user", "content": "Here is SECRET_KEY"}]}
-    
-    result = handle_pre_prompt(context, payload)
-    assert result.status == "ok"
-    assert result.payload["messages"][0]["content"] == "Here is [MASKED]"
-```
+- [Packaging & Publishing](/docs/plugins/publishing)
+- [Marketplace Installation](/docs/marketplace/installing-plugins)

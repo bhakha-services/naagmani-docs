@@ -1,67 +1,89 @@
-# Node.js / TypeScript HDK (`@naagmani/hdk`)
+# Node.js & TypeScript SDK
 
-The official Node.js / TypeScript HDK provides ergonomic async/await bindings, type definitions, and standard stream handling for building Naagmani plugins.
+The **Naagmani Node.js SDK** (`@naagmani/sdk`) delivers typed TypeScript definitions, complete OpenAI client drop-in compatibility, and full support for both browser and Node.js runtimes.
 
 ---
 
 ## Installation
 
 ```bash
-npm install @naagmani/hdk
+npm install @naagmani/sdk
 # or
-yarn add @naagmani/hdk
+pnpm add @naagmani/sdk
 # or
-pnpm add @naagmani/hdk
+yarn add @naagmani/sdk
 ```
 
 ---
 
-## Quick Example (TypeScript)
+## 1. Basic Chat Completion
 
 ```typescript
-import { 
-  Plugin, 
-  HookContext, 
-  PrePromptPayload, 
-  HookResult,
-  PostGenerationPayload
-} from "@naagmani/hdk";
+import { Naagmani } from '@naagmani/sdk';
 
-const plugin = new Plugin({
-  name: "security-guard",
-  version: "1.0.0"
+const naagmani = new Naagmani({
+  apiKey: process.env.NAAGMANI_SERVICE_TOKEN || 'nst_live_9b2d8819...',
+  baseURL: 'http://localhost:8080/v1', // or https://gateway.naagmani.app/v1
 });
 
-// Pre-prompt hook
-plugin.onPrePrompt(async (context: HookContext, payload: PrePromptPayload): Promise<HookResult> => {
-  context.log.info(`Processing request ${context.requestId}`);
-  
-  // Transform or validate input
-  return {
-    status: "ok",
-    action: "pass"
-  };
-});
+async function run() {
+  const completion = await naagmani.chat.completions.create({
+    model: 'gpt-4o',
+    messages: [
+      { role: 'system', content: 'You are an expert TypeScript architect.' },
+      { role: 'user', content: 'What are branded types in TypeScript?' }
+    ],
+    temperature: 0.5,
+  });
 
-// Post-generation hook
-plugin.onPostGeneration(async (context: HookContext, payload: PostGenerationPayload): Promise<HookResult> => {
-  // Check generated output
-  return {
-    status: "ok",
-    action: "pass"
-  };
-});
+  console.log(completion.choices[0].message.content);
+  console.log('Attempt Trace ID:', completion.system_fingerprint);
+}
 
-plugin.start();
+run().catch(console.error);
 ```
 
 ---
 
-## Logging & Diagnostics
-
-Never use `console.log()` inside a plugin, as stdout is reserved for JSON-RPC messages. Instead, use the structured logger provided on `context.log` (which writes to `stderr`):
+## 2. Server-Sent Events (SSE) Streaming
 
 ```typescript
-context.log.info("Processing completed successfully", { tokenCount: 42 });
-context.log.error("Failed to connect to external vector DB", { err });
+const stream = await naagmani.chat.completions.create({
+  model: 'claude-3-5-sonnet-20241022',
+  messages: [{ role: 'user', content: 'Write a Fibonacci sequence function.' }],
+  stream: true,
+});
+
+for await (const chunk of stream) {
+  const content = chunk.choices[0]?.delta?.content || '';
+  process.stdout.write(content);
+}
 ```
+
+---
+
+## 3. Drop-in OpenAI Compatibility
+
+If your application already uses the official `openai` npm package, you only need to change the `baseURL` and `apiKey`:
+
+```typescript
+import OpenAI from 'openai';
+
+const client = new OpenAI({
+  apiKey: 'nst_live_9b2d8819...',
+  baseURL: 'http://localhost:8080/v1',
+});
+
+// All standard methods work seamlessly with Naagmani Smart Routing!
+const response = await client.chat.completions.create({
+  model: 'gpt-4o',
+  messages: [{ role: 'user', content: 'Hello Naagmani!' }],
+});
+```
+
+---
+
+## Next Steps
+
+- [Python SDK](/docs/sdk/python)
+- [Go SDK](/docs/sdk/go)

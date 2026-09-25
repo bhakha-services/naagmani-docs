@@ -1,30 +1,30 @@
-# FinOps Spend Controls & Quotas
+# FinOps & Budget Controls
 
-Deterministic cost estimation and hard budget limits in Naagmani guarantee **zero upstream provider cost** whenever quotas or budget limits are breached.
+Monitor organization-wide spending velocity, enforce multi-tier budget caps, and analyze cost breakdowns across projects and members.
+
+- **Portal Page**: [http://localhost:3000/usage](http://localhost:3000/usage)
+
+```mermaid
+graph TD
+    FinOps["FinOps Hub"]
+    FinOps --> Summary["Real-Time Summary (Spent, Limit, Remaining, Health)"]
+    FinOps --> Trends["Token & Cost Velocity Charts"]
+    FinOps --> Caps["Hierarchical Budget Caps (Org -> Project -> Member)"]
+```
 
 ---
 
-## FinOps Telemetry & Enforcement
+## Setting Organization & Project Budgets
 
-```mermaid
-graph LR
-    Req[Incoming Request] --> Gate{Budget Check}
-    Gate -->|Within Cap| Exec[Dispatch to Provider]
-    Gate -->|Budget Exceeded| Reject[Reject with HTTP 429 / Zero Provider Cost]
-    Exec --> Telemetry[Token Counter & Telemetry Aggregator]
-    Telemetry --> Analytics[USD Cost & P50/P95/P99 Percentiles]
-```
+1. Navigate to the **Usage & FinOps** hub at [http://localhost:3000/usage](http://localhost:3000/usage).
+2. Click **+ Create Budget Target**.
+3. Select your budget scope (**Organization**, **Project**, or **Environment**).
+4. Set your **Monthly Limit** (e.g. `$5,000.00`) and alert notification threshold (e.g. `80%`).
+5. Click **Deploy Budget**.
 
-### Core Features
+---
 
-1. **Hard Spend Caps**:
-   - Spend limits are enforced locally at the gateway prior to dispatching inference requests upstream.
-   - Guarantees zero dollar overrun during unexpected agent loops or traffic surges.
+## Next Steps
 
-2. **Sliding Window Quotas**:
-   - Granular request and token quotas evaluated per-project or per-environment.
-   - Standard HTTP 429 response codes with precision `Retry-After` headers.
-
-3. **Real-time Latency & Token Analytics**:
-   - Track prompt tokens, completion tokens, and dollar costs mapped to provider rate cards.
-   - Percentile latency telemetry (P50, P95, P99) for all model routes.
+- Manage member limits: [Members & Access Control](members.md)
+- API Reference: [FinOps & Budgets API](../api/budgets.md)

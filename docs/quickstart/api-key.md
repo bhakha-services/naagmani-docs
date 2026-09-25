@@ -1,41 +1,45 @@
 # Creating an API Key
 
-To authenticate requests to the Naagmani Gateway, client applications must provide a **Naagmani API Key**.
+To authenticate requests against the Naagmani Gateway Data Plane, your application requires a valid API Key or Project Service Token.
 
 ---
 
-## 1. Key Formats
+## Option A: Via the Developer Portal
 
-Naagmani API keys are cryptographically hashed and prefixed to indicate their environment scope:
-- **Production Keys**: `nm_live_<32_character_hash>`
-- **Test / Development Keys**: `nm_test_<32_character_hash>`
+1. Log into the **Naagmani Developer Portal** at [http://localhost:3000](http://localhost:3000) or [https://developer.naagmani.app](https://developer.naagmani.app).
+2. In the left navigation sidebar, select your active **Project**.
+3. Click on **API Keys** in the project menu.
+4. Click **+ Create API Key**.
+5. Give your key a descriptive name (e.g. `production-backend-key`), choose an environment (`Production`), and click **Generate**.
+6. Copy your API key (prefixed with `nsk_live_...`). Store it securely—it is only displayed once.
 
 ---
 
-## 2. Generating Keys via the CLI
+## Option B: Via the Naagmani CLI
 
-You can generate and manage API keys directly using the [Naagmani CLI](../cli/installation.md):
+If you have the Naagmani CLI installed:
 
 ```bash
-# Login to your Naagmani environment
-naagmani login
+# Authenticate CLI
+naagmani auth login
 
-# View active environment and identity
-naagmani whoami
-
-# Configure key environment variable
-export NAAGMANI_API_KEY="nm_test_your_generated_api_key_here"
+# Generate a new project API key
+naagmani keys create --project "my-copilot" --env "production" --name "cli-generated-key"
 ```
 
 ---
 
-## 3. Best Practices
+## Key Format
 
-- **Never commit keys to Git**: Store `NAAGMANI_API_KEY` in your application environment or secrets manager.
-- **Environment Isolation**: Always use `nm_test_` keys for local testing and CI/CD pipelines to prevent polluting production usage metrics.
+Naagmani credentials use standard prefix identifiers for fast identification:
+
+- **`nsk_live_...`**: Standard Project API Key
+- **`nsk_test_...`**: Sandbox / Development API Key
+- **`nst_live_...`**: Scoped Project Service Token (Machine-to-Machine)
 
 ---
 
 ## Next Steps
 
-- Execute your first chat completion: [First Request Guide](first-request.md)
+- Use your key to make a request: [Sending Your First Request](first-request.md)
+- Learn about scoped machine tokens: [Project Service Tokens Guide](../concepts/project-service-tokens.md)

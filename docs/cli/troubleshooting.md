@@ -1,42 +1,41 @@
-# CLI Troubleshooting
+# CLI Diagnostics & Troubleshooting
 
-Common issues encountered when running the Naagmani CLI and their solutions.
-
----
-
-## 1. `naagmani: command not found`
-
-- **Cause**: The global npm bin directory or manual install directory is not in your system `$PATH`.
-- **Solution**:
-  - Run `npm bin -g` to check where npm installs binaries.
-  - Add that directory to your PATH (e.g. in `~/.bashrc`, `~/.zshrc`, or Windows Environment Variables).
+Common errors encountered when using the `naagmani` CLI and their resolutions.
 
 ---
 
-## 2. Manifest Validation Failed (`naagmani validate`)
+## 1. Authentication & Token Errors
 
-- **Cause**: `plugin.json` is missing mandatory keys or contains invalid types.
-- **Common Fixes**:
-  - Ensure `name` contains only lowercase letters, numbers, and hyphens.
-  - Ensure `runtime.protocol_version` is set exactly to `naagmani.plugin/v1`.
-  - Ensure `entrypoint` points to an existing, executable file relative to `plugin.json`.
+### Error: `401 Unauthorized / Token Expired`
+- **Cause:** The cached OAuth session or Project Service Token has expired.
+- **Fix:** Run `naagmani auth login` to re-authenticate or generate a new token via `naagmani tokens create`.
 
 ---
 
-## 3. Dev Mode Process Exited Prematurely (`naagmani dev`)
+## 2. Connection Refused
 
-- **Cause**: The plugin entrypoint threw an unhandled runtime exception during startup or failed the `initialize` handshake.
-- **Solution**:
-  - Check the `stderr` logs output in the dev console.
-  - Ensure runtime dependencies are installed (e.g. `npm install` or `pip install -r requirements.txt`).
-  - Verify that standard output (`stdout`) is not being written to by user code (use logger on `stderr` instead).
-
----
-
-## 4. Permission Denied on Binary Execution (Linux / macOS)
-
-- **Cause**: The built entrypoint binary lacks executable permissions (`+x`).
-- **Solution**:
+### Error: `dial tcp 127.0.0.1:8081: connect: connection refused`
+- **Cause:** Local development server or Docker container is not running.
+- **Fix:** Start the Control Plane container:
   ```bash
-  chmod +x dist/index.js # or chmod +x bin/plugin
+  docker start naagmani-os
   ```
+  Or specify the remote production URL using `--api-url https://api.naagmani.app`.
+
+---
+
+## 3. Plugin Validation Warnings
+
+### Error: `entrypoint binary not executable`
+- **Cause:** Missing POSIX execution permissions on the target binary.
+- **Fix:**
+  ```bash
+  chmod +x ./bin/plugin
+  ```
+
+---
+
+## Next Steps
+
+- [Common Errors Guide](/docs/troubleshooting/common-errors)
+- [Developer Portal CLI Guide](/docs/developer-portal/cli-workflow)

@@ -1,91 +1,97 @@
 # Streaming Responses
 
-Naagmani OS supports real-time token streaming using standard **Server-Sent Events (SSE)**.
+Naagmani provides full support for real-time Server-Sent Events (SSE) streaming for ultra-responsive user interfaces.
 
 ---
 
-## 1. Using `curl`
+## How Streaming Works
 
-Pass `"stream": true` in the JSON request body:
+When `stream: true` is provided, the Naagmani Gateway establishes a persistent HTTP connection and forwards tokens downstream as they arrive from the upstream model provider.
 
-```bash
-curl -N -X POST "http://localhost:8080/v1/chat/completions" \
-  -H "Authorization: Bearer $NAAGMANI_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "gpt-4o",
-    "stream": true,
-    "messages": [
-      {"role": "user", "content": "Write a 3-line haiku about artificial intelligence."}
-    ]
-  }'
-```
-
-### Stream Event Output
-```text
-data: {"id":"chatcmpl-01j8xyz987","object":"chat.completion.chunk","created":1726400000,"model":"gpt-4o","choices":[{"index":0,"delta":{"content":"Silicon"},"finish_reason":null}]}
-
-data: {"id":"chatcmpl-01j8xyz987","object":"chat.completion.chunk","created":1726400000,"model":"gpt-4o","choices":[{"index":0,"delta":{"content":" minds awake,"},"finish_reason":null}]}
-
-data: [DONE]
+```mermaid
+sequenceDiagram
+    autonumber
+    Client->>Naagmani Gateway: POST /v1/chat/completions {"stream": true}
+    Naagmani Gateway->>Provider: Open Upstream SSE Stream
+    Provider-->>Naagmani Gateway: data: {"choices": [{"delta": {"content": "Hello"}}]}
+    Naagmani Gateway-->>Client: data: {"choices": [{"delta": {"content": "Hello"}}]}
+    Provider-->>Naagmani Gateway: data: {"choices": [{"delta": {"content": " World"}}]}
+    Naagmani Gateway-->>Client: data: {"choices": [{"delta": {"content": " World"}}]}
+    Provider-->>Naagmani Gateway: data: [DONE]
+    Naagmani Gateway-->>Client: data: [DONE]
 ```
 
 ---
 
-## 2. Using Python Streaming
+## Code Examples
 
-```python
-import os
-from openai import OpenAI
-
-client = OpenAI(
-    base_url="http://localhost:8080/v1",
-    api_key=os.environ.get("NAAGMANI_API_KEY"),
-)
-
-stream = client.chat.completions.create(
-    model="gpt-4o",
-    messages=[{"role": "user", "content": "Tell me a short story."}],
-    stream=True,
-)
-
-for chunk in stream:
-    content = chunk.choices[0].delta.content or ""
-    print(content, end="", flush=True)
-print()
-```
-
----
-
-## 3. Using TypeScript Streaming
+### 1. TypeScript / Node.js
 
 ```typescript
 import OpenAI from "openai";
 
 const client = new OpenAI({
+  apiKey: process.env.NAAGMANI_API_KEY || "nsk_live_YOUR_KEY",
   baseURL: "http://localhost:8080/v1",
-  apiKey: process.env.NAAGMANI_API_KEY,
 });
 
-async function main() {
+async function streamDemo() {
   const stream = await client.chat.completions.create({
-    model: "gpt-4o",
-    messages: [{ role: "user", content: "Tell me a short story." }],
+    model: "claude-3-5-sonnet-20241022",
+    messages: [{ role: "user", content: "Write a poem about distributed systems." }],
     stream: true,
   });
 
   for await (const chunk of stream) {
-    process.stdout.write(chunk.choices[0]?.delta?.content || "");
+    const content = chunk.choices[0]?.delta?.content || "";
+    process.stdout.write(content);
   }
-  process.stdout.write("\n");
+  console.log("
+--- Stream Finished ---");
 }
 
-main();
+streamDemo().catch(console.error);
 ```
+
+---
+
+### 2. Python
+
+```python
+from openai import OpenAI
+import os
+
+client = OpenAI(
+    api_key=os.environ.get("NAAGMANI_API_KEY", "nsk_live_YOUR_KEY"),
+    base_url="http://localhost:8080/v1"
+)
+
+stream = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": "Explain quantum computing simply."}],
+    stream=True
+)
+
+for chunk in stream:
+    content = chunk.choices[0].delta.content
+    if content:
+        print(content, end="", flush=True)
+
+print()
+```
+
+---
+
+## Partial Streaming Token Accumulation
+
+Naagmani automatically captures partial token usage during SSE streams:
+- Tracks **Time to First Token (TTFT)**.
+- Reconstructs accurate token counts even if the client disconnects prematurely.
+- Accurately meters downstream costs against the tenant's spending budget.
 
 ---
 
 ## Next Steps
 
-- Explore foundational platform concepts: [Organizations & Projects](../concepts/organizations.md)
-- Learn how plugins intercept streaming requests: [Plugin Protocol](../plugins/protocol.md)
+- Inspect streaming telemetry: [Execution Trace Telemetry](provider-attempts.md)
+- Learn about model fallbacks: [Routing & Fallbacks](../concepts/routing.md)

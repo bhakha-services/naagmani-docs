@@ -1,61 +1,47 @@
-# Developer Portal Overview & Quickstart
+# Developer Portal Overview & Navigation
 
-Naagmani v1 operates as an "Android OS for AI" with strict separation of concerns between runtime execution and tenant control plane management.
+The **Naagmani Developer Portal** is the centralized web management console for managing AI infrastructure, credentials, routing policies, autonomous agents, and FinOps governance.
 
----
-
-## Architecture Topology
-
-The Naagmani architecture is divided into three primary tiers:
+- **Local Development URL**: [http://localhost:3000](http://localhost:3000)
+- **Production Hosted URL**: [https://developer.naagmani.app](https://developer.naagmani.app)
 
 ```mermaid
 graph TD
-    Client[Client Applications / AI Agents] -->|OpenAI Protocol| OS[Naagmani OS Data Plane :8080]
-    DevPortal[Developer Portal Web Console :3000] -->|GraphQL / REST| Cloud[Naagmani Cloud SaaS Control Plane :8081]
-    Cloud -->|Policy & License Sync| OS
-    OS -->|AES-256 BYOK Keys| Providers[Upstream LLM Providers]
-    OS -->|stdio JSON-RPC 2.0| Plugins[Decoupled Child Plugins]
+    Portal["Developer Portal Navigation"]
+    Portal --> OrgMgmt["Organization Level (Members, Settings, Billing, FinOps)"]
+    Portal --> ProjMgmt["Project Level (Agents, Skills, Tools, MCP, Service Tokens)"]
+    Portal --> Observability["Global Observability (Provider Attempts, Audit Logs)"]
 ```
-
-### Core Components
-
-1. **Naagmani OS (`:8080`)**:
-   - High-performance Go data plane for OpenAI-compatible model routing.
-   - BYOK credential resolution with AES-256-GCM encryption.
-   - In-memory token bucket rate limiting and sliding window metrics.
-   - Out-of-process plugin host communicating via JSON-RPC 2.0 over standard I/O (`stdio`).
-
-2. **Naagmani Cloud (`:8081`)**:
-   - SaaS control plane managing multi-tenant organization boundaries, teams, and environments.
-   - Payment processing via Cashfree gateway integration.
-   - Cryptographic license generation and verification.
-   - Marketplace catalog distribution and plugin verification registry.
-
-3. **Developer Portal (`:3000`)**:
-   - Customer web console for managing API keys, providers, model routing policies, and usage metrics.
-   - Project-based workspace isolation and environment switching (Production, Test).
 
 ---
 
-## Getting Started
+## Portal Navigation Layout
 
-### 1. Launching the Backend Stack
+### 1. Top Navigation Bar
+- **Organization Selector**: Switch between team organizations seamlessly.
+- **Project Selector**: Choose your active project workspace.
+- **Documentation & User Menu**: Quick access to documentation links and user profile settings.
 
-Start the backend infrastructure (Naagmani OS, Naagmani Cloud, PostgreSQL, Redis, Mailpit) using Docker Compose:
+### 2. Organization Sidebar (Global Scope)
+- **Dashboard**: High-level platform health, aggregate token velocity, and active projects.
+- **Projects**: Manage project workspaces across your company.
+- **Members**: Manage team members, RBAC roles, and individual monthly spending caps.
+- **Usage & FinOps**: Organization-wide token metering, budget limits, and cost analytics.
+- **Provider Attempts**: Real-time upstream dispatch trace inspector and retry cascade logs.
+- **Audit Logs**: Immutable security compliance event trail.
 
-```bash
-# 1. Clone monorepo and start backend stack
-docker compose up -d --build
+### 3. Project Sidebar (Scoped Workload)
+- **Agents**: Autonomous AI assistants, system prompts, and tool bindings.
+- **Agent Playground**: Interactive testbed for debugging agent reasoning steps and tool calls.
+- **Skills & Tools**: Reusable prompt skills and custom HTTP/gRPC tool schemas.
+- **MCP Servers & Policies**: External Model Context Protocol integrations and security guardrails.
+- **Model Playground**: Side-by-side model comparison, latency benchmarking, and token accounting.
+- **Service Tokens**: Scoped machine-to-machine credentials.
 
-# 2. Verify health endpoints
-curl http://localhost:8080/v1/health
-curl http://localhost:8081/health
-```
+---
 
-### 2. Accessing the Developer Portal
+## Next Steps
 
-Navigate to [http://localhost:3000](http://localhost:3000) to access the Developer Console:
-
-- **Create Organization & Projects**: Configure your development environment.
-- **Generate API Keys**: Obtain project-scoped API keys (`nm_live_...`).
-- **Configure Model Providers**: Add OpenAI, Anthropic, Gemini, DeepSeek, or local Ollama credentials.
+- Manage team members: [Members & Access Control](members.md)
+- Issue service tokens: [Project Service Tokens Guide](service-tokens.md)
+- Build autonomous agents: [Autonomous Agents & Assistants](agents.md)

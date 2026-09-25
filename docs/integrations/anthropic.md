@@ -1,40 +1,27 @@
-# Anthropic Integration
+# Anthropic Claude Integration
 
-Naagmani natively interfaces with Anthropic's Claude models, translating OpenAI-standard payloads into Anthropic Messages API structures and normalizing response tokens and thinking blocks.
-
----
-
-## Supported Models
-
-| Model | ID | Context Window | Capabilities |
-| :--- | :--- | :--- | :--- |
-| **Claude 3.7 Sonnet** | `claude-3-7-sonnet-20250219` | 200k tokens | Hybrid Reasoning / Extended Thinking, Coding |
-| **Claude 3.5 Sonnet** | `claude-3-5-sonnet-20241022` | 200k tokens | Vision, Tool Calling, Structured Outputs |
-| **Claude 3.5 Haiku** | `claude-3-5-haiku-20241022` | 200k tokens | Ultra-low latency, High throughput |
+Naagmani transparently bridges OpenAI-compatible client payloads with Anthropic's native Messages API for `claude-3-5-sonnet-20241022`, `claude-3-5-haiku-20241022`, and `claude-3-opus-20240229`.
 
 ---
 
-## Configuration (BYOK)
+## Automatic Protocol Translation
 
-```yaml
-providers:
-  anthropic:
-    api_key: "${ANTHROPIC_API_KEY}"
-```
+When a client sends a standard OpenAI JSON body with `model: "claude-3-5-sonnet-20241022"`, Naagmani automatically:
+1. Extracts `system` messages and maps them to Anthropic's top-level `system` parameter.
+2. Converts `tools` definitions into Anthropic tool schemas.
+3. Translates `tool_calls` and `tool_results` into native blocks.
+4. Normalizes streaming SSE events into OpenAI-compatible delta chunks.
 
 ---
 
-## Extended Thinking Support
+## Credential Setup
 
-When invoking Claude 3.7 Sonnet via Naagmani, extended thinking tokens can be configured directly in standard payloads:
+Add your `sk-ant-...` key in the Portal:
+- **Credential Pools**: [http://localhost:3000/credentials](http://localhost:3000/credentials)
 
-```json
-{
-  "model": "claude-3-7-sonnet-20250219",
-  "messages": [
-    {"role": "user", "content": "Prove that the square root of 2 is irrational."}
-  ],
-  "reasoning_effort": "high"
-}
-```
-Naagmani extracts and normalizes the internal reasoning traces.
+---
+
+## Next Steps
+
+- [Google Gemini Integration](/docs/integrations/google)
+- [DeepSeek Integration](/docs/integrations/deepseek)

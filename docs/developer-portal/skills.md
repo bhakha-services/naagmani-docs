@@ -1,47 +1,29 @@
 # Agent Skills & Orchestration
 
-A **Skill** in Naagmani is a high-level cognitive capability configured at the agent level. Unlike a simple Tool (which executes a single deterministic function call), a Skill provides structured prompts, reasoning heuristics, domain knowledge, and multi-turn orchestration allowing an agent to solve complex enterprise workflows.
+**Skills** are modular, reusable behavioral units that teach autonomous agents how to perform specialized workflows.
 
----
-
-## 1. Capabilities Triad
+- **Portal Page**: `/projects/[projectId]/skills`
 
 ```mermaid
-graph TD
-    subgraph Capability Hierarchy
-        Skill[1. Skill: High-Level Workflow<br/>Prompt guidelines, heuristics & tool chaining]
-        Tool[2. Tool: Discrete Execution<br/>Validated inputSchema + single API/DB call]
-        Plugin[3. Plugin: Packaged Bundle<br/>WASM / binary container packaging skills & tools]
-    end
-    Skill -->|invokes| Tool
-    Plugin -->|provides| Tool
-    Plugin -->|provides| Skill
+graph LR
+    Skill["Skill: Order Refund Specialist"]
+    Skill --> Rules["Policy Rules (Refunds < $100 auto-approved)"]
+    Skill --> Templates["Structured Few-Shot Prompt Templates"]
+    Skill --> Tools["Required Tools (Stripe API, CRM)"]
 ```
 
-- **Skill**: Defines *how* and *when* an agent reasons about a domain problem (e.g., *Customer Ticket Triage Skill*, *Cloud Incident Diagnostician*).
-- **Tool**: Executable atomic action (e.g., `fetch_logs`, `restart_service`).
-- **Plugin**: Shareable package containing tools and skills distributed across the enterprise.
+---
+
+## Anatomy of a Skill
+
+1. **Name & Identifier**: Unique slug (e.g. `customer-refund-workflow`).
+2. **System Prompt Addendum**: Specialized instructions appended to the agent's base system prompt.
+3. **Few-Shot Examples**: Representative input/output pairs demonstrating desired reasoning quality.
+4. **Required Tool Capabilities**: List of tools that must be present for the skill to execute.
 
 ---
 
-## 2. Configuring Skills in the Developer Portal
+## Next Steps
 
-In the **Naagmani Developer Console** (`http://localhost:3000`):
-
-1. Navigate to **Projects** $\rightarrow$ `[Your Project]` $\rightarrow$ **Skills** (`/projects/[projectId]/skills`).
-2. Click **Create Skill** or import one from the **Marketplace**.
-3. Configure the following parameters:
-   - **Name & Identifier**: Unique slug for referencing in agent loops.
-   - **System Instructions**: Specific step-by-step guidance and domain heuristics.
-   - **Required Tools**: Selected callable tools that this skill is permitted to invoke.
-   - **Parameters & Input Constraints**: Strongly-typed arguments passed to the skill.
-4. Test the skill interactively in the **Agent Playground**.
-
----
-
-## 3. Related Documentation
-
-- [Tools Architecture & Working Flow](./tools.md)
-- [Agent Playground Guide](./agent-playground.md)
-- [Model Context Protocol (MCP) Servers](./mcp-servers.md)
-- [Plugin Protocol (v1)](./plugin-protocol.md)
+- Register custom tools: [Tools & Working Flow](tools.md)
+- Build agents: [Autonomous Agents & Assistants](agents.md)

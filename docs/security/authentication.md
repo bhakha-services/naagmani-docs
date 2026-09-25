@@ -1,21 +1,22 @@
-# Security: Authentication
+# Authentication & BYOK Security
 
-Deep dive into authentication mechanisms, key derivation, and session controls within Naagmani.
+Naagmani separates authentication into two distinct operational planes:
 
----
-
-## API Key Architecture
-
-- **Entropy**: Naagmani API keys are generated using CSPRNG (Cryptographically Secure Pseudo-Random Number Generators) with 256 bits of entropy.
-- **Storage**: Keys are never stored in plaintext on disk or in gateway memory caches. They are hashed using standard cryptographic hashing (SHA-256 with project salt) before persistence.
-- **Prefix Scoping**: Keys use explicit prefixes (`nmn_live_`, `nmn_test_`) allowing edge gateways and automated secret scanners (e.g. GitHub Secret Scanning) to instantly detect accidental exposures.
+1. **Management / Control Plane**: OAuth2 SSO (Google, GitHub, SAML/OIDC) and Personal Access Tokens for portal users.
+2. **Inference / Data Plane**: Project Service Tokens (`nst_live_...`) for microservices, background jobs, and agents.
 
 ---
 
-## Secret Storage (BYOK Vault)
+## Bring-Your-Own-Key (BYOK) Security Vault
 
-Upstream provider credentials (OpenAI, Anthropic, Gemini keys) provided by customers are encrypted at rest using **AES-256-GCM** with per-organization key envelopes. 
+When you register provider API keys in Naagmani:
+- Keys are encrypted in memory prior to database persistence.
+- Database records store only ciphertext and cryptographic hashes for indexing.
+- Key material is decrypted exclusively inside the Data Plane memory enclave during an active provider dispatch and wiped immediately after socket transmission.
 
-Key encryption keys (KEKs) can be managed via:
-- Naagmani Cloud HSM / Key Management Service
-- AWS KMS / Google Cloud KMS / Azure Key Vault integration (Enterprise tier)
+---
+
+## Next Steps
+
+- [Role-Based Access Control](/docs/security/authorization)
+- [Data Protection & DLP](/docs/security/data-protection)

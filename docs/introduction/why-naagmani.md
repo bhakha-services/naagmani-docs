@@ -1,28 +1,71 @@
 # Why Naagmani?
 
-As organizations scale their AI initiatives, integrating LLMs into production exposes critical architectural challenges:
+Modern software engineering teams are transitioning from single-model prototypes to complex multi-model, multi-agent production systems. However, managing raw provider connections at scale introduces severe operational overhead.
 
-- **Provider Fragmentation**: Each model provider (OpenAI, Anthropic, Google Gemini, DeepSeek, local vLLM) has different SDKs, credential schemes, rate limits, and error semantics.
-- **Security & Secret Exposure**: Hardcoding provider API keys in client apps or distributed services leads to key leakage and unbounded financial liability.
-- **Provider Outages & Rate Limit Lockouts**: If your sole model provider experiences an outage or throttles your TPM (Tokens Per Minute), your downstream application goes down.
-- **Lack of Governance & Data Privacy**: Without an interception layer, sensitive PII, passwords, or intellectual property can accidentally be transmitted to third-party LLMs.
+Naagmani provides the **Five Core Pillars** of enterprise AI infrastructure:
+
+```mermaid
+graph LR
+    A["5 Pillars of Naagmani"] --> B["1. High Availability & Failover"]
+    A --> C["2. FinOps & Budget Hierarchy"]
+    A --> D["3. BYOK Credential Vault"]
+    A --> E["4. MCP & Agent Extensibility"]
+    A --> F["5. Full-Stack Observability"]
+```
 
 ---
 
-## How Naagmani Solves These Challenges
+## 1. Zero-Downtime Reliability & Failovers
 
-| Enterprise Challenge | Traditional Direct Integration | With Naagmani OS |
-| :--- | :--- | :--- |
-| **Provider Key Management** | Keys distributed across services and devs | Encrypted central vault; developers receive scoped Naagmani keys |
-| **API Standardization** | Custom code per provider API | Unified OpenAI-compatible wire format for all models |
-| **Reliability & Uptime** | Hard dependency on a single vendor | Automatic health probing and multi-provider failover |
-| **Data Loss Prevention (DLP)** | Custom regexes duplicated in each app | Centralized, high-performance DLP & PII redaction plugins |
-| **Cost & Token Control** | Manual end-of-month cloud billing analysis | Real-time token metering, per-project budgets, and rate limiting |
-| **Extensibility** | Monolithic code rewrites | Isolated plugins speaking `naagmani.plugin/v1` in Go, Node, or Python |
+When foundational model providers suffer API outages, elevated 5xx error rates, or capacity throttling (HTTP 429 / 529), direct client applications break.
+
+With Naagmani:
+- **Intelligent Cascade Routing**: If Anthropic Claude returns an `OVERLOADED` error, Naagmani instantly routes the prompt to OpenAI GPT-4o or Google Gemini with zero application code changes.
+- **Provider Health Probing**: Background probes monitor upstream provider latency and error rates, proactively routing traffic away from degraded regions.
+- **Sub-50ms Failover Overhead**: Retries happen at the gateway layer, preserving client connections and streaming pipelines.
+
+---
+
+## 2. Granular FinOps & Multi-Tier Spending Caps
+
+AI infrastructure spending can spiral rapidly without strict enforcement. Naagmani implements an authoritative 3-tier budget hierarchy:
+
+1. **Organization Budget**: Enforces the absolute hard limit for the enterprise billing cycle.
+2. **Project Budget**: Allocates portions of the organizational limit to individual project teams.
+3. **Member / Service Token Budget**: Caps specific engineers or autonomous background processes to prevent accidental runaway loops.
+
+---
+
+## 3. Bring-Your-Own-Key (BYOK) Security Vault
+
+Naagmani never forces you to use middleman model markups. You provide your direct OpenAI, Anthropic, Gemini, or DeepSeek API keys:
+- Keys are encrypted in an isolated vault using AES-256-GCM.
+- Client applications only hold scoped **Naagmani API Keys** or **Project Service Tokens**.
+- Real upstream provider keys are never exposed to frontend code, developers, or client devices.
+
+---
+
+## 4. Native Model Context Protocol (MCP) & Autonomous Agents
+
+As language models transition from chat interfaces into autonomous agents that read databases and execute APIs, Naagmani serves as the runtime gateway:
+- Connect to standard **MCP Servers** over `stdio`, `SSE`, or HTTP streams.
+- Define granular **MCP Tool Policies** (allowlist / blocklist / approval workflows).
+- Test agents interactively in the **Agent Playground** before deploying to production.
+
+---
+
+## 5. Discrete Attempt Telemetry & Audit Trails
+
+Every discrete upstream interaction is recorded as a **Provider Attempt**:
+- Exact duration and **Time to First Token (TTFT)**.
+- Token breakdown (Prompt Tokens, Completion Tokens, Total).
+- Upstream cost attribution (Cost of Goods Sold - COGS).
+- Full security audit logging identifying which user, service token, and IP initiated the request.
 
 ---
 
 ## Next Steps
 
-- Explore the platform topology: [Architecture](architecture.md)
-- Learn foundational terms: [Core Concepts](concepts.md)
+- Understand the internal components: [Architecture Overview](architecture.md)
+- Learn foundational terms: [Foundational Concepts](concepts.md)
+- Create your first API Key: [Quickstart Guide](../quickstart/api-key.md)

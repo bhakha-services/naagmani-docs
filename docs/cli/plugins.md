@@ -1,49 +1,61 @@
-# CLI Plugin Management
+# Plugin Management via CLI
 
-Manage installed plugins, test harnesses, and marketplace discovery directly from the terminal.
+The CLI provides commands to initialize, build, test, and publish custom Gateway plugins.
 
 ---
 
-## Searching Plugins
-
-Search public marketplace plugins or internal private enterprise registry:
+## 1. Scaffold a New Plugin
 
 ```bash
-naagmani marketplace search "dlp"
-```
-
-Output:
-```text
-NAME                     VERSION   AUTHOR             VISIBILITY   DESCRIPTION
-dlp-sanitizer            1.0.0     naagmani-official  public       Masks PII, credit cards, emails
-ai-firewall              1.2.0     naagmani-official  public       Prompt injection defense
-internal-rag-bridge      0.4.1     acme-corp          private      Acme enterprise knowledge RAG
+naagmani plugins init my-custom-guard --template go
+# Output:
+# Created my-custom-guard/
+# ├── plugin.json
+# ├── main.go
+# ├── go.mod
+# └── README.md
 ```
 
 ---
 
-## Installing & Registering Plugins
-
-Install a plugin into your project:
+## 2. Validate Plugin Manifest
 
 ```bash
-naagmani marketplace install dlp-sanitizer@1.0.0
+naagmani plugins validate ./my-custom-guard
 ```
 
 ---
 
-## Inspecting Plugin Versions & History
+## 3. Local Test Simulation
+
+Test plugin execution against real or synthetic prompt payloads without needing a running gateway server:
 
 ```bash
-naagmani versions dlp-sanitizer
+naagmani plugins test ./my-custom-guard \
+  --hook pre_route \
+  --input '{"messages":[{"role":"user","content":"Sample test input"}]}'
 ```
 
 ---
 
-## Rolling Back a Version
-
-In case of runtime anomalies:
+## 4. Benchmark Performance
 
 ```bash
-naagmani rollback dlp-sanitizer@0.9.8 --env production
+naagmani plugins benchmark ./my-custom-guard --concurrency 20 --requests 500
 ```
+
+---
+
+## 5. Package & Publish
+
+```bash
+naagmani plugins pack ./my-custom-guard -o ./dist/plugin.tar.gz
+naagmani plugins publish ./dist/plugin.tar.gz --scope organization
+```
+
+---
+
+## Next Steps
+
+- [CLI Troubleshooting](/docs/cli/troubleshooting)
+- [Marketplace Overview](/docs/marketplace/overview)
