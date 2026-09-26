@@ -7,8 +7,10 @@ graph TD
     Org["Organization (Acme Corp)"]
     Org --> P1["Project: E-Commerce Search"]
     Org --> P2["Project: Internal Copilot"]
-    Org --> Mem["Team Members (Roles & RBAC)"]
-    Org --> Bgt["Organization Budget Cap ($5,000/mo)"]
+    Org --> PortalUsers["Portal Users (Human RBAC)"]
+    Org --> Roles["Dynamic Organization Roles & Permissions"]
+    Org --> CustomerMembers["Customer Members (Attribution & Budgets)"]
+    Org --> Bgt["Organization Budget Cap"]
     Org --> Vault["BYOK Encrypted Credential Vault"]
 ```
 
@@ -16,13 +18,13 @@ graph TD
 
 ## Key Responsibilities of an Organization
 
-1. **Billing & Budget Authority**: Governs the root spending limit for all underlying projects and members. Project and Member limits can never exceed the Organization's limit.
-2. **Team & Membership Access**: Manage user accounts with strict Role-Based Access Control (RBAC):
-   - **Owner**: Full administrative control, billing ownership, and destructive action permissions.
-   - **Admin**: Project creation, member invitations, credential management, and routing policy configuration.
-   - **Member**: Access to assigned projects, playgrounds, and issued service tokens.
-3. **Bring-Your-Own-Key (BYOK) Vault**: Store root provider API keys (OpenAI, Anthropic, Gemini, DeepSeek) centrally with AES-256-GCM encryption.
-4. **Audit Trail**: Aggregated compliance logging capturing every authentication event, key creation, member role change, and high-level routing operation.
+1. **Billing & Budget Authority**: Governs the root spending limit for all underlying projects and customer members. Project and Customer Member limits can never exceed the Organization's limit.
+2. **Team & Portal User Access**: Manage Developer Portal logins, dynamic role assignments, and organization memberships:
+   - **System Roles**: Predefined `Owner`, `Admin`, and `Member` platform roles.
+   - **Custom Roles**: Tailored roles (e.g. `Project Operator`, `Billing Manager`) composed of granular canonical permissions.
+3. **Customer / Application Directory**: Manage end-user and application member identities for token usage attribution and individual spending limits.
+4. **Bring-Your-Own-Key (BYOK) Vault**: Store root provider API keys (OpenAI, Anthropic, Gemini, DeepSeek) centrally with AES-256-GCM encryption.
+5. **Audit Trail**: Aggregated compliance logging capturing every authentication event, key creation, role modification, and high-level routing operation.
 
 ---
 
@@ -30,12 +32,16 @@ graph TD
 
 Organizations can be managed directly in the **Developer Portal**:
 - **Switch Organizations**: Use the top-left Organization dropdown selector in the navigation bar.
-- **Organization Settings**: Navigate to [http://localhost:3000/settings](http://localhost:3000/settings) to update organization name, billing details, and view subscription tier.
-- **Members Directory**: Manage engineers and permissions at [http://localhost:3000/members](http://localhost:3000/members).
+- **Organization Settings**: Navigate to [http://localhost:3000/organizations](http://localhost:3000/organizations) to update organization name and view subscription tier.
+- **Portal Users**: Manage team access and roles at [http://localhost:3000/users](http://localhost:3000/users).
+- **Roles & Permissions**: Create and configure custom organization roles at [http://localhost:3000/roles](http://localhost:3000/roles).
+- **Customer Members**: Manage customer attribution and spending caps at [http://localhost:3000/members](http://localhost:3000/members).
 
 ---
 
 ## Next Steps
 
 - Learn about project boundaries: [Projects & Workloads](projects.md)
-- Configure team members: [Members & Access Control](../developer-portal/members.md)
+- Manage portal team members: [Portal Users](../developer-portal/users.md)
+- Configure custom roles: [Roles & Permissions](../developer-portal/roles.md)
+- Manage customer spending caps: [Customer Members Directory](../developer-portal/members.md)

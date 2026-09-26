@@ -1,38 +1,46 @@
 # Environments & Isolation
 
-An **Environment** is a deployment stage within a Project. Naagmani provides native support for multi-stage lifecycle environments (typically `Development`, `Staging`, and `Production`).
+An **Environment** is an isolated deployment stage within a Project. Naagmani provides native two-tier environment isolation: **Test** and **Production**.
 
 ```mermaid
 graph LR
-    subgraph Dev["Development"]
-        DevToken["nsk_test_..."] --> DevModel["gpt-4o-mini (Cost Optimized)"]
+    subgraph Test["Test Environment (Sandbox)"]
+        TestToken["nst_live_... (Test Env)"] --> TestModel["gpt-4o-mini / Synthetic Data"]
     end
-    subgraph Staging["Staging"]
-        StageToken["nst_stage_..."] --> StageModel["claude-3-5-sonnet (Testing)"]
-    end
-    subgraph Prod["Production"]
-        ProdToken["nst_live_..."] --> ProdModel["gpt-4o + Fallback Cascade"]
+    subgraph Prod["Production Environment"]
+        ProdToken["nst_live_... (Prod Env)"] --> ProdModel["gpt-4o + Fallback Cascade"]
     end
 ```
 
 ---
 
-## Environment Isolation Guarantees
+## Two-Tier Environment Architecture
 
-1. **Secret & Key Isolation**: Service tokens issued for `Development` are strictly rejected in `Production`.
-2. **Dedicated Routing Rules**: Use inexpensive, fast models in Development while enforcing strict high-availability fallback cascades in Production.
-3. **Telemetry & Quota Tagging**: Usage analytics and audit logs are tagged by environment, enabling clean cost breakdown across pre-production and production infrastructure.
+Naagmani consolidates workloads into two distinct, cryptographically isolated tiers:
+
+| Environment | Purpose | Credential Scope | Model Strategy |
+| :--- | :--- | :--- | :--- |
+| **Test** (`test`) | Local development, automated CI pipelines, and pre-release integration tests. | Sandboxed Test Service Tokens | Cost-effective models, mocks, and rate-limited test pools. |
+| **Production** (`production`) | Live customer-facing applications and mission-critical production traffic. | Production Service Tokens | High-availability fallback cascades, dedicated credential pools, strict DLP. |
 
 ---
 
-## Managing Environments
+## Environment Isolation Guarantees
 
-- In the Developer Portal, environments are selectable from the project navigation sidebar.
-- When generating **Project Service Tokens** or **API Keys**, you must explicitly bind the credential to its target environment.
+1. **Secret & Key Isolation**: Service tokens and credentials issued for the `test` environment are strictly rejected in `production`.
+2. **Dedicated Routing Rules**: Use inexpensive, fast models in Test while enforcing strict high-availability fallback cascades and circuit breakers in Production.
+3. **Telemetry & Quota Tagging**: Usage analytics, provider attempts, and audit logs are partitioned by environment, enabling clear cost segregation between testing and live operations.
+
+---
+
+## Managing Environments in the Developer Portal
+
+- In the Developer Portal, the active environment is selectable from the top navigation and project sidebar.
+- When generating **Project Service Tokens** or **API Keys**, you must explicitly bind the token to its target environment (`Test` or `Production`).
 
 ---
 
 ## Next Steps
 
-- Learn about API keys: [API Keys & Vault](api-keys.md)
-- Learn about service tokens: [Project Service Tokens](project-service-tokens.md)
+- Learn about API keys: [API Keys & Vault](/docs/concepts/api-keys)
+- Learn about service tokens: [Project Service Tokens](/docs/concepts/project-service-tokens)

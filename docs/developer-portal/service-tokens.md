@@ -21,7 +21,7 @@ graph TD
 3. Click the **+ Create Service Token** button.
 4. Fill in the token configuration:
    - **Token Name**: A descriptive label (e.g. `order-processing-worker`).
-   - **Environment**: Select `Development`, `Staging`, or `Production`.
+   - **Environment**: Select `Test` or `Production`.
    - **Capabilities**: Choose allowed operations (`inference:chat`, `tools:execute`, `mcp:access`).
    - **Expiration (TTL)**: Select a duration (30 days, 90 days, or Never Expire).
    - **Member Attribution**: Optionally link this token to an engineer for personal budget metering.

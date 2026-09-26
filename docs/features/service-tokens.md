@@ -358,9 +358,9 @@ curl -X DELETE "https://api.naagmani.com/v1/projects/YOUR_PROJECT_ID/service-tok
 
 ## Best Practices
 
-1. **One Token per Pipeline / Agent**: Create dedicated tokens for each workload (e.g. `eval-agent`, `staging-deployer`, `customer-support-bot`) to simplify auditing and rotation.
-2. **Never Commit Secrets to Git**: Always store the `nm_st_...` plaintext secret in an environment variable or secrets manager.
-3. **Use Environment Pinning**: Do not share tokens across environments. Ensure staging machines connect exclusively with tokens bound to the `Staging` environment.
+1. **One Token per Pipeline / Agent**: Create dedicated tokens for each workload (e.g. `eval-agent`, `test-runner`, `customer-support-bot`) to simplify auditing and rotation.
+2. **Never Commit Secrets to Git**: Always store the `nst_live_...` plaintext secret in an environment variable or secrets manager.
+3. **Use Environment Pinning**: Do not share tokens across environments. Ensure test runners connect exclusively with tokens bound to the `Test` environment, and production services use `Production` tokens.
 4. **Leverage Grace Periods**: When rotating credentials in production, specify a grace window (e.g. 24–48 hours) to prevent pipeline interruption while deployment updates propagate.
 5. **Set RPM Limits for Background Jobs**: Protect upstream AI providers and project budgets by assigning reasonable RPM limits to asynchronous workers.
 6. **Pass Member ID for Multi-User Workloads**: When executing LLM requests on behalf of human users or specific internal directory members, pass the `X-Naagmani-Member-ID` header for accurate attribution and member-level budget enforcement.

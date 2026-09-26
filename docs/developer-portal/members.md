@@ -1,45 +1,47 @@
-# Members & Access Control
+# Customer Members Directory & Spending Limits
 
-Manage team members, assign Role-Based Access Control (RBAC) permissions, and enforce individual spending limits directly in the Developer Portal.
+The **Customer Members** directory allows you to manage end-user and application member identities for token usage attribution, per-member spending limits, and FinOps governance.
 
 - **Portal Page**: [http://localhost:3000/members](http://localhost:3000/members)
 
 ```mermaid
-graph LR
-    Owner["Owner (Billing & Deletion)"] --> Admin["Admin (Projects & Tokens)"]
-    Admin --> Member["Member (Playgrounds & Inference)"]
+graph TD
+    Org["Organization (Global Budget Limit)"]
+    Org --> MemberA["Customer Member A ($100/mo)"]
+    Org --> MemberB["Customer Member B ($250/mo)"]
+    MemberA --> PST["Project Service Token (Attributed)"]
 ```
 
----
-
-## Member Roles & Permissions
-
-| Permission | Owner | Admin | Member |
-| :--- | :---: | :---: | :---: |
-| Delete Organization | Yes | No | No |
-| Manage Billing & Org Budget | Yes | No | No |
-| Invite Members & Update Roles | Yes | Yes | No |
-| Create & Delete Projects | Yes | Yes | No |
-| Create Project Service Tokens | Yes | Yes | Yes |
-| Use Playgrounds & Inference | Yes | Yes | Yes |
+> [!IMPORTANT]
+> **Customer Members vs. Portal Users**  
+> Customer Members are application and end-user identities used by LLM workloads and backend services. They **do not** have Developer Portal login accounts.  
+> To manage internal team members and administrators who have Developer Portal access, see [Portal Users](users.md).
 
 ---
 
 ## Setting Member-Specific Spending Limits
 
-1. Navigate to the **Members** page at [http://localhost:3000/members](http://localhost:3000/members).
-2. Click on a member to open their **Member Detail Profile** (e.g. `/members/mbr_123...`).
-3. Under the **Spending Budget & Hierarchy Governance** card, click **Modify Member Budget**.
-4. Enter the desired **Monthly Limit Amount** (e.g. `$200.00`).
-5. Click **Save Budget**.
+1. Navigate to the **Customer Members** page at [http://localhost:3000/members](http://localhost:3000/members).
+2. Click **Add Customer Member** or select an existing member.
+3. In the member modal or budget modal, enter the desired **Daily Limit Amount** or **Monthly Limit Amount** (e.g. `$200.00`).
+4. Click **Save Budget**.
 
 > [!NOTE]
 > **Hierarchy Rule Enforcement**  
-> A member's spending limit cannot exceed the parent Organization's monthly limit. If the organization budget is $3,000, setting a member cap of $30,000 will be cleanly rejected.
+> A member's spending limit cannot exceed the parent Organization's monthly limit. If the organization budget is $3,000, setting a member cap of $30,000 will be rejected with an error.
+
+---
+
+## Attribution in Workloads
+
+Applications can attribute LLM inference calls to a specific Customer Member using:
+- The `X-Naagmani-Member-Id` HTTP header.
+- Binding the API Key or Service Token to a specific `member_id`.
 
 ---
 
 ## Next Steps
 
-- Issue machine credentials: [Project Service Tokens](service-tokens.md)
-- View organization FinOps: [FinOps & Budget Controls](finops-budgets.md)
+- [Portal Users Management](users.md)
+- [Project Service Tokens](service-tokens.md)
+- [FinOps & Budget Controls](finops-budgets.md)

@@ -54,7 +54,7 @@ To understand how Naagmani organizes workloads, consider the following structura
 
 1. **Organization**: The top-level account and billing tenant (e.g. Acme Corp). Governs aggregate spending limits, team members, and enterprise audit logs.
 2. **Project**: An isolated application or business initiative (e.g. *Customer Support Bot*, *Internal Copilot*).
-3. **Environment**: Deployment stages within a project (e.g. *Development*, *Staging*, *Production*) with segregated secrets, routing rules, and rate limits.
+3. **Environment**: Deployment stages within a project (*Test* and *Production*) with segregated secrets, routing rules, and rate limits.
 4. **Service Tokens & API Keys**: Scoped credentials issued to services or developers with explicit capability matrices and optional member attribution.
 5. **Smart Routing & Attempts**: Intelligent multi-hop dispatch engine that executes upstream provider calls, logs durable latency and token accounting, and handles failovers automatically.
 

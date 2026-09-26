@@ -26,7 +26,7 @@ graph LR
 
 1. **Instant Model Upgrades**: When a new model version is released (e.g. GPT-5), update the alias target in the Developer Portal with zero application downtime or deployments.
 2. **Zero Code Refactoring**: Switch primary providers across hundreds of microservices instantly.
-3. **Environment-Specific Routing**: Route `smart-tier` to an inexpensive model in Development and the premier flagship model in Production.
+3. **Environment-Specific Routing**: Route `smart-tier` to an inexpensive model in Test and the premier flagship model in Production.
 
 ---
 

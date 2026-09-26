@@ -7,7 +7,7 @@ To guarantee security in multi-tenant environments, Naagmani enforces strict iso
 ## Isolation Dimensions
 
 1. **Organization Isolation**: Logical and cryptographic boundaries preventing cross-tenant data leaks.
-2. **Project & Environment Namespaces**: Distinct credential pools and token lifecycles between `development`, `staging`, and `production`.
+2. **Project & Environment Namespaces**: Distinct credential pools and token lifecycles between `test` and `production`.
 3. **Plugin Process Sandboxing**: Separate OS process trees with limited system calls and no shared memory.
 
 ---
