@@ -108,11 +108,16 @@
 }
 
 .prose pre {
-  background-color: #0d0d10 !important;
-  border: 1px solid #27272a;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 0.5rem;
   padding: 1rem;
   overflow-x: auto;
+}
+
+html.dark .prose pre {
+  background-color: #0d0d10 !important;
+  border-color: #27272a;
 }
 
 .prose code:not(pre code) {
@@ -249,14 +254,18 @@
 }
 
 /* Dual theme support for Shiki */
-html.dark .shiki,
+html.dark .shiki {
+  color: var(--shiki-dark, #e1e4e8) !important;
+}
 html.dark .shiki span {
-  color: var(--shiki-dark) !important;
+  color: var(--shiki-dark, inherit) !important;
 }
 
-html:not(.dark) .shiki,
+html:not(.dark) .shiki {
+  color: var(--shiki-light, #24292e) !important;
+}
 html:not(.dark) .shiki span {
-  color: var(--shiki-light) !important;
+  color: var(--shiki-light, inherit) !important;
 }
 
 

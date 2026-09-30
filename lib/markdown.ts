@@ -86,6 +86,7 @@ export async function highlightCodeSnippet(code: string, lang: string): Promise<
         light: 'github-light',
         dark: 'github-dark',
       },
+      defaultColor: false,
     });
   } catch (err) {
     const escaped = code
@@ -207,6 +208,7 @@ export async function compileMarkdown(content: string, currentSlug: string[]): P
             light: 'github-light',
             dark: 'github-dark',
           },
+          defaultColor: false,
         });
       } catch (err) {
         const escaped = text

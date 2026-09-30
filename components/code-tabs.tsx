@@ -29,9 +29,9 @@ export function CodeTabs({ tabs, defaultTab = 0 }: CodeTabsProps) {
   };
 
   return (
-    <div className="my-6 rounded-xl border border-zinc-800 bg-[#09090B] overflow-hidden shadow-lg">
+    <div className="my-6 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#09090B] overflow-hidden shadow-lg transition-colors">
       {/* Tab Header */}
-      <div className="flex items-center justify-between px-3.5 py-2.5 border-b border-zinc-800 bg-zinc-950/80">
+      <div className="flex items-center justify-between px-3.5 py-2.5 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-100/90 dark:bg-zinc-950/80">
         <div className="flex items-center gap-1.5 overflow-x-auto">
           {tabs.map((tab, idx) => (
             <button
@@ -39,8 +39,8 @@ export function CodeTabs({ tabs, defaultTab = 0 }: CodeTabsProps) {
               onClick={() => setActiveTab(idx)}
               className={`px-3 py-1 text-xs font-mono rounded-md transition-all ${
                 activeTab === idx
-                  ? 'bg-zinc-800 text-emerald-400 font-semibold border border-zinc-700/80 shadow-sm'
-                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/60'
+                  ? 'bg-white dark:bg-zinc-800 text-emerald-600 dark:text-emerald-400 font-semibold border border-zinc-300 dark:border-zinc-700/80 shadow-sm'
+                  : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-200/60 dark:hover:bg-zinc-900/60'
               }`}
             >
               {tab.label}
@@ -50,13 +50,13 @@ export function CodeTabs({ tabs, defaultTab = 0 }: CodeTabsProps) {
 
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono text-zinc-400 hover:text-emerald-400 hover:bg-zinc-800/80 rounded transition-all"
+          className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono text-zinc-500 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-zinc-200/70 dark:hover:bg-zinc-800/80 rounded transition-all"
           aria-label="Copy code snippet"
         >
           {copied ? (
             <>
-              <Check className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="text-emerald-400">Copied</span>
+              <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <span className="text-emerald-600 dark:text-emerald-400">Copied</span>
             </>
           ) : (
             <>
@@ -74,7 +74,7 @@ export function CodeTabs({ tabs, defaultTab = 0 }: CodeTabsProps) {
           dangerouslySetInnerHTML={{ __html: currentTab.highlightedHtml }}
         />
       ) : (
-        <pre className="p-4 text-xs md:text-sm font-mono text-zinc-100 overflow-x-auto leading-relaxed">
+        <pre className="p-4 text-xs md:text-sm font-mono text-zinc-800 dark:text-zinc-100 overflow-x-auto leading-relaxed">
           <code>{currentTab?.code}</code>
         </pre>
       )}
