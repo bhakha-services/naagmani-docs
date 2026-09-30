@@ -14,7 +14,7 @@ Naagmani provides first-class support for DeepSeek's open reasoning and general-
 ## Setup in Developer Portal
 
 1. Obtain your API Key from the DeepSeek Open Platform.
-2. Store the key in [http://localhost:3000/credentials](http://localhost:3000/credentials).
+2. Store the key in [{{DEVELOPER_PORTAL_URL}}/credentials]({{DEVELOPER_PORTAL_URL}}/credentials).
 3. Set your routing policy to prefer `deepseek-chat` as primary.
 
 ---

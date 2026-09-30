@@ -6,7 +6,7 @@ Adding pre-built capabilities to your Naagmani project takes just one click or a
 
 ## 1. Installation via Developer Portal
 
-1. Navigate to **Plugins & Marketplace**: [http://localhost:3000/plugins](http://localhost:3000/plugins)
+1. Navigate to **Plugins & Marketplace**: [{{DEVELOPER_PORTAL_URL}}/plugins]({{DEVELOPER_PORTAL_URL}}/plugins)
 2. Locate your desired plugin (e.g., *PII Redaction Guardrail*).
 3. Click **Install to Project**.
 4. Select the target Environment (`production` or `test`).

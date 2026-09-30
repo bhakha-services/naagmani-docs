@@ -20,7 +20,7 @@ Generate high-dimensional vector representations for semantic search, RAG retrie
 ## Example cURL Request
 
 ```bash
-curl -X POST "http://localhost:8080/v1/embeddings" \
+curl -X POST "{{GATEWAY_URL}}/v1/embeddings" \
   -H "Authorization: Bearer nsk_live_YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{

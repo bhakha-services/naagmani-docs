@@ -2,7 +2,7 @@
 
 The **Customer Members** directory allows you to manage end-user and application member identities for token usage attribution, per-member spending limits, and FinOps governance.
 
-- **Portal Page**: [http://localhost:3000/members](http://localhost:3000/members)
+- **Portal Page**: [{{DEVELOPER_PORTAL_URL}}/members]({{DEVELOPER_PORTAL_URL}}/members)
 
 ```mermaid
 graph TD
@@ -21,7 +21,7 @@ graph TD
 
 ## Setting Member-Specific Spending Limits
 
-1. Navigate to the **Customer Members** page at [http://localhost:3000/members](http://localhost:3000/members).
+1. Navigate to the **Customer Members** page at [{{DEVELOPER_PORTAL_URL}}/members]({{DEVELOPER_PORTAL_URL}}/members).
 2. Click **Add Customer Member** or select an existing member.
 3. In the member modal or budget modal, enter the desired **Daily Limit Amount** or **Monthly Limit Amount** (e.g. `$200.00`).
 4. Click **Save Budget**.

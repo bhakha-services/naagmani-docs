@@ -6,7 +6,7 @@ Techniques for diagnosing crashing, timing out, or misbehaving plugins.
 
 ## 1. Inspecting Plugin Crash Logs
 When a plugin worker crashes, the Gateway logs the stack trace to the system audit trail:
-- Check **Audit Logs**: [http://localhost:3000/audit-logs](http://localhost:3000/audit-logs)
+- Check **Audit Logs**: [{{DEVELOPER_PORTAL_URL}}/audit-logs]({{DEVELOPER_PORTAL_URL}}/audit-logs)
 
 ---
 

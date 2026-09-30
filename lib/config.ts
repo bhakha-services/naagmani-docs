@@ -7,21 +7,27 @@ export const siteConfig = {
   description:
     'Official developer documentation, architectural guides, API references, CLI manuals, and Plugin SDK guides for Naagmani — The AI Runtime for your applications.',
   
-  // Production URL fallback ensures crawlers, canonical links, and OG tags are always valid production URLs
+  // Environment-driven URLs with production fallbacks ensuring no localhost leaks to users
   url: (
     process.env.NEXT_PUBLIC_SITE_URL ||
     process.env.NEXT_PUBLIC_DOCS_URL ||
-    (isProd ? 'https://docs.naagmani.app' : 'http://localhost:3001')
+    'https://docs.naagmani.ai'
   ).replace(/\/$/, ''),
 
   apiUrl: (
     process.env.NEXT_PUBLIC_API_BASE_URL ||
-    (isProd ? 'https://api.naagmani.app' : 'http://localhost:8081')
+    'https://api.naagmani.ai'
+  ).replace(/\/$/, ''),
+
+  gatewayUrl: (
+    process.env.NEXT_PUBLIC_GATEWAY_URL ||
+    process.env.NEXT_PUBLIC_API_BASE_URL ||
+    'https://gateway.naagmani.ai'
   ).replace(/\/$/, ''),
 
   developerPortalUrl: (
     process.env.NEXT_PUBLIC_DEVELOPER_PORTAL_URL ||
-    (isProd ? 'https://developer.naagmani.app' : 'http://localhost:3000')
+    'https://cloud.naagmani.ai'
   ).replace(/\/$/, ''),
 
   githubUrl:

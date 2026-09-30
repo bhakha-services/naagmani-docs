@@ -17,7 +17,7 @@ When a client sends a standard OpenAI JSON body with `model: "claude-3-5-sonnet-
 ## Credential Setup
 
 Add your `sk-ant-...` key in the Portal:
-- **Credential Pools**: [http://localhost:3000/credentials](http://localhost:3000/credentials)
+- **Credential Pools**: [{{DEVELOPER_PORTAL_URL}}/credentials]({{DEVELOPER_PORTAL_URL}}/credentials)
 
 ---
 

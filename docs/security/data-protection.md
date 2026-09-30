@@ -16,7 +16,7 @@ Naagmani does **not** persist request prompt contents or generated completions t
 - Redact database connection strings, JWT tokens, and private RSA keys before external model transmission.
 
 Configure guardrails in the Portal:
-- **AI Guardrails**: [http://localhost:3000/guardrails](http://localhost:3000/guardrails)
+- **AI Guardrails**: [{{DEVELOPER_PORTAL_URL}}/guardrails]({{DEVELOPER_PORTAL_URL}}/guardrails)
 
 ---
 

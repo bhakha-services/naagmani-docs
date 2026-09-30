@@ -6,7 +6,7 @@ To authenticate requests against the Naagmani Gateway Data Plane, your applicati
 
 ## Option A: Via the Developer Portal
 
-1. Log into the **Naagmani Developer Portal** at [http://localhost:3000](http://localhost:3000) or [https://developer.naagmani.app](https://developer.naagmani.app).
+1. Log into the **Naagmani Developer Portal** at [{{DEVELOPER_PORTAL_URL}}]({{DEVELOPER_PORTAL_URL}}) or [{{DEVELOPER_PORTAL_URL}}]({{DEVELOPER_PORTAL_URL}}).
 2. In the left navigation sidebar, select your active **Project**.
 3. Click on **API Keys** in the project menu.
 4. Click **+ Create API Key**.

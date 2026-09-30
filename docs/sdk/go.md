@@ -29,7 +29,7 @@ import (
 func main() {
 	client := naagmani.NewClient(
 		naagmani.WithAPIKey("nst_live_9b2d8819..."),
-		naagmani.WithBaseURL("http://localhost:8080/v1"), // or https://gateway.naagmani.app/v1
+		naagmani.WithBaseURL("{{GATEWAY_URL}}/v1"),
 	)
 
 	req := &chat.CompletionRequest{

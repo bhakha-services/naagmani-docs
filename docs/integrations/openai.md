@@ -6,7 +6,7 @@ Naagmani provides seamless, native proxying and intelligent fallback routing for
 
 ## Configuration
 
-1. Open **Credential Pools** in the Developer Portal: [http://localhost:3000/credentials](http://localhost:3000/credentials)
+1. Open **Credential Pools** in the Developer Portal: [{{DEVELOPER_PORTAL_URL}}/credentials]({{DEVELOPER_PORTAL_URL}}/credentials)
 2. Click **Add Provider Credential**.
 3. Select **OpenAI**, input your `sk-proj-...` API key, and configure rate limits or priority weighting.
 
@@ -34,7 +34,7 @@ Naagmani provides seamless, native proxying and intelligent fallback routing for
 ## Example Invocations
 
 ```bash
-curl -X POST http://localhost:8080/v1/chat/completions \
+curl -X POST {{GATEWAY_URL}}/v1/chat/completions \
   -H "Authorization: Bearer nst_live_9b2d8819..." \
   -H "Content-Type: application/json" \
   -d '{

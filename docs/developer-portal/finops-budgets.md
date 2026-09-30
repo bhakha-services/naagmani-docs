@@ -2,7 +2,7 @@
 
 Monitor organization-wide spending velocity, enforce multi-tier budget caps, and analyze cost breakdowns across projects and members.
 
-- **Portal Page**: [http://localhost:3000/usage](http://localhost:3000/usage)
+- **Portal Page**: [{{DEVELOPER_PORTAL_URL}}/usage]({{DEVELOPER_PORTAL_URL}}/usage)
 
 ```mermaid
 graph TD
@@ -16,7 +16,7 @@ graph TD
 
 ## Setting Organization & Project Budgets
 
-1. Navigate to the **Usage & FinOps** hub at [http://localhost:3000/usage](http://localhost:3000/usage).
+1. Navigate to the **Usage & FinOps** hub at [{{DEVELOPER_PORTAL_URL}}/usage]({{DEVELOPER_PORTAL_URL}}/usage).
 2. Click **+ Create Budget Target**.
 3. Select your budget scope (**Organization**, **Project**, or **Environment**).
 4. Set your **Monthly Limit** (e.g. `$5,000.00`) and alert notification threshold (e.g. `80%`).

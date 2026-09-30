@@ -173,8 +173,8 @@ The following environment variables configure the integration in `demos/zomato-a
 
 | Variable | Description | Example |
 | :--- | :--- | :--- |
-| `NAAGMANI_OS_URL` | Naagmani OS runtime gateway endpoint | `http://localhost:8080` |
-| `NAAGMANI_CLOUD_URL` | Naagmani Cloud management API endpoint | `http://localhost:8081` |
+| `NAAGMANI_OS_URL` | Naagmani OS runtime gateway endpoint | `{{GATEWAY_URL}}` |
+| `NAAGMANI_CLOUD_URL` | Naagmani Cloud management API endpoint | `{{API_BASE_URL}}` |
 | `NAAGMANI_SERVICE_TOKEN` | Active Project Service Token (`nm_st_...`) | `nm_st_VAK8CS0FJP_0123...` |
 | `NAAGMANI_API_KEY` | Fallback standard runtime API key | `nm_live_0123...` |
 | `NAAGMANI_DEV_EMAIL` | Developer portal admin email for live token creation | `demo-developer@naagmani.local` |
@@ -217,7 +217,7 @@ npm run build
 npm start
 
 # 3. Open Web UI
-# Navigate to http://localhost:3001 and switch to the "Project Service Tokens" tab.
+# Navigate to {{DOCS_URL}} and switch to the "Project Service Tokens" tab.
 
 # 4. Run Automated Test Suite
 npm test

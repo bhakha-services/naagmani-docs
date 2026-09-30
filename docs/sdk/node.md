@@ -23,7 +23,7 @@ import { Naagmani } from '@naagmani/sdk';
 
 const naagmani = new Naagmani({
   apiKey: process.env.NAAGMANI_SERVICE_TOKEN || 'nst_live_9b2d8819...',
-  baseURL: 'http://localhost:8080/v1', // or https://gateway.naagmani.app/v1
+  baseURL: '{{GATEWAY_URL}}/v1',
 });
 
 async function run() {
@@ -71,7 +71,7 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({
   apiKey: 'nst_live_9b2d8819...',
-  baseURL: 'http://localhost:8080/v1',
+  baseURL: '{{GATEWAY_URL}}/v1',
 });
 
 // All standard methods work seamlessly with Naagmani Smart Routing!

@@ -35,7 +35,7 @@ Every Project contains:
 
 ## Managing in the Developer Portal
 
-1. Navigate to the **Projects** list at [http://localhost:3000/projects](http://localhost:3000/projects).
+1. Navigate to the **Projects** list at [{{DEVELOPER_PORTAL_URL}}/projects]({{DEVELOPER_PORTAL_URL}}/projects).
 2. Click **+ Create Project** to initialize a new workspace.
 3. Select any project to view its dedicated dashboard, service tokens, agents, and analytics.
 

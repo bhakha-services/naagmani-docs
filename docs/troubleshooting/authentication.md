@@ -15,7 +15,7 @@ All Project Service Tokens must start with the `nst_live_` prefix:
 Verify token capabilities and expiration:
 
 ```bash
-curl http://localhost:8081/v1/organizations/{org_id}/service-tokens \
+curl {{API_BASE_URL}}/v1/organizations/{org_id}/service-tokens \
   -H "Authorization: Bearer <ADMIN_SESSION_TOKEN>"
 ```
 

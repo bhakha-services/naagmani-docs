@@ -20,7 +20,7 @@ from naagmani import Naagmani
 
 client = Naagmani(
     api_key=os.getenv("NAAGMANI_API_KEY", "nst_live_9b2d8819..."),
-    base_url="http://localhost:8080/v1" # or https://gateway.naagmani.app/v1
+    base_url="{{GATEWAY_URL}}/v1"
 )
 
 response = client.chat.completions.create(
@@ -45,7 +45,7 @@ import asyncio
 from naagmani import AsyncNaagmani
 
 async def main():
-    aclient = AsyncNaagmani(api_key="nst_live_9b2d8819...", base_url="http://localhost:8080/v1")
+    aclient = AsyncNaagmani(api_key="nst_live_9b2d8819...", base_url="{{GATEWAY_URL}}/v1")
     
     stream = await aclient.chat.completions.create(
         model="claude-3-5-sonnet-20241022",
@@ -70,7 +70,7 @@ from langchain_openai import ChatOpenAI
 llm = ChatOpenAI(
     model="gpt-4o",
     openai_api_key="nst_live_9b2d8819...",
-    openai_api_base="http://localhost:8080/v1"
+    openai_api_base="{{GATEWAY_URL}}/v1"
 )
 
 response = llm.invoke("Summarize the benefits of AI API gateways.")

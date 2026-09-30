@@ -22,8 +22,8 @@ writeDoc('developer-portal/overview.md', `
 
 The **Naagmani Developer Portal** is the centralized web management console for managing AI infrastructure, credentials, routing policies, autonomous agents, and FinOps governance.
 
-- **Local Development URL**: [http://localhost:3000](http://localhost:3000)
-- **Production Hosted URL**: [https://developer.naagmani.app](https://developer.naagmani.app)
+- **Local Development URL**: [{{DEVELOPER_PORTAL_URL}}]({{DEVELOPER_PORTAL_URL}})
+- **Production Hosted URL**: [{{DEVELOPER_PORTAL_URL}}]({{DEVELOPER_PORTAL_URL}})
 
 \`\`\`mermaid
 graph TD
@@ -73,7 +73,7 @@ writeDoc('developer-portal/members.md', `
 
 Manage team members, assign Role-Based Access Control (RBAC) permissions, and enforce individual spending limits directly in the Developer Portal.
 
-- **Portal Page**: [http://localhost:3000/members](http://localhost:3000/members)
+- **Portal Page**: [{{DEVELOPER_PORTAL_URL}}/members]({{DEVELOPER_PORTAL_URL}}/members)
 
 \`\`\`mermaid
 graph LR
@@ -98,7 +98,7 @@ graph LR
 
 ## Setting Member-Specific Spending Limits
 
-1. Navigate to the **Members** page at [http://localhost:3000/members](http://localhost:3000/members).
+1. Navigate to the **Members** page at [{{DEVELOPER_PORTAL_URL}}/members]({{DEVELOPER_PORTAL_URL}}/members).
 2. Click on a member to open their **Member Detail Profile** (e.g. \`/members/mbr_123...\`).
 3. Under the **Spending Budget & Hierarchy Governance** card, click **Modify Member Budget**.
 4. Enter the desired **Monthly Limit Amount** (e.g. \`$200.00\`).
@@ -122,7 +122,7 @@ writeDoc('developer-portal/service-tokens.md', `
 
 Generate, scope, and manage machine-to-machine credentials for backend microservices and autonomous agents in the Developer Portal.
 
-- **Portal Page**: \`/projects/[projectId]/service-tokens\` (e.g. [http://localhost:3000/projects](http://localhost:3000/projects))
+- **Portal Page**: \`/projects/[projectId]/service-tokens\` (e.g. [{{DEVELOPER_PORTAL_URL}}/projects]({{DEVELOPER_PORTAL_URL}}/projects))
 
 \`\`\`mermaid
 graph TD
@@ -482,7 +482,7 @@ writeDoc('developer-portal/credential-pools.md', `
 
 Store your direct commercial provider credentials securely in the **Bring-Your-Own-Key (BYOK)** encrypted vault and configure failover pools.
 
-- **Portal Page**: [http://localhost:3000/providers](http://localhost:3000/providers)
+- **Portal Page**: [{{DEVELOPER_PORTAL_URL}}/providers]({{DEVELOPER_PORTAL_URL}}/providers)
 
 \`\`\`mermaid
 graph TD
@@ -495,7 +495,7 @@ graph TD
 
 ## Configuring Provider Credentials
 
-1. Navigate to **Providers** in the Developer Portal ([http://localhost:3000/providers](http://localhost:3000/providers)).
+1. Navigate to **Providers** in the Developer Portal ([{{DEVELOPER_PORTAL_URL}}/providers]({{DEVELOPER_PORTAL_URL}}/providers)).
 2. Click on the desired provider (e.g. **OpenAI**, **Anthropic**, **Google**, or **DeepSeek**).
 3. Enter your provider API Key and optional Organization ID.
 4. Click **Connect Provider**.
@@ -552,7 +552,7 @@ writeDoc('developer-portal/attempts.md', `
 
 Inspect granular upstream dispatch attempts, Time to First Token (TTFT), token breakdowns, and step-by-step failover cascade ladders.
 
-- **Portal Page**: [http://localhost:3000/attempts](http://localhost:3000/attempts)
+- **Portal Page**: [{{DEVELOPER_PORTAL_URL}}/attempts]({{DEVELOPER_PORTAL_URL}}/attempts)
 
 \`\`\`mermaid
 graph LR
@@ -592,7 +592,7 @@ writeDoc('developer-portal/finops-budgets.md', `
 
 Monitor organization-wide spending velocity, enforce multi-tier budget caps, and analyze cost breakdowns across projects and members.
 
-- **Portal Page**: [http://localhost:3000/usage](http://localhost:3000/usage)
+- **Portal Page**: [{{DEVELOPER_PORTAL_URL}}/usage]({{DEVELOPER_PORTAL_URL}}/usage)
 
 \`\`\`mermaid
 graph TD
@@ -606,7 +606,7 @@ graph TD
 
 ## Setting Organization & Project Budgets
 
-1. Navigate to the **Usage & FinOps** hub at [http://localhost:3000/usage](http://localhost:3000/usage).
+1. Navigate to the **Usage & FinOps** hub at [{{DEVELOPER_PORTAL_URL}}/usage]({{DEVELOPER_PORTAL_URL}}/usage).
 2. Click **+ Create Budget Target**.
 3. Select your budget scope (**Organization**, **Project**, or **Environment**).
 4. Set your **Monthly Limit** (e.g. \`$5,000.00\`) and alert notification threshold (e.g. \`80%\`).
@@ -626,7 +626,7 @@ writeDoc('developer-portal/audit-logs.md', `
 
 Naagmani maintains an immutable compliance audit trail capturing every administrative event, credential modification, and security policy evaluation.
 
-- **Portal Page**: [http://localhost:3000/audit-logs](http://localhost:3000/audit-logs)
+- **Portal Page**: [{{DEVELOPER_PORTAL_URL}}/audit-logs]({{DEVELOPER_PORTAL_URL}}/audit-logs)
 
 ---
 

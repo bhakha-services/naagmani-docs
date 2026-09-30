@@ -50,8 +50,8 @@ graph TD
 
 Organizations can be managed directly in the **Developer Portal**:
 - **Switch Organizations**: Use the top-left Organization dropdown selector in the navigation bar.
-- **Organization Settings**: Navigate to [http://localhost:3000/settings](http://localhost:3000/settings) to update organization name, billing details, and view subscription tier.
-- **Members Directory**: Manage engineers and permissions at [http://localhost:3000/members](http://localhost:3000/members).
+- **Organization Settings**: Navigate to [{{DEVELOPER_PORTAL_URL}}/settings]({{DEVELOPER_PORTAL_URL}}/settings) to update organization name, billing details, and view subscription tier.
+- **Members Directory**: Manage engineers and permissions at [{{DEVELOPER_PORTAL_URL}}/members]({{DEVELOPER_PORTAL_URL}}/members).
 
 ---
 
@@ -101,7 +101,7 @@ Every Project contains:
 
 ## Managing in the Developer Portal
 
-1. Navigate to the **Projects** list at [http://localhost:3000/projects](http://localhost:3000/projects).
+1. Navigate to the **Projects** list at [{{DEVELOPER_PORTAL_URL}}/projects]({{DEVELOPER_PORTAL_URL}}/projects).
 2. Click **+ Create Project** to initialize a new workspace.
 3. Select any project to view its dedicated dashboard, service tokens, agents, and analytics.
 
@@ -265,7 +265,7 @@ If a token is compromised, clicking **Revoke** in the Developer Portal immediate
 Pass your token in the standard HTTP \`Authorization\` header:
 
 \`\`\`bash
-curl -X POST "http://localhost:8080/v1/chat/completions" \\
+curl -X POST "{{GATEWAY_URL}}/v1/chat/completions" \\
   -H "Authorization: Bearer nst_live_9f8a2b1c3d4e..." \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -438,8 +438,8 @@ graph LR
 
 ## Inspecting Telemetry
 
-- **Usage Dashboard**: View aggregate trends, charts, and project breakdowns at [http://localhost:3000/usage](http://localhost:3000/usage).
-- **Attempts Table**: Inspect granular per-request dispatch logs at [http://localhost:3000/attempts](http://localhost:3000/attempts).
+- **Usage Dashboard**: View aggregate trends, charts, and project breakdowns at [{{DEVELOPER_PORTAL_URL}}/usage]({{DEVELOPER_PORTAL_URL}}/usage).
+- **Attempts Table**: Inspect granular per-request dispatch logs at [{{DEVELOPER_PORTAL_URL}}/attempts]({{DEVELOPER_PORTAL_URL}}/attempts).
 
 ---
 

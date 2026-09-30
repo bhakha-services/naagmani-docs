@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { replaceEnvUrls } from './env-urls';
 
 export interface DocHeading {
   id: string;
@@ -64,7 +65,8 @@ export async function getDocBySlug(slug: string[]): Promise<DocPage | null> {
   }
 
   const rawFile = fs.readFileSync(fullPath, 'utf-8');
-  const { data: frontmatter, content } = matter(rawFile);
+  const { data: frontmatter, content: rawContent } = matter(rawFile);
+  const content = replaceEnvUrls(rawContent);
 
   // Extract headings
   const headings: DocHeading[] = [];
@@ -78,7 +80,7 @@ export async function getDocBySlug(slug: string[]): Promise<DocPage | null> {
   }
 
   // Determine title
-  let title = frontmatter.title;
+  let title = frontmatter.title ? replaceEnvUrls(frontmatter.title) : undefined;
   if (!title) {
     const h1Match = /^#\s+(.+)$/m.exec(content);
     if (h1Match) {
@@ -92,7 +94,7 @@ export async function getDocBySlug(slug: string[]): Promise<DocPage | null> {
   }
 
   // Determine description
-  let description = frontmatter.description;
+  let description = frontmatter.description ? replaceEnvUrls(frontmatter.description) : undefined;
   if (!description) {
     // Look for first paragraph after H1
     const lines = content.split('\n');
@@ -151,17 +153,18 @@ export function getAllDocs(): DocPage[] {
     const fullPath = path.join(docsDirectory, relativePath);
     if (fs.existsSync(fullPath)) {
       const rawFile = fs.readFileSync(fullPath, 'utf-8');
-      const { data: frontmatter, content } = matter(rawFile);
+      const { data: frontmatter, content: rawContent } = matter(rawFile);
+      const content = replaceEnvUrls(rawContent);
       const h1Match = /^#\s+(.+)$/m.exec(content);
       const title =
-        frontmatter.title ||
+        (frontmatter.title ? replaceEnvUrls(frontmatter.title) : undefined) ||
         (h1Match ? h1Match[1].trim() : slug[slug.length - 1]);
       
       docs.push({
         slug,
         slugPath: `/docs/${slug.join('/')}`,
         title,
-        description: frontmatter.description || `Documentation for ${title}`,
+        description: (frontmatter.description ? replaceEnvUrls(frontmatter.description) : undefined) || `Documentation for ${title}`,
         content,
         headings: [],
         category: slug[0]?.toUpperCase(),

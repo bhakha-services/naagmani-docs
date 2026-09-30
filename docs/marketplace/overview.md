@@ -16,7 +16,7 @@ The **Naagmani Marketplace** is the central discovery catalog for pre-built plug
 ## Discover Plugins in Portal
 
 Browse the catalog directly in the Developer Portal:
-- **Marketplace**: [http://localhost:3000/plugins](http://localhost:3000/plugins)
+- **Marketplace**: [{{DEVELOPER_PORTAL_URL}}/plugins]({{DEVELOPER_PORTAL_URL}}/plugins)
 
 ---
 

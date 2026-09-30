@@ -24,7 +24,7 @@ Execute standard or streaming chat completions across any foundational model wit
 ## Example cURL Request
 
 ```bash
-curl -X POST "http://localhost:8080/v1/chat/completions" \
+curl -X POST "{{GATEWAY_URL}}/v1/chat/completions" \
   -H "Authorization: Bearer nsk_live_YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{

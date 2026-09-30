@@ -23,8 +23,8 @@ graph LR
 
 ## Inspecting Telemetry
 
-- **Usage Dashboard**: View aggregate trends, charts, and project breakdowns at [http://localhost:3000/usage](http://localhost:3000/usage).
-- **Attempts Table**: Inspect granular per-request dispatch logs at [http://localhost:3000/attempts](http://localhost:3000/attempts).
+- **Usage Dashboard**: View aggregate trends, charts, and project breakdowns at [{{DEVELOPER_PORTAL_URL}}/usage]({{DEVELOPER_PORTAL_URL}}/usage).
+- **Attempts Table**: Inspect granular per-request dispatch logs at [{{DEVELOPER_PORTAL_URL}}/attempts]({{DEVELOPER_PORTAL_URL}}/attempts).
 
 ---
 

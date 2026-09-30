@@ -13,7 +13,7 @@ naagmani auth login
 # Output:
 # Attempting to automatically open the SSO authorization page in your default browser...
 # If the browser does not open, visit:
-# https://developer.naagmani.app/cli-auth?code=ABCD-1234
+# {{DEVELOPER_PORTAL_URL}}/cli-auth?code=ABCD-1234
 #
 # Waiting for authorization... [OK]
 # Successfully authenticated as alice@company.com (Org: org_ad094812-07ef)
@@ -28,7 +28,7 @@ For CI/CD pipelines and automated environments, provide a Project Service Token 
 ```bash
 export NAAGMANI_API_KEY="nst_live_9b2d8819..."
 export NAAGMANI_ORG_ID="org_ad094812-07ef-4db5-b2ba-6585bd9df55e"
-export NAAGMANI_API_URL="http://localhost:8081" # or https://api.naagmani.app
+export NAAGMANI_API_URL="{{API_BASE_URL}}"
 
 # Verify context
 naagmani auth status

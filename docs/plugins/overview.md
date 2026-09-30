@@ -73,7 +73,7 @@ All hook payloads (request buffers, response streams, attempt telemetry) are exc
 ## Developer Portal Management
 
 You can inspect, activate, configure, and monitor plugins directly from the Developer Portal:
-- Navigate to **Plugins & Marketplace**: [http://localhost:3000/plugins](http://localhost:3000/plugins)
+- Navigate to **Plugins & Marketplace**: [{{DEVELOPER_PORTAL_URL}}/plugins]({{DEVELOPER_PORTAL_URL}}/plugins)
 
 ---
 

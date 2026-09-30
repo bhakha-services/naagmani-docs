@@ -1,5 +1,8 @@
 import { Marked } from 'marked';
 import { createHighlighter, type Highlighter } from 'shiki';
+import { replaceEnvUrls } from './env-urls';
+
+export { replaceEnvUrls } from './env-urls';
 
 function slugify(text: string): string {
   return text
@@ -98,6 +101,7 @@ export async function highlightCodeSnippet(code: string, lang: string): Promise<
 }
 
 export async function compileMarkdown(content: string, currentSlug: string[]): Promise<string> {
+  const processedContent = replaceEnvUrls(content);
   const highlighter = await getHighlighter();
   const marked = new Marked();
 

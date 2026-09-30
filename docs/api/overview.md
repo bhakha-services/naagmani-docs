@@ -11,8 +11,8 @@ The Naagmani API suite is split into two primary surfaces:
 
 | Surface | Local Environment | Production Hosted |
 | :--- | :--- | :--- |
-| **Gateway Data Plane** | `http://localhost:8080` | `https://gateway.naagmani.app` |
-| **Control Plane API** | `http://localhost:8081` | `https://api.naagmani.app` |
+| **Gateway Data Plane** | `{{GATEWAY_URL}}` | `https://gateway.naagmani.app` |
+| **Control Plane API** | `{{API_BASE_URL}}` | `https://api.naagmani.app` |
 
 ---
 

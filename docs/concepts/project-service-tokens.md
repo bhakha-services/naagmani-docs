@@ -64,7 +64,7 @@ If a token is compromised, clicking **Revoke** in the Developer Portal immediate
 Pass your token in the standard HTTP `Authorization` header:
 
 ```bash
-curl -X POST "http://localhost:8080/v1/chat/completions" \
+curl -X POST "{{GATEWAY_URL}}/v1/chat/completions" \
   -H "Authorization: Bearer nst_live_9f8a2b1c3d4e..." \
   -H "Content-Type: application/json" \
   -d '{

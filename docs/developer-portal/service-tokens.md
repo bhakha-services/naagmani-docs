@@ -2,7 +2,7 @@
 
 Generate, scope, and manage machine-to-machine credentials for backend microservices and autonomous agents in the Developer Portal.
 
-- **Portal Page**: `/projects/[projectId]/service-tokens` (e.g. [http://localhost:3000/projects](http://localhost:3000/projects))
+- **Portal Page**: `/projects/[projectId]/service-tokens` (e.g. [{{DEVELOPER_PORTAL_URL}}/projects]({{DEVELOPER_PORTAL_URL}}/projects))
 
 ```mermaid
 graph TD

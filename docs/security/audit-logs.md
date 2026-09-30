@@ -16,7 +16,7 @@ Every critical action performed across the Naagmani ecosystem is immutably logge
 ## Developer Portal Audit Log Viewer
 
 Inspect historical audit records with full actor attribution:
-- **Audit Logs**: [http://localhost:3000/audit-logs](http://localhost:3000/audit-logs)
+- **Audit Logs**: [{{DEVELOPER_PORTAL_URL}}/audit-logs]({{DEVELOPER_PORTAL_URL}}/audit-logs)
 
 ---
 

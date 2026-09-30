@@ -9,7 +9,7 @@ Now that you have an API key, let's execute your first AI completion through Naa
 ### 1. cURL
 
 ```bash
-curl -X POST "http://localhost:8080/v1/chat/completions" \
+curl -X POST "{{GATEWAY_URL}}/v1/chat/completions" \
   -H "Authorization: Bearer nsk_live_YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -31,7 +31,7 @@ import OpenAI from "openai";
 
 const client = new OpenAI({
   apiKey: process.env.NAAGMANI_API_KEY || "nsk_live_YOUR_API_KEY",
-  baseURL: "http://localhost:8080/v1", // Point directly to Naagmani Gateway
+  baseURL: "{{GATEWAY_URL}}/v1", // Point directly to Naagmani Gateway
 });
 
 async function main() {
@@ -60,7 +60,7 @@ import os
 
 client = OpenAI(
     api_key=os.environ.get("NAAGMANI_API_KEY", "nsk_live_YOUR_API_KEY"),
-    base_url="http://localhost:8080/v1"  # Point directly to Naagmani Gateway
+    base_url="{{GATEWAY_URL}}/v1"  # Point directly to Naagmani Gateway
 )
 
 response = client.chat.completions.create(
@@ -100,7 +100,7 @@ func main() {
 	}
 	body, _ := json.Marshal(payload)
 
-	req, _ := http.NewRequest("POST", "http://localhost:8080/v1/chat/completions", bytes.NewBuffer(body))
+	req, _ := http.NewRequest("POST", "{{GATEWAY_URL}}/v1/chat/completions", bytes.NewBuffer(body))
 	req.Header.Set("Authorization", "Bearer "+os.Getenv("NAAGMANI_API_KEY"))
 	req.Header.Set("Content-Type", "application/json")
 

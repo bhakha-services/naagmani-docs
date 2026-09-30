@@ -2,7 +2,7 @@
 
 Internal Developer Portal Users are human team members and administrators who have access to log into the Naagmani Developer Portal and manage an organization's resources.
 
-- **Portal Page**: [http://localhost:3000/users](http://localhost:3000/users)
+- **Portal Page**: [{{DEVELOPER_PORTAL_URL}}/users]({{DEVELOPER_PORTAL_URL}}/users)
 
 ```mermaid
 graph TD
@@ -26,7 +26,7 @@ graph TD
 
 ## Inviting & Managing Portal Users
 
-1. Navigate to the **Portal Users** page at [http://localhost:3000/users](http://localhost:3000/users).
+1. Navigate to the **Portal Users** page at [{{DEVELOPER_PORTAL_URL}}/users]({{DEVELOPER_PORTAL_URL}}/users).
 2. Click **Invite Portal User**.
 3. Enter the email address of the team member.
 4. Select the desired role (`Owner`, `Admin`, `Member`).

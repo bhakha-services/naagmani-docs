@@ -2,8 +2,8 @@
 
 The **Naagmani Developer Portal** is the centralized web management console for managing AI infrastructure, credentials, routing policies, autonomous agents, and FinOps governance.
 
-- **Local Development URL**: [http://localhost:3000](http://localhost:3000)
-- **Production Hosted URL**: [https://developer.naagmani.app](https://developer.naagmani.app)
+- **Local Development URL**: [{{DEVELOPER_PORTAL_URL}}]({{DEVELOPER_PORTAL_URL}})
+- **Production Hosted URL**: [{{DEVELOPER_PORTAL_URL}}]({{DEVELOPER_PORTAL_URL}})
 
 ```mermaid
 graph TD

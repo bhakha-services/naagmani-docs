@@ -42,7 +42,7 @@ For native socket and RPC plugins, Naagmani dispatches a lightweight `ping` even
 
 ## 3. Hot Reloading Configuration
 
-When an administrator updates plugin settings in the Developer Portal ([http://localhost:3000/plugins](http://localhost:3000/plugins)), Naagmani performs a **hot configuration push**:
+When an administrator updates plugin settings in the Developer Portal ([{{DEVELOPER_PORTAL_URL}}/plugins]({{DEVELOPER_PORTAL_URL}}/plugins)), Naagmani performs a **hot configuration push**:
 
 ```json
 {

@@ -32,10 +32,10 @@ graph TD
 
 Organizations can be managed directly in the **Developer Portal**:
 - **Switch Organizations**: Use the top-left Organization dropdown selector in the navigation bar.
-- **Organization Settings**: Navigate to [http://localhost:3000/organizations](http://localhost:3000/organizations) to update organization name and view subscription tier.
-- **Portal Users**: Manage team access and roles at [http://localhost:3000/users](http://localhost:3000/users).
-- **Roles & Permissions**: Create and configure custom organization roles at [http://localhost:3000/roles](http://localhost:3000/roles).
-- **Customer Members**: Manage customer attribution and spending caps at [http://localhost:3000/members](http://localhost:3000/members).
+- **Organization Settings**: Navigate to [{{DEVELOPER_PORTAL_URL}}/organizations]({{DEVELOPER_PORTAL_URL}}/organizations) to update organization name and view subscription tier.
+- **Portal Users**: Manage team access and roles at [{{DEVELOPER_PORTAL_URL}}/users]({{DEVELOPER_PORTAL_URL}}/users).
+- **Roles & Permissions**: Create and configure custom organization roles at [{{DEVELOPER_PORTAL_URL}}/roles]({{DEVELOPER_PORTAL_URL}}/roles).
+- **Customer Members**: Manage customer attribution and spending caps at [{{DEVELOPER_PORTAL_URL}}/members]({{DEVELOPER_PORTAL_URL}}/members).
 
 ---
 

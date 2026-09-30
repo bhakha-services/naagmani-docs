@@ -31,7 +31,7 @@ naagmani platform register \
 | Option | Default | Description |
 |---|---|---|
 | `--dir` | `.` | Path to installation directory |
-| `--cloud-url` | `http://localhost:8081` | Naagmani Cloud API endpoint |
+| `--cloud-url` | `{{API_BASE_URL}}` | Naagmani Cloud API endpoint |
 | `--org-id` | Prompted | Target Organization ID |
 | `--token` | `""` | Scoped Service Token or API Key |
 | `--edition` | `free` | Desired commercial tier (`free`, `pro`, `enterprise`) |

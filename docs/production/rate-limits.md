@@ -13,7 +13,7 @@ Protect upstream provider quotas and prevent noisy-neighbor congestion across in
 
 ## Configuration
 
-Set rate limits directly per credential in **Credential Pools** ([http://localhost:3000/credentials](http://localhost:3000/credentials)) or per token in **Project Service Tokens** ([http://localhost:3000/service-tokens](http://localhost:3000/service-tokens)).
+Set rate limits directly per credential in [**Credential Pools**]({{DEVELOPER_PORTAL_URL}}/credentials) or per token in [**Project Service Tokens**]({{DEVELOPER_PORTAL_URL}}/service-tokens).
 
 ---
 

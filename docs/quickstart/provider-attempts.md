@@ -27,7 +27,7 @@ graph TD
 
 You can inspect provider attempt telemetry interactively:
 
-1. Open the **Naagmani Developer Portal** at [http://localhost:3000/attempts](http://localhost:3000/attempts).
+1. Open the **Naagmani Developer Portal** at [{{DEVELOPER_PORTAL_URL}}/attempts]({{DEVELOPER_PORTAL_URL}}/attempts).
 2. Browse the **Provider Attempt Accounting** table.
 3. Click on any row or click **Cascade Chain** to slide open the **Execution Trace Inspector Drawer**.
 4. Review the step-by-step ladder showing which provider failed, the exact error reason, and the final successful response.
@@ -38,11 +38,11 @@ You can inspect provider attempt telemetry interactively:
 
 ```bash
 # List all recent provider attempts
-curl -X GET "http://localhost:8081/v1/organizations/YOUR_ORG_ID/attempts?per_page=20" \
+curl -X GET "{{API_BASE_URL}}/v1/organizations/YOUR_ORG_ID/attempts?per_page=20" \
   -H "Authorization: Bearer YOUR_SESSION_TOKEN"
 
 # Query the full cascade chain for a specific request ID
-curl -X GET "http://localhost:8081/v1/organizations/YOUR_ORG_ID/requests/req_01J8F0A2B3C4D5E6F7G8H9J0K1/attempts" \
+curl -X GET "{{API_BASE_URL}}/v1/organizations/YOUR_ORG_ID/requests/req_01J8F0A2B3C4D5E6F7G8H9J0K1/attempts" \
   -H "Authorization: Bearer YOUR_SESSION_TOKEN"
 ```
 

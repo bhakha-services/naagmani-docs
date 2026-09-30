@@ -15,7 +15,7 @@ In addition to managed cloud providers, Naagmani allows you to route traffic to 
 
 ## Configuring a Custom Endpoint
 
-In **Credential Pools** ([http://localhost:3000/credentials](http://localhost:3000/credentials)), select **Custom / Self-Hosted**:
+In [**Credential Pools**]({{DEVELOPER_PORTAL_URL}}/credentials), select **Custom / Self-Hosted**:
 
 ```json
 {

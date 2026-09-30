@@ -80,7 +80,7 @@ All hook payloads (request buffers, response streams, attempt telemetry) are exc
 ## Developer Portal Management
 
 You can inspect, activate, configure, and monitor plugins directly from the Developer Portal:
-- Navigate to **Plugins & Marketplace**: [http://localhost:3000/plugins](http://localhost:3000/plugins)
+- Navigate to **Plugins & Marketplace**: [{{DEVELOPER_PORTAL_URL}}/plugins]({{DEVELOPER_PORTAL_URL}}/plugins)
 
 ---
 
@@ -427,7 +427,7 @@ For native socket and RPC plugins, Naagmani dispatches a lightweight \`ping\` ev
 
 ## 3. Hot Reloading Configuration
 
-When an administrator updates plugin settings in the Developer Portal ([http://localhost:3000/plugins](http://localhost:3000/plugins)), Naagmani performs a **hot configuration push**:
+When an administrator updates plugin settings in the Developer Portal ([{{DEVELOPER_PORTAL_URL}}/plugins]({{DEVELOPER_PORTAL_URL}}/plugins)), Naagmani performs a **hot configuration push**:
 
 \`\`\`json
 {
@@ -759,7 +759,7 @@ import (
 func main() {
 	client := naagmani.NewClient(
 		naagmani.WithAPIKey("nst_live_9b2d8819..."),
-		naagmani.WithBaseURL("http://localhost:8080/v1"), // or https://gateway.naagmani.app/v1
+		naagmani.WithBaseURL("{{GATEWAY_URL}}/v1"),
 	)
 
 	req := &chat.CompletionRequest{
@@ -853,7 +853,7 @@ import { Naagmani } from '@naagmani/sdk';
 
 const naagmani = new Naagmani({
   apiKey: process.env.NAAGMANI_SERVICE_TOKEN || 'nst_live_9b2d8819...',
-  baseURL: 'http://localhost:8080/v1', // or https://gateway.naagmani.app/v1
+  baseURL: '{{GATEWAY_URL}}/v1',
 });
 
 async function run() {
@@ -901,7 +901,7 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({
   apiKey: 'nst_live_9b2d8819...',
-  baseURL: 'http://localhost:8080/v1',
+  baseURL: '{{GATEWAY_URL}}/v1',
 });
 
 // All standard methods work seamlessly with Naagmani Smart Routing!
@@ -941,7 +941,7 @@ from naagmani import Naagmani
 
 client = Naagmani(
     api_key=os.getenv("NAAGMANI_API_KEY", "nst_live_9b2d8819..."),
-    base_url="http://localhost:8080/v1" # or https://gateway.naagmani.app/v1
+    base_url="{{GATEWAY_URL}}/v1"
 )
 
 response = client.chat.completions.create(
@@ -966,7 +966,7 @@ import asyncio
 from naagmani import AsyncNaagmani
 
 async def main():
-    aclient = AsyncNaagmani(api_key="nst_live_9b2d8819...", base_url="http://localhost:8080/v1")
+    aclient = AsyncNaagmani(api_key="nst_live_9b2d8819...", base_url="{{GATEWAY_URL}}/v1")
     
     stream = await aclient.chat.completions.create(
         model="claude-3-5-sonnet-20241022",
@@ -991,7 +991,7 @@ from langchain_openai import ChatOpenAI
 llm = ChatOpenAI(
     model="gpt-4o",
     openai_api_key="nst_live_9b2d8819...",
-    openai_api_base="http://localhost:8080/v1"
+    openai_api_base="{{GATEWAY_URL}}/v1"
 )
 
 response = llm.invoke("Summarize the benefits of AI API gateways.")
@@ -1090,7 +1090,7 @@ naagmani auth login
 # Output:
 # Attempting to automatically open the SSO authorization page in your default browser...
 # If the browser does not open, visit:
-# https://developer.naagmani.app/cli-auth?code=ABCD-1234
+# {{DEVELOPER_PORTAL_URL}}/cli-auth?code=ABCD-1234
 #
 # Waiting for authorization... [OK]
 # Successfully authenticated as alice@company.com (Org: org_ad094812-07ef)
@@ -1105,7 +1105,7 @@ For CI/CD pipelines and automated environments, provide a Project Service Token 
 \`\`\`bash
 export NAAGMANI_API_KEY="nst_live_9b2d8819..."
 export NAAGMANI_ORG_ID="org_ad094812-07ef-4db5-b2ba-6585bd9df55e"
-export NAAGMANI_API_URL="http://localhost:8081" # or https://api.naagmani.app
+export NAAGMANI_API_URL="{{API_BASE_URL}}"
 
 # Verify context
 naagmani auth status

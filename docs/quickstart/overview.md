@@ -12,7 +12,7 @@ graph LR
 ## Prerequisites
 
 Before starting, ensure you have:
-1. Access to the **Naagmani Developer Portal** (Local: `http://localhost:3000`, Hosted: `https://developer.naagmani.app`).
+1. Access to the **Naagmani Developer Portal** ([{{DEVELOPER_PORTAL_URL}}]({{DEVELOPER_PORTAL_URL}})).
 2. An active Organization and Project.
 3. `curl`, Node.js (`>= 18`), Python (`>= 3.9`), or Go (`>= 1.21`) installed.
 

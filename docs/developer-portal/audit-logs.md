@@ -2,7 +2,7 @@
 
 Naagmani maintains an immutable compliance audit trail capturing every administrative event, credential modification, and security policy evaluation.
 
-- **Portal Page**: [http://localhost:3000/audit-logs](http://localhost:3000/audit-logs)
+- **Portal Page**: [{{DEVELOPER_PORTAL_URL}}/audit-logs]({{DEVELOPER_PORTAL_URL}}/audit-logs)
 
 ---
 

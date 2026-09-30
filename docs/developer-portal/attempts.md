@@ -2,7 +2,7 @@
 
 Inspect granular upstream dispatch attempts, Time to First Token (TTFT), token breakdowns, and step-by-step failover cascade ladders.
 
-- **Portal Page**: [http://localhost:3000/attempts](http://localhost:3000/attempts)
+- **Portal Page**: [{{DEVELOPER_PORTAL_URL}}/attempts]({{DEVELOPER_PORTAL_URL}}/attempts)
 
 ```mermaid
 graph LR

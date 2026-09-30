@@ -328,7 +328,7 @@ graph LR
 ## Prerequisites
 
 Before starting, ensure you have:
-1. Access to the **Naagmani Developer Portal** (Local: \`http://localhost:3000\`, Hosted: \`https://developer.naagmani.app\`).
+1. Access to the [**Naagmani Developer Portal**]({{DEVELOPER_PORTAL_URL}}).
 2. An active Organization and Project.
 3. \`curl\`, Node.js (\`>= 18\`), Python (\`>= 3.9\`), or Go (\`>= 1.21\`) installed.
 
@@ -358,7 +358,7 @@ To authenticate requests against the Naagmani Gateway Data Plane, your applicati
 
 ## Option A: Via the Developer Portal
 
-1. Log into the **Naagmani Developer Portal** at [http://localhost:3000](http://localhost:3000) or [https://developer.naagmani.app](https://developer.naagmani.app).
+1. Log into the **Naagmani Developer Portal** at [{{DEVELOPER_PORTAL_URL}}]({{DEVELOPER_PORTAL_URL}}) or [{{DEVELOPER_PORTAL_URL}}]({{DEVELOPER_PORTAL_URL}}).
 2. In the left navigation sidebar, select your active **Project**.
 3. Click on **API Keys** in the project menu.
 4. Click **+ Create API Key**.
@@ -410,7 +410,7 @@ Now that you have an API key, let's execute your first AI completion through Naa
 ### 1. cURL
 
 \`\`\`bash
-curl -X POST "http://localhost:8080/v1/chat/completions" \\
+curl -X POST "{{GATEWAY_URL}}/v1/chat/completions" \\
   -H "Authorization: Bearer nsk_live_YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -432,7 +432,7 @@ import OpenAI from "openai";
 
 const client = new OpenAI({
   apiKey: process.env.NAAGMANI_API_KEY || "nsk_live_YOUR_API_KEY",
-  baseURL: "http://localhost:8080/v1", // Point directly to Naagmani Gateway
+  baseURL: "{{GATEWAY_URL}}/v1", // Point directly to Naagmani Gateway
 });
 
 async function main() {
@@ -461,7 +461,7 @@ import os
 
 client = OpenAI(
     api_key=os.environ.get("NAAGMANI_API_KEY", "nsk_live_YOUR_API_KEY"),
-    base_url="http://localhost:8080/v1"  # Point directly to Naagmani Gateway
+    base_url="{{GATEWAY_URL}}/v1"  # Point directly to Naagmani Gateway
 )
 
 response = client.chat.completions.create(
@@ -501,7 +501,7 @@ func main() {
 	}
 	body, _ := json.Marshal(payload)
 
-	req, _ := http.NewRequest("POST", "http://localhost:8080/v1/chat/completions", bytes.NewBuffer(body))
+	req, _ := http.NewRequest("POST", "{{GATEWAY_URL}}/v1/chat/completions", bytes.NewBuffer(body))
 	req.Header.Set("Authorization", "Bearer "+os.Getenv("NAAGMANI_API_KEY"))
 	req.Header.Set("Content-Type", "application/json")
 
@@ -590,7 +590,7 @@ import OpenAI from "openai";
 
 const client = new OpenAI({
   apiKey: process.env.NAAGMANI_API_KEY || "nsk_live_YOUR_KEY",
-  baseURL: "http://localhost:8080/v1",
+  baseURL: "{{GATEWAY_URL}}/v1",
 });
 
 async function streamDemo() {
@@ -620,7 +620,7 @@ import os
 
 client = OpenAI(
     api_key=os.environ.get("NAAGMANI_API_KEY", "nsk_live_YOUR_KEY"),
-    base_url="http://localhost:8080/v1"
+    base_url="{{GATEWAY_URL}}/v1"
 )
 
 stream = client.chat.completions.create(
@@ -685,7 +685,7 @@ graph TD
 
 You can inspect provider attempt telemetry interactively:
 
-1. Open the **Naagmani Developer Portal** at [http://localhost:3000/attempts](http://localhost:3000/attempts).
+1. Open the **Naagmani Developer Portal** at [{{DEVELOPER_PORTAL_URL}}/attempts]({{DEVELOPER_PORTAL_URL}}/attempts).
 2. Browse the **Provider Attempt Accounting** table.
 3. Click on any row or click **Cascade Chain** to slide open the **Execution Trace Inspector Drawer**.
 4. Review the step-by-step ladder showing which provider failed, the exact error reason, and the final successful response.
@@ -696,11 +696,11 @@ You can inspect provider attempt telemetry interactively:
 
 \`\`\`bash
 # List all recent provider attempts
-curl -X GET "http://localhost:8081/v1/organizations/YOUR_ORG_ID/attempts?per_page=20" \\
+curl -X GET "{{API_BASE_URL}}/v1/organizations/YOUR_ORG_ID/attempts?per_page=20" \\
   -H "Authorization: Bearer YOUR_SESSION_TOKEN"
 
 # Query the full cascade chain for a specific request ID
-curl -X GET "http://localhost:8081/v1/organizations/YOUR_ORG_ID/requests/req_01J8F0A2B3C4D5E6F7G8H9J0K1/attempts" \\
+curl -X GET "{{API_BASE_URL}}/v1/organizations/YOUR_ORG_ID/requests/req_01J8F0A2B3C4D5E6F7G8H9J0K1/attempts" \\
   -H "Authorization: Bearer YOUR_SESSION_TOKEN"
 \`\`\`
 

@@ -2,7 +2,7 @@
 
 The Naagmani Developer Portal features a dynamic, permission-based Role-Based Access Control (RBAC) foundation. Organizations can define custom roles tailored to specific operational responsibilities while utilizing platform-defined canonical permissions.
 
-- **Portal Page**: [http://localhost:3000/roles](http://localhost:3000/roles)
+- **Portal Page**: [{{DEVELOPER_PORTAL_URL}}/roles]({{DEVELOPER_PORTAL_URL}}/roles)
 
 ---
 
@@ -47,7 +47,7 @@ Canonical permissions represent granular business capabilities across all Naagma
 
 ## 3. Creating & Managing Custom Roles
 
-1. Navigate to **Roles & Permissions** at [http://localhost:3000/roles](http://localhost:3000/roles).
+1. Navigate to **Roles & Permissions** at [{{DEVELOPER_PORTAL_URL}}/roles]({{DEVELOPER_PORTAL_URL}}/roles).
 2. Click **Create Custom Role**.
 3. Specify a unique role identifier (e.g. `project_operator`), display name, and description.
 4. Select the desired canonical permissions from the categorized registry.

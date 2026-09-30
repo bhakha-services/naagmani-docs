@@ -14,7 +14,7 @@ Naagmani supports versatile routing policies tailored to specific organizational
 | **Weighted Round-Robin** | Distributes load proportionately across multiple keys or providers (e.g. 70/30 split). | Canary testing, A/B model evaluations. |
 
 Configure policies in the Portal:
-- **Routing Policies**: [http://localhost:3000/routing-policies](http://localhost:3000/routing-policies)
+- **Routing Policies**: [{{DEVELOPER_PORTAL_URL}}/routing-policies]({{DEVELOPER_PORTAL_URL}}/routing-policies)
 
 ---
 

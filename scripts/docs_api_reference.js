@@ -31,8 +31,8 @@ The Naagmani API suite is split into two primary surfaces:
 
 | Surface | Local Environment | Production Hosted |
 | :--- | :--- | :--- |
-| **Gateway Data Plane** | \`http://localhost:8080\` | \`https://gateway.naagmani.app\` |
-| **Control Plane API** | \`http://localhost:8081\` | \`https://api.naagmani.app\` |
+| **Gateway Data Plane** | \`{{GATEWAY_URL}}\` | \`https://gateway.naagmani.app\` |
+| **Control Plane API** | \`{{API_BASE_URL}}\` | \`https://api.naagmani.app\` |
 
 ---
 
@@ -124,7 +124,7 @@ Execute standard or streaming chat completions across any foundational model wit
 ## Example cURL Request
 
 \`\`\`bash
-curl -X POST "http://localhost:8080/v1/chat/completions" \\
+curl -X POST "{{GATEWAY_URL}}/v1/chat/completions" \\
   -H "Authorization: Bearer nsk_live_YOUR_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -238,7 +238,7 @@ Generate high-dimensional vector representations for semantic search, RAG retrie
 ## Example cURL Request
 
 \`\`\`bash
-curl -X POST "http://localhost:8080/v1/embeddings" \\
+curl -X POST "{{GATEWAY_URL}}/v1/embeddings" \\
   -H "Authorization: Bearer nsk_live_YOUR_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{

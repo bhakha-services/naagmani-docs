@@ -44,18 +44,18 @@ Documentation must never expose internal table schemas, unencrypted private keys
 ## Developer Portal Canonical URLs
 
 All documentation cross-references must use canonical portal paths:
-- **Overview**: [http://localhost:3000](http://localhost:3000)
-- **Members**: [http://localhost:3000/members](http://localhost:3000/members)
-- **Project Service Tokens**: [http://localhost:3000/service-tokens](http://localhost:3000/service-tokens)
-- **Agents**: [http://localhost:3000/agents](http://localhost:3000/agents)
-- **Skills**: [http://localhost:3000/skills](http://localhost:3000/skills)
-- **Tools**: [http://localhost:3000/tools](http://localhost:3000/tools)
-- **MCP Servers**: [http://localhost:3000/mcp](http://localhost:3000/mcp)
-- **Guardrails**: [http://localhost:3000/guardrails](http://localhost:3000/guardrails)
-- **Credential Pools**: [http://localhost:3000/credentials](http://localhost:3000/credentials)
-- **Routing Policies**: [http://localhost:3000/routing-policies](http://localhost:3000/routing-policies)
-- **FinOps & Budgets**: [http://localhost:3000/finops](http://localhost:3000/finops)
-- **Audit Logs**: [http://localhost:3000/audit-logs](http://localhost:3000/audit-logs)
+- **Overview**: [{{DEVELOPER_PORTAL_URL}}]({{DEVELOPER_PORTAL_URL}})
+- **Members**: [{{DEVELOPER_PORTAL_URL}}/members]({{DEVELOPER_PORTAL_URL}}/members)
+- **Project Service Tokens**: [{{DEVELOPER_PORTAL_URL}}/service-tokens]({{DEVELOPER_PORTAL_URL}}/service-tokens)
+- **Agents**: [{{DEVELOPER_PORTAL_URL}}/agents]({{DEVELOPER_PORTAL_URL}}/agents)
+- **Skills**: [{{DEVELOPER_PORTAL_URL}}/skills]({{DEVELOPER_PORTAL_URL}}/skills)
+- **Tools**: [{{DEVELOPER_PORTAL_URL}}/tools]({{DEVELOPER_PORTAL_URL}}/tools)
+- **MCP Servers**: [{{DEVELOPER_PORTAL_URL}}/mcp]({{DEVELOPER_PORTAL_URL}}/mcp)
+- **Guardrails**: [{{DEVELOPER_PORTAL_URL}}/guardrails]({{DEVELOPER_PORTAL_URL}}/guardrails)
+- **Credential Pools**: [{{DEVELOPER_PORTAL_URL}}/credentials]({{DEVELOPER_PORTAL_URL}}/credentials)
+- **Routing Policies**: [{{DEVELOPER_PORTAL_URL}}/routing-policies]({{DEVELOPER_PORTAL_URL}}/routing-policies)
+- **FinOps & Budgets**: [{{DEVELOPER_PORTAL_URL}}/finops]({{DEVELOPER_PORTAL_URL}}/finops)
+- **Audit Logs**: [{{DEVELOPER_PORTAL_URL}}/audit-logs]({{DEVELOPER_PORTAL_URL}}/audit-logs)
 
 ---
 

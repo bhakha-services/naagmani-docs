@@ -2,7 +2,7 @@
 
 Store your direct commercial provider credentials securely in the **Bring-Your-Own-Key (BYOK)** encrypted vault and configure failover pools.
 
-- **Portal Page**: [http://localhost:3000/providers](http://localhost:3000/providers)
+- **Portal Page**: [{{DEVELOPER_PORTAL_URL}}/providers]({{DEVELOPER_PORTAL_URL}}/providers)
 
 ```mermaid
 graph TD
@@ -15,7 +15,7 @@ graph TD
 
 ## Configuring Provider Credentials
 
-1. Navigate to **Providers** in the Developer Portal ([http://localhost:3000/providers](http://localhost:3000/providers)).
+1. Navigate to **Providers** in the Developer Portal ([{{DEVELOPER_PORTAL_URL}}/providers]({{DEVELOPER_PORTAL_URL}}/providers)).
 2. Click on the desired provider (e.g. **OpenAI**, **Anthropic**, **Google**, or **DeepSeek**).
 3. Enter your provider API Key and optional Organization ID.
 4. Click **Connect Provider**.

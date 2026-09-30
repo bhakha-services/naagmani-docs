@@ -15,7 +15,7 @@ Naagmani provides seamless, native proxying and intelligent fallback routing for
 
 ## Configuration
 
-1. Open **Credential Pools** in the Developer Portal: [http://localhost:3000/credentials](http://localhost:3000/credentials)
+1. Open **Credential Pools** in the Developer Portal: [{{DEVELOPER_PORTAL_URL}}/credentials]({{DEVELOPER_PORTAL_URL}}/credentials)
 2. Click **Add Provider Credential**.
 3. Select **OpenAI**, input your \`sk-proj-...\` API key, and configure rate limits or priority weighting.
 
@@ -43,7 +43,7 @@ Naagmani provides seamless, native proxying and intelligent fallback routing for
 ## Example Invocations
 
 \`\`\`bash
-curl -X POST http://localhost:8080/v1/chat/completions \\
+curl -X POST {{GATEWAY_URL}}/v1/chat/completions \\
   -H "Authorization: Bearer nst_live_9b2d8819..." \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -80,7 +80,7 @@ When a client sends a standard OpenAI JSON body with \`model: "claude-3-5-sonnet
 ## Credential Setup
 
 Add your \`sk-ant-...\` key in the Portal:
-- **Credential Pools**: [http://localhost:3000/credentials](http://localhost:3000/credentials)
+- **Credential Pools**: [{{DEVELOPER_PORTAL_URL}}/credentials]({{DEVELOPER_PORTAL_URL}}/credentials)
 
 ---
 
@@ -131,7 +131,7 @@ Naagmani provides first-class support for DeepSeek's open reasoning and general-
 ## Setup in Developer Portal
 
 1. Obtain your API Key from the DeepSeek Open Platform.
-2. Store the key in [http://localhost:3000/credentials](http://localhost:3000/credentials).
+2. Store the key in [{{DEVELOPER_PORTAL_URL}}/credentials]({{DEVELOPER_PORTAL_URL}}/credentials).
 3. Set your routing policy to prefer \`deepseek-chat\` as primary.
 
 ---
@@ -159,7 +159,7 @@ In addition to managed cloud providers, Naagmani allows you to route traffic to 
 
 ## Configuring a Custom Endpoint
 
-In **Credential Pools** ([http://localhost:3000/credentials](http://localhost:3000/credentials)), select **Custom / Self-Hosted**:
+In [**Credential Pools**]({{DEVELOPER_PORTAL_URL}}/credentials), select **Custom / Self-Hosted**:
 
 \`\`\`json
 {
@@ -261,7 +261,7 @@ Access to organizations, projects, and resources is governed by strict, hierarch
 ## Managing Roles in Portal
 
 Assign roles directly in the Developer Portal:
-- **Members**: [http://localhost:3000/members](http://localhost:3000/members)
+- **Members**: [{{DEVELOPER_PORTAL_URL}}/members]({{DEVELOPER_PORTAL_URL}}/members)
 
 ---
 
@@ -309,7 +309,7 @@ Naagmani does **not** persist request prompt contents or generated completions t
 - Redact database connection strings, JWT tokens, and private RSA keys before external model transmission.
 
 Configure guardrails in the Portal:
-- **AI Guardrails**: [http://localhost:3000/guardrails](http://localhost:3000/guardrails)
+- **AI Guardrails**: [{{DEVELOPER_PORTAL_URL}}/guardrails]({{DEVELOPER_PORTAL_URL}}/guardrails)
 
 ---
 
@@ -337,7 +337,7 @@ Every critical action performed across the Naagmani ecosystem is immutably logge
 ## Developer Portal Audit Log Viewer
 
 Inspect historical audit records with full actor attribution:
-- **Audit Logs**: [http://localhost:3000/audit-logs](http://localhost:3000/audit-logs)
+- **Audit Logs**: [{{DEVELOPER_PORTAL_URL}}/audit-logs]({{DEVELOPER_PORTAL_URL}}/audit-logs)
 
 ---
 
@@ -418,7 +418,7 @@ Protect upstream provider quotas and prevent noisy-neighbor congestion across in
 
 ## Configuration
 
-Set rate limits directly per credential in **Credential Pools** ([http://localhost:3000/credentials](http://localhost:3000/credentials)) or per token in **Project Service Tokens** ([http://localhost:3000/service-tokens](http://localhost:3000/service-tokens)).
+Set rate limits directly per credential in [**Credential Pools**]({{DEVELOPER_PORTAL_URL}}/credentials) or per token in [**Project Service Tokens**]({{DEVELOPER_PORTAL_URL}}/service-tokens).
 
 ---
 
@@ -444,7 +444,7 @@ Naagmani supports versatile routing policies tailored to specific organizational
 | **Weighted Round-Robin** | Distributes load proportionately across multiple keys or providers (e.g. 70/30 split). | Canary testing, A/B model evaluations. |
 
 Configure policies in the Portal:
-- **Routing Policies**: [http://localhost:3000/routing-policies](http://localhost:3000/routing-policies)
+- **Routing Policies**: [{{DEVELOPER_PORTAL_URL}}/routing-policies]({{DEVELOPER_PORTAL_URL}}/routing-policies)
 
 ---
 
@@ -552,7 +552,7 @@ The **Naagmani Marketplace** is the central discovery catalog for pre-built plug
 ## Discover Plugins in Portal
 
 Browse the catalog directly in the Developer Portal:
-- **Marketplace**: [http://localhost:3000/plugins](http://localhost:3000/plugins)
+- **Marketplace**: [{{DEVELOPER_PORTAL_URL}}/plugins]({{DEVELOPER_PORTAL_URL}}/plugins)
 
 ---
 
@@ -570,7 +570,7 @@ Adding pre-built capabilities to your Naagmani project takes just one click or a
 
 ## 1. Installation via Developer Portal
 
-1. Navigate to **Plugins & Marketplace**: [http://localhost:3000/plugins](http://localhost:3000/plugins)
+1. Navigate to **Plugins & Marketplace**: [{{DEVELOPER_PORTAL_URL}}/plugins]({{DEVELOPER_PORTAL_URL}}/plugins)
 2. Locate your desired plugin (e.g., *PII Redaction Guardrail*).
 3. Click **Install to Project**.
 4. Select the target Environment (\`production\`, \`staging\`, or \`development\`).
@@ -658,14 +658,14 @@ Quick diagnosis and resolution steps for frequent HTTP status codes and operatio
 ## 1. \`401 Unauthorized / invalid_token\`
 - **Symptom:** API requests return \`{"code": "unauthorized", "message": "invalid service token"}\`.
 - **Diagnosis:** The token secret is mistyped, revoked, or has passed its expiration TTL.
-- **Resolution:** Check active tokens in [http://localhost:3000/service-tokens](http://localhost:3000/service-tokens) or generate a new token.
+- **Resolution:** Check active tokens in [{{DEVELOPER_PORTAL_URL}}/service-tokens]({{DEVELOPER_PORTAL_URL}}/service-tokens) or generate a new token.
 
 ---
 
 ## 2. \`400 Bad Request / member budget exceeds parent\`
 - **Symptom:** Attempting to update a member budget fails with \`"member monthly budget exceeds parent organization monthly budget"\`.
 - **Diagnosis:** FinOps budget hierarchy enforcement blocks child budgets from exceeding parent organization ceilings.
-- **Resolution:** Increase the parent organization budget first in [http://localhost:3000/finops](http://localhost:3000/finops) before increasing the member limit.
+- **Resolution:** Increase the parent organization budget first in [{{DEVELOPER_PORTAL_URL}}/finops]({{DEVELOPER_PORTAL_URL}}/finops) before increasing the member limit.
 
 ---
 
@@ -679,7 +679,7 @@ Quick diagnosis and resolution steps for frequent HTTP status codes and operatio
 ## 4. \`502 Bad Gateway / provider_unreachable\`
 - **Symptom:** Upstream AI provider is timing out or returning 5xx.
 - **Diagnosis:** Outage on the provider side.
-- **Resolution:** Configure automated secondary and tertiary fallback routes in [http://localhost:3000/routing-policies](http://localhost:3000/routing-policies).
+- **Resolution:** Configure automated secondary and tertiary fallback routes in [{{DEVELOPER_PORTAL_URL}}/routing-policies]({{DEVELOPER_PORTAL_URL}}/routing-policies).
 
 ---
 
@@ -707,7 +707,7 @@ All Project Service Tokens must start with the \`nst_live_\` prefix:
 Verify token capabilities and expiration:
 
 \`\`\`bash
-curl http://localhost:8081/v1/organizations/{org_id}/service-tokens \\
+curl {{API_BASE_URL}}/v1/organizations/{org_id}/service-tokens \\
   -H "Authorization: Bearer <ADMIN_SESSION_TOKEN>"
 \`\`\`
 
@@ -727,7 +727,7 @@ Techniques for diagnosing crashing, timing out, or misbehaving plugins.
 
 ## 1. Inspecting Plugin Crash Logs
 When a plugin worker crashes, the Gateway logs the stack trace to the system audit trail:
-- Check **Audit Logs**: [http://localhost:3000/audit-logs](http://localhost:3000/audit-logs)
+- Check **Audit Logs**: [{{DEVELOPER_PORTAL_URL}}/audit-logs]({{DEVELOPER_PORTAL_URL}}/audit-logs)
 
 ---
 

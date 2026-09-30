@@ -25,7 +25,7 @@ In air-gapped or restricted network environments, Naagmani uses **self-contained
 
 ## 2. Generating & Downloading Offline License
 
-1. Log into the **Developer Portal** (`http://localhost:3000` or Cloud).
+1. Log into the **Developer Portal** ([{{DEVELOPER_PORTAL_URL}}]({{DEVELOPER_PORTAL_URL}})).
 2. Navigate to **Settings ➔ License & Entitlements**.
 3. Click **Download Signed License (.json)**.
 4. Save the generated file `naagmani-license-<licID>.json`.
