@@ -25,7 +25,6 @@ export const navigationData: NavSection[] = [
           { title: 'Why Naagmani?', href: '/docs/introduction/why-naagmani' },
           { title: 'Architecture Overview', href: '/docs/introduction/architecture' },
           { title: 'Foundational Concepts', href: '/docs/introduction/concepts' },
-          { title: 'Documentation & Standards', href: '/docs/introduction/standards' },
         ],
       },
       {
