@@ -1,6 +1,12 @@
-# Naagmani Documentation (`naagmani-docs`)
+<p align="center">
+  <img src="public/logo.svg" alt="Naagmani Docs Logo" width="80" height="80" />
+</p>
 
-Official developer documentation, architectural guides, API references, CLI manuals, and Plugin SDK guides for the **Naagmani AI Operating System**.
+<h1 align="center">NAAGMANI DOCUMENTATION</h1>
+
+<p align="center">
+  <strong>Official Developer Guides, API Specifications, SDK Manuals & Architecture</strong>
+</p>
 
 ---
 
