@@ -31,12 +31,11 @@ export function Logo({ className = "" }: { className?: string }) {
           {/* Outer Protective Octagon */}
           <polygon
             points="16,3 27,8 27,24 16,29 5,24 5,8"
-            stroke="url(#docsOrbitGradLight)"
-            strokeWidth="1.6"
+            stroke="url(#docsGemGradLight)"
+            strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
             fill="none"
-            opacity="0.9"
           />
 
           {/* Inner Gem Facet Lattice */}
@@ -45,7 +44,7 @@ export function Logo({ className = "" }: { className?: string }) {
             fill="url(#docsGemGradLight)"
             fillOpacity="0.18"
             stroke="url(#docsGemGradLight)"
-            strokeWidth="1.4"
+            strokeWidth="1.5"
           />
 
           {/* Core Radiant Nucleus */}
@@ -53,10 +52,10 @@ export function Logo({ className = "" }: { className?: string }) {
           <circle cx="16" cy="16" r="5" stroke="#059669" strokeWidth="0.9" strokeDasharray="1.5 1.5" opacity="0.85" />
 
           {/* Cardinal Energy Rays */}
-          <line x1="16" y1="3" x2="16" y2="7" stroke="#059669" strokeWidth="1.4" strokeLinecap="round" />
-          <line x1="16" y1="25" x2="16" y2="29" stroke="#0284c7" strokeWidth="1.4" strokeLinecap="round" />
-          <line x1="5" y1="16" x2="9" y2="16" stroke="#059669" strokeWidth="1.4" strokeLinecap="round" />
-          <line x1="23" y1="16" x2="27" y2="16" stroke="#0284c7" strokeWidth="1.4" strokeLinecap="round" />
+          <line x1="16" y1="3" x2="16" y2="7" stroke="url(#docsGemGradLight)" strokeWidth="1.5" strokeLinecap="butt" />
+          <line x1="16" y1="25" x2="16" y2="29" stroke="url(#docsGemGradLight)" strokeWidth="1.5" strokeLinecap="butt" />
+          <line x1="5" y1="16" x2="9" y2="16" stroke="url(#docsGemGradLight)" strokeWidth="1.5" strokeLinecap="butt" />
+          <line x1="23" y1="16" x2="27" y2="16" stroke="url(#docsGemGradLight)" strokeWidth="1.5" strokeLinecap="butt" />
         </svg>
 
         {/* DARK MODE SVG (Luminous Glowing Emerald & Mint) */}
@@ -81,12 +80,11 @@ export function Logo({ className = "" }: { className?: string }) {
           {/* Outer Protective Octagon */}
           <polygon
             points="16,3 27,8 27,24 16,29 5,24 5,8"
-            stroke="url(#docsOrbitGradDark)"
+            stroke="url(#docsGemGradDark)"
             strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
             fill="none"
-            opacity="0.9"
           />
 
           {/* Inner Gem Facet Lattice */}
@@ -95,7 +93,7 @@ export function Logo({ className = "" }: { className?: string }) {
             fill="url(#docsGemGradDark)"
             fillOpacity="0.25"
             stroke="url(#docsGemGradDark)"
-            strokeWidth="1.2"
+            strokeWidth="1.5"
           />
 
           {/* Core Radiant Nucleus */}
@@ -103,10 +101,10 @@ export function Logo({ className = "" }: { className?: string }) {
           <circle cx="16" cy="16" r="5" stroke="#34d399" strokeWidth="0.8" strokeDasharray="1.5 1.5" opacity="0.8" />
 
           {/* Cardinal Energy Rays */}
-          <line x1="16" y1="3" x2="16" y2="7" stroke="#34d399" strokeWidth="1.2" strokeLinecap="round" />
-          <line x1="16" y1="25" x2="16" y2="29" stroke="#06b6d4" strokeWidth="1.2" strokeLinecap="round" />
-          <line x1="5" y1="16" x2="9" y2="16" stroke="#10b981" strokeWidth="1.2" strokeLinecap="round" />
-          <line x1="23" y1="16" x2="27" y2="16" stroke="#06b6d4" strokeWidth="1.2" strokeLinecap="round" />
+          <line x1="16" y1="3" x2="16" y2="7" stroke="url(#docsGemGradDark)" strokeWidth="1.5" strokeLinecap="butt" />
+          <line x1="16" y1="25" x2="16" y2="29" stroke="url(#docsGemGradDark)" strokeWidth="1.5" strokeLinecap="butt" />
+          <line x1="5" y1="16" x2="9" y2="16" stroke="url(#docsGemGradDark)" strokeWidth="1.5" strokeLinecap="butt" />
+          <line x1="23" y1="16" x2="27" y2="16" stroke="url(#docsGemGradDark)" strokeWidth="1.5" strokeLinecap="butt" />
         </svg>
       </div>
 
