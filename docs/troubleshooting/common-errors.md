@@ -32,8 +32,20 @@ Quick diagnosis and resolution steps for frequent HTTP status codes and operatio
 
 ---
 
+## 5. `400 Bad Request / Model Not Supported`
+- **Symptom:** Gateway returns `{"code": "invalid_request", "message": "Model '<name>' is not supported or no matching routing policy found."}`.
+- **Diagnosis:** The incoming `model` string does not correspond to an enabled upstream provider model, nor is there an active **Routing Policy** matching that alias (or `"model": "auto"` without an active Enterprise license).
+- **Resolution:**
+  1. Check enabled providers in [{{DEVELOPER_PORTAL_URL}}/providers]({{DEVELOPER_PORTAL_URL}}/providers).
+  2. If using an alias like `"smart"`, `"code-gen"`, or `"fallback-chain"`, create a policy matching that name under [{{DEVELOPER_PORTAL_URL}}/routing-policies]({{DEVELOPER_PORTAL_URL}}/routing-policies).
+  3. Verify the provider API key credentials are saved and active.
+
+---
+
 ## Next Steps
 
 - [Authentication Troubleshooting](/docs/troubleshooting/authentication)
+- [Routing Concepts & Resolution Modes](/docs/concepts/routing)
+- [Virtual Aliases & Model Matching](/docs/concepts/models)
 - [Plugin Debugging](/docs/troubleshooting/plugins)
 - [CLI Diagnostics](/docs/troubleshooting/cli)

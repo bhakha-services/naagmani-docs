@@ -1,36 +1,74 @@
 # Models & Virtual Aliases
 
-Naagmani allows engineering teams to decouple application code from specific underlying model strings using **Virtual Model Aliases**.
+Naagmani allows engineering teams to decouple application code from specific underlying provider model strings using **Virtual Model Aliases** and **Smart Routing Policies**.
+
+```mermaid
+graph LR
+    App["Application Code"] -->|model: smart| Router["Naagmani Smart Router"]
+    Router -->|1. Check Policy 'smart'| Found{"Policy Exists?"}
+    Found -->|Yes| Exec["Execute Policy Cascade: DeepSeek -> Claude -> GPT-4o"]
+    Found -->|No| CheckModel{"Direct Provider Model?"}
+    CheckModel -->|Yes| Direct["Direct Dispatch to Target Provider"]
+    CheckModel -->|No| Err["400 Bad Request: Model Not Found"]
+```
 
 ---
 
 ## What is a Virtual Model Alias?
 
-Instead of hardcoding `gpt-4o` or `claude-3-5-sonnet-20241022` into your backend repositories, your applications request virtual tier aliases:
+Instead of hardcoding concrete strings like `gpt-4o` or `deepseek-chat` across multiple microservices and codebases, your applications request logical aliases defined in your Routing Policies:
 
-```mermaid
-graph LR
-    App["Application Code"] -->|model: smart-tier| Router["Naagmani Router"]
-    Router -->|Rule: Primary| C35["Claude 3.5 Sonnet"]
-    Router -->|Rule: Fallback| G4O["OpenAI GPT-4o"]
+```json
+{
+  "model": "smart",
+  "messages": [
+    {"role": "user", "content": "Analyze quarterly customer retention trends."}
+  ]
+}
 ```
 
-### Common Alias Patterns:
-- **`smart-tier`**: Resolves to state-of-the-art reasoning models (e.g., Claude 3.5 Sonnet $\rightarrow$ GPT-4o).
-- **`fast-tier`**: Resolves to ultra-low-latency, lightweight models (e.g., Gemini 2.5 Flash $\rightarrow$ GPT-4o-mini).
-- **`cheap-tier`**: Resolves to high-throughput, cost-efficient models (e.g., DeepSeek V3).
+Naagmani intercepts the alias `"smart"`, evaluates the active routing policy for your environment, and dispatches the request to the optimal healthy provider according to the policy rules.
 
 ---
 
-## Benefits of Virtual Aliases
+## The 3 Model Types Supported in Naagmani
 
-1. **Instant Model Upgrades**: When a new model version is released (e.g. GPT-5), update the alias target in the Developer Portal with zero application downtime or deployments.
-2. **Zero Code Refactoring**: Switch primary providers across hundreds of microservices instantly.
-3. **Environment-Specific Routing**: Route `smart-tier` to an inexpensive model in Test and the premier flagship model in Production.
+Naagmani strictly accepts 3 types of model identifiers:
+
+| Identifier Type | Example | Behavior |
+| :--- | :--- | :--- |
+| **Virtual Alias / Policy Name** | `"smart"`, `"fast"`, `"reasoning"`, `"code-gen"` | Strictly resolves against your configured [Routing Policies](../developer-portal/routing-policies.md). Must be explicitly created in the portal. |
+| **Automated Router** | `"auto"` | Built-in AI routing engine that evaluates all connected providers and models dynamically. *(Requires Pro/Enterprise license; blocked on free tier)*. |
+| **Direct Provider Model** | `"deepseek-chat"`, `"gpt-4o"`, `"claude-3-5-sonnet-20241022"`, `"gemini-2.5-flash"` | Direct dispatch to the specified provider and model registered in your active credential pool. |
+
+> [!NOTE]
+> If a requested model does not match an existing Routing Policy, `"auto"`, or a supported provider model in your pool, Naagmani will immediately reject the request with `400 Bad Request: no eligible provider candidate found for model`.
+
+---
+
+## Recommended Alias Naming Patterns
+
+| Alias Name | Purpose | Example Policy Cascade |
+| :--- | :--- | :--- |
+| **`smart`** / **`smart-tier`** | State-of-the-art reasoning and deep analysis | DeepSeek R1 / V3 $\rightarrow$ Claude 3.5 Sonnet $\rightarrow$ GPT-4o |
+| **`fast`** / **`fast-tier`** | Ultra-low-latency real-time interactions | Gemini 2.5 Flash $\rightarrow$ GPT-4o-mini $\rightarrow$ Claude 3.5 Haiku |
+| **`cheap`** / **`economy`** | Cost-effective bulk processing | DeepSeek V3 $\rightarrow$ Llama 3.3 70B |
+| **`code`** / **`code-gen`** | Code synthesis and review | Claude 3.5 Sonnet $\rightarrow$ DeepSeek Coder |
+
+---
+
+## Key Benefits of Virtual Aliases
+
+1. **Zero-Downtime Model Swaps**: When a new flagship model drops (e.g. GPT-5 or DeepSeek V4), switch your `smart` alias in the Developer Portal without redeploying backend services.
+2. **Multi-Provider Resilience**: If an upstream provider suffers an outage or rate-limiting (429), your policy automatically cascades to the configured secondary provider.
+3. **Environment Isolation**:
+   - **Development/Staging**: Point `smart` to cost-effective models (`deepseek-chat` or `gpt-4o-mini`).
+   - **Production**: Point `smart` to flagship models (`claude-3-5-sonnet` or `deepseek-reasoner`).
 
 ---
 
 ## Next Steps
 
-- Configure routing rules: [Smart Model Routing](routing.md)
-- Test models interactively: [Model Playground](../developer-portal/model-playground.md)
+- **Configure Routing Policies**: [Smart Routing Policies](../developer-portal/routing-policies.md)
+- **Deep Dive into Routing**: [Smart Model Routing & Fallbacks](routing.md)
+- **Interactive Playground**: [Model Playground](../developer-portal/model-playground.md)
