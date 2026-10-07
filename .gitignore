@@ -7,6 +7,10 @@ dist/
 build/
 out/
 
+# Build & Type info
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
 # OS & Temp
 .DS_Store
 Thumbs.db
