@@ -10,7 +10,7 @@ graph TD
     Request["Application Request: { model: 'smart' }"] --> Policy["Routing Policy: 'smart'"]
     Policy --> P1["1. Primary: DeepSeek (deepseek-chat)"]
     P1 -->|429 Rate Limit or 5xx Server Error| P2["2. Secondary: Anthropic (claude-3-5-sonnet)"]
-    P2 -->|Timeout (>15s) or Outage| P3["3. Tertiary: OpenAI (gpt-4o)"]
+    P2 -->|"Timeout (>15s) or Outage"| P3["3. Tertiary: OpenAI (gpt-4o)"]
 ```
 
 ---
