@@ -15,23 +15,23 @@ export function Navbar({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void
   const [searchOpen, setSearchOpen] = useState(false);
 
   const navLinks = [
-    { label: 'Docs', href: '/docs/introduction/what-is-naagmani', activeMatch: '/docs/introduction' },
+    { label: 'Get Started', href: '/docs/get-started/what-is-naagmani', activeMatch: '/docs/get-started' },
+    { label: 'Developer Portal', href: '/docs/developer-portal/overview', activeMatch: '/docs/developer-portal' },
     { label: 'API Reference', href: '/docs/api/overview', activeMatch: '/docs/api' },
-    { label: 'Plugins', href: '/docs/plugins/overview', activeMatch: '/docs/plugins' },
-    { label: 'SDKs', href: '/docs/sdk/go', activeMatch: '/docs/sdk' },
-    { label: 'CLI', href: '/docs/cli/installation', activeMatch: '/docs/cli' },
+    { label: 'Marketplace', href: '/docs/marketplace/overview', activeMatch: '/docs/marketplace' },
+    { label: 'Build', href: '/docs/build/sdks/overview', activeMatch: '/docs/build' },
   ];
 
   return (
     <>
       <header className="sticky top-0 z-40 w-full border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-[#09090B]/80 backdrop-blur-md">
-        <div className="max-w-[1920px] 4xl:max-w-[2400px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 h-16 flex items-center justify-between gap-4">
+        <div className="max-w-[1920px] 4xl:max-w-[2400px] mx-auto px-3 sm:px-6 lg:px-8 2xl:px-12 h-16 flex items-center justify-between gap-2 sm:gap-4">
           {/* Left: Brand & Mobile Menu Button */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {onMobileMenuToggle && (
               <button
                 onClick={onMobileMenuToggle}
-                className="md:hidden p-2 rounded-lg text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                className="md:hidden p-1.5 sm:p-2 rounded-lg text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
                 aria-label="Toggle navigation menu"
               >
                 <Menu className="w-5 h-5" />
@@ -61,16 +61,16 @@ export function Navbar({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void
           </nav>
 
           {/* Right: Search, Theme Toggle, GitHub & CTA */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
             {/* Search Trigger Button */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/80 hover:border-zinc-300 dark:hover:border-zinc-700 text-xs text-zinc-500 dark:text-zinc-400 transition-all shadow-sm group"
+              className="flex items-center gap-2 p-2 sm:px-3 sm:py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/80 hover:border-zinc-300 dark:hover:border-zinc-700 text-xs text-zinc-500 dark:text-zinc-400 transition-all shadow-sm group"
               aria-label="Search documentation (Cmd+K)"
             >
-              <Search className="w-3.5 h-3.5 text-zinc-400 group-hover:text-emerald-500 transition-colors" />
+              <Search className="w-4 h-4 sm:w-3.5 sm:h-3.5 text-zinc-400 group-hover:text-emerald-500 transition-colors" />
               <span className="hidden sm:inline">Search docs...</span>
-              <kbd className="hidden sm:inline-block px-1.5 py-0.2 text-[10px] font-mono bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded border border-zinc-300 dark:border-zinc-700">
+              <kbd className="hidden md:inline-block px-1.5 py-0.2 text-[10px] font-mono bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded border border-zinc-300 dark:border-zinc-700">
                 ⌘K
               </kbd>
             </button>
@@ -90,7 +90,7 @@ export function Navbar({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void
               href={siteConfig.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:flex p-2 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+              className="hidden md:flex p-2 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
               aria-label="Naagmani on GitHub"
             >
               <Github className="w-4 h-4" />
@@ -98,8 +98,8 @@ export function Navbar({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void
 
             {/* CTA Button */}
             <Link
-              href="/docs/quickstart/overview"
-              className="inline-flex items-center justify-center px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-500 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+              href="/docs/get-started/quickstart"
+              className="hidden sm:inline-flex items-center justify-center px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-500 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500/50 whitespace-nowrap"
             >
               Get Started
             </Link>

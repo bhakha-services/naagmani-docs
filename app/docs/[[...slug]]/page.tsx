@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const resolvedParams = await params;
   const slug = resolvedParams.slug && resolvedParams.slug.length > 0
     ? resolvedParams.slug
-    : ['introduction', 'what-is-naagmani'];
+    : ['get-started', 'what-is-naagmani'];
 
   const doc = await getDocBySlug(slug);
   if (!doc) {
@@ -79,7 +79,7 @@ export default async function DocPage({ params }: PageProps) {
   const resolvedParams = await params;
   const slug = resolvedParams.slug && resolvedParams.slug.length > 0
     ? resolvedParams.slug
-    : ['introduction', 'what-is-naagmani'];
+    : ['get-started', 'what-is-naagmani'];
 
   const doc = await getDocBySlug(slug);
 
@@ -92,11 +92,11 @@ export default async function DocPage({ params }: PageProps) {
 
   // Generate breadcrumb items
   const breadcrumbItems: { label: string; href?: string }[] = [
-    { label: 'Docs', href: '/docs/introduction/what-is-naagmani' },
+    { label: 'Docs', href: '/docs/get-started/what-is-naagmani' },
   ];
   if (slug.length > 1) {
     breadcrumbItems.push({
-      label: slug[0].toUpperCase(),
+      label: slug[0].toUpperCase().replace(/-/g, ' '),
       href: `/docs/${slug[0]}/${slug[1]}`,
     });
   }

@@ -1,11 +1,11 @@
 # Node & Web Build
 node_modules/
-dist/
+/dist/
 .docusaurus/
 .next/
 .source/
-build/
-out/
+/build/
+/out/
 
 # Build & Type info
 *.tsbuildinfo

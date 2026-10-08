@@ -129,35 +129,35 @@ const pillars = [
     title: 'Smart Model Routing',
     description:
       'Dynamically route prompts across OpenAI, Anthropic, Gemini, and DeepSeek based on cost, latency, or health.',
-    href: '/docs/concepts/routing',
+    href: '/docs/developer-portal/governance-routing/routing',
   },
   {
     icon: Shield,
     title: 'Zero-Leakage BYOK Vault',
     description:
       'Store provider API keys in an encrypted hardware-grade vault. Application developers never see master secrets.',
-    href: '/docs/concepts/api-keys',
+    href: '/docs/developer-portal/projects/api-keys',
   },
   {
     icon: Cpu,
     title: 'Polyglot Plugin Engine',
     description:
       'Extend gateway pipelines with isolated plugins written in Go, Node.js, or Python via naagmani.plugin/v1.',
-    href: '/docs/plugins/overview',
+    href: '/docs/build/hdks/overview',
   },
   {
     icon: BarChart3,
     title: 'Real-Time FinOps Metering',
     description:
       'Track prompt tokens, completion tokens, costs, and tenant quotas across organizations, projects, and environments.',
-    href: '/docs/concepts/usage',
+    href: '/docs/developer-portal/operations/usage',
   },
   {
     icon: Terminal,
     title: 'Native Developer CLI',
     description:
       'Scaffold plugins, validate manifests, run local cluster gateways, and package extensions with the naagmani CLI.',
-    href: '/docs/cli/installation',
+    href: '/docs/build/cli/installation',
   },
 ];
 
@@ -166,25 +166,25 @@ const quickstartSteps = [
     step: '01',
     title: 'Generate API Key',
     desc: 'Create an environment-scoped API key with granular permissions and rate limits.',
-    href: '/docs/quickstart/api-key',
+    href: '/docs/developer-portal/projects/api-keys',
   },
   {
     step: '02',
     title: 'Make First Request',
     desc: 'Send an OpenAI-compatible completion request using your favorite language SDK or cURL.',
-    href: '/docs/quickstart/first-request',
+    href: '/docs/get-started/first-request',
   },
   {
     step: '03',
     title: 'Stream Tokens',
     desc: 'Receive real-time Server-Sent Events (SSE) with sub-10ms gateway dispatch latency.',
-    href: '/docs/quickstart/streaming',
+    href: '/docs/api/streaming',
   },
   {
     step: '04',
     title: 'Author Custom HDK Plugin',
     desc: 'Build prompt sanitizers, DLP scanners, and MCP agents in Go, Node.js, or Python.',
-    href: '/docs/plugins/development',
+    href: '/docs/build/hdks/development',
   },
 ];
 
@@ -214,7 +214,7 @@ export default async function HomePage() {
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                 <span>Naagmani 1.0.0 is now live</span>
                 <span className="text-zinc-400 dark:text-zinc-600">|</span>
-                <Link href="/docs/introduction/what-is-naagmani" className="hover:underline flex items-center gap-1">
+                <Link href="/docs/get-started/what-is-naagmani" className="hover:underline flex items-center gap-1">
                   Explore Architecture <ArrowRight className="w-3 h-3" />
                 </Link>
               </div>
@@ -232,7 +232,7 @@ export default async function HomePage() {
               {/* CTAs */}
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <Link
-                  href="/docs/quickstart/overview"
+                  href="/docs/get-started/quickstart"
                   className="px-6 py-3 rounded-xl font-semibold text-sm text-white bg-emerald-600 hover:bg-emerald-500 shadow-lg shadow-emerald-600/20 transition-all flex items-center gap-2"
                 >
                   Get Started <ArrowRight className="w-4 h-4" />
@@ -244,7 +244,7 @@ export default async function HomePage() {
                   API Reference
                 </Link>
                 <Link
-                  href="/docs/plugins/overview"
+                  href="/docs/build/hdks/overview"
                   className="px-6 py-3 rounded-xl font-semibold text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-900/60 transition-all flex items-center gap-1.5"
                 >
                   <Cpu className="w-4 h-4 text-emerald-500" />
@@ -318,7 +318,7 @@ export default async function HomePage() {
                 </h2>
               </div>
               <Link
-                href="/docs/introduction/architecture"
+                href="/docs/get-started/how-it-works"
                 className="text-xs sm:text-sm font-semibold text-emerald-500 hover:text-emerald-400 flex items-center gap-1.5 self-start md:self-auto"
               >
                 View full architecture breakdown <ArrowRight className="w-4 h-4" />
@@ -372,28 +372,28 @@ export default async function HomePage() {
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
-                    href="/docs/cli/installation"
+                    href="/docs/build/cli/installation"
                     className="px-4 py-2 2xl:px-5 2xl:py-2.5 rounded-lg text-xs 2xl:text-sm font-semibold bg-emerald-600 text-white hover:bg-emerald-500 transition-colors"
                   >
                     Install CLI
                   </Link>
                   <Link
-                    href="/docs/sdk/go"
+                    href="/docs/build/sdks/go"
                     className="px-4 py-2 2xl:px-5 2xl:py-2.5 rounded-lg text-xs 2xl:text-sm font-semibold border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:border-emerald-500 transition-colors"
                   >
-                    Go HDK
+                    Go SDK
                   </Link>
                   <Link
-                    href="/docs/sdk/node"
+                    href="/docs/build/sdks/node"
                     className="px-4 py-2 2xl:px-5 2xl:py-2.5 rounded-lg text-xs 2xl:text-sm font-semibold border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:border-emerald-500 transition-colors"
                   >
-                    Node HDK
+                    Node SDK
                   </Link>
                   <Link
-                    href="/docs/sdk/python"
+                    href="/docs/build/sdks/python"
                     className="px-4 py-2 2xl:px-5 2xl:py-2.5 rounded-lg text-xs 2xl:text-sm font-semibold border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:border-emerald-500 transition-colors"
                   >
-                    Python HDK
+                    Python SDK
                   </Link>
                 </div>
               </div>
@@ -422,13 +422,13 @@ export default async function HomePage() {
             <span>The AI Runtime for your applications.</span>
           </div>
           <div className="flex items-center gap-6">
-            <Link href="/docs/introduction/what-is-naagmani" className="hover:text-emerald-500 transition-colors">
+            <Link href="/docs/get-started/what-is-naagmani" className="hover:text-emerald-500 transition-colors">
               Docs
             </Link>
             <Link href="/docs/api/overview" className="hover:text-emerald-500 transition-colors">
               API Reference
             </Link>
-            <Link href="/docs/security/overview" className="hover:text-emerald-500 transition-colors">
+            <Link href="/docs/developer-portal/governance-routing/guardrails" className="hover:text-emerald-500 transition-colors">
               Security
             </Link>
             <a
