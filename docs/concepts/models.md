@@ -69,6 +69,7 @@ Naagmani strictly accepts 3 types of model identifiers:
 
 ## Next Steps
 
+- **Supported Providers & Model Catalog**: [Model Providers & Adapters](providers.md)
 - **Configure Routing Policies**: [Smart Routing Policies](../developer-portal/routing-policies.md)
 - **Deep Dive into Routing**: [Smart Model Routing & Fallbacks](routing.md)
 - **Interactive Playground**: [Model Playground](../developer-portal/model-playground.md)

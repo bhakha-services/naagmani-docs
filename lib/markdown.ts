@@ -100,6 +100,67 @@ export async function highlightCodeSnippet(code: string, lang: string): Promise<
   }
 }
 
+const ALERT_CONFIGS: Record<
+  string,
+  {
+    title: string;
+    border: string;
+    bg: string;
+    text: string;
+    iconSvg: string;
+  }
+> = {
+  NOTE: {
+    title: 'Note',
+    border: 'border-blue-500/30',
+    bg: 'bg-blue-500/5 dark:bg-blue-500/10',
+    text: 'text-blue-500 dark:text-blue-400',
+    iconSvg: `<svg class="w-4 h-4 shrink-0 text-blue-500 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`,
+  },
+  INFO: {
+    title: 'Info',
+    border: 'border-blue-500/30',
+    bg: 'bg-blue-500/5 dark:bg-blue-500/10',
+    text: 'text-blue-500 dark:text-blue-400',
+    iconSvg: `<svg class="w-4 h-4 shrink-0 text-blue-500 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`,
+  },
+  TIP: {
+    title: 'Tip',
+    border: 'border-emerald-500/30',
+    bg: 'bg-emerald-500/5 dark:bg-emerald-500/10',
+    text: 'text-emerald-500 dark:text-emerald-400',
+    iconSvg: `<svg class="w-4 h-4 shrink-0 text-emerald-500 dark:text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
+  },
+  IMPORTANT: {
+    title: 'Important',
+    border: 'border-purple-500/30',
+    bg: 'bg-purple-500/5 dark:bg-purple-500/10',
+    text: 'text-purple-500 dark:text-purple-400',
+    iconSvg: `<svg class="w-4 h-4 shrink-0 text-purple-500 dark:text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+  },
+  WARNING: {
+    title: 'Warning',
+    border: 'border-amber-500/30',
+    bg: 'bg-amber-500/5 dark:bg-amber-500/10',
+    text: 'text-amber-500 dark:text-amber-400',
+    iconSvg: `<svg class="w-4 h-4 shrink-0 text-amber-500 dark:text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+  },
+  CAUTION: {
+    title: 'Caution',
+    border: 'border-rose-500/30',
+    bg: 'bg-rose-500/5 dark:bg-rose-500/10',
+    text: 'text-rose-500 dark:text-rose-400',
+    iconSvg: `<svg class="w-4 h-4 shrink-0 text-rose-500 dark:text-rose-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+  },
+  DANGER: {
+    title: 'Danger',
+    border: 'border-rose-500/30',
+    bg: 'bg-rose-500/5 dark:bg-rose-500/10',
+    text: 'text-rose-500 dark:text-rose-400',
+    iconSvg: `<svg class="w-4 h-4 shrink-0 text-rose-500 dark:text-rose-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+  },
+};
+
 export async function compileMarkdown(content: string, currentSlug: string[]): Promise<string> {
   const processedContent = replaceEnvUrls(content);
   const highlighter = await getHighlighter();
@@ -240,6 +301,33 @@ export async function compileMarkdown(content: string, currentSlug: string[]): P
 
     blockquote(this: any, { tokens }: { tokens: any[] }): string {
       const quote = this.parser.parse(tokens);
+      const alertMatch = quote.match(/^\s*<p>\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION|INFO|DANGER)\](?:\s*<br\s*\/?>|\s+)?([\s\S]*?)<\/p>([\s\S]*)$/i);
+
+      if (alertMatch) {
+        const typeKey = alertMatch[1].toUpperCase();
+        const config = ALERT_CONFIGS[typeKey] || ALERT_CONFIGS.NOTE;
+        const firstPara = alertMatch[2].trim();
+        const remaining = alertMatch[3].trim();
+
+        let innerContent = '';
+        if (firstPara) {
+          innerContent += `<p>${firstPara}</p>`;
+        }
+        if (remaining) {
+          innerContent += remaining;
+        }
+
+        return `<div class="my-6 rounded-lg border ${config.border} ${config.bg} p-4 text-sm leading-relaxed shadow-sm not-prose">
+          <div class="flex items-center gap-2 font-semibold ${config.text} text-xs tracking-wider uppercase mb-2">
+            ${config.iconSvg}
+            <span>${config.title}</span>
+          </div>
+          <div class="text-zinc-700 dark:text-zinc-300 [&>p]:mb-2 [&>p:last-child]:mb-0 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:bg-zinc-200/60 dark:[&_code]:bg-zinc-800/80 [&_code]:text-xs [&_code]:font-mono">
+            ${innerContent}
+          </div>
+        </div>`;
+      }
+
       return `<blockquote class="my-4 border-l-2 border-emerald-500 bg-emerald-500/5 px-4 py-3 rounded-r text-zinc-700 dark:text-zinc-300">
         ${quote}
       </blockquote>`;
