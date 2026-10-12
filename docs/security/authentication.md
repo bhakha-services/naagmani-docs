@@ -3,7 +3,7 @@
 Naagmani separates authentication into two distinct operational planes:
 
 1. **Management / Control Plane**: OAuth2 SSO (Google, GitHub, SAML/OIDC) and Personal Access Tokens for portal users.
-2. **Inference / Data Plane**: Project Service Tokens (`nst_live_...`) for microservices, background jobs, and agents.
+2. **Inference / Data Plane**: Project Service Tokens (`nm_st_...`) for microservices, background jobs, and agents.
 
 ---
 
