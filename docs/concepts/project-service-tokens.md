@@ -6,15 +6,16 @@ Unlike standard API keys, Project Service Tokens provide fine-grained **capabili
 
 ```mermaid
 graph TD
-    subgraph PST["Project Service Token (nst_live_...)"]
-        Cap["Capability Matrix (inference:chat, tools:execute)"]
+    subgraph PST["Project Service Token (nm_st_...)"]
+        Cap["Capability Matrix (inference.execute, models.read)"]
         Env["Environment Scope (Production)"]
         TTL["TTL Expiration (e.g. 30 Days)"]
         Attribution["Member Attribution (User: Rahul)"]
     end
 
     PST --> GW["Naagmani Gateway Engine"]
-    GW --> Authorize{"Capabilities & Quota OK?"}
+    Authorize{"Capabilities & Quota OK?"}
+    GW --> Authorize
     Authorize -->|Yes| Upstream["Execute AI Inference / MCP Tools"]
     Authorize -->|No| Reject["HTTP 403 Forbidden"]
 ```
@@ -28,12 +29,12 @@ Every Project Service Token specifies an explicit list of allowed capabilities. 
 
 | Capability | Allowed Operations |
 | :--- | :--- |
-| `inference:chat` | Standard and streaming chat completions (`/v1/chat/completions`). |
-| `inference:embeddings` | Vector embeddings generation (`/v1/embeddings`). |
-| `models:read` | Model catalog listing and provider capability discovery. |
-| `tools:execute` | Invoking registered HTTP/gRPC tools and functions. |
-| `mcp:access` | Connecting to Model Context Protocol (MCP) servers and tools. |
-| `skills:read` | Reading agent prompts, skills, and templates. |
+| `inference.execute` | Standard and streaming chat completions (`/v1/chat/completions`). |
+| `models.read` | Model catalog listing and provider capability discovery. |
+| `usage.read` | FinOps usage telemetry and spend analytics. |
+| `provider.use` | Routing traffic through BYOK upstream credentials. |
+| `members.read` | Read organization/project member directory. |
+| `members.write` | Provision and manage member profiles. |
 
 ---
 
@@ -65,7 +66,7 @@ Pass your token in the standard HTTP `Authorization` header:
 
 ```bash
 curl -X POST "{{GATEWAY_URL}}/v1/chat/completions" \
-  -H "Authorization: Bearer nst_live_9f8a2b1c3d4e..." \
+  -H "Authorization: Bearer nm_st_VAK8CS0FJP_8f14e45c7b39a2d04e5f61728394a5b6c7d8e9f012345678" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "gpt-4o",
@@ -77,5 +78,6 @@ curl -X POST "{{GATEWAY_URL}}/v1/chat/completions" \
 
 ## Next Steps
 
-- Portal management guide: [Developer Portal Service Tokens](../developer-portal/service-tokens.md)
+- Developer Portal Guide & Partner Gateway API: [Project Service Tokens Guide](../developer-portal/projects/service-tokens.md)
+- Portal management guide: [Developer Portal Service Tokens](../developer-portal/projects/service-tokens.md)
 - API endpoint documentation: [Service Tokens API Reference](../api/service-tokens.md)

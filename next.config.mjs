@@ -9,6 +9,15 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/docs/features/smart-routing',
+        destination: '/docs/developer-portal/operations/attempts',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default withMDX(nextConfig);
