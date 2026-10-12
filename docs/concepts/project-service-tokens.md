@@ -27,14 +27,13 @@ graph TD
 ### 1. Fine-Grained Capability Matrix
 Every Project Service Token specifies an explicit list of allowed capabilities. Requests attempting actions outside the capability scope are rejected at the gateway:
 
-| Capability | Allowed Operations |
-| :--- | :--- |
-| `inference.execute` | Standard and streaming chat completions (`/v1/chat/completions`). |
-| `models.read` | Model catalog listing and provider capability discovery. |
-| `usage.read` | FinOps usage telemetry and spend analytics. |
-| `provider.use` | Routing traffic through BYOK upstream credentials. |
-| `members.read` | Read organization/project member directory. |
-| `members.write` | Provision and manage member profiles. |
+| Capability | Category | Allowed Operations |
+| :--- | :--- | :--- |
+| `services.tokens.create` | Services Gateway | Provision child customer API keys (`nm_live_...`) with budgets and rate limits. |
+| `services.tokens.read` | Services Gateway | List and inspect provisioned child tokens. |
+| `services.tokens.revoke` | Services Gateway | Immediately invalidate provisioned child tokens. |
+| `services.usage.read` | Observability | Inspect member token consumption and real-time monthly spend telemetry. |
+| `inference.execute` | AI Workloads | Standard and streaming chat completions (`/v1/chat/completions`). |
 
 ---
 

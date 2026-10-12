@@ -46,15 +46,14 @@ Capabilities in Naagmani follow a strict dot-notation standard verified by the g
 
 | Canonical Capability | Category | Description | Permitted Endpoints |
 |---|---|---|---|
-| `inference.execute` | Runtime | Permission to dispatch model inference and streaming completions. | `POST /v1/chat/completions`<br>`POST /v1/embeddings`<br>`POST /v1/responses` |
-| `models.read` | Catalog | Permission to list active models, virtual aliases, and provider candidate statuses. | `GET /v1/models`<br>`GET /v1/models/{id}` |
-| `usage.read` | FinOps | Permission to read token consumption metrics, latency telemetry, and attempt logs. | `GET /v1/usage`<br>`GET /v1/attempts` |
-| `provider.use` | Routing | Permission to utilize organization-level BYOK provider credentials. | Gateway Provider Resolution |
-| `members.read` | Directory | Permission to query external customer member profiles, quotas, and metadata. | `GET /v1/organizations/{orgID}/members` |
-| `members.write` | Directory | Permission to create, update, or revoke customer member identities. | `POST /v1/organizations/{orgID}/members`<br>`DELETE /v1/organizations/{orgID}/members/{id}` |
+| `services.tokens.create` | Services Gateway | Permission to provision child customer API keys (`nm_live_...`) with budgets and rate limits. | `POST /v1/services/tokens` |
+| `services.tokens.read` | Services Gateway | Permission to list and inspect provisioned child tokens. | `GET /v1/services/tokens`<br>`GET /v1/services/tokens/{id}` |
+| `services.tokens.revoke` | Services Gateway | Permission to immediately invalidate provisioned child tokens. | `DELETE /v1/services/tokens/{id}` |
+| `services.usage.read` | Observability | Permission to inspect member token consumption and real-time monthly spend telemetry. | `GET /v1/services/tokens/{id}/usage` |
+| `inference.execute` | AI Workloads | Permission to dispatch direct chat completions and streaming model inference. | `POST /v1/chat/completions`<br>`POST /v1/embeddings`<br>`POST /v1/responses` |
 
 > [!IMPORTANT]
-> Wildcard capabilities (e.g. `*` or `inference.*`) are rejected by Naagmani's validation engine to enforce strict least-privilege compliance.
+> Wildcard capabilities (e.g. `*` or `services.*`) are rejected by Naagmani's validation engine to enforce strict least-privilege compliance.
 
 ---
 
@@ -65,7 +64,7 @@ Capabilities in Naagmani follow a strict dot-notation standard verified by the g
 3. Configure the machine credential:
    - **Token Name**: A descriptive label (e.g., `zomato-backend-prod`, `ci-runner`).
    - **Environment**: Select `Test` or `Production`.
-   - **Capabilities**: Select the exact permissions required (`inference.execute`, `models.read`, `usage.read`).
+   - **Capabilities**: Select the exact permissions required (`services.tokens.create`, `services.tokens.read`, `services.tokens.revoke`, `services.usage.read`, `inference.execute`).
    - **Expiration / TTL**: Preset options (`30 Days`, `90 Days`, `365 Days`, or `Never Expire` for daemons).
    - **Requests Per Minute (RPM)** *(Optional)*: Dedicated rate-limiting throttle.
 4. Click **Create Token** and copy the secret (`nm_st_...`) immediately.

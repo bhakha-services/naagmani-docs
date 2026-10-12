@@ -15,7 +15,7 @@ Programmatically issue, list, and revoke scoped Project Service Tokens, as well 
 {
   "name": "data-pipeline-worker",
   "environment_id": "env_prod_01J8F0A2B3",
-  "capabilities": ["inference.execute", "models.read"],
+  "capabilities": ["services.tokens.create", "services.usage.read", "inference.execute"],
   "expires_in_days": 30
 }
 ```
@@ -29,7 +29,7 @@ Programmatically issue, list, and revoke scoped Project Service Tokens, as well 
     "public_id": "VAK8CS0FJP",
     "name": "data-pipeline-worker",
     "environment_id": "env_prod_01J8F0A2B3",
-    "capabilities": ["inference.execute", "models.read"],
+    "capabilities": ["services.tokens.create", "services.usage.read", "inference.execute"],
     "expires_at": "2026-10-25T23:59:59Z",
     "status": "active",
     "created_at": "2026-09-25T23:00:00Z"
