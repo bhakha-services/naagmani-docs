@@ -23,8 +23,11 @@ Naagmani returns clear, structured JSON errors with standard HTTP status codes a
 | **`400`** | `invalid_request` | Malformed JSON payload, unknown model alias without a routing policy, or budget constraint violation. |
 | **`401`** | `invalid_api_key` | Provided API Key or Service Token is invalid, revoked, or expired. |
 | **`403`** | `permission_denied` | Token lacks the required capability in its capability matrix, or license is required for feature (e.g., `model: "auto"`). |
+| **`403`** | `PROJECT_ACCESS_DENIED` | Portal user is not assigned to this project or lacks the necessary project role (`viewer`, `developer`, `admin`). |
+| **`403`** | `ENTITLEMENT_LIMIT_EXCEEDED` | The project has reached its maximum customer member limit or tier quota under the active subscription plan. |
 | **`404`** | `not_found` | The requested project, member, or resource does not exist. |
-| **`429`** | `quota_exceeded` | Tenant or member has exceeded their configured monthly/daily spending cap. |
+| **`409`** | `IDENTITY_COLLISION` | The provided `external_user_id` or `email` already exists within this project boundary. |
+| **`429`** | `quota_exceeded` / `BUDGET_EXHAUSTED` | Tenant or member has exceeded their configured monthly/daily spending cap or rate limit. |
 | **`502`** | `upstream_failure` | All primary and fallback providers in the routing policy candidate list failed. |
 | **`504`** | `upstream_timeout` | Upstream model adapter timed out waiting for provider response. |
 

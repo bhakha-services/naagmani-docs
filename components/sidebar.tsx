@@ -13,6 +13,7 @@ interface SidebarProps {
 
 const sectionIcons: Record<string, any> = {
   'GET STARTED': Sparkles,
+  'ARCHITECTURE & CONCEPTS': BookOpen,
   'DEVELOPER PORTAL': LayoutDashboard,
   'API REFERENCE': Terminal,
   'MARKETPLACE': ShoppingBag,

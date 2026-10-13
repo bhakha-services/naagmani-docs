@@ -9,9 +9,13 @@ graph TD
     Org --> P2["Project: Internal Copilot"]
     Org --> PortalUsers["Portal Users (Human RBAC)"]
     Org --> Roles["Dynamic Organization Roles & Permissions"]
-    Org --> CustomerMembers["Customer Members (Attribution & Budgets)"]
     Org --> Bgt["Organization Budget Cap"]
     Org --> Vault["BYOK Encrypted Credential Vault"]
+    
+    P1 --> CM1["Customer Members (Project Scoped)"]
+    P1 --> PST1["Project Service Tokens"]
+    P2 --> CM2["Customer Members (Project Scoped)"]
+    P2 --> PST2["Project Service Tokens"]
 ```
 
 ---
@@ -22,9 +26,9 @@ graph TD
 2. **Team & Portal User Access**: Manage Developer Portal logins, dynamic role assignments, and organization memberships:
    - **System Roles**: Predefined `Owner`, `Admin`, and `Member` platform roles.
    - **Custom Roles**: Tailored roles (e.g. `Project Operator`, `Billing Manager`) composed of granular canonical permissions.
-3. **Customer / Application Directory**: Manage end-user and application member identities for token usage attribution and individual spending limits.
-4. **Bring-Your-Own-Key (BYOK) Vault**: Store root provider API keys (OpenAI, Anthropic, Gemini, DeepSeek) centrally with AES-256-GCM encryption.
-5. **Audit Trail**: Aggregated compliance logging capturing every authentication event, key creation, role modification, and high-level routing operation.
+   - **Project Access**: Assign portal users to project workspaces via [ProjectAccessAssignment](/docs/concepts/portal-users-vs-customer-members).
+3. **Bring-Your-Own-Key (BYOK) Vault**: Store root provider API keys (OpenAI, Anthropic, Gemini, DeepSeek) centrally with AES-256-GCM encryption.
+4. **Audit Trail**: Aggregated compliance logging capturing every authentication event, key creation, role modification, and high-level routing operation.
 
 ---
 
@@ -35,7 +39,7 @@ Organizations can be managed directly in the **Developer Portal**:
 - **Organization Settings**: Navigate to [{{DEVELOPER_PORTAL_URL}}/organizations]({{DEVELOPER_PORTAL_URL}}/organizations) to update organization name and view subscription tier.
 - **Portal Users**: Manage team access and roles at [{{DEVELOPER_PORTAL_URL}}/users]({{DEVELOPER_PORTAL_URL}}/users).
 - **Roles & Permissions**: Create and configure custom organization roles at [{{DEVELOPER_PORTAL_URL}}/roles]({{DEVELOPER_PORTAL_URL}}/roles).
-- **Customer Members**: Manage customer attribution and spending caps at [{{DEVELOPER_PORTAL_URL}}/members]({{DEVELOPER_PORTAL_URL}}/members).
+- **Customer Members**: Managed per project workspace at `{{DEVELOPER_PORTAL_URL}}/projects/[projectId]/members`.
 
 ---
 
@@ -43,5 +47,7 @@ Organizations can be managed directly in the **Developer Portal**:
 
 - Learn about project boundaries: [Projects & Workloads](projects.md)
 - Manage portal team members: [Portal Users](../developer-portal/users.md)
+- Customer Members architecture: [Customer Members](customer-members.md)
+- Portal Users vs Customer Members: [Portal Users vs Customer Members](portal-users-vs-customer-members.md)
 - Configure custom roles: [Roles & Permissions](../developer-portal/roles.md)
-- Manage customer spending caps: [Customer Members Directory](../developer-portal/members.md)
+

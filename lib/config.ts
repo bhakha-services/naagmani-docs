@@ -30,6 +30,10 @@ export const siteConfig = {
     'https://cloud.naagmani.ai'
   ).replace(/\/$/, ''),
 
+  get cloudUrl() {
+    return this.developerPortalUrl;
+  },
+
   githubUrl:
     process.env.NEXT_PUBLIC_GITHUB_REPO_URL ||
     'https://github.com/bhakha-services/naagmani-cli',

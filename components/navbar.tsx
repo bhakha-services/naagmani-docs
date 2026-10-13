@@ -16,6 +16,7 @@ export function Navbar({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void
 
   const navLinks = [
     { label: 'Get Started', href: '/docs/get-started/what-is-naagmani', activeMatch: '/docs/get-started' },
+    { label: 'Concepts', href: '/docs/concepts/organizations', activeMatch: '/docs/concepts' },
     { label: 'Developer Portal', href: '/docs/developer-portal/overview', activeMatch: '/docs/developer-portal' },
     { label: 'API Reference', href: '/docs/api/overview', activeMatch: '/docs/api' },
     { label: 'Marketplace', href: '/docs/marketplace/overview', activeMatch: '/docs/marketplace' },

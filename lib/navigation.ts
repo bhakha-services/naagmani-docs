@@ -25,6 +25,40 @@ export const navigationData: NavSection[] = [
     ],
   },
   {
+    title: 'ARCHITECTURE & CONCEPTS',
+    groups: [
+      {
+        title: 'Multi-Tenant Hierarchy',
+        items: [
+          { title: 'Organizations & Tenant Scope', href: '/docs/concepts/organizations' },
+          { title: 'Projects & Workspaces', href: '/docs/concepts/projects' },
+          { title: 'Project Environments (Test & Prod)', href: '/docs/concepts/environments' },
+        ],
+      },
+      {
+        title: 'Identity & Members',
+        items: [
+          { title: 'Customer Members (Project-Scoped)', href: '/docs/concepts/customer-members', badge: 'New' },
+          { title: 'Portal Users vs Customer Members', href: '/docs/concepts/portal-users-vs-customer-members', badge: 'Core' },
+          { title: 'Project Service Tokens (Machine Auth)', href: '/docs/concepts/project-service-tokens', badge: 'New' },
+          { title: 'Migration: Project-Scoped Members', href: '/docs/concepts/migration-project-scoped-members', badge: 'Guide' },
+        ],
+      },
+      {
+        title: 'Intelligence & FinOps',
+        items: [
+          { title: 'Smart Routing Policies', href: '/docs/concepts/routing', badge: 'Core' },
+          { title: 'Model Providers & BYOK', href: '/docs/concepts/providers' },
+          { title: 'Virtual Models & Aliases', href: '/docs/concepts/models' },
+          { title: 'API Keys & Security Boundaries', href: '/docs/concepts/api-keys' },
+          { title: 'FinOps & Spending Caps', href: '/docs/concepts/billing' },
+          { title: 'Usage Analytics & Attribution', href: '/docs/concepts/usage' },
+          { title: 'Plugins & Extensibility', href: '/docs/concepts/plugins' },
+        ],
+      },
+    ],
+  },
+  {
     title: 'DEVELOPER PORTAL',
     items: [
       { title: 'Overview & Dual Scopes', href: '/docs/developer-portal/overview' },
@@ -34,9 +68,9 @@ export const navigationData: NavSection[] = [
         title: 'Organization Management',
         items: [
           { title: 'Organizations & Hierarchy', href: '/docs/developer-portal/organization/organizations' },
-          { title: 'Portal Users & Access', href: '/docs/developer-portal/organization/users' },
+          { title: 'Portal Users & Team Access', href: '/docs/developer-portal/organization/users' },
           { title: 'Roles & Permissions (RBAC)', href: '/docs/developer-portal/organization/roles' },
-          { title: 'Customer Members', href: '/docs/developer-portal/organization/members' },
+          { title: 'Workspace Member Redirection', href: '/docs/developer-portal/members' },
           { title: 'Billing & Subscriptions', href: '/docs/developer-portal/organization/billing' },
           { title: 'Providers & Health (BYOK)', href: '/docs/developer-portal/organization/providers', badge: 'Core' },
         ],
@@ -45,6 +79,8 @@ export const navigationData: NavSection[] = [
         title: 'Projects & Workspaces',
         items: [
           { title: 'Projects & Environments', href: '/docs/developer-portal/projects/projects' },
+          { title: 'Customer Members Directory', href: '/docs/developer-portal/projects/members', badge: 'New' },
+          { title: 'Project Access & Assignments', href: '/docs/developer-portal/projects/access', badge: 'New' },
           { title: 'API Keys & Vault', href: '/docs/developer-portal/projects/api-keys' },
           { title: 'Project Service Tokens', href: '/docs/developer-portal/projects/service-tokens', badge: 'New' },
         ],
@@ -91,7 +127,9 @@ export const navigationData: NavSection[] = [
       { title: 'Responses API', href: '/docs/api/responses' },
       { title: 'Embeddings API', href: '/docs/api/embeddings' },
       { title: 'Models & Aliases API', href: '/docs/api/models' },
-      { title: 'Project Service Tokens API', href: '/docs/api/service-tokens' },
+      { title: 'Project Service Tokens API', href: '/docs/api/service-tokens', badge: 'New' },
+      { title: 'Customer Members API', href: '/docs/api/customer-members', badge: 'New' },
+      { title: 'Project User Access API', href: '/docs/api/project-access', badge: 'New' },
       { title: 'Provider Attempts API', href: '/docs/api/attempts' },
       { title: 'FinOps & Budgets API', href: '/docs/api/budgets' },
       { title: 'Errors & Status Codes', href: '/docs/api/errors' },

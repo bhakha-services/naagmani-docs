@@ -2,13 +2,18 @@
 
 The **Customer Members** directory allows you to manage end-user and application member identities for token usage attribution, per-member spending limits, and FinOps governance.
 
-- **Portal Page**: [{{DEVELOPER_PORTAL_URL}}/members]({{DEVELOPER_PORTAL_URL}}/members)
+> [!TIP]
+> **Project-Scoped Workspaces (Recommended)**  
+> In Naagmani 4.7+, Customer Members are managed natively within individual Project workspaces:  
+> Navigate to **Projects** -> Select Project -> **Members** ([Project Customer Members](projects/members.md)).  
+> Navigating to `{{DEVELOPER_PORTAL_URL}}/members` provides an intelligent workspace router that directs you to your authorized project.
 
 ```mermaid
 graph TD
-    Org["Organization (Global Budget Limit)"]
-    Org --> MemberA["Customer Member A ($100/mo)"]
-    Org --> MemberB["Customer Member B ($250/mo)"]
+    Org["Organization: Acme Corp"]
+    Org --> Project["Project: Support AI Workspace"]
+    Project --> MemberA["Customer Member A ($100/mo)"]
+    Project --> MemberB["Customer Member B ($250/mo)"]
     MemberA --> PST["Project Service Token (Attributed)"]
 ```
 
@@ -21,14 +26,14 @@ graph TD
 
 ## Setting Member-Specific Spending Limits
 
-1. Navigate to the **Customer Members** page at [{{DEVELOPER_PORTAL_URL}}/members]({{DEVELOPER_PORTAL_URL}}/members).
+1. Navigate to the project workspace **Members** page at `{{DEVELOPER_PORTAL_URL}}/projects/[projectId]/members`.
 2. Click **Add Customer Member** or select an existing member.
 3. In the member modal or budget modal, enter the desired **Daily Limit Amount** or **Monthly Limit Amount** (e.g. `$200.00`).
 4. Click **Save Budget**.
 
 > [!NOTE]
 > **Hierarchy Rule Enforcement**  
-> A member's spending limit cannot exceed the parent Organization's monthly limit. If the organization budget is $3,000, setting a member cap of $30,000 will be rejected with an error.
+> A member's spending limit cannot exceed the parent Project or Organization monthly limit. If the project budget ceiling is $500, setting a member cap of $1,000 will be rejected with an error.
 
 ---
 
@@ -36,12 +41,14 @@ graph TD
 
 Applications can attribute LLM inference calls to a specific Customer Member using:
 - The `X-Naagmani-Member-Id` HTTP header.
-- Binding the API Key or Service Token to a specific `member_id`.
+- Binding the API Key or Service Token to a specific `member_id` or `external_user_id`.
 
 ---
 
 ## Next Steps
 
+- [Project Customer Members](projects/members.md)
 - [Portal Users Management](users.md)
-- [Project Service Tokens](service-tokens.md)
-- [FinOps & Budget Controls](finops-budgets.md)
+- [Project Service Tokens](projects/service-tokens.md)
+- [Customer Members API Reference](/docs/api/customer-members)
+

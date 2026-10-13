@@ -30,7 +30,7 @@ Connect your local installation to Naagmani Cloud with one command:
 
 ```bash
 naagmani platform register \
-  --cloud-url https://cloud.naagmani.ai \
+  --cloud-url {{CLOUD_URL}} \
   --org-id org_your_company \
   --token <your-service-token-or-api-key>
 ```
@@ -72,6 +72,6 @@ When a subscription is renewed in Naagmani Cloud:
 1. Cloud issues a new signed license envelope with an extended `expires_at`.
 2. The installation automatically downloads the envelope during periodic sync or via CLI:
    ```bash
-   naagmani platform register --cloud-url https://cloud.naagmani.ai --org-id org_your_company
+   naagmani platform register --cloud-url {{CLOUD_URL}} --org-id org_your_company
    naagmani platform restart
    ```

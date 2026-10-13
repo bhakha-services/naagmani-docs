@@ -7,9 +7,11 @@ graph TD
     Project["Project: Customer Support AI"]
     Project --> Env1["Test Environment"]
     Project --> Env2["Production Environment"]
+    Project --> CM["Customer Members Directory (external_user_id)"]
+    Project --> Access["ProjectAccessAssignment (Portal Users)"]
+    Project --> ST["Project Service Tokens"]
     Project --> Agents["Autonomous Agents"]
     Project --> Tools["Registered Tools & MCP Servers"]
-    Project --> ST["Project Service Tokens"]
 ```
 
 ---
@@ -18,6 +20,8 @@ graph TD
 
 Projects enforce strict resource and credential isolation between different workloads:
 - **Credential Segregation**: API Keys and Service Tokens created in *Project A* cannot access models or resources in *Project B*.
+- **Customer Member Directory**: End-user identities (`external_user_id`) and individual budgets are strictly scoped per project.
+- **Portal User Assignment**: Team members are granted access to specific projects through [ProjectAccessAssignment](/docs/concepts/portal-users-vs-customer-members).
 - **Autonomous Agents**: Agents, prompt templates, skills, and MCP tools are scoped to the project.
 - **Budget Allocation**: Assign specific monthly budgets to individual projects to prevent runaway costs from affecting other teams.
 
@@ -27,6 +31,8 @@ Projects enforce strict resource and credential isolation between different work
 
 Every Project contains:
 - **Environments**: Two-tier isolation stages (`Test` and `Production`).
+- **Customer Members**: Workload and end-user directory with individual spending limits.
+- **Portal User Access**: Assigned developers and operators via `ProjectAccessAssignment`.
 - **Service Tokens**: Machine-to-machine credentials scoped to the project and environment.
 - **Routing Policies**: Custom fallback cascades and latency/cost optimization rules.
 - **Agent Ecosystem**: Autonomous agents, tools, skills, and MCP server integrations.
@@ -37,11 +43,14 @@ Every Project contains:
 
 1. Navigate to the **Projects** list at [{{DEVELOPER_PORTAL_URL}}/projects]({{DEVELOPER_PORTAL_URL}}/projects).
 2. Click **+ Create Project** to initialize a new workspace.
-3. Select any project to view its dedicated dashboard, service tokens, agents, and analytics.
+3. Select any project to view its dedicated dashboard, members, service tokens, agents, and analytics.
 
 ---
 
 ## Next Steps
 
 - Understand environment boundaries: [Environments & Isolation](/docs/concepts/environments)
+- Manage project customer members: [Customer Members](/docs/concepts/customer-members)
+- Assign team members: [Portal Users vs Customer Members](/docs/concepts/portal-users-vs-customer-members)
 - Issue project credentials: [Project Service Tokens](/docs/concepts/project-service-tokens)
+

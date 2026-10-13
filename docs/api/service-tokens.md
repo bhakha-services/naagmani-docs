@@ -2,6 +2,11 @@
 
 Programmatically issue, list, and revoke scoped Project Service Tokens, as well as provision and govern Child User Tokens via the B2B Partner Services Gateway.
 
+**Key Architecture Properties**:
+- **Scoped to Project & Environment**: Each Project Service Token (PST) is bound to an exact Project and Environment (`test` or `production`).
+- **Identity Attribution**: Calls made via PSTs can attribute usage to a specific Customer Member using the `X-Naagmani-Member-Id: mbr_...` or `X-Naagmani-External-User-Id: ...` header. The Member must belong to the same project.
+- **Child Token Provisioning**: Machine PSTs with `services.tokens.create` capability can provision ephemeral API keys directly mapped to customer members.
+
 **Surface**: Control Plane API & B2B Partner Gateway (`/v1/*`)
 
 ---

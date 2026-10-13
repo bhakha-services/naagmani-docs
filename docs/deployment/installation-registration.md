@@ -21,7 +21,7 @@ Run the registration command from your installation host:
 
 ```bash
 naagmani platform register \
-  --cloud-url https://cloud.naagmani.ai \
+  --cloud-url {{CLOUD_URL}} \
   --org-id org_01JTESTORG123 \
   --token <your-service-token-or-api-key>
 ```
