@@ -131,6 +131,10 @@ html.dark .prose pre {
 }
 
 .prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   width: 100%;
   border-collapse: collapse;
   margin: 1.5rem 0;
@@ -169,7 +173,7 @@ html.dark .prose pre {
   color: hsl(var(--foreground));
   font-weight: 700;
   letter-spacing: -0.02em;
-  scroll-margin-top: 5.5rem;
+  scroll-margin-top: 7rem;
 }
 
 .prose h1 {

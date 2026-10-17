@@ -1,48 +1,61 @@
-# Execution Hooks
+# Execution Hooks Pipeline
 
-Naagmani offers discrete hook interception points along the complete request/response lifecycle.
+Naagmani OS provides deterministic hook interception points across the complete request and response lifecycle:
 
 ```mermaid
 flowchart TD
-    A[Client Request] --> B[pre_auth]
-    B --> C[pre_route]
-    C --> D[pre_model_call]
-    D --> E[Upstream AI Execution]
-    E --> F[post_model_call]
-    F --> G[post_response]
-    G --> H[Client Response]
-    
-    E -.->|Error Encountered| I[on_error]
+    Req[Client Request] --> Auth[1. Auth & Tenant Context Resolution]
+    Auth --> RBefore[2. request.before: Inbound Inspection & PII Tokenization]
+    RBefore --> SmartRouter[3. Smart Router Policy & Provider Selection]
+    SmartRouter --> RAfter[4. request.after: Pre-Dispatch Read-Only Inspection]
+    RAfter --> PBefore[5. provider.before: Provider Network Boundary]
+    PBefore --> Provider[(Upstream LLM Provider)]
+    Provider --> PAfter[6. provider.after: Raw Response Interception]
+    PAfter --> RespBefore[7. response.before: Output Redaction & Transform]
+    RespBefore --> Egress[8. HTTP Client Response Delivery]
+    Egress --> RespAfter[9. response.after: Asynchronous Telemetry & Audit]
 ```
 
 ---
 
-## Supported Hook Points
+## Supported Lifecycle Hooks
 
-| Hook Name | When It Executes | Can Mutate Payload? | Common Use Cases |
-| :--- | :--- | :--- | :--- |
-| **`pre_auth`** | Before token validation and project context resolution. | Headers only | Custom JWT decryption, IP whitelisting. |
-| **`pre_route`** | After project auth, before selecting the upstream provider/model. | Yes (Full) | Semantic routing, RAG context enrichment, PII masking. |
-| **`pre_model_call`** | Immediately before dispatching payload to the selected provider adapter. | Yes (Provider payload) | Model-specific prompt formatting, token clipping. |
-| **`post_model_call`** | Immediately after provider response or first stream chunk. | Yes | Output moderation, toxic content filtering. |
-| **`post_response`** | Final stage before sending bytes to client. | Yes | Watermarking, telemetry calculation. |
-| **`on_error`** | Triggered when upstream provider returns 4xx/5xx or timeouts. | Error payload | Custom error formatting, alert webhooks. |
-
----
-
-## Hook Priority & Ordering
-
-Multiple plugins can attach to the same hook point. They execute strictly ordered by their `priority` integer in descending order:
-
-1. `Plugin A` (`priority: 100`)
-2. `Plugin B` (`priority: 50`)
-3. `Plugin C` (`priority: 10`)
-
-Each plugin receives the output resulting from the preceding plugin in the pipeline.
+| Hook Name | Execution Phase | Can Mutate Payload? | Common Use Cases |
+|---|---|---|---|
+| **`request.before`** | After auth, before smart router candidate selection. | **Yes** (Messages, model, parameters) | Semantic routing, RAG context enrichment, PII masking & tokenization, prompt injection defense. |
+| **`request.after`** | Immediately prior to provider dispatch. | No (Read-only) | Pre-dispatch audit logging, candidate confirmation. |
+| **`provider.before`**| At the provider network boundary. | **Yes** (Provider-formatted request) | Provider header signing, custom rate-limit wrapping. |
+| **`provider.after`** | Immediately after upstream provider response. | **Yes** (Raw provider payload) | Upstream error normalization, network latency telemetry. |
+| **`response.before`**| Before response delivery to client. | **Yes** (Choices, content, metadata) | Output moderation, toxic content filtering, client placeholder restoration. |
+| **`response.after`** | Asynchronous post-delivery phase. | No (Read-only) | Asynchronous token billing, telemetry calculation, compliance archiving. |
 
 ---
 
-## Next Steps
+## Hook Priority & Execution Order
 
-- [Permissions & Security](/docs/plugins/permissions)
-- [Plugin Development Guide](/docs/plugins/development)
+Multiple plugins can attach to the same hook point. They execute strictly ordered by the `priority` integer declared in `plugin.json`.
+
+**Rule**: Lower priority numbers execute **earlier** in the pipeline:
+1. `Plugin A` (`priority: 5`) — Executes first (e.g., Auth & Ingress Security)
+2. `Plugin B` (`priority: 10`) — Executes second (e.g., PII Redaction / Privacy Shield)
+3. `Plugin C` (`priority: 100`) — Executes third (e.g., Default Custom Filters)
+
+Each mutating plugin receives the payload resulting from the preceding plugin in the pipeline. If any plugin with `failure_policy: "fail_close"` returns a block decision or fails, the pipeline terminates immediately.
+
+---
+
+## Decisions
+
+Plugins communicate execution decisions back to the OS:
+
+- **`continue`**: Allow pipeline execution to proceed without modification.
+- **`modify`**: Provide replacement request or response payloads.
+- **`block`**: Immediately terminate the request with HTTP 403 Forbidden and a specified block reason.
+
+---
+
+## Related Documentation
+
+- [Plugin Manifest Specification](/docs/build/hdks/manifest)
+- [Plugin Lifecycle & Sandboxing](/docs/build/hdks/lifecycle)
+- [Building Plugins with HDK](/docs/build/hdks/development)

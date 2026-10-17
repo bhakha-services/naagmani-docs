@@ -31,7 +31,7 @@ flowchart TD
 
 ## Core HDK Capabilities
 
-1. **Pipeline Interception**: Inspect, mutate, or short-circuit requests at `pre_route`, `pre_model_call`, and `post_response` execution phases.
+1. **Pipeline Interception**: Inspect, mutate, or short-circuit requests at `request.before`, `provider.before`, and `response.before` execution phases.
 2. **Crash Resilience & Auto-Restart**: If a plugin process panics, the gateway supervisor isolates the failure, logs a diagnostic event, and restarts the worker without dropping active HTTP client connections.
 3. **Strict Resource Sandboxing**: Plugins execute with CPU/memory cgroup limits and restricted network access.
 

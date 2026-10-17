@@ -16,16 +16,18 @@ graph LR
 
 ## Key Capabilities
 
-1. **Multi-Language SDKs**: Author plugins in **Go**, **TypeScript/Node.js**, or **Python**.
-2. **Isolated Sandboxing**: Plugins run in isolated worker processes, ensuring custom code cannot crash the core gateway engine.
+1. **Multi-Language HDKs**: Author plugins in **Go**, **TypeScript/Node.js**, or **Python**.
+2. **Isolated Sandboxing**: Plugins run in isolated worker processes communicating over standard I/O via JSON-RPC 2.0 (`naagmani.plugin/v1`), ensuring custom code cannot crash the core gateway engine.
 3. **Execution Hooks**:
-   - `before_ingest`: Inspect incoming headers, validate custom tokens.
-   - `before_dispatch`: Mask sensitive PII/DLP data, inject system context, RAG vector retrieval.
-   - `after_complete`: Sanitize model responses, log analytics, trigger downstream webhooks.
+   - `request.before`: Inspect incoming headers, validate custom tokens, verify rate limits.
+   - `provider.before`: Mask sensitive PII/DLP data, inject system prompts, perform RAG vector retrieval.
+   - `response.before`: Sanitize model responses, restore encrypted Privacy Shield tokens, trigger downstream webhooks.
 
 ---
 
 ## Next Steps
 
-- Deep dive into plugin development: [Plugin Development Guide](../plugins/overview.md)
-- Plugin manifest specification: [Plugin Manifest](../plugins/manifest.md)
+- Deep dive into plugin development: [Building Custom Plugins](file:///e:/project/naagmani-project/naagmani-docs/docs/build/hdks/development.md)
+- Plugin manifest specification: [Plugin Manifest Schema](file:///e:/project/naagmani-project/naagmani-docs/docs/build/hdks/manifest.md)
+- Wire Protocol Reference: [HDK Wire Protocol v1](file:///e:/project/naagmani-project/naagmani-docs/docs/build/hdks/protocol.md)
+

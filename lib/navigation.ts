@@ -54,6 +54,8 @@ export const navigationData: NavSection[] = [
           { title: 'FinOps & Spending Caps', href: '/docs/concepts/billing' },
           { title: 'Usage Analytics & Attribution', href: '/docs/concepts/usage' },
           { title: 'Plugins & Extensibility', href: '/docs/concepts/plugins' },
+          { title: 'Inference Observability & Tracing', href: '/docs/security/inference-observability', badge: 'New' },
+          { title: 'Versioning & Lifecycle', href: '/docs/concepts/versioning' },
         ],
       },
     ],
@@ -111,7 +113,7 @@ export const navigationData: NavSection[] = [
           { title: 'Provider Attempts', href: '/docs/developer-portal/operations/attempts', badge: 'New' },
           { title: 'Usage & Token Analytics', href: '/docs/developer-portal/operations/usage' },
           { title: 'FinOps & Budget Controls', href: '/docs/developer-portal/operations/budgets' },
-          { title: 'Security Audit Logs', href: '/docs/developer-portal/operations/audit-logs' },
+          { title: 'Security Audit Logs & Tracing', href: '/docs/developer-portal/operations/audit-logs', badge: 'Core' },
           { title: 'Project Settings', href: '/docs/developer-portal/operations/settings' },
         ],
       },
@@ -142,6 +144,7 @@ export const navigationData: NavSection[] = [
       { title: 'Discover & Search', href: '/docs/marketplace/discover' },
       { title: 'Installation & Scope', href: '/docs/marketplace/installation' },
       { title: 'Publisher Portal', href: '/docs/marketplace/publishing' },
+      { title: 'Signing Ceremony & Trust', href: '/docs/marketplace/signing-ceremony' },
     ],
   },
   {
@@ -218,3 +221,94 @@ export function getPager(currentHref: string) {
   const next = currentIndex < pages.length - 1 ? pages[currentIndex + 1] : null;
   return { prev, next };
 }
+
+export interface HeaderNavTab {
+  id: string;
+  label: string;
+  href: string;
+  activeMatches: string[];
+  sectionTitle: string;
+}
+
+export const headerNavTabs: HeaderNavTab[] = [
+  {
+    id: 'get-started',
+    label: 'Get Started',
+    href: '/docs/get-started/what-is-naagmani',
+    activeMatches: ['/docs/get-started', '/docs/quickstart', '/docs/introduction'],
+    sectionTitle: 'GET STARTED',
+  },
+  {
+    id: 'concepts',
+    label: 'Concepts',
+    href: '/docs/concepts/organizations',
+    activeMatches: ['/docs/concepts', '/docs/security'],
+    sectionTitle: 'ARCHITECTURE & CONCEPTS',
+  },
+  {
+    id: 'developer-portal',
+    label: 'Developer Portal',
+    href: '/docs/developer-portal/overview',
+    activeMatches: ['/docs/developer-portal'],
+    sectionTitle: 'DEVELOPER PORTAL',
+  },
+  {
+    id: 'api',
+    label: 'API Reference',
+    href: '/docs/api/overview',
+    activeMatches: ['/docs/api'],
+    sectionTitle: 'API REFERENCE',
+  },
+  {
+    id: 'marketplace',
+    label: 'Marketplace',
+    href: '/docs/marketplace/overview',
+    activeMatches: ['/docs/marketplace'],
+    sectionTitle: 'MARKETPLACE',
+  },
+  {
+    id: 'build',
+    label: 'Build',
+    href: '/docs/build/sdks/overview',
+    activeMatches: ['/docs/build', '/docs/sdk', '/docs/cli', '/docs/plugins', '/docs/troubleshooting'],
+    sectionTitle: 'BUILD WITH NAAGMANI',
+  },
+  {
+    id: 'deploy',
+    label: 'Deploy',
+    href: '/docs/deploy/docker-compose',
+    activeMatches: ['/docs/deploy', '/docs/deployment', '/docs/production'],
+    sectionTitle: 'DEPLOYMENT & SELF-HOSTING',
+  },
+];
+
+export function getActiveSectionByPath(pathname: string): NavSection {
+  const normalizedPath = pathname.replace(/\/$/, '');
+
+  // 1. Check if pathname directly belongs to a header tab
+  const matchedTab = headerNavTabs.find((tab) =>
+    tab.activeMatches.some((prefix) => normalizedPath === prefix || normalizedPath.startsWith(prefix + '/'))
+  );
+  if (matchedTab) {
+    const found = navigationData.find((s) => s.title === matchedTab.sectionTitle);
+    if (found) return found;
+  }
+
+  // 2. Check if any item href in navigationData matches
+  for (const section of navigationData) {
+    if (section.items?.some((item) => item.href === normalizedPath || normalizedPath.startsWith(item.href))) {
+      return section;
+    }
+    if (
+      section.groups?.some((group) =>
+        group.items.some((item) => item.href === normalizedPath || normalizedPath.startsWith(item.href))
+      )
+    ) {
+      return section;
+    }
+  }
+
+  // 3. Fallback: Default to GET STARTED
+  return navigationData[0];
+}
+

@@ -112,7 +112,7 @@ export function Logo({ className = "" }: { className?: string }) {
         <span className="font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 text-base group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
           Naagmani
         </span>
-        <span className="px-1.5 py-0.5 text-[10px] font-mono font-bold tracking-wider rounded-md bg-emerald-100/70 text-emerald-800 border border-emerald-300/80 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/30">
+        <span className="hidden min-[380px]:inline-block px-1.5 py-0.5 text-[10px] font-mono font-bold tracking-wider rounded-md bg-emerald-100/70 text-emerald-800 border border-emerald-300/80 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/30">
           DOCS
         </span>
       </div>

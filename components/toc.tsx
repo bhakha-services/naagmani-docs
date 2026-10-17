@@ -36,7 +36,7 @@ export function TableOfContents({ headings }: TocProps) {
   if (!headings || headings.length === 0) return null;
 
   return (
-    <nav className="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto pl-4 text-sm" aria-label="Table of contents">
+    <nav className="w-full text-sm" aria-label="Table of contents">
       <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-3 font-semibold">
         <AlignLeft className="w-3.5 h-3.5 text-emerald-500" />
         <span>On this page</span>

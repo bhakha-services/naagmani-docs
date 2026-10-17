@@ -1,27 +1,25 @@
-# Security Audit Logs
+# Security Audit Logs & Request Observability
 
-Naagmani maintains an immutable compliance audit trail capturing every administrative event, credential modification, and security policy evaluation.
+Naagmani maintains an immutable compliance audit trail capturing every administrative event, credential modification, and 12-stage AI inference request trace across your organization.
 
-- **Portal Page**: [{{DEVELOPER_PORTAL_URL}}/audit-logs]({{DEVELOPER_PORTAL_URL}}/audit-logs)
-
----
-
-## Tracked Event Types
-
-- **Authentication**: `login.success`, `login.failure`, `password.reset`.
-- **Credentials**: `api_key.created`, `api_key.revoked`, `service_token.created`, `service_token.revoked`.
-- **Members**: `member.created`, `member.role_updated`, `member.budget_modified`.
-- **Providers & Vault**: `provider.created`, `provider.updated`, `vault.accessed`.
-- **Guardrails & Security**: `rate_limit.triggered`, `policy.violation`, `dlp.redacted`.
+- **Portal Location**: `Organization > Audit Logs` (`/audit-logs`) or `Projects > [Your Project] > Operations > Audit Logs` (`/projects/[slug]/audit-logs`)
+- **Canonical Operations Guide**: [Security Audit Logs & Inference Trace Observability](operations/audit-logs.md)
+- **Deep Architecture**: [Inference Payload Observability Architecture](../security/inference-observability.md)
 
 ---
 
-## Filtering Audit Events
+## Quick Navigation & Overview
 
-Use the interactive filter drawer to search events by **Actor User/Token**, **Event Type**, **HTTP Status**, and **Time Window**.
+The audit logging subsystem combines two key functions:
 
----
+1. **Administrative Audit Trail**: Every credential rotation (`api_key.created`, `api_key.revoked`), user invitation, role mutation, and log retention modification is immutably logged with actor attribution.
+2. **Inference Request Observability**: Deep lifecycle tracing across 12 authentic runtime stages, including Privacy Shield PII transformations and multi-boundary payload inspection.
 
-## Next Steps
+### Cryptographic Security at Rest
+To protect against database breaches, untrusted DBAs, and insider threats, all stored payloads are envelope-encrypted using **AES-256-GCM** keys wrapped by KMS, coupled with tenant-isolated Additional Authenticated Data (AAD). 
 
-- Security architecture: [Security & Governance](../security/overview.md)
+Viewing decrypted payloads requires an authorized **Privileged Reveal Protocol** (`audit.payload_reveal`) with mandatory business justification, generating an immutable audit trail event.
+
+For complete step-by-step instructions on configuring policies (`metadata_only`, `redacted_payload`, `encrypted_payload`), using the 12-stage timeline inspector, and viewing transformation diffs, see the full guide:
+
+👉 **[Read the Full Developer Portal Audit Logs Guide](operations/audit-logs.md)**

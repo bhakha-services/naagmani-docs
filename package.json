@@ -7,8 +7,10 @@
     "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start -H 0.0.0.0",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test:docs": "node scripts/check-docs.mjs"
   },
+
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.3",
     "@types/marked": "^5.0.2",

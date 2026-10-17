@@ -5,6 +5,7 @@ import { getAllDocSlugs, getDocBySlug } from '@/lib/docs';
 import { compileMarkdown } from '@/lib/markdown';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { TableOfContents } from '@/components/toc';
+import { MobileToc } from '@/components/mobile-toc';
 import { Pager } from '@/components/pager';
 import { StatusBadge } from '@/components/status-badge';
 import { MermaidRenderer } from '@/components/mermaid';
@@ -150,6 +151,9 @@ export default async function DocPage({ params }: PageProps) {
           )}
         </div>
 
+        {/* Mobile & Tablet Table of Contents */}
+        <MobileToc headings={doc.headings} />
+
         {/* Markdown Content */}
         <div
           className="prose dark:prose-invert max-w-none 2xl:prose-lg"
@@ -164,7 +168,7 @@ export default async function DocPage({ params }: PageProps) {
       </main>
 
       {/* Right Sidebar: Table of Contents */}
-      <div className="hidden xl:block w-64 2xl:w-72 3xl:w-80 flex-shrink-0 pl-6 2xl:pl-8 py-10 sticky top-16 max-h-[calc(100vh-4rem)] overflow-y-auto">
+      <div className="hidden xl:block w-64 2xl:w-72 3xl:w-80 flex-shrink-0 pl-6 2xl:pl-8 py-8 sticky top-[101px] max-h-[calc(100vh-101px)] overflow-y-auto scrollbar-none">
         <TableOfContents headings={doc.headings} />
       </div>
     </>

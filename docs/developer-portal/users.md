@@ -48,6 +48,7 @@ graph TD
 
 ## Next Steps
 
-- [Customer Members Directory](members.md)
-- [Access Control & Authorization](../security/authorization.md)
-- [Project Service Tokens](service-tokens.md)
+- [Customer Members Directory](/docs/developer-portal/projects/members)
+- [Access Control & Authorization](/docs/security/authorization)
+- [Project Service Tokens](/docs/developer-portal/projects/service-tokens)
+

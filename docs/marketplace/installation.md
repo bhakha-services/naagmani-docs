@@ -1,52 +1,92 @@
 # Installation & Scope Isolation
 
-Install capabilities from the marketplace with strict project and environment scope boundaries.
+Install capabilities, plugins, and tools from the marketplace with strict multi-tenant isolation, granular project assignment, and environment segregation.
 
 ---
 
-## Scope Isolation Principle
+## The 5-Phase Scoping Model
 
-Capabilities installed in Naagmani never leak across unrelated workspaces:
+Naagmani enforces a zero-implicit-trust model for all plugins and marketplace capabilities. A capability published globally never executes inside your workloads until it passes five independent administrative boundaries:
 
 ```mermaid
-graph TD
-    Marketplace["Marketplace Plugin: DLP Masker v1.0.0"]
-    Marketplace -->|Install to Project A| ProjA["Project A (E-Commerce)"]
-    Marketplace -->|Install to Project B| ProjB["Project B (Internal HR)"]
-
-    ProjA --> E1["Environment: production (Active)"]
-    ProjA --> E2["Environment: test (Disabled)"]
-
-    ProjB --> E3["Environment: test (Active with Custom Config)"]
+flowchart TD
+    Mkt["1. Marketplace Availability\n(Package published in catalog)"] --> Org["2. Organization Installation\n(Org admin approves & adds to org inventory)"]
+    Org --> Proj["3. Project Assignment\n(Project attaches capability to workspace)"]
+    Proj --> Env["4. Environment Enablement\n(Explicitly enabled in 'test' or 'production')"]
+    Env --> Auth["5. Runtime Authorization\n(Gateway checks tenant context & capabilities)"]
 ```
 
-1. **Targeted Workspace Installation**: You choose the exact Project and Environment (`test` or `production`) to attach the capability.
-2. **Dedicated Environment Variables**: Configuration secrets (such as API keys or webhook URLs) are encrypted and isolated per environment.
-3. **Independent Lifecycle Management**: Updating or uninstalling a plugin in `test` does not affect the `production` environment.
+---
+
+## Detailed Isolation Boundaries
+
+### Phase 1: Public Marketplace Availability
+- **Scope**: Global catalog.
+- **State**: The plugin package has passed automated linting, SHA-256 verification, and security scanning.
+- **Access**: Developers can discover and inspect the manifest. **No code executes** in any customer environment.
+
+### Phase 2: Organization Installation
+- **Scope**: Organization level (`org_id`).
+- **Permission**: Organization Admin or Owner.
+- **Action**: The organization downloads or references the signed artifact. The plugin is added to the organization's private capability registry.
+- **Isolation Guarantee**: Still not available to individual projects until explicitly assigned.
+
+### Phase 3: Project Assignment
+- **Scope**: Specific Project (`project_id`).
+- **Permission**: Project Admin or Developer.
+- **Action**: Project attaches the plugin to its pipeline configuration.
+- **Isolation Guarantee**: Other projects within the same organization remain completely unaffected and isolated.
+
+### Phase 4: Environment Enablement (`test` vs `production`)
+- **Scope**: Target deployment tier.
+- **Valid Environments**: Exactly `test` or `production`.
+- **Configuration & Secrets**:
+  - Environment variables, secret tokens, and webhook URLs are configured independently per tier.
+  - A plugin enabled in `test` is **never** automatically enabled in `production`.
+  - Upgrading a plugin version in `test` does not touch the pinned version running in `production`.
+
+### Phase 5: Runtime Authorization & Policy Enforcement
+- **Scope**: Per-request execution inside Naagmani OS gateway.
+- **Enforcement Layer**: `ProviderSecurityBoundary` and `PluginSupervisor`.
+- **Validation**:
+  - Validates `X-Project-Id` and `X-Environment` against the authenticated bearer token (`nst_live_...`).
+  - Cross-environment token substitution (e.g. using a `test` token in `production`) is rejected with HTTP 403 Forbidden.
+  - Declared capabilities (e.g., `dlp.mask`, `audit.log`) are checked against project policy before hook invocation.
 
 ---
 
-## Installing via Developer Portal
+## CLI Installation Commands
 
-1. Navigate to **Organization > Marketplace** (`/marketplace`).
-2. Select the desired item and click **Install**.
-3. In the installation modal:
-   - Select the target **Project**.
-   - Select the target **Environment** (`test` or `production`).
-   - Enter required environment configuration parameters.
-4. Click **Confirm Installation**. The capability is downloaded, validated against its SHA-256 checksum, and initialized within < 2 seconds.
-
----
-
-## Installing via CLI
+Install into a specific project and environment:
 
 ```bash
-naagmani marketplace install postgres-mcp-connector --project-id "proj_01J8F..." --environment "production"
+# Install to 'test' environment for integration verification
+naagmani plugin install email-guardrail \
+  --project-id "proj_01J8F9X..." \
+  --env "test" \
+  --version "1.0.0"
+
+# Promote to 'production' once verified
+naagmani plugin install email-guardrail \
+  --project-id "proj_01J8F9X..." \
+  --env "production" \
+  --version "1.0.0"
 ```
+
+---
+
+## Developer Portal Management
+
+1. Navigate to **Organization > Marketplace** (`/marketplace`).
+2. Click **Install** on the desired capability.
+3. Select the target **Project** and **Environment** (`test` or `production`).
+4. Configure environment-specific encrypted parameters (e.g. Slack Webhook, API endpoints).
+5. Click **Confirm Installation**. The gateway supervisor spawns and health-checks the isolated worker.
 
 ---
 
 ## Related Documentation
 
-- [Discover & Search](file:///e:/project/naagmani-project/naagmani-docs/docs/marketplace/discover.md)
-- [Plugins & Local Tools](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/capabilities/plugins.md)
+- [Environments & Cryptographic Isolation](file:///e:/project/naagmani-project/naagmani-docs/docs/concepts/environments.md)
+- [Marketplace Publishing Lifecycle](file:///e:/project/naagmani-project/naagmani-docs/docs/marketplace/publishing.md)
+- [CLI Plugin Reference](file:///e:/project/naagmani-project/naagmani-docs/docs/build/cli/plugins.md)

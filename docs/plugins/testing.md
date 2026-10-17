@@ -54,5 +54,6 @@ naagmani plugins benchmark ./ --concurrency 50 --requests 1000
 
 ## Next Steps
 
+- [Privacy Shield Local Testing Tutorial](/docs/plugins/privacy-shield-local-testing)
 - [Packaging & Publishing](/docs/plugins/publishing)
 - [Marketplace Installation](/docs/marketplace/installing-plugins)
