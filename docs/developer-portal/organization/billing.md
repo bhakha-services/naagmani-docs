@@ -42,5 +42,5 @@ Certain enterprise capabilities require specific entitlements. When an entitleme
 
 ## Related Documentation
 
-- [Organizations & Settings](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/organization/organizations.md)
-- [FinOps & Budgets](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/operations/budgets.md)
+- [Organizations & Settings](/developer-portal/organization/organizations)
+- [FinOps & Budgets](/developer-portal/operations/budgets)

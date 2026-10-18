@@ -129,7 +129,7 @@ export async function getDocBySlug(slug: string[]): Promise<DocPage | null> {
     }
   }
 
-  const slugPath = `/docs/${slug.join('/')}`;
+  const slugPath = `/${slug.join('/')}`;
 
   return {
     slug,
@@ -162,7 +162,7 @@ export function getAllDocs(): DocPage[] {
       
       docs.push({
         slug,
-        slugPath: `/docs/${slug.join('/')}`,
+        slugPath: `/${slug.join('/')}`,
         title,
         description: (frontmatter.description ? replaceEnvUrls(frontmatter.description) : undefined) || `Documentation for ${title}`,
         content,

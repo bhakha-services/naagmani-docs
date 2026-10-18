@@ -23,5 +23,5 @@ Add your `sk-ant-...` key in the Portal:
 
 ## Next Steps
 
-- [Google Gemini Integration](/docs/integrations/google)
-- [DeepSeek Integration](/docs/integrations/deepseek)
+- [Google Gemini Integration](/integrations/google)
+- [DeepSeek Integration](/integrations/deepseek)

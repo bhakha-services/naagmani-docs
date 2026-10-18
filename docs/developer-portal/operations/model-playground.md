@@ -38,6 +38,6 @@ graph LR
 
 ## Related Documentation
 
-- [Agent Playground](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/capabilities/agent-playground.md)
-- [Smart Routing Policies](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/governance-routing/routing.md)
-- [Chat Completions API](file:///e:/project/naagmani-project/naagmani-docs/docs/api/chat-completions.md)
+- [Agent Playground](/developer-portal/capabilities/agent-playground)
+- [Smart Routing Policies](/developer-portal/governance-routing/routing)
+- [Chat Completions API](/api/chat-completions)

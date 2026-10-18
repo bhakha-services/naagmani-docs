@@ -35,5 +35,5 @@ flowchart TD
 
 ## Next Steps
 
-- [Marketplace Overview](/docs/marketplace/overview)
-- [Troubleshooting Common Errors](/docs/troubleshooting/common-errors)
+- [Marketplace Overview](/marketplace/overview)
+- [Troubleshooting Common Errors](/troubleshooting/common-errors)

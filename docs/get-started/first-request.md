@@ -138,5 +138,5 @@ Every request you send is automatically captured:
 
 ## Next Steps
 
-- Explore [Smart Routing Policies](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/governance-routing/routing.md) to set up multi-model fallback cascades.
-- Review the complete [Chat Completions API Reference](file:///e:/project/naagmani-project/naagmani-docs/docs/api/chat-completions.md).
+- Explore [Smart Routing Policies](/developer-portal/governance-routing/routing) to set up multi-model fallback cascades.
+- Review the complete [Chat Completions API Reference](/api/chat-completions).

@@ -19,5 +19,5 @@ Naagmani streams multi-megabyte prompt payloads directly to Google endpoints wit
 
 ## Next Steps
 
-- [DeepSeek Integration](/docs/integrations/deepseek)
-- [Self-Hosted LLMs (Ollama & vLLM)](/docs/integrations/other-providers)
+- [DeepSeek Integration](/integrations/deepseek)
+- [Self-Hosted LLMs (Ollama & vLLM)](/integrations/other-providers)

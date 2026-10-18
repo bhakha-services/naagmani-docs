@@ -81,5 +81,5 @@ Naagmani API Keys follow a strict prefix convention for security and automated s
 
 ## Related Documentation
 
-- [Project Service Tokens](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/projects/service-tokens.md)
-- [API Authentication Reference](file:///e:/project/naagmani-project/naagmani-docs/docs/api/authentication.md)
+- [Project Service Tokens](/developer-portal/projects/service-tokens)
+- [API Authentication Reference](/api/authentication)

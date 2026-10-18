@@ -48,5 +48,5 @@ naagmani doctor
 
 ## Next Steps
 
-- Authenticate the CLI: [CLI Authentication](file:///e:/project/naagmani-project/naagmani-docs/docs/build/cli/authentication.md)
-- Explore all commands: [Command Reference](file:///e:/project/naagmani-project/naagmani-docs/docs/build/cli/commands.md)
+- Authenticate the CLI: [CLI Authentication](/build/cli/authentication)
+- Explore all commands: [Command Reference](/build/cli/commands)

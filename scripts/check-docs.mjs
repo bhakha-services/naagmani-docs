@@ -28,10 +28,21 @@ function resolveDocTarget(targetPath, sourceFile) {
     const rel = cleanTarget.replace('/docs/', '');
     candidate = path.join(docsDir, rel);
   } else if (cleanTarget.startsWith('/')) {
-    // Non-docs root link like /features/service-tokens
-    const appPage = path.join(rootDir, 'app', cleanTarget, 'page.tsx');
-    if (fs.existsSync(appPage)) return true;
-    return true; // Let non-docs app pages pass
+    const rel = cleanTarget.replace(/^\//, '');
+    const docCandidate = path.join(docsDir, rel);
+    if (
+      fs.existsSync(docCandidate) ||
+      fs.existsSync(docCandidate + '.md') ||
+      fs.existsSync(docCandidate + '.mdx') ||
+      fs.existsSync(path.join(docCandidate, 'index.md')) ||
+      fs.existsSync(path.join(docCandidate, 'index.mdx'))
+    ) {
+      candidate = docCandidate;
+    } else {
+      const appPage = path.join(rootDir, 'app', cleanTarget, 'page.tsx');
+      if (fs.existsSync(appPage)) return true;
+      candidate = docCandidate;
+    }
   } else if (cleanTarget.startsWith('file:///')) {
     // Local workspace link: strip scheme and normalize
     let localPath = cleanTarget.replace('file:///', '');

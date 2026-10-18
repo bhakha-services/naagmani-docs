@@ -53,6 +53,6 @@ Naagmani enforces strict project authorization boundaries:
 
 ## Related Documentation
 
-- [Portal Users vs Customer Members](/docs/concepts/portal-users-vs-customer-members)
-- [Project Access API Reference](/docs/api/project-access)
+- [Portal Users vs Customer Members](/concepts/portal-users-vs-customer-members)
+- [Project Access API Reference](/api/project-access)
 - [Project Customer Members](members.md)

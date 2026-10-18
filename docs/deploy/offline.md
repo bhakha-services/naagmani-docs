@@ -36,5 +36,5 @@ graph LR
 
 ## Related Documentation
 
-- [Providers & BYOK (Self-Hosted)](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/organization/providers.md)
-- [Docker Compose Deployment](file:///e:/project/naagmani-project/naagmani-docs/docs/deploy/docker-compose.md)
+- [Providers & BYOK (Self-Hosted)](/developer-portal/organization/providers)
+- [Docker Compose Deployment](/deploy/docker-compose)

@@ -53,5 +53,5 @@ Validates upstream completions against safety categories (hate speech, self-harm
 
 ## Related Documentation
 
-- [Smart Routing Policies](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/governance-routing/routing.md)
-- [Security Audit Logs](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/operations/audit-logs.md)
+- [Smart Routing Policies](/developer-portal/governance-routing/routing)
+- [Security Audit Logs](/developer-portal/operations/audit-logs)

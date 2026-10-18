@@ -52,5 +52,5 @@ graph TD
 
 ## Related Documentation
 
-- [Coolify Deployment](file:///e:/project/naagmani-project/naagmani-docs/docs/deploy/coolify.md)
-- [Air-Gapped & Offline Setup](file:///e:/project/naagmani-project/naagmani-docs/docs/deploy/offline.md)
+- [Coolify Deployment](/deploy/coolify)
+- [Air-Gapped & Offline Setup](/deploy/offline)

@@ -60,5 +60,5 @@ naagmani completion fish > ~/.config/fish/completions/naagmani.fish
 
 ## Next Steps
 
-- [CLI Authentication & Contexts](/docs/cli/authentication)
-- [Commands Reference](/docs/cli/commands)
+- [CLI Authentication & Contexts](/cli/authentication)
+- [Commands Reference](/cli/commands)

@@ -19,7 +19,7 @@ In Naagmani's tenant hierarchy:
 $$\text{Organization} \longrightarrow \text{Projects} \longrightarrow \text{Customer Members}$$
 
 - **Strict Project Scoping**: Every customer member belongs to exactly one `project_id`. A customer member in *Project Alpha* has no visibility or standing in *Project Beta*.
-- **Domain Separation**: Customer members are **application entities** (API consumers, end users). They do **not** have human login credentials to the Developer Portal. For human team members with portal access, see [Portal Users vs Customer Members](/docs/concepts/portal-users-vs-customer-members).
+- **Domain Separation**: Customer members are **application entities** (API consumers, end users). They do **not** have human login credentials to the Developer Portal. For human team members with portal access, see [Portal Users vs Customer Members](/concepts/portal-users-vs-customer-members).
 
 ---
 
@@ -68,6 +68,6 @@ AI inference executed by applications can attribute token usage and cost directl
 
 ## Next Steps
 
-- [Portal Users vs Customer Members](/docs/concepts/portal-users-vs-customer-members)
-- [Customer Members API Reference](/docs/api/customer-members)
-- [Project Service Tokens](/docs/concepts/project-service-tokens)
+- [Portal Users vs Customer Members](/concepts/portal-users-vs-customer-members)
+- [Customer Members API Reference](/api/customer-members)
+- [Project Service Tokens](/concepts/project-service-tokens)

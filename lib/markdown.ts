@@ -187,9 +187,21 @@ export async function compileMarkdown(content: string, currentSlug: string[]): P
       const text = this.parser.parseInline(tokens);
       let targetHref = href;
 
-      // Handle relative .md links
+      // Handle file:/// links: convert to clean web docs path
+      if (targetHref && targetHref.startsWith('file:///')) {
+        let localPath = decodeURIComponent(targetHref.replace('file:///', ''));
+        const docsIdx = localPath.indexOf('/docs/');
+        const docsIdxBackslash = localPath.indexOf('\\docs\\');
+        if (docsIdx !== -1) {
+          targetHref = '/' + localPath.slice(docsIdx + 6).replace(/\\/g, '/').replace(/\.mdx?$/, '');
+        } else if (docsIdxBackslash !== -1) {
+          targetHref = '/' + localPath.slice(docsIdxBackslash + 6).replace(/\\/g, '/').replace(/\.mdx?$/, '');
+        }
+      }
+
+      // Handle relative .md links or paths starting with /docs/
       if (targetHref && !targetHref.startsWith('http') && !targetHref.startsWith('#') && !targetHref.startsWith('mailto:')) {
-        let cleanPath = targetHref.replace(/\.md$/, '');
+        let cleanPath = targetHref.replace(/\.mdx?$/, '');
         
         if (cleanPath.startsWith('../')) {
           // relative to parent
@@ -201,14 +213,20 @@ export async function compileMarkdown(content: string, currentSlug: string[]): P
             upCount++;
           }
           const baseSlug = parentSlug.slice(0, Math.max(0, parentSlug.length - (upCount - 1)));
-          targetHref = `/docs/${[...baseSlug, ...parts].join('/')}`;
+          targetHref = `/${[...baseSlug, ...parts].join('/')}`;
         } else if (!cleanPath.startsWith('/') && !cleanPath.startsWith('./')) {
           // relative to current directory
           const currentDir = currentSlug.slice(0, -1);
-          targetHref = `/docs/${[...currentDir, cleanPath].join('/')}`;
+          targetHref = `/${[...currentDir, cleanPath].join('/')}`;
         } else if (cleanPath.startsWith('./')) {
           const currentDir = currentSlug.slice(0, -1);
-          targetHref = `/docs/${[...currentDir, cleanPath.slice(2)].join('/')}`;
+          targetHref = `/${[...currentDir, cleanPath.slice(2)].join('/')}`;
+        } else if (cleanPath.startsWith('/docs/')) {
+          targetHref = cleanPath.replace(/^\/docs/, '');
+        } else if (cleanPath === '/docs') {
+          targetHref = '/get-started/what-is-naagmani';
+        } else {
+          targetHref = cleanPath;
         }
       }
 

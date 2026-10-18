@@ -60,5 +60,5 @@ export NAAGMANI_BASE_URL="http://localhost:8080/v1"
 ## Next Steps
 
 Now that you have configured a provider and generated an API key, proceed to:
-- [Make Your First AI Request](file:///e:/project/naagmani-project/naagmani-docs/docs/get-started/first-request.md)
-- Learn about [Project Service Tokens](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/projects/service-tokens.md) for automated microservices.
+- [Make Your First AI Request](/get-started/first-request)
+- Learn about [Project Service Tokens](/developer-portal/projects/service-tokens) for automated microservices.

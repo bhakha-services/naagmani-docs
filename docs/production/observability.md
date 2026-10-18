@@ -31,5 +31,5 @@ Pre-built dashboards are provided in the official repository under `/deploy/graf
 
 ## Next Steps
 
-- [Scaling & Concurrency](/docs/production/scaling)
-- [Marketplace Overview](/docs/marketplace/overview)
+- [Scaling & Concurrency](/production/scaling)
+- [Marketplace Overview](/marketplace/overview)

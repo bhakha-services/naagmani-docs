@@ -28,5 +28,5 @@ Plugins **never** have direct access to provider API keys (e.g. your master Open
 
 ## Next Steps
 
-- [Building a Plugin: Step-by-Step](/docs/plugins/development)
-- [Testing & Validation](/docs/plugins/testing)
+- [Building a Plugin: Step-by-Step](/plugins/development)
+- [Testing & Validation](/plugins/testing)

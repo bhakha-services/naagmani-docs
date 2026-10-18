@@ -49,7 +49,7 @@ When a candidate model is selected:
 2. **Execution Attempt #1**: The gateway dispatches the request to Candidate #1 with a configurable timeout (e.g. 10s).
 3. **Trigger Evaluation**: If Candidate #1 returns **HTTP 429 (Rate Limit)**, **HTTP 5xx (Server Error)**, **HTTP 529 (Overloaded)**, or hits a network timeout, the gateway catches the exception.
 4. **Instant Cascade to Candidate #2**: Without disconnecting the client or breaking an active SSE stream header, the gateway dispatches the payload to Candidate #2.
-5. **Telemetry Logging**: Every attempt hop is permanently logged with status and latency in [Provider Attempts](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/operations/attempts.md).
+5. **Telemetry Logging**: Every attempt hop is permanently logged with status and latency in [Provider Attempts](/developer-portal/operations/attempts).
 
 ---
 
@@ -90,12 +90,12 @@ curl -X POST http://localhost:8080/v1/chat/completions \
 | Symptom | Cause | Resolution |
 |---|---|---|
 | `404 Not Found: model alias not found` | The requested model name does not match any active policy or provider model in this project/environment. | Verify the policy name in **Routing Policies** and check environment selection (`test` vs `production`). |
-| All candidates fail in cascade | All upstream provider keys are expired or hit global quotas simultaneously. | Check [Providers & Health](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/organization/providers.md) to inspect real-time provider statuses. |
+| All candidates fail in cascade | All upstream provider keys are expired or hit global quotas simultaneously. | Check [Providers & Health](/developer-portal/organization/providers) to inspect real-time provider statuses. |
 
 ---
 
 ## Related Documentation
 
-- [Providers & Health (BYOK)](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/organization/providers.md)
-- [Provider Attempt Accounting](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/operations/attempts.md)
-- [Chat Completions API](file:///e:/project/naagmani-project/naagmani-docs/docs/api/chat-completions.md)
+- [Providers & Health (BYOK)](/developer-portal/organization/providers)
+- [Provider Attempt Accounting](/developer-portal/operations/attempts)
+- [Chat Completions API](/api/chat-completions)

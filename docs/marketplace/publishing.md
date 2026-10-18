@@ -110,7 +110,7 @@ flowchart TD
 
 ## Related Documentation
 
-- [Marketplace Signing Ceremony & Trust Authority](file:///e:/project/naagmani-project/naagmani-docs/docs/marketplace/signing-ceremony.md)
-- [HDK Plugin Packaging & Publishing](file:///e:/project/naagmani-project/naagmani-docs/docs/build/hdks/publishing.md)
-- [Marketplace Installation & Scope Isolation](file:///e:/project/naagmani-project/naagmani-docs/docs/marketplace/installation.md)
-- [CLI Plugin Commands](file:///e:/project/naagmani-project/naagmani-docs/docs/build/cli/plugins.md)
+- [Marketplace Signing Ceremony & Trust Authority](/marketplace/signing-ceremony)
+- [HDK Plugin Packaging & Publishing](/build/hdks/publishing)
+- [Marketplace Installation & Scope Isolation](/marketplace/installation)
+- [CLI Plugin Commands](/build/cli/plugins)

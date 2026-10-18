@@ -95,6 +95,6 @@ fmt.Printf("Generated Secret: %s
 
 ## Next Steps
 
-- [Node.js / TypeScript SDK](/docs/sdk/node)
-- [Python SDK](/docs/sdk/python)
-- [API Reference](/docs/api/overview)
+- [Node.js / TypeScript SDK](/sdk/node)
+- [Python SDK](/sdk/python)
+- [API Reference](/api/overview)

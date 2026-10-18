@@ -71,12 +71,12 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
   if (!isOpen) return null;
 
   const quickLinks = [
-    { title: 'What is Naagmani?', href: '/docs/introduction/what-is-naagmani', section: 'Introduction' },
-    { title: 'Quickstart Guide', href: '/docs/quickstart/overview', section: 'Quickstart' },
-    { title: 'Chat Completions API', href: '/docs/api/chat-completions', section: 'API Reference' },
-    { title: 'Smart Model Routing', href: '/docs/concepts/routing', section: 'Concepts' },
-    { title: 'Go HDK', href: '/docs/sdk/go', section: 'SDKs' },
-    { title: 'CLI Commands', href: '/docs/cli/commands', section: 'CLI' },
+    { title: 'What is Naagmani?', href: '/get-started/what-is-naagmani', section: 'Get Started' },
+    { title: 'Quickstart Guide', href: '/get-started/quickstart', section: 'Get Started' },
+    { title: 'Chat Completions API', href: '/api/chat-completions', section: 'API Reference' },
+    { title: 'Smart Model Routing', href: '/concepts/routing', section: 'Concepts' },
+    { title: 'Go SDK', href: '/build/sdks/go', section: 'SDKs' },
+    { title: 'CLI Commands', href: '/build/cli/commands', section: 'CLI' },
   ];
 
   return (

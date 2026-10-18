@@ -138,7 +138,7 @@ client := openai.NewClientWithConfig(config)
 
 ## Related Documentation
 
-- [Chat Completions API Reference](file:///e:/project/naagmani-project/naagmani-docs/docs/api/chat-completions.md)
-- [Project Service Tokens](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/projects/service-tokens.md)
-- [HDK Plugin Development in Go](file:///e:/project/naagmani-project/naagmani-docs/docs/build/hdks/development.md)
+- [Chat Completions API Reference](/api/chat-completions)
+- [Project Service Tokens](/developer-portal/projects/service-tokens)
+- [HDK Plugin Development in Go](/build/hdks/development)
 

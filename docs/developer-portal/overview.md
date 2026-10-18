@@ -108,7 +108,7 @@ graph TD
 ## Next Steps
 
 Explore specific Developer Portal capabilities:
-- [Organizations & Settings](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/organization/organizations.md)
-- [Providers & BYOK Health](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/organization/providers.md)
-- [Projects & Environments](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/projects/projects.md)
-- [Smart Routing Policies](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/governance-routing/routing.md)
+- [Organizations & Settings](/developer-portal/organization/organizations)
+- [Providers & BYOK Health](/developer-portal/organization/providers)
+- [Projects & Environments](/developer-portal/projects/projects)
+- [Smart Routing Policies](/developer-portal/governance-routing/routing)

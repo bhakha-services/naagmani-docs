@@ -43,5 +43,5 @@ All 7 checks passed successfully!
 
 ## Related Documentation
 
-- [Command Reference](file:///e:/project/naagmani-project/naagmani-docs/docs/build/cli/commands.md)
-- [CLI Authentication](file:///e:/project/naagmani-project/naagmani-docs/docs/build/cli/authentication.md)
+- [Command Reference](/build/cli/commands)
+- [CLI Authentication](/build/cli/authentication)

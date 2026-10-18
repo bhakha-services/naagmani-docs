@@ -37,5 +37,5 @@ naagmani plugins publish ./dist/pii-guard-1.0.0.tar.gz --scope organization --vi
 
 ## Next Steps
 
-- [Marketplace Overview](/docs/marketplace/overview)
-- [Installing Plugins into Environments](/docs/marketplace/installing-plugins)
+- [Marketplace Overview](/marketplace/overview)
+- [Installing Plugins into Environments](/marketplace/installing-plugins)

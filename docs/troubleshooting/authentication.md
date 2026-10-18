@@ -23,5 +23,5 @@ curl {{API_BASE_URL}}/v1/organizations/{org_id}/service-tokens \
 
 ## Next Steps
 
-- [Plugin Debugging](/docs/troubleshooting/plugins)
-- [CLI Diagnostics](/docs/troubleshooting/cli)
+- [Plugin Debugging](/troubleshooting/plugins)
+- [CLI Diagnostics](/troubleshooting/cli)

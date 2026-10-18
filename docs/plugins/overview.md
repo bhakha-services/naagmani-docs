@@ -39,9 +39,9 @@ A Naagmani plugin consists of three primary components:
 
 | Component | Description | Reference |
 | :--- | :--- | :--- |
-| **Manifest (`plugin.json`)** | Metadata, capabilities, entrypoint binaries, and requested permissions. | [Plugin Manifest](/docs/plugins/manifest) |
-| **Executable Hook Binary** | The compiled logic (Go, Rust, Python, or Node.js) communicating over the v1 Wire Protocol. | [Wire Protocol](/docs/plugins/protocol) |
-| **Config Schema** | JSON schema defining user-configurable runtime parameters in the Developer Portal. | [Portal Settings](/docs/developer-portal/overview) |
+| **Manifest (`plugin.json`)** | Metadata, capabilities, entrypoint binaries, and requested permissions. | [Plugin Manifest](/plugins/manifest) |
+| **Executable Hook Binary** | The compiled logic (Go, Rust, Python, or Node.js) communicating over the v1 Wire Protocol. | [Wire Protocol](/plugins/protocol) |
+| **Config Schema** | JSON schema defining user-configurable runtime parameters in the Developer Portal. | [Portal Settings](/developer-portal/overview) |
 
 ---
 
@@ -79,7 +79,7 @@ You can inspect, activate, configure, and monitor plugins directly from the Deve
 
 ## Next Steps
 
-- [Plugin Architecture & Isolation](/docs/plugins/architecture)
-- [Plugin Manifest Specification](/docs/plugins/manifest)
-- [Wire Protocol (v1)](/docs/plugins/protocol)
-- [Go Plugin HDK Guide](/docs/sdk/go)
+- [Plugin Architecture & Isolation](/plugins/architecture)
+- [Plugin Manifest Specification](/plugins/manifest)
+- [Wire Protocol (v1)](/plugins/protocol)
+- [Go Plugin HDK Guide](/sdk/go)

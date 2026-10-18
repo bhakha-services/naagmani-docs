@@ -25,5 +25,5 @@ If your plugin performs heavy remote HTTP lookups or embedding calculations, inc
 
 ## Next Steps
 
-- [CLI Diagnostics](/docs/troubleshooting/cli)
-- [Common Errors Guide](/docs/troubleshooting/common-errors)
+- [CLI Diagnostics](/troubleshooting/cli)
+- [Common Errors Guide](/troubleshooting/common-errors)

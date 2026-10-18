@@ -37,5 +37,5 @@ Common errors encountered when using the `naagmani` CLI and their resolutions.
 
 ## Next Steps
 
-- [Common Errors Guide](/docs/troubleshooting/common-errors)
-- [Developer Portal CLI Guide](/docs/developer-portal/cli-workflow)
+- [Common Errors Guide](/troubleshooting/common-errors)
+- [Developer Portal CLI Guide](/developer-portal/cli-workflow)

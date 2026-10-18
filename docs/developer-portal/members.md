@@ -50,5 +50,5 @@ Applications can attribute LLM inference calls to a specific Customer Member usi
 - [Project Customer Members](projects/members.md)
 - [Portal Users Management](users.md)
 - [Project Service Tokens](projects/service-tokens.md)
-- [Customer Members API Reference](/docs/api/customer-members)
+- [Customer Members API Reference](/api/customer-members)
 

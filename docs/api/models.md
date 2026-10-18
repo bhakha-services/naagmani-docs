@@ -95,5 +95,5 @@ curl -X GET http://localhost:8080/v1/models/smart \
 
 ## Related Documentation
 
-- [Smart Routing Policies](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/governance-routing/routing.md)
-- [Chat Completions API](file:///e:/project/naagmani-project/naagmani-docs/docs/api/chat-completions.md)
+- [Smart Routing Policies](/developer-portal/governance-routing/routing)
+- [Chat Completions API](/api/chat-completions)

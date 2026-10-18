@@ -79,6 +79,6 @@ is **permanently excluded and strictly rejected** by the Naagmani OS production 
 
 ## Related Documentation
 
-- [Marketplace Publishing & Lifecycle](file:///e:/project/naagmani-project/naagmani-docs/docs/marketplace/publishing.md)
-- [Plugin Installation & Scope Isolation](file:///e:/project/naagmani-project/naagmani-docs/docs/marketplace/installation.md)
-- [Production Vault Operations](file:///e:/project/naagmani-project/naagmani/naagmani-os/docs/production-vault-operations.md)
+- [Marketplace Publishing & Lifecycle](/marketplace/publishing)
+- [Plugin Installation & Scope Isolation](/marketplace/installation)
+- [Production Vault & API Keys](/developer-portal/projects/api-keys)

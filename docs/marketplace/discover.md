@@ -38,5 +38,5 @@ Found 2 capabilities:
 
 ## Related Documentation
 
-- [Installation & Scope Isolation](file:///e:/project/naagmani-project/naagmani-docs/docs/marketplace/installation.md)
-- [Publisher Portal](file:///e:/project/naagmani-project/naagmani-docs/docs/marketplace/publishing.md)
+- [Installation & Scope Isolation](/marketplace/installation)
+- [Publisher Portal](/marketplace/publishing)

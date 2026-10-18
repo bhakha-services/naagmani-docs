@@ -38,7 +38,7 @@ export default function NotFound() {
             </button>
 
             <Link
-              href="/docs/introduction/what-is-naagmani"
+              href="/get-started/what-is-naagmani"
               className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-semibold text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700 transition-colors flex items-center justify-center gap-2"
             >
               <BookOpen className="w-3.5 h-3.5" />
@@ -48,11 +48,11 @@ export default function NotFound() {
 
           <div className="pt-8 border-t border-zinc-200 dark:border-zinc-800">
             <Link
-              href="/"
+              href="/get-started/what-is-naagmani"
               className="text-xs text-zinc-500 hover:text-emerald-500 transition-colors inline-flex items-center gap-1"
             >
               <Home className="w-3.5 h-3.5" />
-              Return to Homepage
+              Return to Documentation
             </Link>
           </div>
         </div>

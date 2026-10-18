@@ -62,6 +62,6 @@ To ensure documentation never diverges from active runtime code, all repository 
 
 ## Related Documentation
 
-- [HDK Wire Protocol Specification](file:///e:/project/naagmani-project/naagmani-docs/docs/build/hdks/protocol.md)
-- [Marketplace Publishing & Lifecycle](file:///e:/project/naagmani-project/naagmani-docs/docs/marketplace/publishing.md)
-- [CLI Command Reference](file:///e:/project/naagmani-project/naagmani-docs/docs/build/cli/commands.md)
+- [HDK Wire Protocol Specification](/build/hdks/protocol)
+- [Marketplace Publishing & Lifecycle](/marketplace/publishing)
+- [CLI Command Reference](/build/cli/commands)

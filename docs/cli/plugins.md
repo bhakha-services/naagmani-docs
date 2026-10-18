@@ -57,5 +57,5 @@ naagmani plugins publish ./dist/plugin.tar.gz --scope organization
 
 ## Next Steps
 
-- [CLI Troubleshooting](/docs/cli/troubleshooting)
-- [Marketplace Overview](/docs/marketplace/overview)
+- [CLI Troubleshooting](/cli/troubleshooting)
+- [Marketplace Overview](/marketplace/overview)

@@ -44,12 +44,12 @@ Example:
 - `deepseek-chat`: $0.14 / 1M prompt tokens, $0.28 / 1M completion tokens.
 - `gpt-4o`: $2.50 / 1M prompt tokens, $10.00 / 1M completion tokens.
 
-When using the [Lowest Cost Routing Strategy](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/governance-routing/routing.md), the router uses these exact rate books to choose the cheapest model in real time.
+When using the [Lowest Cost Routing Strategy](/developer-portal/governance-routing/routing), the router uses these exact rate books to choose the cheapest model in real time.
 
 ---
 
 ## Related Documentation
 
-- [Usage & Token Analytics](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/operations/usage.md)
-- [Smart Routing Policies](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/governance-routing/routing.md)
-- [FinOps & Budgets API](file:///e:/project/naagmani-project/naagmani-docs/docs/api/budgets.md)
+- [Usage & Token Analytics](/developer-portal/operations/usage)
+- [Smart Routing Policies](/developer-portal/governance-routing/routing)
+- [FinOps & Budgets API](/api/budgets)

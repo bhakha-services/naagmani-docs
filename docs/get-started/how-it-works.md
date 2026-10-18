@@ -131,6 +131,6 @@ graph TD
 
 ## Next Steps
 
-- Get started with your first project: [Quickstart Guide](file:///e:/project/naagmani-project/naagmani-docs/docs/get-started/quickstart.md)
-- Learn how to send inference requests: [Make Your First AI Request](file:///e:/project/naagmani-project/naagmani-docs/docs/get-started/first-request.md)
-- Explore the Developer Portal: [Developer Portal Overview](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/overview.md)
+- Get started with your first project: [Quickstart Guide](/get-started/quickstart)
+- Learn how to send inference requests: [Make Your First AI Request](/get-started/first-request)
+- Explore the Developer Portal: [Developer Portal Overview](/developer-portal/overview)

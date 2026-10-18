@@ -25,5 +25,5 @@ naagmani plugins install com.company.pii-guard --env production
 
 ## Next Steps
 
-- [Publishing Your Own Plugins](/docs/marketplace/publishing)
-- [Plugin Visibility & Scopes](/docs/marketplace/plugin-visibility)
+- [Publishing Your Own Plugins](/marketplace/publishing)
+- [Plugin Visibility & Scopes](/marketplace/plugin-visibility)

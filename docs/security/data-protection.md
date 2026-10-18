@@ -22,5 +22,5 @@ Configure guardrails in the Portal:
 
 ## Next Steps
 
-- [Security Audit Logs](/docs/security/audit-logs)
-- [Production Operations Overview](/docs/production/overview)
+- [Security Audit Logs](/security/audit-logs)
+- [Production Operations Overview](/production/overview)

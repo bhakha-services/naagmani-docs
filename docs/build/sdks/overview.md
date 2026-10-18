@@ -35,9 +35,9 @@ graph TD
 
 | Language / Runtime | Package Name | Minimum Version | Installation | Guide |
 |---|---|---|---|---|
-| **Node.js / TypeScript** | `@naagmani/sdk` | Node.js 18+ / TS 5+ | `npm install @naagmani/sdk` | [Node.js & TypeScript SDK](file:///e:/project/naagmani-project/naagmani-docs/docs/build/sdks/node.md) |
-| **Python** | `naagmani-sdk` | Python 3.9+ | `pip install naagmani-sdk` | [Python SDK](file:///e:/project/naagmani-project/naagmani-docs/docs/build/sdks/python.md) |
-| **Go** | `github.com/bhakha-services/naagmani-sdk-go` | Go 1.22+ | `go get github.com/bhakha-services/naagmani-sdk-go` | [Go SDK](file:///e:/project/naagmani-project/naagmani-docs/docs/build/sdks/go.md) |
+| **Node.js / TypeScript** | `@naagmani/sdk` | Node.js 18+ / TS 5+ | `npm install @naagmani/sdk` | [Node.js & TypeScript SDK](/build/sdks/node) |
+| **Python** | `naagmani-sdk` | Python 3.9+ | `pip install naagmani-sdk` | [Python SDK](/build/sdks/python) |
+| **Go** | `github.com/bhakha-services/naagmani-sdk-go` | Go 1.22+ | `go get github.com/bhakha-services/naagmani-sdk-go` | [Go SDK](/build/sdks/go) |
 
 ---
 
@@ -76,8 +76,8 @@ const client = new OpenAI({
 
 ## Next Steps
 
-- [Node.js & TypeScript SDK](file:///e:/project/naagmani-project/naagmani-docs/docs/build/sdks/node.md)
-- [Python SDK](file:///e:/project/naagmani-project/naagmani-docs/docs/build/sdks/python.md)
-- [Go SDK](file:///e:/project/naagmani-project/naagmani-docs/docs/build/sdks/go.md)
-- [Building Custom Plugins with HDK](file:///e:/project/naagmani-project/naagmani-docs/docs/build/hdks/overview.md)
+- [Node.js & TypeScript SDK](/build/sdks/node)
+- [Python SDK](/build/sdks/python)
+- [Go SDK](/build/sdks/go)
+- [Building Custom Plugins with HDK](/build/hdks/overview)
 

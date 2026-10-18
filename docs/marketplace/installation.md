@@ -87,6 +87,6 @@ naagmani plugin install email-guardrail \
 
 ## Related Documentation
 
-- [Environments & Cryptographic Isolation](file:///e:/project/naagmani-project/naagmani-docs/docs/concepts/environments.md)
-- [Marketplace Publishing Lifecycle](file:///e:/project/naagmani-project/naagmani-docs/docs/marketplace/publishing.md)
-- [CLI Plugin Reference](file:///e:/project/naagmani-project/naagmani-docs/docs/build/cli/plugins.md)
+- [Environments & Cryptographic Isolation](/concepts/environments)
+- [Marketplace Publishing Lifecycle](/marketplace/publishing)
+- [CLI Plugin Reference](/build/cli/plugins)

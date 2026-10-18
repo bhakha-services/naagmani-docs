@@ -286,8 +286,8 @@ Hard credentials and cryptographic keys are **never written to disk, never store
 
 ## 7. Related Documentation
 
-- [Inference Payload Observability & Security Architecture](file:///e:/project/naagmani-project/naagmani-docs/docs/security/inference-observability.md)
-- [AI Guardrails & Privacy Shield](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/governance-routing/guardrails.md)
-- [Roles & Permissions (RBAC)](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/organization/roles.md)
-- [API Keys & Vault Security](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/projects/api-keys.md)
-- [Provider Attempt Accounting & Telemetry](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/operations/attempts.md)
+- [Inference Payload Observability & Security Architecture](/security/inference-observability)
+- [AI Guardrails & Privacy Shield](/developer-portal/governance-routing/guardrails)
+- [Roles & Permissions (RBAC)](/developer-portal/organization/roles)
+- [API Keys & Vault Security](/developer-portal/projects/api-keys)
+- [Provider Attempt Accounting & Telemetry](/developer-portal/operations/attempts)

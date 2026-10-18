@@ -14,18 +14,15 @@ import { siteConfig } from '@/lib/config';
 
 interface PageProps {
   params: Promise<{
-    slug?: string[];
+    slug: string[];
   }>;
 }
 
 export async function generateStaticParams() {
   const slugs = getAllDocSlugs();
-  return [
-    { slug: [] },
-    ...slugs.map((slug) => ({
-      slug,
-    })),
-  ];
+  return slugs.map((slug) => ({
+    slug,
+  }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -93,36 +90,49 @@ export default async function DocPage({ params }: PageProps) {
 
   // Generate breadcrumb items
   const breadcrumbItems: { label: string; href?: string }[] = [
-    { label: 'Docs', href: '/docs/get-started/what-is-naagmani' },
+    { label: 'Documentation', href: '/get-started/what-is-naagmani' },
   ];
   if (slug.length > 1) {
     breadcrumbItems.push({
       label: slug[0].toUpperCase().replace(/-/g, ' '),
-      href: `/docs/${slug[0]}/${slug[1]}`,
+      href: `/${slug[0]}/${slug[1]}`,
     });
   }
   breadcrumbItems.push({ label: doc.title });
 
-  // Structured Data (TechArticle + BreadcrumbList)
+  // Structured Data (TechArticle + BreadcrumbList for Rich Snippets)
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'TechArticle',
-    headline: doc.title,
-    description: doc.description,
-    url: `${siteConfig.url}${doc.slugPath}`,
-    author: {
-      '@type': 'Organization',
-      name: 'Naagmani Team',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Naagmani',
-      url: siteConfig.url,
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `${siteConfig.url}${doc.slugPath}`,
-    },
+    '@graph': [
+      {
+        '@type': 'TechArticle',
+        headline: doc.title,
+        description: doc.description,
+        url: `${siteConfig.url}${doc.slugPath}`,
+        author: {
+          '@type': 'Organization',
+          name: 'Naagmani Team',
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Naagmani',
+          url: siteConfig.url,
+        },
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `${siteConfig.url}${doc.slugPath}`,
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbItems.map((item, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: item.label,
+          item: item.href ? `${siteConfig.url}${item.href}` : `${siteConfig.url}${doc.slugPath}`,
+        })),
+      },
+    ],
   };
 
   return (

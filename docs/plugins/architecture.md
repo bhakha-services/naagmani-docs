@@ -71,6 +71,6 @@ sequenceDiagram
 
 ## Related Guides
 
-- [Plugin Manifest Specification](/docs/plugins/manifest)
-- [Plugin Lifecycle & Heartbeats](/docs/plugins/lifecycle)
-- [Go Plugin Development (HDK)](/docs/sdk/go)
+- [Plugin Manifest Specification](/plugins/manifest)
+- [Plugin Lifecycle & Heartbeats](/plugins/lifecycle)
+- [Go Plugin Development (HDK)](/sdk/go)

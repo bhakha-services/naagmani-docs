@@ -14,7 +14,7 @@ MCP is an open standard developed to connect AI models with external data source
 Naagmani provides a built-in **MCP Gateway** that manages:
 1. **Connection Lifecycle**: Maintains long-lived transports (`stdio` subprocesses or `SSE` HTTP streams) to external MCP servers.
 2. **Dynamic Tool Discovery**: Automatically discovers tools, resources, and prompts exposed by the remote MCP server.
-3. **Governance & Approval Policies**: Applies fine-grained [MCP Tool Policies](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/governance-routing/mcp-policies.md) before executing sensitive actions.
+3. **Governance & Approval Policies**: Applies fine-grained [MCP Tool Policies](/developer-portal/governance-routing/mcp-policies) before executing sensitive actions.
 
 ```mermaid
 graph LR
@@ -49,6 +49,6 @@ graph LR
 
 ## Related Documentation
 
-- [MCP Tool Policies](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/governance-routing/mcp-policies.md)
-- [Tools Registry](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/capabilities/tools.md)
-- [Agent Playground](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/capabilities/agent-playground.md)
+- [MCP Tool Policies](/developer-portal/governance-routing/mcp-policies)
+- [Tools Registry](/developer-portal/capabilities/tools)
+- [Agent Playground](/developer-portal/capabilities/agent-playground)

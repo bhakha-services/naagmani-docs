@@ -51,5 +51,5 @@ For enterprise deployments requiring fine-grained policies, custom roles can be 
 
 ## Related Documentation
 
-- [Organizations & Settings](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/organization/organizations.md)
-- [Portal Users](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/organization/users.md)
+- [Organizations & Settings](/developer-portal/organization/organizations)
+- [Portal Users](/developer-portal/organization/users)

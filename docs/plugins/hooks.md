@@ -56,6 +56,6 @@ Plugins communicate execution decisions back to the OS:
 
 ## Related Documentation
 
-- [Plugin Manifest Specification](/docs/build/hdks/manifest)
-- [Plugin Lifecycle & Sandboxing](/docs/build/hdks/lifecycle)
-- [Building Plugins with HDK](/docs/build/hdks/development)
+- [Plugin Manifest Specification](/build/hdks/manifest)
+- [Plugin Lifecycle & Sandboxing](/build/hdks/lifecycle)
+- [Building Plugins with HDK](/build/hdks/development)

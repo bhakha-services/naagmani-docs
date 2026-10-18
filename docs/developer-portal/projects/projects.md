@@ -54,6 +54,6 @@ Every project comes pre-configured with two primary environments:
 
 ## Related Documentation
 
-- [API Keys & Vault](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/projects/api-keys.md)
-- [Project Service Tokens](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/projects/service-tokens.md)
-- [Smart Routing Policies](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/governance-routing/routing.md)
+- [API Keys & Vault](/developer-portal/projects/api-keys)
+- [Project Service Tokens](/developer-portal/projects/service-tokens)
+- [Smart Routing Policies](/developer-portal/governance-routing/routing)

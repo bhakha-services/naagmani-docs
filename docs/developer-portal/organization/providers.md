@@ -83,13 +83,13 @@ stateDiagram-v2
 | Issue | Root Cause | Solution |
 |---|---|---|
 | **HTTP 401 Unauthorized** | The upstream provider API key is invalid or revoked. | Update the API key in `/providers` and verify billing on the upstream vendor portal. |
-| **HTTP 429 Rate Limit** | Upstream account has hit Requests-Per-Minute (RPM) or Tier limit. | Configure a [Smart Routing Failover Cascade](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/governance-routing/routing.md) to automatically route excess traffic to a secondary provider. |
+| **HTTP 429 Rate Limit** | Upstream account has hit Requests-Per-Minute (RPM) or Tier limit. | Configure a [Smart Routing Failover Cascade](/developer-portal/governance-routing/routing) to automatically route excess traffic to a secondary provider. |
 | **Connection Refused (vLLM/Ollama)** | Private model server is unreachable from the Naagmani gateway. | Verify network firewalls and ensure `Custom Base URL` is reachable via HTTP/HTTPS. |
 
 ---
 
 ## Related Documentation
 
-- [Smart Routing Policies](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/governance-routing/routing.md)
-- [Provider Attempt Accounting](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/operations/attempts.md)
-- [API Models Endpoint](file:///e:/project/naagmani-project/naagmani-docs/docs/api/models.md)
+- [Smart Routing Policies](/developer-portal/governance-routing/routing)
+- [Provider Attempt Accounting](/developer-portal/operations/attempts)
+- [API Models Endpoint](/api/models)

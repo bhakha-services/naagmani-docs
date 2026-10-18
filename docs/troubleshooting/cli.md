@@ -26,5 +26,5 @@ naagmani projects list --verbose
 
 ## Next Steps
 
-- [Common Errors Guide](/docs/troubleshooting/common-errors)
-- [Return to Quickstart](/docs/quickstart/overview)
+- [Common Errors Guide](/troubleshooting/common-errors)
+- [Return to Quickstart](/quickstart/overview)

@@ -21,7 +21,7 @@ graph TD
 Projects enforce strict resource and credential isolation between different workloads:
 - **Credential Segregation**: API Keys and Service Tokens created in *Project A* cannot access models or resources in *Project B*.
 - **Customer Member Directory**: End-user identities (`external_user_id`) and individual budgets are strictly scoped per project.
-- **Portal User Assignment**: Team members are granted access to specific projects through [ProjectAccessAssignment](/docs/concepts/portal-users-vs-customer-members).
+- **Portal User Assignment**: Team members are granted access to specific projects through [ProjectAccessAssignment](/concepts/portal-users-vs-customer-members).
 - **Autonomous Agents**: Agents, prompt templates, skills, and MCP tools are scoped to the project.
 - **Budget Allocation**: Assign specific monthly budgets to individual projects to prevent runaway costs from affecting other teams.
 
@@ -49,8 +49,8 @@ Every Project contains:
 
 ## Next Steps
 
-- Understand environment boundaries: [Environments & Isolation](/docs/concepts/environments)
-- Manage project customer members: [Customer Members](/docs/concepts/customer-members)
-- Assign team members: [Portal Users vs Customer Members](/docs/concepts/portal-users-vs-customer-members)
-- Issue project credentials: [Project Service Tokens](/docs/concepts/project-service-tokens)
+- Understand environment boundaries: [Environments & Isolation](/concepts/environments)
+- Manage project customer members: [Customer Members](/concepts/customer-members)
+- Assign team members: [Portal Users vs Customer Members](/concepts/portal-users-vs-customer-members)
+- Issue project credentials: [Project Service Tokens](/concepts/project-service-tokens)
 

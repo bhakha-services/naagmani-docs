@@ -20,4 +20,4 @@ Configure policies in the Portal:
 
 ## Next Steps
 
-- [Observability & Metrics](/docs/production/observability)
+- [Observability & Metrics](/production/observability)

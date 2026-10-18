@@ -55,5 +55,5 @@ Start a local reverse proxy for development testing.
 
 ## Next Steps
 
-- [Plugin Management with CLI](/docs/cli/plugins)
-- [CLI Diagnostics](/docs/cli/troubleshooting)
+- [Plugin Management with CLI](/cli/plugins)
+- [CLI Diagnostics](/cli/troubleshooting)

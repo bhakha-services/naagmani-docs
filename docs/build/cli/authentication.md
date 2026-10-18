@@ -61,5 +61,5 @@ naagmani logout
 
 ## Related Documentation
 
-- [Command Reference](file:///e:/project/naagmani-project/naagmani-docs/docs/build/cli/commands.md)
-- [Project Service Tokens](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/projects/service-tokens.md)
+- [Command Reference](/build/cli/commands)
+- [Project Service Tokens](/developer-portal/projects/service-tokens)

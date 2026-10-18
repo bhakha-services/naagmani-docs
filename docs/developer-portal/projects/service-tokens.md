@@ -298,5 +298,5 @@ curl -X POST https://api.naagmani.com/v1/chat/completions \
 
 ## Related Documentation
 
-- [API Keys & Vault](/docs/developer-portal/projects/api-keys)
-- [Project Service Tokens API Reference](/docs/api/service-tokens)
+- [API Keys & Vault](/developer-portal/projects/api-keys)
+- [Project Service Tokens API Reference](/api/service-tokens)

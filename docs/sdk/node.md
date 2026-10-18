@@ -85,5 +85,5 @@ const response = await client.chat.completions.create({
 
 ## Next Steps
 
-- [Python SDK](/docs/sdk/python)
-- [Go SDK](/docs/sdk/go)
+- [Python SDK](/sdk/python)
+- [Go SDK](/sdk/go)

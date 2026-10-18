@@ -33,5 +33,5 @@ graph LR
 
 ## Related Documentation
 
-- [Portal Users](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/organization/users.md)
-- [FinOps & Budgets](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/operations/budgets.md)
+- [Portal Users](/developer-portal/organization/users)
+- [FinOps & Budgets](/developer-portal/operations/budgets)

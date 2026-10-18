@@ -54,21 +54,26 @@ export function Navbar({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void
     }
   }, []);
 
-  // Auto-scroll the active tab into view on mobile / narrow viewports
+  // Auto-scroll the active tab into view only on mobile / narrow viewports when tabs overflow
   useEffect(() => {
     if (activeTabRef.current && tabsContainerRef.current) {
       const container = tabsContainerRef.current;
-      const tab = activeTabRef.current;
-      const tabLeft = tab.offsetLeft;
-      const tabWidth = tab.offsetWidth;
-      const containerWidth = container.offsetWidth;
-      const targetScroll = tabLeft - (containerWidth / 2) + (tabWidth / 2);
+      if (container.scrollWidth > container.clientWidth + 8) {
+        const tab = activeTabRef.current;
+        const tabLeft = tab.offsetLeft;
+        const tabWidth = tab.offsetWidth;
+        const containerWidth = container.offsetWidth;
+        const targetScroll = tabLeft - (containerWidth / 2) + (tabWidth / 2);
 
-      container.scrollTo({
-        left: Math.max(0, targetScroll),
-        behavior: 'smooth',
-      });
-      setTimeout(updateScrollState, 350);
+        container.scrollTo({
+          left: Math.max(0, targetScroll),
+          behavior: 'smooth',
+        });
+        setTimeout(updateScrollState, 350);
+      } else {
+        container.scrollTo({ left: 0, behavior: 'instant' });
+        updateScrollState();
+      }
     }
   }, [pathname, updateScrollState]);
 
@@ -91,7 +96,7 @@ export function Navbar({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void
       <header className="sticky top-0 z-40 w-full border-b border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-[#09090B]/95 backdrop-blur-md shadow-2xs">
         {/* Tier 1: Main Top Bar (Brand, Centered Search, and Actions) */}
         <div className="border-b border-zinc-200/70 dark:border-zinc-800/70">
-          <div className="max-w-[1920px] 4xl:max-w-[2400px] mx-auto px-2.5 sm:px-6 lg:px-8 2xl:px-12 h-14 sm:h-15 flex items-center justify-between gap-2 sm:gap-6">
+          <div className="max-w-[1920px] 4xl:max-w-[2400px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 h-14 sm:h-15 flex items-center justify-between gap-2 sm:gap-6">
             {/* Left: Brand & Mobile Menu Button */}
             <div className="flex items-center gap-1 sm:gap-3 shrink-0">
               {onMobileMenuToggle && (
@@ -162,7 +167,7 @@ export function Navbar({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void
 
               {/* Quickstart CTA */}
               <Link
-                href="/docs/get-started/quickstart"
+                href="/get-started/quickstart"
                 className="hidden sm:inline-flex items-center justify-center px-3 sm:px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-500 shadow-xs transition-all whitespace-nowrap"
               >
                 Quickstart
@@ -173,66 +178,68 @@ export function Navbar({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void
 
         {/* Tier 2: Sub-Header Section Navigation Tabs with Dynamic Edge Fades */}
         <div className="relative bg-zinc-50/70 dark:bg-zinc-950/70 border-b border-zinc-200/50 dark:border-zinc-800/50">
-          {/* Left Fade Indicator & Scroll Button */}
-          {canScrollLeft && (
-            <div className="absolute left-0 top-0 bottom-0 z-20 flex items-center bg-gradient-to-r from-white via-white/90 to-transparent dark:from-[#09090B] dark:via-[#09090B]/90 pl-1 pr-4">
-              <button
-                onClick={() => scrollTabs('left')}
-                className="hidden sm:flex p-1 rounded-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-sm text-zinc-600 dark:text-zinc-300 hover:text-emerald-500 transition-colors"
-                aria-label="Scroll tabs left"
-              >
-                <ChevronLeft className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          )}
+          <div className="max-w-[1920px] 4xl:max-w-[2400px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 relative">
+            {/* Left Fade Indicator & Scroll Button */}
+            {canScrollLeft && (
+              <div className="absolute left-4 sm:left-6 lg:left-8 2xl:left-12 top-0 bottom-0 z-20 flex items-center bg-gradient-to-r from-zinc-50 via-zinc-50/90 to-transparent dark:from-zinc-950 dark:via-zinc-950/90 pl-0.5 pr-4 pointer-events-none">
+                <button
+                  onClick={() => scrollTabs('left')}
+                  className="pointer-events-auto hidden sm:flex p-1 rounded-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-sm text-zinc-600 dark:text-zinc-300 hover:text-emerald-500 transition-colors"
+                  aria-label="Scroll tabs left"
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
 
-          {/* Right Fade Indicator & Scroll Button */}
-          {canScrollRight && (
-            <div className="absolute right-0 top-0 bottom-0 z-20 flex items-center justify-end bg-gradient-to-l from-white via-white/90 to-transparent dark:from-[#09090B] dark:via-[#09090B]/90 pr-1 pl-4">
-              <button
-                onClick={() => scrollTabs('right')}
-                className="hidden sm:flex p-1 rounded-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-sm text-zinc-600 dark:text-zinc-300 hover:text-emerald-500 transition-colors"
-                aria-label="Scroll tabs right"
-              >
-                <ChevronRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          )}
+            {/* Right Fade Indicator & Scroll Button */}
+            {canScrollRight && (
+              <div className="absolute right-4 sm:right-6 lg:right-8 2xl:right-12 top-0 bottom-0 z-20 flex items-center justify-end bg-gradient-to-l from-zinc-50 via-zinc-50/90 to-transparent dark:from-zinc-950 dark:via-zinc-950/90 pr-0.5 pl-4 pointer-events-none">
+                <button
+                  onClick={() => scrollTabs('right')}
+                  className="pointer-events-auto hidden sm:flex p-1 rounded-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-sm text-zinc-600 dark:text-zinc-300 hover:text-emerald-500 transition-colors"
+                  aria-label="Scroll tabs right"
+                >
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
 
-          {/* Tabs Scroll Container */}
-          <div
-            ref={tabsContainerRef}
-            onScroll={updateScrollState}
-            onWheel={(e) => {
-              if (tabsContainerRef.current && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                tabsContainerRef.current.scrollLeft += e.deltaY;
-              }
-            }}
-            className="overflow-x-auto scrollbar-none scroll-smooth touch-pan-x"
-          >
-            <div className="max-w-[1920px] 4xl:max-w-[2400px] mx-auto px-3 sm:px-6 lg:px-8 2xl:px-12 flex items-center gap-1 sm:gap-2 h-11 w-max min-w-full">
-              {headerNavTabs.map((tab) => {
-                const isActive =
-                  tab.activeMatches.some((prefix) => pathname.startsWith(prefix) || pathname === prefix) ||
-                  (tab.id === 'get-started' && (pathname === '/docs' || pathname === '/docs/'));
-                const TabIcon = tabIcons[tab.id] || Sparkles;
+            {/* Tabs Scroll Container */}
+            <div
+              ref={tabsContainerRef}
+              onScroll={updateScrollState}
+              onWheel={(e) => {
+                if (tabsContainerRef.current && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                  tabsContainerRef.current.scrollLeft += e.deltaY;
+                }
+              }}
+              className="overflow-x-auto scrollbar-none scroll-smooth touch-pan-x"
+            >
+              <div className="flex items-center gap-1 sm:gap-2 h-11 w-max">
+                {headerNavTabs.map((tab) => {
+                  const isActive =
+                    tab.activeMatches.some((prefix) => pathname.startsWith(prefix) || pathname === prefix) ||
+                    (tab.id === 'get-started' && (pathname === '/' || pathname === '/docs' || pathname === '/docs/'));
+                  const TabIcon = tabIcons[tab.id] || Sparkles;
 
-                return (
-                  <Link
-                    key={tab.id}
-                    ref={isActive ? activeTabRef : null}
-                    href={tab.href}
-                    className={`shrink-0 flex items-center gap-1.5 px-3 py-2 text-xs sm:text-[13px] font-medium transition-all whitespace-nowrap border-b-2 -mb-[1px] ${
-                      isActive
-                        ? 'border-emerald-500 text-emerald-600 dark:text-emerald-400 font-semibold bg-emerald-500/5 dark:bg-emerald-500/10'
-                        : 'border-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-300 dark:hover:border-zinc-700'
-                    }`}
-                  >
-                    <TabIcon className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-emerald-500' : 'text-zinc-400 dark:text-zinc-500'}`} />
-                    <span>{tab.label}</span>
-                  </Link>
-                );
-              })}
+                  return (
+                    <Link
+                      key={tab.id}
+                      ref={isActive ? activeTabRef : null}
+                      href={tab.href}
+                      className={`shrink-0 flex items-center gap-1.5 px-3 py-2 text-xs sm:text-[13px] font-medium transition-all whitespace-nowrap border-b-2 -mb-[1px] ${
+                        isActive
+                          ? 'border-emerald-500 text-emerald-600 dark:text-emerald-400 font-semibold bg-emerald-500/5 dark:bg-emerald-500/10'
+                          : 'border-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-300 dark:hover:border-zinc-700'
+                      }`}
+                    >
+                      <TabIcon className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-emerald-500' : 'text-zinc-400 dark:text-zinc-500'}`} />
+                      <span>{tab.label}</span>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

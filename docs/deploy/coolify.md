@@ -22,4 +22,4 @@ Deploy Naagmani using [Coolify](https://coolify.io) or modern Nixpacks-based sel
 
 ## Related Documentation
 
-- [Docker Compose Deployment](file:///e:/project/naagmani-project/naagmani-docs/docs/deploy/docker-compose.md)
+- [Docker Compose Deployment](/deploy/docker-compose)

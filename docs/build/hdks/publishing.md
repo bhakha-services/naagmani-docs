@@ -86,6 +86,6 @@ stateDiagram-v2
 
 ## Related Documentation
 
-- [Marketplace Overview & Installation](file:///e:/project/naagmani-project/naagmani-docs/docs/marketplace/overview.md)
-- [Installation & Scope Isolation](file:///e:/project/naagmani-project/naagmani-docs/docs/marketplace/installation.md)
-- [CLI Command Reference](file:///e:/project/naagmani-project/naagmani-docs/docs/build/cli/commands.md)
+- [Marketplace Overview & Installation](/marketplace/overview)
+- [Installation & Scope Isolation](/marketplace/installation)
+- [CLI Command Reference](/build/cli/commands)

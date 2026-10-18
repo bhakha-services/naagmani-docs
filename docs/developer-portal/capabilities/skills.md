@@ -40,5 +40,5 @@ graph TD
 
 ## Related Documentation
 
-- [AI Agents](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/capabilities/agents.md)
-- [Tools Registry](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/capabilities/tools.md)
+- [AI Agents](/developer-portal/capabilities/agents)
+- [Tools Registry](/developer-portal/capabilities/tools)

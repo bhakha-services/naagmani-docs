@@ -48,6 +48,6 @@ Developers who belong to multiple organizations (e.g. personal development vs cl
 
 ## Related Documentation
 
-- [Portal Users & Access](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/organization/users.md)
-- [Roles & Permissions](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/organization/roles.md)
-- [Providers & BYOK Vault](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/organization/providers.md)
+- [Portal Users & Access](/developer-portal/organization/users)
+- [Roles & Permissions](/developer-portal/organization/roles)
+- [Providers & BYOK Vault](/developer-portal/organization/providers)

@@ -81,5 +81,5 @@ print(response.content)
 
 ## Next Steps
 
-- [CLI Manual](/docs/cli/installation)
-- [API Reference Overview](/docs/api/overview)
+- [CLI Manual](/cli/installation)
+- [API Reference Overview](/api/overview)

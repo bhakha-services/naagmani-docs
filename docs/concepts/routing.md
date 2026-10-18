@@ -133,7 +133,7 @@ Every attempt and failover is recorded with high precision:
    - Background health probes automatically verify provider recovery before restoring production traffic.
 
 3. **Provider Attempt Accounting**:
-   - Every single attempt (initial attempt `Idx #0`, retries `Idx #1`, `Idx #2`) is recorded in the [Provider Attempt Accounting](/docs/developer-portal/attempts.md) dashboard.
+   - Every single attempt (initial attempt `Idx #0`, retries `Idx #1`, `Idx #2`) is recorded in the [Provider Attempt Accounting](/developer-portal/attempts.md) dashboard.
    - You can inspect exact TTFT, adapter latency, provider request IDs, error codes, and estimated COGS costs for every cascade execution.
 
 ---

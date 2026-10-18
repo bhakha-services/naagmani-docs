@@ -56,6 +56,6 @@ For every upstream attempt, Naagmani captures:
 
 ## Related Documentation
 
-- [Smart Routing Policies](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/governance-routing/routing.md)
-- [Usage & Token Analytics](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/operations/usage.md)
-- [Provider Attempts API](file:///e:/project/naagmani-project/naagmani-docs/docs/api/attempts.md)
+- [Smart Routing Policies](/developer-portal/governance-routing/routing)
+- [Usage & Token Analytics](/developer-portal/operations/usage)
+- [Provider Attempts API](/api/attempts)

@@ -14,6 +14,6 @@ Deploying Naagmani in mission-critical, enterprise production environments requi
 
 ## Next Steps
 
-- [High Availability & Failover](/docs/production/reliability)
-- [Rate Limiting & Quotas](/docs/production/rate-limits)
-- [Observability & Prometheus Metrics](/docs/production/observability)
+- [High Availability & Failover](/production/reliability)
+- [Rate Limiting & Quotas](/production/rate-limits)
+- [Observability & Prometheus Metrics](/production/observability)

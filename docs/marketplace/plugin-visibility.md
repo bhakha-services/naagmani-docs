@@ -16,4 +16,4 @@ Control who can discover, install, and execute your published plugins.
 
 ## Next Steps
 
-- [Troubleshooting Guide](/docs/troubleshooting/common-errors)
+- [Troubleshooting Guide](/troubleshooting/common-errors)

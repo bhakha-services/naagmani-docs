@@ -121,7 +121,7 @@ client = OpenAI(
 
 ## Related Documentation
 
-- [Chat Completions API](file:///e:/project/naagmani-project/naagmani-docs/docs/api/chat-completions.md)
-- [Smart Routing Policies](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/governance-routing/routing.md)
-- [HDK Plugin Development in Python](file:///e:/project/naagmani-project/naagmani-docs/docs/build/hdks/development.md)
+- [Chat Completions API](/api/chat-completions)
+- [Smart Routing Policies](/developer-portal/governance-routing/routing)
+- [HDK Plugin Development in Python](/build/hdks/development)
 

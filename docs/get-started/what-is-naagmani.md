@@ -69,6 +69,6 @@ The platform is designed around four unified touchpoints:
 
 ## Next Steps
 
-- Understand the architectural mental model: [How Naagmani Works](file:///e:/project/naagmani-project/naagmani-docs/docs/get-started/how-it-works.md)
-- Set up your first project and credentials: [Quickstart Guide](file:///e:/project/naagmani-project/naagmani-docs/docs/get-started/quickstart.md)
-- Send your first inference request: [Make Your First AI Request](file:///e:/project/naagmani-project/naagmani-docs/docs/get-started/first-request.md)
+- Understand the architectural mental model: [How Naagmani Works](/get-started/how-it-works)
+- Set up your first project and credentials: [Quickstart Guide](/get-started/quickstart)
+- Send your first inference request: [Make Your First AI Request](/get-started/first-request)

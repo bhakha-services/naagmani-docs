@@ -54,6 +54,6 @@ graph LR
 
 ## Related Documentation
 
-- [AI Agents](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/capabilities/agents.md)
-- [MCP Tool Policies](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/governance-routing/mcp-policies.md)
-- [MCP Servers](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/capabilities/mcp-servers.md)
+- [AI Agents](/developer-portal/capabilities/agents)
+- [MCP Tool Policies](/developer-portal/governance-routing/mcp-policies)
+- [MCP Servers](/developer-portal/capabilities/mcp-servers)

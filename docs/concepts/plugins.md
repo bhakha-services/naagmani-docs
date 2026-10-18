@@ -27,7 +27,7 @@ graph LR
 
 ## Next Steps
 
-- Deep dive into plugin development: [Building Custom Plugins](file:///e:/project/naagmani-project/naagmani-docs/docs/build/hdks/development.md)
-- Plugin manifest specification: [Plugin Manifest Schema](file:///e:/project/naagmani-project/naagmani-docs/docs/build/hdks/manifest.md)
-- Wire Protocol Reference: [HDK Wire Protocol v1](file:///e:/project/naagmani-project/naagmani-docs/docs/build/hdks/protocol.md)
+- Deep dive into plugin development: [Building Custom Plugins](/build/hdks/development)
+- Plugin manifest specification: [Plugin Manifest Schema](/build/hdks/manifest)
+- Wire Protocol Reference: [HDK Wire Protocol v1](/build/hdks/protocol)
 

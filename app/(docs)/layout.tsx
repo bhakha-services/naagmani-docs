@@ -74,7 +74,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
                   {headerNavTabs.map((tab, idx) => {
                     const isActive =
                       tab.activeMatches.some((prefix) => pathname.startsWith(prefix) || pathname === prefix) ||
-                      (tab.id === 'get-started' && (pathname === '/docs' || pathname === '/docs/'));
+                      (tab.id === 'get-started' && (pathname === '/' || pathname === '/docs' || pathname === '/docs/'));
                     const TabIcon = sectionTabIcons[tab.id] || Sparkles;
                     const isLastOdd = idx === headerNavTabs.length - 1 && headerNavTabs.length % 2 !== 0;
 
@@ -128,7 +128,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
                 </a>
               </div>
               <Link
-                href="/docs/get-started/quickstart"
+                href="/get-started/quickstart"
                 onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center justify-center w-full px-3 py-2 rounded-lg text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-500 shadow-xs transition-all"
               >

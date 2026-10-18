@@ -83,7 +83,7 @@ Defines which execution stages the plugin intercepts:
 - **`on_failure`**: Either `fail-close` (reject request) or `fail-open` (bypass).
 
 ### `permissions` (array of strings)
-Declares access limits for least-privilege enforcement. See [Permissions & Security](/docs/plugins/permissions).
+Declares access limits for least-privilege enforcement. See [Permissions & Security](/plugins/permissions).
 
 ---
 
@@ -100,5 +100,5 @@ naagmani plugins validate ./my-plugin
 
 ## Next Steps
 
-- [Wire Protocol (v1)](/docs/plugins/protocol)
-- [Plugin Execution Hooks](/docs/plugins/hooks)
+- [Wire Protocol (v1)](/plugins/protocol)
+- [Plugin Execution Hooks](/plugins/hooks)

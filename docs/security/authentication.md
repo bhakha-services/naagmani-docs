@@ -18,5 +18,5 @@ When you register provider API keys in Naagmani:
 
 ## Next Steps
 
-- [Role-Based Access Control](/docs/security/authorization)
-- [Data Protection & DLP](/docs/security/data-protection)
+- [Role-Based Access Control](/security/authorization)
+- [Data Protection & DLP](/security/data-protection)

@@ -70,7 +70,7 @@ curl -X POST "{{GATEWAY_URL}}/v1/chat/completions" \
 
 ## Related Documentation
 
-- [Customer Members Concept](/docs/concepts/customer-members)
-- [Customer Members API Reference](/docs/api/customer-members)
+- [Customer Members Concept](/concepts/customer-members)
+- [Customer Members API Reference](/api/customer-members)
 - [Project Access & Authorization](access.md)
 - [Project Service Tokens](service-tokens.md)

@@ -52,5 +52,5 @@ naagmani context use production-org
 
 ## Next Steps
 
-- [Commands Reference](/docs/cli/commands)
-- [Plugin Management](/docs/cli/plugins)
+- [Commands Reference](/cli/commands)
+- [Plugin Management](/cli/plugins)

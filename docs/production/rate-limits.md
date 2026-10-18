@@ -19,5 +19,5 @@ Set rate limits directly per credential in [**Credential Pools**]({{DEVELOPER_PO
 
 ## Next Steps
 
-- [Observability & Metrics](/docs/production/observability)
-- [Scaling & Concurrency](/docs/production/scaling)
+- [Observability & Metrics](/production/observability)
+- [Scaling & Concurrency](/production/scaling)

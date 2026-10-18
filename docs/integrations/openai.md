@@ -48,5 +48,5 @@ curl -X POST {{GATEWAY_URL}}/v1/chat/completions \
 
 ## Next Steps
 
-- [Anthropic Claude Integration](/docs/integrations/anthropic)
-- [Smart Routing & Cascading](/docs/concepts/routing)
+- [Anthropic Claude Integration](/integrations/anthropic)
+- [Smart Routing & Cascading](/concepts/routing)

@@ -52,6 +52,6 @@ my-plugin/
 
 ## Next Steps
 
-- Review the [Plugin Manifest Schema (plugin.json)](file:///e:/project/naagmani-project/naagmani-docs/docs/build/hdks/manifest.md)
-- Learn about the [Wire Protocol v1](file:///e:/project/naagmani-project/naagmani-docs/docs/build/hdks/protocol.md)
-- Follow the step-by-step [Plugin Development Tutorial](file:///e:/project/naagmani-project/naagmani-docs/docs/build/hdks/development.md)
+- Review the [Plugin Manifest Schema (plugin.json)](/build/hdks/manifest)
+- Learn about the [Wire Protocol v1](/build/hdks/protocol)
+- Follow the step-by-step [Plugin Development Tutorial](/build/hdks/development)

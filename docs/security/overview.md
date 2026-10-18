@@ -29,6 +29,6 @@ flowchart TD
 
 ## Next Steps
 
-- [Authentication & BYOK Model](/docs/security/authentication)
-- [Role-Based Access Control (RBAC)](/docs/security/authorization)
-- [Tenant Isolation & Sandboxing](/docs/security/isolation)
+- [Authentication & BYOK Model](/security/authentication)
+- [Role-Based Access Control (RBAC)](/security/authorization)
+- [Tenant Isolation & Sandboxing](/security/isolation)

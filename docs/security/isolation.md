@@ -14,5 +14,5 @@ To guarantee security in multi-tenant environments, Naagmani enforces strict iso
 
 ## Next Steps
 
-- [Data Protection & DLP](/docs/security/data-protection)
-- [Audit Trail & Compliance](/docs/security/audit-logs)
+- [Data Protection & DLP](/security/data-protection)
+- [Audit Trail & Compliance](/security/audit-logs)

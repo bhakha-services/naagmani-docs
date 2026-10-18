@@ -20,5 +20,5 @@ Manage configuration, metadata, environment variables, and deletion for an activ
 
 ## Related Documentation
 
-- [Projects & Environments](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/projects/projects.md)
-- [Organizations & Settings](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/organization/organizations.md)
+- [Projects & Environments](/developer-portal/projects/projects)
+- [Organizations & Settings](/developer-portal/organization/organizations)

@@ -81,7 +81,7 @@ Content-Type: application/json
 
 ## Related Documentation
 
-- [Project Service Tokens](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/projects/service-tokens.md)
-- [Marketplace Installation & Scope Isolation](file:///e:/project/naagmani-project/naagmani-docs/docs/marketplace/installation.md)
-- [Cryptographic Vault & Privacy Shield Architecture](file:///e:/project/naagmani-project/naagmani-docs/docs/security/data-protection.md)
+- [Project Service Tokens](/developer-portal/projects/service-tokens)
+- [Marketplace Installation & Scope Isolation](/marketplace/installation)
+- [Cryptographic Vault & Privacy Shield Architecture](/security/data-protection)
 

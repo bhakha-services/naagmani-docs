@@ -69,6 +69,6 @@ curl -X POST "{{API_BASE_URL}}/v1/organizations/{orgID}/projects/{projectID}/use
 
 ## Next Steps
 
-- [Customer Members Architecture](/docs/concepts/customer-members)
-- [Project Access API Reference](/docs/api/project-access)
-- [Project Service Tokens](/docs/concepts/project-service-tokens)
+- [Customer Members Architecture](/concepts/customer-members)
+- [Project Access API Reference](/api/project-access)
+- [Project Service Tokens](/concepts/project-service-tokens)

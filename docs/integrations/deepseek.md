@@ -21,5 +21,5 @@ Naagmani provides first-class support for DeepSeek's open reasoning and general-
 
 ## Next Steps
 
-- [Self-Hosted LLMs](/docs/integrations/other-providers)
-- [Provider Attempt Telemetry](/docs/concepts/providers)
+- [Self-Hosted LLMs](/integrations/other-providers)
+- [Provider Attempt Telemetry](/concepts/providers)

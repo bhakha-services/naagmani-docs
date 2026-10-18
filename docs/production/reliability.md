@@ -26,5 +26,5 @@ flowchart TD
 
 ## Next Steps
 
-- [Rate Limiting & Quotas](/docs/production/rate-limits)
-- [Traffic Routing Strategies](/docs/production/routing)
+- [Rate Limiting & Quotas](/production/rate-limits)
+- [Traffic Routing Strategies](/production/routing)

@@ -202,8 +202,8 @@ naagmani plugin metrics email-guardrail
 
 ## Related Documentation
 
-- [HDK Wire Protocol Specification](file:///e:/project/naagmani-project/naagmani-docs/docs/build/hdks/protocol.md)
-- [HDK Plugin Manifest](file:///e:/project/naagmani-project/naagmani-docs/docs/build/hdks/manifest.md)
-- [Building Custom Plugins](file:///e:/project/naagmani-project/naagmani-docs/docs/build/hdks/development.md)
-- [CLI Command Reference](file:///e:/project/naagmani-project/naagmani-docs/docs/build/cli/commands.md)
+- [HDK Wire Protocol Specification](/build/hdks/protocol)
+- [HDK Plugin Manifest](/build/hdks/manifest)
+- [Building Custom Plugins](/build/hdks/development)
+- [CLI Command Reference](/build/cli/commands)
 

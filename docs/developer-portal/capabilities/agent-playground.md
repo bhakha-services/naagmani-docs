@@ -40,6 +40,6 @@ sequenceDiagram
 
 ## Related Documentation
 
-- [AI Agents](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/capabilities/agents.md)
-- [MCP Servers](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/capabilities/mcp-servers.md)
-- [Model Playground](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/operations/model-playground.md)
+- [AI Agents](/developer-portal/capabilities/agents)
+- [MCP Servers](/developer-portal/capabilities/mcp-servers)
+- [Model Playground](/developer-portal/operations/model-playground)

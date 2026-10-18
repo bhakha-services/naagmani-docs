@@ -156,5 +156,5 @@ naagmani policy simulate smart --input "Hello"
 
 ## Related Documentation
 
-- [CLI Installation](file:///e:/project/naagmani-project/naagmani-docs/docs/build/cli/installation.md)
-- [CLI Diagnostics](file:///e:/project/naagmani-project/naagmani-docs/docs/build/cli/troubleshooting.md)
+- [CLI Installation](/build/cli/installation)
+- [CLI Diagnostics](/build/cli/troubleshooting)

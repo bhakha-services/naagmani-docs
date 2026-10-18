@@ -42,5 +42,5 @@ graph TD
 
 ## Related Documentation
 
-- [FinOps & Budget Controls](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/operations/budgets.md)
-- [Provider Attempt Accounting](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/operations/attempts.md)
+- [FinOps & Budget Controls](/developer-portal/operations/budgets)
+- [Provider Attempt Accounting](/developer-portal/operations/attempts)

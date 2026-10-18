@@ -50,5 +50,5 @@ sequenceDiagram
 
 ## Related Documentation
 
-- [Roles & Permissions (RBAC)](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/organization/roles.md)
-- [Customer Members](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/organization/members.md)
+- [Roles & Permissions (RBAC)](/developer-portal/organization/roles)
+- [Customer Members](/developer-portal/organization/members)

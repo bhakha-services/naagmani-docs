@@ -49,6 +49,6 @@ graph TD
 
 ## Related Documentation
 
-- [MCP Servers](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/capabilities/mcp-servers.md)
-- [AI Agents](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/capabilities/agents.md)
-- [AI Guardrails](file:///e:/project/naagmani-project/naagmani-docs/docs/developer-portal/governance-routing/guardrails.md)
+- [MCP Servers](/developer-portal/capabilities/mcp-servers)
+- [AI Agents](/developer-portal/capabilities/agents)
+- [AI Guardrails](/developer-portal/governance-routing/guardrails)

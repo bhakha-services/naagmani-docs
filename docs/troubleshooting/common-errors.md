@@ -44,8 +44,8 @@ Quick diagnosis and resolution steps for frequent HTTP status codes and operatio
 
 ## Next Steps
 
-- [Authentication Troubleshooting](/docs/troubleshooting/authentication)
-- [Routing Concepts & Resolution Modes](/docs/concepts/routing)
-- [Virtual Aliases & Model Matching](/docs/concepts/models)
-- [Plugin Debugging](/docs/troubleshooting/plugins)
-- [CLI Diagnostics](/docs/troubleshooting/cli)
+- [Authentication Troubleshooting](/troubleshooting/authentication)
+- [Routing Concepts & Resolution Modes](/concepts/routing)
+- [Virtual Aliases & Model Matching](/concepts/models)
+- [Plugin Debugging](/troubleshooting/plugins)
+- [CLI Diagnostics](/troubleshooting/cli)

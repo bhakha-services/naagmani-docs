@@ -101,5 +101,5 @@ sequenceDiagram
 
 ## Next Steps
 
-- [Plugin Lifecycle & Process Monitoring](/docs/plugins/lifecycle)
-- [Plugin Development with Go HDK](/docs/sdk/go)
+- [Plugin Lifecycle & Process Monitoring](/plugins/lifecycle)
+- [Plugin Development with Go HDK](/sdk/go)

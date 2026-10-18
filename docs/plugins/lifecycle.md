@@ -60,5 +60,5 @@ The plugin updates its internal state in-memory without dropping active connecti
 
 ## Next Steps
 
-- [Plugin Execution Hooks](/docs/plugins/hooks)
-- [Permissions & Security Model](/docs/plugins/permissions)
+- [Plugin Execution Hooks](/plugins/hooks)
+- [Permissions & Security Model](/plugins/permissions)

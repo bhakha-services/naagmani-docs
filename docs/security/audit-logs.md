@@ -3,8 +3,8 @@
 Every critical administrative mutation, credential rotation, and AI inference request lifecycle stage across the Naagmani ecosystem is immutably logged for enterprise compliance audits (**SOC 2 Type II**, **ISO 27001**, **HIPAA**, and **GDPR**).
 
 - **Developer Portal Viewer**: `Organization > Audit Logs` (`/audit-logs`)
-- **Operations & Portal Guide**: [Developer Portal Audit Logs & Trace Inspector](/docs/developer-portal/operations/audit-logs)
-- **Inference Architecture Deep Dive**: [Inference Payload Observability Architecture](/docs/security/inference-observability)
+- **Operations & Portal Guide**: [Developer Portal Audit Logs & Trace Inspector](/developer-portal/operations/audit-logs)
+- **Inference Architecture Deep Dive**: [Inference Payload Observability Architecture](/security/inference-observability)
 
 ---
 
@@ -72,7 +72,7 @@ curl -X PUT "https://api.naagmani.com/v1/organizations/{orgID}/retention" \
 
 ## 4. Related Guides
 
-- [Developer Portal Audit Logs & Trace Inspector](/docs/developer-portal/operations/audit-logs)
-- [Inference Payload Observability Architecture](/docs/security/inference-observability)
-- [Roles, Scopes & Access Control (RBAC)](/docs/developer-portal/organization/roles)
-- [AI Guardrails & Privacy Shield](/docs/developer-portal/governance-routing/guardrails)
+- [Developer Portal Audit Logs & Trace Inspector](/developer-portal/operations/audit-logs)
+- [Inference Payload Observability Architecture](/security/inference-observability)
+- [Roles, Scopes & Access Control (RBAC)](/developer-portal/organization/roles)
+- [AI Guardrails & Privacy Shield](/developer-portal/governance-routing/guardrails)

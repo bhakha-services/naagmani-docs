@@ -30,5 +30,5 @@ In [**Credential Pools**]({{DEVELOPER_PORTAL_URL}}/credentials), select **Custom
 
 ## Next Steps
 
-- [Security Architecture](/docs/security/overview)
-- [High Availability & Failover](/docs/production/reliability)
+- [Security Architecture](/security/overview)
+- [High Availability & Failover](/production/reliability)

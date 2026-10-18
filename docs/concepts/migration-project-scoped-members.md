@@ -105,6 +105,6 @@ This restores the member's `project_id` to `NULL` without impacting token secret
 
 ## Next Steps
 
-- [Customer Members Architecture](/docs/concepts/customer-members)
-- [Customer Members API Reference](/docs/api/customer-members)
-- [Project Service Tokens](/docs/concepts/project-service-tokens)
+- [Customer Members Architecture](/concepts/customer-members)
+- [Customer Members API Reference](/api/customer-members)
+- [Project Service Tokens](/concepts/project-service-tokens)

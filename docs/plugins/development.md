@@ -83,5 +83,5 @@ naagmani plugins test ./ --sample-prompt "Reach me at test@example.com"
 
 ## Next Steps
 
-- [Testing & Validation Guide](/docs/plugins/testing)
-- [Packaging & Publishing](/docs/plugins/publishing)
+- [Testing & Validation Guide](/plugins/testing)
+- [Packaging & Publishing](/plugins/publishing)

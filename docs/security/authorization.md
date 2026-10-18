@@ -101,8 +101,8 @@ Organizations can create custom roles with tailored permission subsets.
 
 ## Next Steps
 
-- [Developer Portal Roles & Permissions](/docs/developer-portal/roles)
-- [Developer Portal Users](/docs/developer-portal/users)
-- [Customer Members Directory](/docs/developer-portal/members)
-- [Project Service Tokens](/docs/developer-portal/projects/service-tokens)
-- [Security Audit Logs](/docs/security/audit-logs)
+- [Developer Portal Roles & Permissions](/developer-portal/roles)
+- [Developer Portal Users](/developer-portal/users)
+- [Customer Members Directory](/developer-portal/members)
+- [Project Service Tokens](/developer-portal/projects/service-tokens)
+- [Security Audit Logs](/security/audit-logs)

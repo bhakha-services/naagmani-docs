@@ -115,5 +115,5 @@ When a log record is stored under `encrypted_payload`:
 
 For an interactive, step-by-step tutorial on navigating the 12-stage execution timeline, inspecting plugin diff badges, and executing the Privileged Reveal protocol in the UI, refer to:
 
-👉 **[Developer Portal: Security Audit Logs & Inference Trace Observability](/docs/developer-portal/operations/audit-logs)**
+👉 **[Developer Portal: Security Audit Logs & Inference Trace Observability](/developer-portal/operations/audit-logs)**
 
