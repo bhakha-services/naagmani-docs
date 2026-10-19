@@ -43,6 +43,16 @@ Start a local reverse proxy for development testing.
 
 ---
 
+### `naagmani platform`
+Manage local or on-premise Naagmani platform containers and lifecycle.
+- `naagmani platform install`: Deploy complete platform stack (OS, Cloud, Developer Portal, Postgres, Redis).
+- `naagmani platform update check`: Evaluate target releases, compatibility, and schema migrations.
+- `naagmani platform update --version <version>`: Automated rolling zero-downtime platform upgrade with snapshot backups.
+- `naagmani platform rollback`: Revert to previous release and database state.
+- `naagmani platform status`: Inspect container health and service readiness probes.
+
+---
+
 ## Global Flags
 
 | Flag | Shorthand | Description |
@@ -55,5 +65,6 @@ Start a local reverse proxy for development testing.
 
 ## Next Steps
 
+- [Platform Updates & Upgrades](/cli/updates)
 - [Plugin Management with CLI](/cli/plugins)
 - [CLI Diagnostics](/cli/troubleshooting)
