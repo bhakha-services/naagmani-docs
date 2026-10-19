@@ -18,7 +18,7 @@ Entitlements are evaluated with strict deterministic precedence:
 3. Project & Environment Policies
          │
          ▼
-4. DefaultFree Fallback (Baseline open-source capabilities)
+4. DefaultFree Fallback (Baseline Community capabilities)
 ```
 
 > [!IMPORTANT]

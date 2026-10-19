@@ -102,7 +102,7 @@ License Envelope (JSON)
 
 ## 4. DefaultFree Tier Fallback
 
-When no commercial license is configured, or if signature verification fails, the runtime activates the default open-source capabilities without failing or halting inference:
+When no commercial license is configured, or if signature verification fails, the runtime activates the default Community tier baseline capabilities without failing or halting inference:
 
 | Feature | DefaultFree | Pro | Enterprise |
 |---|---|---|---|
