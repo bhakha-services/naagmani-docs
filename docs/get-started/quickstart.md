@@ -6,12 +6,20 @@ Get up and running with Naagmani in under 5 minutes. This guide walks you throug
 
 ## Step 1: Access the Developer Portal
 
-1. Open your browser and navigate to the **Naagmani Developer Portal** (e.g. `http://localhost:3000` or your cloud deployment URL).
+1. Open your browser and navigate to the **Naagmani Developer Portal**:
+   - For **Self-Hosted** deployments: `http://localhost:3001`
+   - For **Cloud / Hosted** deployments: `http://localhost:3000` (or your custom cloud domain)
 2. Log in with your developer account or sign up to create your initial **Organization**.
+
+> [!TIP]
+> **Need to spin up a self-hosted instance in under 60 seconds?**
+> Run the official [1-Command Automated Installer](/deploy/installation):
+> - **Linux & macOS**: `curl -fsSL https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.sh | bash`
+> - **Windows (PowerShell)**: `iwr -useb https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.ps1 | iex`
 
 ```text
 Developer Portal Location:
-http://localhost:3000
+http://localhost:3001 (Self-Hosted) or http://localhost:3000 (Cloud)
 ```
 
 ---

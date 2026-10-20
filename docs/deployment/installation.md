@@ -6,8 +6,24 @@ This guide walks through deploying the **Naagmani AI OS** on a clean Linux VPS o
 
 ## 1. Quick Start
 
-Run the following command on your target host:
+### Shell & PowerShell 1-Command Automated Installers (Fastest)
 
+#### Linux & macOS (via curl or wget):
+```bash
+# Using curl:
+curl -fsSL https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.sh | bash
+
+# Or using wget:
+wget -qO- https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.sh | bash
+```
+
+#### Windows (PowerShell):
+```powershell
+iwr -useb https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.ps1 | iex
+```
+
+### CLI-Managed Installation
+Alternatively, install via the official CLI:
 ```bash
 npx naagmani platform install
 ```

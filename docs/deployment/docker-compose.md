@@ -19,21 +19,35 @@ This guide details deploying the **Naagmani Enterprise AI Operating System** on 
 
 ## 2. One-Command Automated Installation
 
-The fastest way to install Naagmani is via the official CLI:
+The fastest and most reliable way to install Naagmani is via our 1-command installers:
 
+### Linux / macOS:
+```bash
+# Using curl:
+curl -fsSL https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.sh | bash
+
+# Or using wget:
+wget -qO- https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.sh | bash
+```
+
+### Windows (PowerShell):
+```powershell
+iwr -useb https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.ps1 | iex
+```
+
+### Via CLI:
 ```bash
 # Execute idempotent platform installer
 npx naagmani platform install
 ```
 
 The installer will automatically:
-1. Verify system prerequisites, Docker Engine, and ports (`3000`, `8081`).
+1. Verify system prerequisites, Docker Engine, and ports (`3001`, `9080`, `9081`).
 2. Generate cryptographically strong secrets for BYOK encryption (`AES-256-GCM`), session cookies, and PostgreSQL passwords.
-3. Write `docker-compose.production.yml` and `.env`.
-4. Pull official prebuilt multi-arch container images from `ghcr.io/bhakha-services/*`.
-5. Initialize `naagmani` (Data Plane) and `naagmani_cloud` (Control Plane) databases with `pgvector` enabled.
-6. Launch containers and verify all service health probes.
-7. Print access credentials and Developer Portal URL.
+3. Pull official prebuilt multi-arch container images from `ghcr.io/bhakha-services/*`.
+4. Initialize `naagmani` (Data Plane) and `naagmani_selfhosted` (Control Plane) databases with `pgvector` enabled.
+5. Launch containers and verify all service health probes.
+6. Print access credentials and Developer Portal URL (`http://localhost:3001`).
 
 ---
 
