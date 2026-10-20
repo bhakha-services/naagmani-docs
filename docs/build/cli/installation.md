@@ -12,10 +12,10 @@ Download the pre-compiled binary for your operating system:
 
 ```bash
 # Linux / macOS (curl)
-curl -fsSL https://get.naagmani.com/install.sh | bash
+curl -fsSL https://naagmani.com/install.sh | bash
 
 # Windows (PowerShell)
-iwr -useb https://get.naagmani.com/install.ps1 | iex
+iwr -useb https://naagmani.com/install.ps1 | iex
 ```
 
 ### 2. Via NPM
@@ -23,16 +23,6 @@ iwr -useb https://get.naagmani.com/install.ps1 | iex
 ```bash
 npm install -g @naagmani/cli
 ```
-
-### 3. Build from Source (Go 1.22+)
-
-```bash
-git clone https://github.com/bhakha-services/naagmani-cli.git
-cd naagmani-cli
-go build -o naagmani main.go
-sudo mv naagmani /usr/local/bin/
-```
-
 ---
 
 ## Verifying Installation

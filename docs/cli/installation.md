@@ -6,26 +6,16 @@ The **Naagmani CLI** (`naagmani`) is the unified command-line tool for developer
 
 ## Installation Methods
 
-### Homebrew (macOS / Linux)
-```bash
-brew install naagmani/tap/naagmani
-```
-
-### Standalone Binary (Linux / macOS / Windows)
+### 1-Command Installer (Linux / macOS / Windows)
 
 #### Linux / macOS (curl)
 ```bash
-curl -fsSL https://get.naagmani.app/install.sh | bash
+curl -fsSL https://naagmani.com/install.sh | bash
 ```
 
 #### Windows (PowerShell)
 ```powershell
-irm https://get.naagmani.app/install.ps1 | iex
-```
-
-### Via Go
-```bash
-go install github.com/naagmani/naagmani-cli/cmd/naagmani@latest
+irm https://naagmani.com/install.ps1 | iex
 ```
 
 ---

@@ -55,7 +55,7 @@ POST /v1/installations/:id/heartbeat
 ```json
 {
   "os_installation_id": "inst_01JXYZ1234",
-  "platform_version": "v2.0.0",
+  "platform_version": "v1.0.1",
   "status": "healthy",
   "timestamp": "2026-09-27T12:00:00Z"
 }

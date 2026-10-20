@@ -19,36 +19,51 @@ This guide details deploying the **Naagmani Enterprise AI Operating System** on 
 
 ## 2. One-Command Automated Installation
 
-The fastest way to install Naagmani is via the official CLI:
+The fastest and most reliable way to install Naagmani is via our 1-command installers:
 
+### Linux / macOS:
+```bash
+# Using curl:
+curl -fsSL https://naagmani.com/install.sh | bash
+
+# Or using wget:
+wget -qO- https://naagmani.com/install.sh | bash
+```
+
+### Windows (PowerShell):
+```powershell
+iwr -useb https://naagmani.com/install.ps1 | iex
+```
+
+### Via CLI:
 ```bash
 # Execute idempotent platform installer
 npx naagmani platform install
 ```
 
 The installer will automatically:
-1. Verify system prerequisites, Docker Engine, and ports (`3000`, `8081`).
+1. Verify system prerequisites, Docker Engine, and ports (`3001`, `9080`, `9081`).
 2. Generate cryptographically strong secrets for BYOK encryption (`AES-256-GCM`), session cookies, and PostgreSQL passwords.
-3. Write `docker-compose.production.yml` and `.env`.
-4. Pull official prebuilt multi-arch container images from `ghcr.io/bhakha-services/*`.
-5. Initialize `naagmani` (Data Plane) and `naagmani_cloud` (Control Plane) databases with `pgvector` enabled.
-6. Launch containers and verify all service health probes.
-7. Print access credentials and Developer Portal URL.
+3. Pull official prebuilt multi-arch container images from `ghcr.io/bhakha-services/*`.
+4. Initialize `naagmani` (Data Plane) and `naagmani_selfhosted` (Control Plane) databases with `pgvector` enabled.
+5. Launch containers and verify all service health probes.
+6. Print access credentials and Developer Portal URL (`http://localhost:3001`).
 
 ---
 
 ## 3. Manual Docker Compose Deployment
 
-If you prefer manual configuration:
+If you prefer manual configuration without running the installer script:
 
 ### Step 1: Prepare Directory & Environment
 
 ```bash
-mkdir -p /opt/naagmani && cd /opt/naagmani
-curl -fsSL https://raw.githubusercontent.com/bhakha-services/naagmani/main/.env.production.example -o .env
-curl -fsSL https://raw.githubusercontent.com/bhakha-services/naagmani/main/docker-compose.production.yml -o docker-compose.yml
-mkdir -p scripts/postgres-init
-curl -fsSL https://raw.githubusercontent.com/bhakha-services/naagmani/main/scripts/postgres-init/init-databases.sql -o scripts/postgres-init/init-databases.sql
+mkdir -p ~/naagmani && cd ~/naagmani
+curl -fsSL https://naagmani.com/docker-compose.yml -o docker-compose.yml
+cat << 'EOF' > init-databases.sql
+SELECT 'CREATE DATABASE naagmani'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'naagmani')\gexec
+EOF
 ```
 
 ### Step 2: Generate Secure Secrets
@@ -96,7 +111,7 @@ Access the Developer Portal at `http://<your-server-ip>:3000`.
 | **Check Platform Status** | `naagmani platform status` |
 | **Stream Service Logs** | `naagmani platform logs -f --service cloud` |
 | **Backup Databases** | `naagmani platform backup --dest /backups` |
-| **Zero-Downtime Update** | `naagmani platform update --version v2.0.1` |
+| **Zero-Downtime Update** | `naagmani platform update --version v1.0.1` |
 | **Rollback Update** | `naagmani platform rollback` |
 | **Stop Platform** | `naagmani platform stop` |
 | **Restart Platform** | `naagmani platform restart` |

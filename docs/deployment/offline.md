@@ -29,7 +29,7 @@ On a machine with Internet access and Docker installed, pull and export the offi
 
 ```bash
 # Set version tag
-export VERSION="v2.0.0"
+export VERSION="v1.0.1"
 
 # Pull official release images
 docker pull ghcr.io/bhakha-services/naagmani-os:${VERSION}
@@ -51,7 +51,7 @@ docker save -o naagmani-images-${VERSION}.tar \
 
 ### Step 2: Transfer Artifacts to Air-Gapped Server
 Copy the following files via USB drive, secure bastion, or approved optical media:
-1. `naagmani-images-v2.0.0.tar`
+1. `naagmani-images-v1.0.1.tar`
 2. `naagmani-cli` standalone binary (or npm package)
 3. `release.yaml`
 4. Customer Ed25519 offline license file (`license.jwt`)
@@ -62,7 +62,7 @@ Copy the following files via USB drive, secure bastion, or approved optical medi
 On the air-gapped server, load the OCI images into the local Docker daemon:
 
 ```bash
-docker load -i naagmani-images-v2.0.0.tar
+docker load -i naagmani-images-v1.0.1.tar
 ```
 
 Verify images are available locally:
@@ -76,7 +76,7 @@ docker images | grep -E "naagmani|pgvector|redis"
 Run the platform installer. The preflight engine detects the absence of GHCR connectivity, reports a non-fatal warning, and proceeds using the preloaded local images:
 
 ```bash
-./naagmani platform install --dir /opt/naagmani --version v2.0.0
+./naagmani platform install --dir /opt/naagmani --version v1.0.1
 ```
 
 ---

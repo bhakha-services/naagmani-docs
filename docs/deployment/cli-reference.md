@@ -39,7 +39,7 @@ Performs an idempotent, full-stack installation.
 naagmani platform install
 
 # Custom installation directory and release version
-naagmani platform install --dir /opt/naagmani --version v2.0.0 --port-portal 3000 --port-cloud 8081
+naagmani platform install --dir /opt/naagmani --version v1.0.1 --port-portal 3000 --port-cloud 8081
 
 # Preflight validation only
 naagmani platform install --dry-run
@@ -47,7 +47,7 @@ naagmani platform install --dry-run
 
 **Flags:**
 - `--dir <path>`: Target directory (default: `.`)
-- `--version <tag>`: Release version (default: `v2.0.0`)
+- `--version <tag>`: Release version (default: `v1.0.1`)
 - `--channel <stable|beta>`: Release channel (default: `stable`)
 - `--port-portal <int>`: Developer Portal port (default: `3000`)
 - `--port-cloud <int>`: Cloud API port (default: `8081`)
@@ -108,8 +108,8 @@ Performs automated update with preflight backup.
 # Check if updates are available
 naagmani platform update --check-only
 
-# Apply update to v2.0.1
-naagmani platform update --version v2.0.1
+# Apply update to v1.0.1
+naagmani platform update --version v1.0.1
 ```
 
 **Flags:**

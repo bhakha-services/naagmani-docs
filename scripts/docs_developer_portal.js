@@ -662,11 +662,8 @@ Integrate Naagmani directly into terminal workflows, CI/CD pipelines, and local 
 ## Installation
 
 \`\`\`bash
-# Install via Go
-go install github.com/bhakha-services/naagmani-cli/cmd/naagmani@latest
-
-# Or download binary release
-curl -sSL https://get.naagmani.app | bash
+# 1-Command Installer
+curl -fsSL https://naagmani.com/install.sh | bash
 \`\`\`
 
 ---

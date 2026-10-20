@@ -60,7 +60,7 @@ naagmani platform update check [--channel stable|beta] [--json]
 
 ### Execute Platform Upgrade
 ```bash
-naagmani platform update [--version v2.1.0] [--channel stable]
+naagmani platform update [--version v1.0.1] [--channel stable]
 ```
 
 ### Inspect Upgrade History
@@ -76,7 +76,7 @@ naagmani platform recovery [--force-rollback]
 
 ### Manual Rollback
 ```bash
-naagmani platform rollback [--version v2.0.0]
+naagmani platform rollback [--version v1.0.0]
 ```
 
 ---
@@ -100,6 +100,6 @@ For disconnected enterprise installations:
 2. Transfer archive to target server via secure bastion.
 3. Run offline upgrade:
 ```bash
-naagmani platform update --offline /path/to/naagmani-release-v2.1.0.tar.gz
+naagmani platform update --offline /path/to/naagmani-release-v1.0.1.tar.gz
 ```
 4. The updater validates the internal `release.sig` with the local trusted public key before staging container layers.

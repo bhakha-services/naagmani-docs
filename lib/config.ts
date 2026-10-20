@@ -34,9 +34,7 @@ export const siteConfig = {
     return this.developerPortalUrl;
   },
 
-  githubUrl:
-    process.env.NEXT_PUBLIC_GITHUB_REPO_URL ||
-    'https://github.com/bhakha-services/naagmani-cli',
+  githubUrl: process.env.NEXT_PUBLIC_GITHUB_REPO_URL || '',
 
   ogImage: '/og-image.png',
   locale: 'en_US',

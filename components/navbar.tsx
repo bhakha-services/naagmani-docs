@@ -9,7 +9,6 @@ import {
   Search,
   Sun,
   Moon,
-  Github,
   Menu,
   ArrowUpRight,
   Sparkles,
@@ -142,17 +141,6 @@ export function Navbar({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void
                 <Sun className="w-4 h-4 hidden dark:block text-zinc-300 hover:text-amber-400 transition-colors" />
                 <Moon className="w-4 h-4 block dark:hidden text-zinc-700 hover:text-emerald-600 transition-colors" />
               </button>
-
-              {/* GitHub Link */}
-              <a
-                href={siteConfig.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden md:flex p-2 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-                aria-label="Naagmani on GitHub"
-              >
-                <Github className="w-4 h-4" />
-              </a>
 
               {/* Developer Portal External Link */}
               <a

@@ -6,8 +6,24 @@ This guide walks through deploying the **Naagmani AI OS** on a clean Linux VPS o
 
 ## 1. Quick Start
 
-Run the following command on your target host:
+### Shell & PowerShell 1-Command Automated Installers (Fastest)
 
+#### Linux & macOS (via curl or wget):
+```bash
+# Using curl:
+curl -fsSL https://naagmani.com/install.sh | bash
+
+# Or using wget:
+wget -qO- https://naagmani.com/install.sh | bash
+```
+
+#### Windows (PowerShell):
+```powershell
+iwr -useb https://naagmani.com/install.ps1 | iex
+```
+
+### CLI-Managed Installation
+Alternatively, install via the official CLI:
 ```bash
 npx naagmani platform install
 ```
@@ -82,7 +98,7 @@ Customize the installation using command-line flags:
 # Custom directory, release channel, and custom external ports
 naagmani platform install \
   --dir /opt/naagmani \
-  --version v2.0.0 \
+  --version v1.0.1 \
   --channel stable \
   --port-portal 80 \
   --port-cloud 8081 \
@@ -100,7 +116,7 @@ naagmani platform install --force
 | Flag | Type | Default | Description |
 |---|---|---|---|
 | `--dir` | string | `.` | Target directory for platform configuration and persistent metadata |
-| `--version` | string | `v2.0.0` | Exact platform version tag to deploy |
+| `--version` | string | `v1.0.1` | Exact platform version tag to deploy |
 | `--channel` | string | `stable` | Release channel (`stable`, `beta`, `nightly`) |
 | `--port-portal` | int | `3000` | Host port exposed for Developer Portal UI |
 | `--port-cloud` | int | `8081` | Host port exposed for Naagmani Cloud Control Plane |

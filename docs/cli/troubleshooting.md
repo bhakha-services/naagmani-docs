@@ -20,7 +20,7 @@ Common errors encountered when using the `naagmani` CLI and their resolutions.
   ```bash
   docker start naagmani-os
   ```
-  Or specify the remote production URL using `--api-url https://api.naagmani.app`.
+  Or specify the remote production URL using `--api-url https://api.naagmani.com`.
 
 ---
 

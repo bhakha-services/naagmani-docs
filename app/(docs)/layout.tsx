@@ -7,7 +7,6 @@ import { Logo } from '@/components/logo';
 import {
   X,
   ArrowUpRight,
-  Github,
   Sparkles,
   BookOpen,
   LayoutDashboard,
@@ -107,26 +106,15 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
 
             {/* Drawer Footer: Quick Actions */}
             <div className="pt-3 mt-2 border-t border-zinc-200 dark:border-zinc-800 shrink-0 space-y-2">
-              <div className="grid grid-cols-2 gap-2">
-                <a
-                  href="http://localhost:3003"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 transition-colors"
-                >
-                  <span>Portal</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
-                </a>
-                <a
-                  href={siteConfig.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 transition-colors"
-                >
-                  <Github className="w-3.5 h-3.5" />
-                  <span>GitHub</span>
-                </a>
-              </div>
+              <a
+                href="http://localhost:3003"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-1.5 w-full px-3 py-2 rounded-lg text-xs font-medium border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 transition-colors"
+              >
+                <span>Developer Portal</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
+              </a>
               <Link
                 href="/get-started/quickstart"
                 onClick={() => setMobileMenuOpen(false)}

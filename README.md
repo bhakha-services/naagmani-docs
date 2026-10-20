@@ -29,12 +29,7 @@ Explore the full documentation structure:
 
 ---
 
-## 🔗 Related Ecosystem Repositories
 
-- **CLI Distribution**: [`bhakha-services/naagmani-cli`](https://github.com/bhakha-services/naagmani-cli)
-- **Plugin HDKs & Templates**: [`bhakha-services/naagmani-plugins`](https://github.com/bhakha-services/naagmani-plugins)
-
----
 
 ## 🤝 Contributing
 

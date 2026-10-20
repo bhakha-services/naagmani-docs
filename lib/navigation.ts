@@ -186,6 +186,7 @@ export const navigationData: NavSection[] = [
   {
     title: 'DEPLOYMENT & SELF-HOSTING',
     items: [
+      { title: '1-Command Installation', href: '/deploy/installation', badge: 'Fast' },
       { title: 'Docker Compose Deployment', href: '/deploy/docker-compose' },
       { title: 'Coolify Deployment', href: '/deploy/coolify' },
       { title: 'Air-Gapped & Offline Setup', href: '/deploy/offline' },

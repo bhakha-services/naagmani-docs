@@ -12,7 +12,7 @@ Whenever a new container release of Naagmani (OS Kernel, Cloud Control Plane, or
    - An unread announcement badge appears in the top navigation header.
    - Clicking the bell opens release highlights, changelogs, and breaking change advisories.
 2. **Header Update Pill**:
-   - An animated update pill (e.g. `🚀 Update Available: v2.1.0`) appears in the top header.
+   - An animated update pill (e.g. `🚀 Update Available: v1.0.1`) appears in the top header.
    - Clicking it opens an interactive modal with version diffs, database migration safety ratings, and the exact copyable terminal command.
 3. **CLI Automated Check**:
    - Automated CI/CD pipelines and operators can inspect update readiness anytime from the terminal.
@@ -32,8 +32,8 @@ naagmani platform update check
 ================================================================================
 🔍 Naagmani Platform Update Check
 ================================================================================
-Current Installed Version: v2.0.0
-Target Release Version:    v2.1.0
+Current Installed Version: v1.0.0
+Target Release Version:    v1.0.1
 Release Channel:           stable
 Compatibility Verdict:     UPGRADE_ALLOWED
 Architecture Supported:    true (windows/amd64)
@@ -41,7 +41,7 @@ License Entitlement:      true
 Migrations Required:       true (Safety: REVERSIBLE)
 
 ✓ Upgrade available! To execute update:
-  naagmani platform update --version v2.1.0
+  naagmani platform update --version v1.0.1
 ================================================================================
 ```
 
@@ -57,16 +57,16 @@ naagmani platform update check --json
 To perform an automated, zero-downtime rolling update:
 
 ```bash
-naagmani platform update --version v2.1.0
+naagmani platform update --version v1.0.1
 ```
 
 ### What Happens Automatically (10-Stage Upgrade Engine):
 1. **Preflight Verification**: Validates Docker daemon, disk space, and memory.
 2. **Pre-Upgrade Snapshot Backup**: Automatically creates a timestamped SQL dump of both `naagmani` and `naagmani_cloud` databases into `./backups/`.
 3. **Container Pull**: Fetches the verified release images from GHCR:
-   - `ghcr.io/bhakha-services/naagmani-os:v2.1.0`
-   - `ghcr.io/bhakha-services/naagmani-cloud:v2.1.0`
-   - `ghcr.io/bhakha-services/naagmani-developer:v2.1.0`
+   - `ghcr.io/bhakha-services/naagmani-os:v1.0.1`
+   - `ghcr.io/bhakha-services/naagmani-cloud:v1.0.1`
+   - `ghcr.io/bhakha-services/naagmani-developer:v1.0.1`
 4. **Database Migrations**: Applies required forward-compatible or reversible migrations.
 5. **Rolling Deployment**: Restarts service containers in deterministic dependency order.
 6. **Health Checking**: Runs automated readiness probes against `/v1/health` for 60 seconds.
