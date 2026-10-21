@@ -11,26 +11,15 @@ This guide walks through deploying the **Naagmani AI OS** on a clean Linux VPS o
 #### Linux & macOS (via curl or wget):
 ```bash
 # Using curl:
-<<<<<<< HEAD
 curl -fsSL https://naagmani.com/install.sh | bash
 
 # Or using wget:
 wget -qO- https://naagmani.com/install.sh | bash
-=======
-curl -fsSL https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.sh | bash
-
-# Or using wget:
-wget -qO- https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.sh | bash
->>>>>>> 0325ea36bb3c190d8e9a036bf163445d7f42bf55
 ```
 
 #### Windows (PowerShell):
 ```powershell
-<<<<<<< HEAD
 iwr -useb https://naagmani.com/install.ps1 | iex
-=======
-iwr -useb https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.ps1 | iex
->>>>>>> 0325ea36bb3c190d8e9a036bf163445d7f42bf55
 ```
 
 ### CLI-Managed Installation
@@ -167,3 +156,85 @@ Once the installation reaches the `READY` state, access your platform endpoints:
 - **System Health Check**: `http://<your-server-ip>:8081/health`
 
 Authenticate using the generated one-time bootstrap token displayed upon completion, or link your self-hosted instance to Naagmani Cloud.
+
+---
+
+## 7. Lifecycle Management & Operations (`doctor`, `update`, `uninstall`)
+
+The installer script (`install.sh` / `install.ps1`) acts not only as an initial bootstrapper, but as a complete **Stack Lifecycle Controller**.
+
+Once installed, the installer automatically registers a native global CLI command: **`naagmani`**.
+
+### Day-to-Day CLI Commands
+
+You can execute lifecycle actions from any directory on your server:
+
+```bash
+# Diagnose health, check port bindings, verify database & auto-repair issues
+naagmani doctor
+
+# Pull latest GHCR images and restart stack with zero data loss
+naagmani update
+
+# Restart all containers
+naagmani restart
+
+# Inspect running container status and ports
+naagmani status
+
+# Stream live container logs in real time
+naagmani logs
+
+# Re-run the interactive configuration wizard (.env / ports / credentials)
+naagmani reconfigure
+
+# Safely stop containers and remove deployment (prompts to preserve data)
+naagmani uninstall
+```
+
+*(On Windows PowerShell, use `.\naagmani.ps1 [command]` or `.\install.ps1 -Action [command]`)*
+
+### Re-running the 1-Command Installer (Interactive Action Menu)
+
+If you re-run the original installer command on an existing deployment:
+
+```bash
+curl -fsSL https://naagmani.com/install.sh | bash
+```
+
+The installer immediately detects the active `.env` configuration and presents an **Interactive Control Menu**:
+
+```text
+=================================================================
+       Existing Naagmani AI OS Deployment Detected!              
+=================================================================
+
+  1) Update to latest container images & restart (Recommended)
+  2) Run Doctor (diagnose health, ports, containers & API)
+  3) Reconfigure ports, credentials & environment (.env)
+  4) Restart all services
+  5) Stream live container logs
+  6) View container status
+  7) Uninstall / Stop and remove deployment
+  8) Exit without making changes
+
+Select an action [1-8] [1]: 
+```
+
+Pressing `[Enter]` defaults to **Option 1 (Update)**, pulling latest container images and restarting services while keeping all persistent volumes intact.
+
+### Remote One-Liner Execution
+
+You can also target specific lifecycle actions directly via curl without opening the menu:
+
+```bash
+# Direct doctor diagnosis & auto-heal:
+curl -fsSL https://naagmani.com/install.sh | bash -s -- doctor
+
+# Direct stack update:
+curl -fsSL https://naagmani.com/install.sh | bash -s -- update
+
+# Direct stack uninstall:
+curl -fsSL https://naagmani.com/install.sh | bash -s -- uninstall
+```
+

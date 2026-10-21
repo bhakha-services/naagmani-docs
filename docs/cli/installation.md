@@ -48,7 +48,25 @@ naagmani completion fish > ~/.config/fish/completions/naagmani.fish
 
 ---
 
+## Stack Lifecycle Operations
+
+The `naagmani` CLI includes built-in controls for administering self-hosted stacks:
+
+| Command | Action |
+|---|---|
+| `naagmani doctor` | Diagnoses container status, database readiness, port bindings, and auto-fixes mismatches |
+| `naagmani update` | Pulls latest GHCR container images and recreates running services |
+| `naagmani restart` | Restarts all platform services |
+| `naagmani status` | Inspects live containers and listening ports |
+| `naagmani logs` | Streams aggregated real-time container logs |
+| `naagmani reconfigure` | Re-launches the configuration wizard to modify ports or credentials |
+| `naagmani uninstall` | Safely stops containers with options to preserve or purge persistent storage |
+
+---
+
 ## Next Steps
 
 - [CLI Authentication & Contexts](/cli/authentication)
 - [Commands Reference](/cli/commands)
+- [Deployment & Operations](/deployment/installation)
+
