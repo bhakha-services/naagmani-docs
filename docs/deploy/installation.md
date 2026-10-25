@@ -14,40 +14,24 @@ Choose the command matching your operating system:
 
 Using `curl`:
 ```bash
-<<<<<<< HEAD
 curl -fsSL https://naagmani.com/install.sh | bash
-=======
-curl -fsSL https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.sh | bash
->>>>>>> 0325ea36bb3c190d8e9a036bf163445d7f42bf55
 ```
 
 Or using `wget`:
 ```bash
-<<<<<<< HEAD
 wget -qO- https://naagmani.com/install.sh | bash
-=======
-wget -qO- https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.sh | bash
->>>>>>> 0325ea36bb3c190d8e9a036bf163445d7f42bf55
 ```
 
 ### Option B: Windows (PowerShell)
 
 Open PowerShell (Run as Administrator or as standard user with Docker Desktop running):
 ```powershell
-<<<<<<< HEAD
 iwr -useb https://naagmani.com/install.ps1 | iex
-=======
-iwr -useb https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.ps1 | iex
->>>>>>> 0325ea36bb3c190d8e9a036bf163445d7f42bf55
 ```
 
 Or using the short alias `irm`:
 ```powershell
-<<<<<<< HEAD
 irm https://naagmani.com/install.ps1 | iex
-=======
-irm https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.ps1 | iex
->>>>>>> 0325ea36bb3c190d8e9a036bf163445d7f42bf55
 ```
 
 ---
@@ -124,11 +108,7 @@ If you prefer not to pipe scripts into `bash`, you can download and run the stan
 mkdir -p ~/naagmani && cd ~/naagmani
 
 # 2. Download the standalone GHCR compose file
-<<<<<<< HEAD
 curl -fsSL https://naagmani.com/docker-compose.yml -o docker-compose.yml
-=======
-curl -fsSL https://raw.githubusercontent.com/bhakha-services/naagmani/main/deployments/self-hosted/docker-compose.ghcr.yml -o docker-compose.yml
->>>>>>> 0325ea36bb3c190d8e9a036bf163445d7f42bf55
 
 # 3. Create the database initialization file
 cat << 'EOF' > init-databases.sql
@@ -190,19 +170,12 @@ docker compose up -d
 
 ## 7. Troubleshooting & GHCR Notes
 
-<<<<<<< HEAD
 ### Official Container Images
 Official multi-arch container images are hosted on GitHub Container Registry (GHCR):
-=======
-### GHCR Package Visibility / Pull Access
-Images are published under the `bhakha-services` GitHub organization:
->>>>>>> 0325ea36bb3c190d8e9a036bf163445d7f42bf55
 - `ghcr.io/bhakha-services/naagmani-os:latest`
 - `ghcr.io/bhakha-services/naagmani-cloud:latest`
 - `ghcr.io/bhakha-services/naagmani-developer:latest`
 
-<<<<<<< HEAD
-=======
 If you encounter a `pull access denied` error while pulling from GHCR:
 1. Verify that the packages are set to **Public** in GitHub Organization settings (`https://github.com/orgs/bhakha-services/packages`), OR
 2. Authenticate your local Docker client using your GitHub Personal Access Token (PAT) with `read:packages` permission:
@@ -210,18 +183,13 @@ If you encounter a `pull access denied` error while pulling from GHCR:
    echo $GH_TOKEN | docker login ghcr.io -u <YOUR_GITHUB_USERNAME> --password-stdin
    ```
 
->>>>>>> 0325ea36bb3c190d8e9a036bf163445d7f42bf55
 ### Resetting Data and Clean Reinstall
 If you wish to wipe the database and start completely fresh:
 ```bash
 cd ~/naagmani
 docker compose down -v
 rm -f .env init-databases.sql docker-compose.yml
-<<<<<<< HEAD
 curl -fsSL https://naagmani.com/install.sh | bash
-=======
-curl -fsSL https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.sh | bash
->>>>>>> 0325ea36bb3c190d8e9a036bf163445d7f42bf55
 ```
 
 ---

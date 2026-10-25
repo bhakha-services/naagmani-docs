@@ -14,13 +14,8 @@ Get up and running with Naagmani in under 5 minutes. This guide walks you throug
 > [!TIP]
 > **Need to spin up a self-hosted instance in under 60 seconds?**
 > Run the official [1-Command Automated Installer](/deploy/installation):
-<<<<<<< HEAD
 > - **Linux & macOS**: `curl -fsSL https://naagmani.com/install.sh | bash`
 > - **Windows (PowerShell)**: `iwr -useb https://naagmani.com/install.ps1 | iex`
-=======
-> - **Linux & macOS**: `curl -fsSL https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.sh | bash`
-> - **Windows (PowerShell)**: `iwr -useb https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.ps1 | iex`
->>>>>>> 0325ea36bb3c190d8e9a036bf163445d7f42bf55
 
 ```text
 Developer Portal Location:

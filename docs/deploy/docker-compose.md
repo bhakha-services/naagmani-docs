@@ -37,7 +37,6 @@ graph TD
 The fastest and most reliable way to deploy is using the official 1-command installer script. It validates prerequisites, generates cryptographically strong keys, sets up database schemas, pulls official multi-arch images from GHCR, and starts the stack:
 
 ### Linux / macOS
-<<<<<<< HEAD
 
 ```bash
 # Using curl:
@@ -59,69 +58,16 @@ Or using the short alias `irm`:
 
 ```powershell
 irm https://naagmani.com/install.ps1 | iex
-=======
-```bash
-# Using curl:
-curl -fsSL https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.sh | bash
-
-# Or using wget:
-wget -qO- https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.sh | bash
-```
-
-### Windows (PowerShell)
-```powershell
-iwr -useb https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.ps1 | iex
->>>>>>> 0325ea36bb3c190d8e9a036bf163445d7f42bf55
 ```
 
 ---
 
 ## Option 2: Standalone GHCR Docker Compose (Zero Code Cloning)
 
-<<<<<<< HEAD
 If you prefer to inspect and manage the Docker Compose file directly without using an automated installer script:
-=======
-If you prefer to inspect and manage the Docker Compose file directly without cloning the entire git repository:
-
-```bash
-# 1. Create deployment directory
-mkdir -p ~/naagmani && cd ~/naagmani
-
-# 2. Download the official standalone GHCR compose definition
-curl -fsSL https://raw.githubusercontent.com/bhakha-services/naagmani/main/deployments/self-hosted/docker-compose.ghcr.yml -o docker-compose.yml
-
-# 3. Create the database initialization script
-cat << 'EOF' > init-databases.sql
-SELECT 'CREATE DATABASE naagmani'
-WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'naagmani')\gexec
-EOF
-
-# 4. Pull pre-built multi-arch images from GHCR
-docker compose pull
-
-# 5. Launch all services in background
-docker compose up -d
-
-# 6. Verify container health
-docker compose ps
-```
-
----
-
-## Option 3: Build & Run from Source (Git Clone)
-
-If you are contributing to Naagmani or wish to build all container images locally from source code:
-
-1. Clone the repository and navigate to root:
-   ```bash
-   git clone https://github.com/bhakha-services/naagmani.git
-   cd naagmani
-   ```
->>>>>>> 0325ea36bb3c190d8e9a036bf163445d7f42bf55
 
 ### Step 1: Create Directory and Download Compose Stack
 
-<<<<<<< HEAD
 ```bash
 # 1. Create deployment directory
 mkdir -p ~/naagmani && cd ~/naagmani
@@ -129,25 +75,9 @@ mkdir -p ~/naagmani && cd ~/naagmani
 # 2. Download the standalone GHCR compose definition
 curl -fsSL https://naagmani.com/docker-compose.yml -o docker-compose.yml
 ```
-=======
-3. Generate secure 32-byte encryption and session keys in `.env.production`:
-   ```bash
-   # AES-256 BYOK encryption key
-   openssl rand -hex 32
-   
-   # Session secret
-   openssl rand -hex 32
-   ```
-
-4. Build and start the platform stack:
-   ```bash
-   docker compose -f docker-compose.production.yml up -d --build
-   ```
->>>>>>> 0325ea36bb3c190d8e9a036bf163445d7f42bf55
 
 ### Step 2: Initialize Databases Script
 
-<<<<<<< HEAD
 ```bash
 cat << 'EOF' > init-databases.sql
 SELECT 'CREATE DATABASE naagmani'
@@ -311,8 +241,6 @@ docker compose up -d
 docker compose ps
 ```
 
-=======
->>>>>>> 0325ea36bb3c190d8e9a036bf163445d7f42bf55
 ---
 
 ## Platform Lifecycle & Maintenance

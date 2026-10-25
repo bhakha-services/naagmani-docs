@@ -24,26 +24,15 @@ The fastest and most reliable way to install Naagmani is via our 1-command insta
 ### Linux / macOS:
 ```bash
 # Using curl:
-<<<<<<< HEAD
 curl -fsSL https://naagmani.com/install.sh | bash
 
 # Or using wget:
 wget -qO- https://naagmani.com/install.sh | bash
-=======
-curl -fsSL https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.sh | bash
-
-# Or using wget:
-wget -qO- https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.sh | bash
->>>>>>> 0325ea36bb3c190d8e9a036bf163445d7f42bf55
 ```
 
 ### Windows (PowerShell):
 ```powershell
-<<<<<<< HEAD
 iwr -useb https://naagmani.com/install.ps1 | iex
-=======
-iwr -useb https://raw.githubusercontent.com/bhakha-services/naagmani/main/install.ps1 | iex
->>>>>>> 0325ea36bb3c190d8e9a036bf163445d7f42bf55
 ```
 
 ### Via CLI:
