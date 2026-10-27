@@ -82,3 +82,17 @@ keys are not added automatically. Before replacing trust, obtain the replacement
 signed license, verify its installation ID and expiry, and stage its import with
 the verifier upgrade. Keep the previous license until replacement acceptance is
 verified. Do not restore a publicly known signing seed during rollback.
+
+## Pre-staged images and custom installation directory
+
+To use images already present on the Docker host, set `NAAGMANI_SKIP_PULL=true`.
+Every image referenced by Compose must exist locally; missing images stop the
+installer. This applies to installation and update and does not publish images.
+Set `NAAGMANI_INSTALL_DIR` to choose the configuration directory. PowerShell users
+can set `NAAGMANI_NO_PATH_UPDATE=true` to leave the user PATH unchanged. Bash users
+can set `NAAGMANI_SKIP_CLI_INSTALL=true` to skip downloading the optional CLI.
+`NON_INTERACTIVE=true` accepts the documented prompt defaults.
+
+The development `test` branch does not publish GHCR images. Source-based Coolify
+builds and tests with locally built images do not imply that the public GHCR
+`latest` images contain those changes; registry releases remain a main-branch step.
