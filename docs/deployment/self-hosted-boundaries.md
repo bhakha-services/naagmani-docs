@@ -5,6 +5,19 @@ owns commercial purchase, renewal and signed-license download. Local portal user
 passwords, memberships, project roles, customer members, budgets and runtime
 content are not a central Accounts user directory.
 
+One Accounts user owns each billing/purchase scope. Accounts does not infer
+purchase ownership from a local portal role, an organization ID in a request, or
+the shared `org_default` placeholder. Existing licenses are linked to their
+confirmed purchaser explicitly; login does not claim old licenses automatically.
+The owner can select and export their installation licenses from Accounts billing.
+The signed JSON export preserves its payload, signature and signing `key_id`.
+
+Commercial administration (plans, gateway settings, global financial records and
+license signing) uses the managed Admin Portal's authorized service path. Ordinary
+Accounts sessions can access only their own billing scopes. This does not create
+Accounts users for local portal members and does not add any Accounts connection
+to local auth, RBAC or offline license verification.
+
 ## Authentication
 
 Set `NAAGMANI_DEPLOYMENT_MODE=self_hosted` on the local Cloud service and
