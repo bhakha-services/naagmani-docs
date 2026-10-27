@@ -12,7 +12,7 @@ Naagmani is engineered with an **offline-first core architecture**.
 - **Core AI Execution & Routing**: Inference pipeline, plugin execution, request interception, prompt firewall, and caching.
 - **Local Data Planes**: PostgreSQL (`naagmani` and `naagmani_cloud`), vector embeddings (`pgvector`), and Redis message broker.
 - **Developer Portal UI**: Full dashboard, playground, tracing UI, and analytics.
-- **Ed25519 Cryptographic Licensing**: Signed license files (`license.jwt`) verify offline without requiring phone-home connections.
+- **Ed25519 Cryptographic Licensing**: Signed license files (`license.json`) verify offline without requiring phone-home connections.
 - **Plugin Runtime**: Locally loaded plugins (`naagmani.plugin/v1`) execute without outbound Internet.
 
 ### What Requires Connectivity (or Pre-staging)
@@ -54,7 +54,7 @@ Copy the following files via USB drive, secure bastion, or approved optical medi
 1. `naagmani-images-v1.0.1.tar`
 2. `naagmani-cli` standalone binary (or npm package)
 3. `release.yaml`
-4. Customer Ed25519 offline license file (`license.jwt`)
+4. Customer Ed25519 offline license file (`license.json`)
 
 ---
 
@@ -81,15 +81,17 @@ Run the platform installer. The preflight engine detects the absence of GHCR con
 
 ---
 
-### Step 5: Activate Offline Ed25519 License
-Place your cryptographic license key into the environment configuration:
+### Step 5: Import the signed JSON license locally
 
-```bash
-# Add license JWT to .env
-echo "NAAGMANI_LICENSE_KEY=\"eyJhbGciOiJFZERTQSI...\"" >> /opt/naagmani/.env
+Download the signed license from Accounts on a connected workstation and transfer
+it to the local installation. Import the JSON envelope through the local license
+page/API. OS verifies it without Accounts connectivity and persists successful
+imports in its data volume for restart.
 
-# Restart platform containers to apply license
-./naagmani platform restart --dir /opt/naagmani
-```
+For a pre-staged file, set `NAAGMANI_LICENSE_PATH` to its container path and mount
+it readably. Alternatively, `NAAGMANI_LICENSE_DATA` accepts the full signed JSON.
+There is no `NAAGMANI_LICENSE_KEY` JWT configuration in this runtime.
 
-The platform verifies the Ed25519 signature against the bundled public key and activates all licensed enterprise capabilities offline.
+See [Self-hosted boundaries](./self-hosted-boundaries.md) for local identity,
+network disclosures, expiry and release-validation limitations. External AI
+providers need their own connectivity; use local providers for air-gapped inference.
