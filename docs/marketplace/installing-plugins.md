@@ -1,29 +1,3 @@
-# Installing Plugins from Marketplace
+# Install plugins
 
-Adding pre-built capabilities to your Naagmani project takes just one click or a single CLI command.
-
----
-
-## 1. Installation via Developer Portal
-
-1. Navigate to **Plugins & Marketplace**: [{{DEVELOPER_PORTAL_URL}}/plugins]({{DEVELOPER_PORTAL_URL}}/plugins)
-2. Locate your desired plugin (e.g., *PII Redaction Guardrail*).
-3. Click **Install to Project**.
-4. Select the target Environment (`production` or `test`).
-5. Configure custom parameters in the auto-generated JSON schema form.
-6. Click **Save & Activate**.
-
----
-
-## 2. Installation via CLI
-
-```bash
-naagmani plugins install com.company.pii-guard --env production
-```
-
----
-
-## Next Steps
-
-- [Publishing Your Own Plugins](/marketplace/publishing)
-- [Plugin Visibility & Scopes](/marketplace/plugin-visibility)
+See [install plugins](/marketplace/installation) for the maintained workflow.

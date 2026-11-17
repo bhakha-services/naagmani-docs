@@ -127,7 +127,6 @@ export const navigationData: NavSection[] = [
       { title: 'Chat Completions', href: '/api/chat-completions', badge: 'v1' },
       { title: 'Streaming (SSE)', href: '/api/streaming' },
       { title: 'Responses API', href: '/api/responses' },
-      { title: 'Embeddings API', href: '/api/embeddings' },
       { title: 'Models & Aliases API', href: '/api/models' },
       { title: 'Project Service Tokens API', href: '/api/service-tokens', badge: 'New' },
       { title: 'Customer Members API', href: '/api/customer-members', badge: 'New' },
@@ -144,7 +143,6 @@ export const navigationData: NavSection[] = [
       { title: 'Discover & Search', href: '/marketplace/discover' },
       { title: 'Installation & Scope', href: '/marketplace/installation' },
       { title: 'Publisher Portal', href: '/marketplace/publishing' },
-      { title: 'Signing Ceremony & Trust', href: '/marketplace/signing-ceremony' },
     ],
   },
   {
@@ -153,10 +151,10 @@ export const navigationData: NavSection[] = [
       {
         title: 'SDKs',
         items: [
-          { title: 'SDK Overview & Libraries', href: '/build/sdks/overview' },
-          { title: 'Node.js & TypeScript SDK', href: '/build/sdks/node' },
-          { title: 'Python SDK', href: '/build/sdks/python' },
-          { title: 'Go SDK', href: '/build/sdks/go' },
+          { title: 'Application Clients & Libraries', href: '/build/sdks/overview' },
+          { title: 'Node.js Client', href: '/build/sdks/node' },
+          { title: 'Python Client', href: '/build/sdks/python' },
+          { title: 'Go Client', href: '/build/sdks/go' },
         ],
       },
       {

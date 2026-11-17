@@ -23,8 +23,8 @@ graph TD
     P1 --> E1["Environment: test"]
     P1 --> E2["Environment: production"]
 
-    E1 --> K1["Test API Key (nak_test_...)"]
-    E2 --> K2["Prod Service Token (nsk_live_...)"]
+    E1 --> K1["Test API Key (nm_live_...)"]
+    E2 --> K2["Prod Service Token (nm_st_...)"]
 ```
 
 ---
@@ -33,10 +33,10 @@ graph TD
 
 Every project comes pre-configured with two primary environments:
 
-| Environment | Purpose | Key Prefix | Recommended Use |
+| Environment | Purpose | Credential format | Recommended Use |
 |---|---|---|---|
-| **`test`** | Staging, CI/CD automated testing, local development. | `nak_test_...` | Unlimited developer iterations with lower rate limits and debug logging enabled. |
-| **`production`** | Live customer-facing traffic. | `nak_live_...` / `nsk_live_...` | High-availability routing cascades, strict budget ceilings, and immutable audit logging. |
+| **`test`** | Staging, CI/CD automated testing, local development. | `nm_live_...` | Test changes with the limits and logging policy you configure. |
+| **`production`** | Live customer-facing traffic. | `nm_live_...` / `nm_st_...` | High-availability routing cascades, strict budget ceilings, and retention-controlled audit logging. |
 
 ---
 

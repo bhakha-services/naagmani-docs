@@ -1,30 +1,9 @@
-# High Availability & Failover
+# Reliability and failover
 
-Naagmani ensures 99.99% uptime for AI workloads by automatically managing provider outages, rate-limit 429s, and network degradation.
+Routing policies can select configured candidates and retry eligible upstream failures. This can improve resilience when another candidate is available; it does not guarantee a particular uptime or recovery time.
 
-```mermaid
-flowchart TD
-    A[Client Request] --> B[Naagmani Active Gateway]
-    B --> C{Primary: OpenAI}
-    C -->|200 OK| D[Fast Return]
-    C -->|503 Outage / 429 Limit| E[Automated Failover]
-    E --> F{Secondary: Anthropic Claude}
-    F -->|200 OK| D
-    F -->|Timeout| G{Tertiary: Google Gemini}
-    G -->|200 OK| D
-```
+Test timeouts, rate-limit errors, unavailable providers, exhausted quotas and interrupted streams. A response that has already started streaming cannot always be transparently replayed against another provider.
 
----
+Platform availability also depends on the portal/API/gateway instances, database, Redis, network, plugin dependencies and model services. A single-node Compose update or host outage can interrupt service. Redundant hosting, load balancing, backups and regional failover require an operator-designed deployment.
 
-## Smart Retry Strategies
-
-1. **Exponential Backoff with Jitter**: Prevents thundering herd problems on upstream recovery.
-2. **Circuit Breaker Pattern**: Temporarily halts traffic to failing providers to avoid latency cascades.
-3. **Attempt Telemetry Tracking**: Logs every hop for automated SLA reporting.
-
----
-
-## Next Steps
-
-- [Rate Limiting & Quotas](/production/rate-limits)
-- [Traffic Routing Strategies](/production/routing)
+Use [routing policies](/concepts/routing), [provider attempt logs](/developer-portal/operations/attempts), [monitoring](/production/observability) and [backup/update procedures](/deployment/upgrades) to validate your target behavior.

@@ -34,7 +34,7 @@ nm_st_ + [10-char Base32 Public ID] + _ + [48-char Hex Secret]
 nm_st_VAK8CS0FJP_8f14e45c7b39a2d04e5f61728394a5b6c7d8e9f012345678
 ```
 
-- **Prefix (`nm_st_`)**: Standard prefix recognized by GitHub Secret Scanning, TruffleHog, and GitLab.
+- **Prefix (`nm_st_`)**: Identifies a Naagmani Project Service Token. Configure secret-scanning rules for your tooling.
 - **Public ID (`VAK8CS0FJP`)**: Safe Crockford Base32 identifier for dashboards, logs, and telemetry without revealing secret material.
 - **Masked Format (`nm_st_VAK8CS0FJP_****...5678`)**: Display format used in dashboard tables and application logs.
 
@@ -50,7 +50,7 @@ Capabilities in Naagmani follow a strict dot-notation standard verified by the g
 | `services.tokens.read` | Services Gateway | Permission to list and inspect provisioned child tokens. | `GET /v1/services/tokens`<br>`GET /v1/services/tokens/{id}` |
 | `services.tokens.revoke` | Services Gateway | Permission to immediately invalidate provisioned child tokens. | `DELETE /v1/services/tokens/{id}` |
 | `services.usage.read` | Observability | Permission to inspect member token consumption and real-time monthly spend telemetry. | `GET /v1/services/tokens/{id}/usage` |
-| `inference.execute` | AI Workloads | Permission to dispatch direct chat completions and streaming model inference. | `POST /v1/chat/completions`<br>`POST /v1/embeddings`<br>`POST /v1/responses` |
+| `inference.execute` | AI Workloads | Permission to dispatch direct chat completions and streaming model inference. | `POST /v1/chat/completions`<br>`POST /v1/responses` |
 
 > [!IMPORTANT]
 > Wildcard capabilities (e.g. `*` or `services.*`) are rejected by Naagmani's validation engine to enforce strict least-privilege compliance.

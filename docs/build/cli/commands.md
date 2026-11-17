@@ -1,160 +1,39 @@
-# CLI Command Reference
+# CLI commands
 
-Exhaustive reference for all commands supported by the `naagmani` CLI tool.
+Run `naagmani help` and the relevant command's help for the flags supported by your installed version.
 
----
+| Command | Purpose |
+| --- | --- |
+| `naagmani version` | Show CLI version |
+| `naagmani doctor` | Check development/runtime prerequisites |
+| `naagmani login`, `logout`, `whoami` | Local login, local credential removal and identity inspection |
+| `naagmani init` | Create project configuration |
+| `naagmani config` | Inspect or update CLI configuration |
+| `naagmani platform help` | List platform lifecycle commands |
+| `naagmani plugin help` | List plugin development and lifecycle commands |
+| `naagmani marketplace help` | List catalog search and installation commands |
 
-## 1. Core Commands
+## Platform operations
 
-### `naagmani doctor`
-Diagnoses system prerequisites, runtime dependencies (Docker, Node, Go, Python), and network connectivity to Naagmani Cloud and Gateway endpoints.
+The platform command includes `install`, `start`, `stop`, `restart`, `status`, `logs`, `doctor`, `update`, `rollback`, `recovery`, `backup`, `restore`, `uninstall`, `register` and `license`.
+
 ```bash
-naagmani doctor
+naagmani platform help
+naagmani platform status --dir ./naagmani --json
+naagmani platform logs --dir ./naagmani --service os -f
 ```
 
-### `naagmani version`
-Prints the CLI version and build metadata.
+Platform subcommands act on their own installation configuration. Do not mix CLI-generated and shell-generated state files without checking compatibility. Back up before updates or recovery. Container recreation and database restore can interrupt service; zero downtime is not guaranteed.
+
+## Plugins
+
+Supported plugin commands include `create`, `validate`, `dev`, `build`, `package`, `publish`, `install`, `list`, `versions`, `update`, `rollback`, `info`, `health` and `metrics`.
+
 ```bash
-naagmani version
-# Output: naagmani CLI v1.0.0
-```
-
-### `naagmani whoami`
-Displays the active authenticated user, organization, project, and environment context.
-```bash
-naagmani whoami
-```
-
----
-
-## 2. Platform Lifecycle & Self-Hosting
-
-### `naagmani platform install`
-Deploys the complete Naagmani platform stack on Docker/Compose.
-```bash
-naagmani platform install
-```
-
-### `naagmani platform status`
-Inspects health status, container uptimes, and port mappings across platform containers.
-```bash
-naagmani platform status --json
-```
-
-### `naagmani platform logs`
-Streams real-time container logs.
-```bash
-naagmani platform logs -f --service os
-# Services: os | cloud | portal | postgres | redis
-```
-
-### `naagmani platform update`
-Executes an automated in-place platform update with preflight database snapshot backup.
-```bash
-naagmani platform update
-```
-
-### `naagmani platform rollback`
-Reverts to the previous known-good platform version.
-```bash
-naagmani platform rollback
-```
-
-### `naagmani platform backup` / `restore`
-Creates or restores full snapshot backups of PostgreSQL database states.
-```bash
-naagmani platform backup --output ./backup-2026.sql
-naagmani platform restore --input ./backup-2026.sql
-```
-
----
-
-## 3. Plugin Development & HDK
-
-### `naagmani plugin create <name>`
-Scaffolds a new plugin project.
-```bash
-naagmani plugin create dlp-filter --language go
-# Options: --language go|node|python
-```
-
-### `naagmani plugin validate [dir]`
-Validates `plugin.json` manifest against protocol rules and permission schemas.
-```bash
+naagmani plugin create --language go example-plugin
 naagmani plugin validate .
 ```
 
-### `naagmani plugin dev [dir]`
-Builds and dynamically links a plugin to the local running OS gateway for live testing.
-```bash
-naagmani plugin dev .
-```
+Language choices for scaffolding are `go`, `node` and `python`. Publishing and catalog operations require a reachable service and permissions; local build/validation are separate from publication.
 
-### `naagmani plugin package [dir]`
-Compiles binaries and builds the distribution `.tar.gz` archive with SHA-256 checksum.
-```bash
-naagmani plugin package .
-```
-
-### `naagmani plugin publish [dir]`
-Publishes a release version to Naagmani Cloud or Organization catalog.
-```bash
-naagmani plugin publish . --visibility organization
-```
-
-### `naagmani plugin list` / `versions`
-Lists published or installed versions for a plugin.
-```bash
-naagmani plugin versions dlp-filter
-```
-
----
-
-## 4. Marketplace Commands
-
-### `naagmani marketplace search <query>`
-Searches the marketplace catalog by keyword or category.
-```bash
-naagmani marketplace search "postgres"
-```
-
-### `naagmani marketplace install <name>`
-Installs a marketplace plugin into the active project and environment.
-```bash
-naagmani marketplace install postgres-mcp-connector
-```
-
----
-
-## 5. Enterprise Governance & Policy
-
-### `naagmani policy list`
-Lists all active routing and guardrail policies.
-```bash
-naagmani policy list
-```
-
-### `naagmani policy simulate <name>`
-Simulates dynamic routing candidate selection for a given input payload without sending real upstream requests.
-```bash
-naagmani policy simulate smart --input "Hello"
-```
-
----
-
-## Exit Codes for CI/CD
-
-| Code | Constant | Meaning |
-|---|---|---|
-| `0` | `ExitSuccess` | Command completed successfully. |
-| `1` | `ExitInvalidArg` | Invalid flags, missing parameters, or usage error. |
-| `2` | `ExitAuthError` | Authentication failure or unauthorized session. |
-| `3` | `ExitValError` | Manifest, schema, or policy validation failure. |
-| `4` | `ExitNetError` | Network connectivity failure or Cloud API unreachable. |
-
----
-
-## Related Documentation
-
-- [CLI Installation](/build/cli/installation)
-- [CLI Diagnostics](/build/cli/troubleshooting)
+See [CLI installation](/build/cli/installation), [authentication](/build/cli/authentication) and [plugin development](/build/hdks/development).

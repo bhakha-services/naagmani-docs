@@ -1,65 +1,38 @@
-# CLI Authentication & Context
+# CLI authentication and context
 
-Log in to Naagmani Cloud or self-hosted control plane instances and manage active tenant contexts.
+Portal login and CLI authentication are different flows. Self-hosted portal users authenticate locally; hosted portal users authenticate through Accounts.
 
----
+## Local CLI password login
 
-## Interactive Login
-
-```bash
-naagmani login
-```
-
-This prompts for your Developer Portal credentials or opens an interactive browser authorization session.
-
----
-
-## Inspecting Active Identity
-
-Check your current authenticated user, active Organization, and default Project:
+The CLI's current `login` command calls the selected control-plane API's local password-login endpoint. It requires explicit email and password arguments:
 
 ```bash
+naagmani login --cloud-url http://localhost:8081 --email local-user@example.com --password '<local-password>'
 naagmani whoami
 ```
 
-```text
-Authenticated Identity:
-  User:        alex@acme.com (ID: usr_01J8F0A7B...)
-  Org:         Acme Corporation (ID: org_acme_corp)
-  Project:     Customer Support (ID: proj_support_bot)
-  Environment: production
-  Cloud URL:   http://localhost:8081
-```
+Use this only with a self-hosted API that supports local password login. Passwords passed on command lines can appear in shell history or process listings. The current command is not an Accounts browser/device authorization flow and should not be used as a hosted SSO login instruction.
 
----
+## Environment configuration
 
-## Non-Interactive & CI/CD Authentication
+| Variable | Purpose |
+| --- | --- |
+| `NAAGMANI_CLOUD_URL` | Control-plane base URL |
+| `NAAGMANI_OS_URL` | Gateway base URL |
+| `NAAGMANI_TOKEN` | Credential for a supported authenticated API workflow |
+| `NAAGMANI_API_KEY` | Application API key for endpoints that accept it |
+| `NAAGMANI_ORG_ID` | Organization context |
+| `NAAGMANI_PROJECT_ID` | Project context |
+| `NAAGMANI_ENVIRONMENT` | Environment context |
 
-In automated GitHub Actions or CI/CD pipelines, configure authentication via standard environment variables:
+A gateway API key or Project Service Token is not a portal session and does not grant arbitrary organization administration. Use a credential accepted by the endpoint and limited to the required scope. Keep automation credentials in a secret manager.
 
-| Environment Variable | Description |
-|---|---|
-| `NAAGMANI_TOKEN` | Bearer session token or Project Service Token (`nsk_live_...`). |
-| `NAAGMANI_API_KEY` | Scoped API Key (`nak_live_...`). |
-| `NAAGMANI_ORG_ID` | Default Organization ID. |
-| `NAAGMANI_PROJECT_ID` | Default Project ID. |
-| `NAAGMANI_ENVIRONMENT` | Target environment (`test` or `production`). |
-| `NAAGMANI_CLOUD_URL` | Control plane endpoint (default: `http://localhost:8081`). |
-| `NAAGMANI_OS_URL` | Gateway OS endpoint (default: `http://localhost:8080`). |
-
----
-
-## Logging Out
-
-Purge locally stored session tokens:
+The CLI stores local configuration in `~/.naagmani/config.json`. To remove stored authentication:
 
 ```bash
 naagmani logout
 ```
 
----
+This clears local CLI credentials; do not treat it as proof that every remote token or browser session has been revoked.
 
-## Related Documentation
-
-- [Command Reference](/build/cli/commands)
-- [Project Service Tokens](/developer-portal/projects/service-tokens)
+See [application authentication](/api/authentication) and [CLI commands](/build/cli/commands).

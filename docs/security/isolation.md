@@ -1,18 +1,9 @@
-# Tenant & Sandbox Isolation
+# Tenant and plugin boundaries
 
-To guarantee security in multi-tenant environments, Naagmani enforces strict isolation across multiple layers:
+Organization, project and environment context scopes credentials and applicable policies. Management APIs enforce user permissions; inference endpoints enforce their accepted credential scope.
 
----
+Plugins run in separate worker processes with declared permissions and runtime lifecycle controls. Process separation is not by itself a container, virtual machine, syscall filter or complete host-security sandbox. Install trusted plugins and restrict their filesystem/network access using deployment controls where needed.
 
-## Isolation Dimensions
+Protect database and host-administrator access separately. Configure and test the intended tenant/project boundaries; avoid sharing privileged machine credentials with applications or plugins.
 
-1. **Organization Isolation**: Logical and cryptographic boundaries preventing cross-tenant data leaks.
-2. **Project & Environment Namespaces**: Distinct credential pools and token lifecycles between `test` and `production`.
-3. **Plugin Process Sandboxing**: Separate OS process trees with limited system calls and no shared memory.
-
----
-
-## Next Steps
-
-- [Data Protection & DLP](/security/data-protection)
-- [Audit Trail & Compliance](/security/audit-logs)
+See [authentication](/security/authentication), [authorization](/security/authorization) and [plugin protocol](/build/hdks/protocol).

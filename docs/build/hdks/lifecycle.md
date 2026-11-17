@@ -6,7 +6,7 @@ This document details the complete operational lifecycle of a Naagmani plugin wo
 
 ## Subprocess Lifecycle
 
-Naagmani OS supervises each plugin worker process as an isolated, sandboxed child process:
+Naagmani OS supervises each plugin worker process as an separate child process:
 
 ```mermaid
 stateDiagram-v2

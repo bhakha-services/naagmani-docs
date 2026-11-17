@@ -1,136 +1,22 @@
-# How Naagmani Works
+# How Naagmani works
 
-Naagmani operates as a high-performance **Control Plane & Data Plane architecture**, providing a centralized gateway between your client applications and upstream AI infrastructure.
+Applications call the OS gateway with a scoped application credential. The gateway resolves request context, applies applicable policy/limits, selects a provider/model, executes enabled plugin hooks, calls the provider and records available usage/attempt information.
 
----
+## Service roles
 
-## The Mental Model
+| Service | Responsibility |
+| --- | --- |
+| Developer Portal | User interface for projects, providers, credentials, policies and operations |
+| Control-plane API | Management operations and permissions |
+| OS gateway | Inference routing and runtime/plugin execution |
+| PostgreSQL and Redis | Persistent data and applicable shared runtime/cache state |
 
-At its simplest, Naagmani replaces direct third-party API calls with an intelligent, governed proxy layer:
+For self-hosted installations these services run locally. The service name `cloud` in the Compose stack refers to the local control-plane API. It does not require hosted Accounts for local user login. Hosted deployments use Accounts as their human identity authority.
 
-```mermaid
-graph TD
-    App["Client Application / SDK"] -->|1. Request with Naagmani Key| Gateway["Naagmani Gateway (Data Plane)"]
-    Gateway -->|2. Check Policies & Limits| ControlPlane["Control Plane & Vault"]
-    Gateway -->|3. Route & Execute| Providers["Upstream AI Providers (OpenAI, Claude, DeepSeek)"]
-    Providers -->|4. Return Response / Stream| Gateway
-    Gateway -->|5. Audit & Meter Usage| Gateway
-    Gateway -->|6. OpenAI-Compatible SSE / JSON| App
-```
+## Configuration before inference
 
----
+Create/select a project and environment, configure provider credentials, and issue an application key or Project Service Token. Use a configured model or an existing routing-policy alias. A healthy installation does not automatically include usable upstream model credentials.
 
-## Architectural Planes: Control vs Data Plane
+The gateway implements `GET /v1/models`, `POST /v1/chat/completions` and `POST /v1/responses`. Provider/model/adapter support determines optional request features. Retry and failover depend on policy, eligible candidates and streaming state.
 
-Naagmani strictly separates configuration management from real-time request processing to guarantee sub-millisecond overhead and high availability:
-
-```mermaid
-graph TB
-    subgraph ClientLayer["1. Developer & Client Layer"]
-        SDK["Naagmani SDKs (Node.js, Python, Go)"]
-        CLI["Naagmani CLI (naagmani)"]
-        Portal["Developer Portal (Next.js :3000)"]
-    end
-
-    subgraph ControlPlane["2. Control Plane (:8081)"]
-        AuthSvc["Auth & Tenant Service"]
-        OrgSvc["Organization & Project Hierarchy"]
-        VaultSvc["AES-256 BYOK Vault"]
-        FinOpsSvc["FinOps & Budget Ledger"]
-    end
-
-    subgraph DataPlane["3. Naagmani OS Gateway Data Plane (:8080)"]
-        Proxy["OpenAI-Compatible Ingress Proxy"]
-        Guard["AI Guardrail & DLP Engine"]
-        Router["Smart Routing & Failover Engine"]
-        MCPGw["Model Context Protocol (MCP) Gateway"]
-        AttemptLog["Provider Attempt Telemetry Engine"]
-    end
-
-    subgraph UpstreamProviders["4. Upstream AI Execution"]
-        CloudLLM["Cloud Providers (OpenAI, Anthropic, Gemini, DeepSeek)"]
-        LocalLLM["Private Models (vLLM, Ollama)"]
-        MCPServers["External MCP Servers"]
-    end
-
-    ClientLayer --> ControlPlane
-    ClientLayer --> DataPlane
-    ControlPlane <-->|Reconciliation & Cache Sync| DataPlane
-    DataPlane --> UpstreamProviders
-```
-
-### 1. Control Plane (`naagmani-cloud` :8081)
-- Manages organizations, projects, environments, and team member roles.
-- Encrypts and manages upstream credentials in the BYOK vault.
-- Maintains billing subscriptions, price books, quotas, and budget ledgers.
-- Emits configuration snapshots and updates to the active gateway data plane.
-
-### 2. Data Plane Gateway (`naagmani-os` :8080)
-- Exposes standard OpenAI-compatible endpoints (`/v1/chat/completions`, `/v1/embeddings`, `/v1/responses`).
-- Performs sub-millisecond authentication and rate limit verification against Redis memory caches.
-- Executes the **Smart Routing cascade**, dynamically selecting the healthiest, lowest-cost, or lowest-latency model candidate.
-- Runs **AI Guardrails** (prompt injection detection, PII masking).
-- Logs **Provider Attempts** telemetry capturing latency, upstream status codes, token usage, and retry hops.
-
----
-
-## The Request Lifecycle
-
-When your application sends an AI inference request:
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor App as Client Application
-    participant GW as Naagmani Gateway (:8080)
-    participant CP as Control Plane / Cache
-    participant P1 as Primary Provider (DeepSeek)
-    participant P2 as Fallback Provider (OpenAI)
-
-    App->>GW: POST /v1/chat/completions (Bearer nsk_live_..., model="smart")
-    GW->>CP: Validate Token, Scopes & Budget Quota
-    CP-->>GW: Context OK (Org: Acme, Project: ChatBot, Env: Prod)
-    GW->>GW: Resolve "smart" Policy -> Candidates [DeepSeek, OpenAI]
-    GW->>P1: Attempt #1 Dispatch (deepseek-chat)
-    P1-->>GW: HTTP 503 Service Unavailable / Rate Limit
-    Note over GW: Attempt #1 Failed (503) -> Trigger Automated Failover
-    GW->>P2: Attempt #2 Dispatch (gpt-4o)
-    P2-->>GW: HTTP 200 OK + Stream Chunks
-    GW-->>App: Forward OpenAI-compatible SSE Stream
-    GW->>CP: Record Telemetry: Attempt #1 (Failed, 120ms) + Attempt #2 (Success, 850ms)
-```
-
-1. **Authentication & Ingress**: The gateway verifies the Bearer token (API Key or Project Service Token) and resolves the target Project and Environment.
-2. **Budget & Rate Limit Check**: Token buckets and monthly spend limits are checked in-memory.
-3. **Policy Resolution**: Virtual model aliases (e.g., `smart`) are mapped to active candidate lists.
-4. **Upstream Dispatch & Failover**: The request is routed to Candidate #1. If it encounters a timeout, 429, or 5xx server error, the gateway seamlessly fails over to Candidate #2 without client disconnection.
-5. **Telemetry & Metering**: Both attempts are recorded with exact latency, token counts, and upstream response metadata.
-
----
-
-## Canonical Resource Hierarchy
-
-Naagmani organizes all resources into a clean 3-tier structure:
-
-```mermaid
-graph TD
-    Org["Organization (Acme Corp)"] --> P1["Project A (Customer Support)"]
-    Org --> P2["Project B (Internal Search)"]
-    P1 --> E1["Environment: test"]
-    P1 --> E2["Environment: production"]
-    E2 --> Keys["API Keys & Service Tokens"]
-    E2 --> Routing["Routing Policies"]
-    E2 --> Agents["AI Agents & Tools"]
-```
-
-- **Organization**: Top-level tenant container owning billing, user roles, customer members, and global provider credentials (BYOK).
-- **Project**: Isolated workspace container for a specific application, service, or team.
-- **Environment**: Strict runtime isolation boundary (e.g. `test`, `production`) owning scoped credentials, routing rules, agents, and usage telemetry.
-
----
-
-## Next Steps
-
-- Get started with your first project: [Quickstart Guide](/get-started/quickstart)
-- Learn how to send inference requests: [Make Your First AI Request](/get-started/first-request)
-- Explore the Developer Portal: [Developer Portal Overview](/developer-portal/overview)
+See [quickstart](/get-started/quickstart), [routing](/concepts/routing), [providers](/concepts/providers) and [deployment](/deploy/installation).

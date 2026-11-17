@@ -1,25 +1,9 @@
-# DeepSeek Integration
+# DeepSeek
 
-Naagmani provides first-class support for DeepSeek's open reasoning and general-purpose models, including `deepseek-chat` (V3) and `deepseek-reasoner` (R1).
+Select the DeepSeek adapter and supply its provider API key.
 
----
+Configure the provider under **Organization → Providers & Health** in the Developer Portal. Confirm the credential is active and the endpoint is reachable, then select a model offered by your configured provider or create a routing policy.
 
-## Key Capabilities
+Send requests to Naagmani's gateway with your application credential, not the provider key. Supported optional fields depend on the selected adapter/model.
 
-- **Chain-of-Thought Streaming**: Dedicated extraction of `reasoning_content` blocks alongside final answers.
-- **Ultra-Cost Effective Routing**: Route high-volume classification and summary workloads to DeepSeek with automatic fallback to OpenAI or Anthropic upon upstream timeouts.
-
----
-
-## Setup in Developer Portal
-
-1. Obtain your API Key from the DeepSeek Open Platform.
-2. Store the key in [{{DEVELOPER_PORTAL_URL}}/credentials]({{DEVELOPER_PORTAL_URL}}/credentials).
-3. Set your routing policy to prefer `deepseek-chat` as primary.
-
----
-
-## Next Steps
-
-- [Self-Hosted LLMs](/integrations/other-providers)
-- [Provider Attempt Telemetry](/concepts/providers)
+See [provider behavior](/concepts/providers), [quickstart](/get-started/quickstart) and [chat completions](/api/chat-completions).

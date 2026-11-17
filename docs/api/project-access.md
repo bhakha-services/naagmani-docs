@@ -100,14 +100,19 @@ curl -X POST "{{API_BASE_URL}}/v1/organizations/org_acme_corp/projects/proj_supp
 
 ### Example Request (TypeScript)
 ```typescript
-import { NaagmaniClient } from '@naagmani/sdk';
-
-const client = new NaagmaniClient({ token: process.env.NAAGMANI_API_TOKEN });
-
-const assignment = await client.projects.assignUser('org_acme_corp', 'proj_support_bot', {
-  userId: 'usr_alice_101',
-});
-console.log('User assigned to project:', assignment.assignmentId);
+const response = await fetch(
+  process.env.NAAGMANI_CONTROL_PLANE_URL + '/v1/organizations/<orgID>/projects/<projectID>/users',
+  {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + process.env.NAAGMANI_MANAGEMENT_TOKEN,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({"user_id":"usr_example"}),
+  },
+);
+if (!response.ok) throw new Error('HTTP ' + response.status);
+console.log(await response.json());
 ```
 
 ### Response (`201 Created`)

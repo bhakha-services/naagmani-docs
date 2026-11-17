@@ -1,19 +1,11 @@
-# Production Operations Overview
+# Production operation
 
-Deploying Naagmani in mission-critical, enterprise production environments requires robust high-availability, rate limiting, comprehensive observability, and scalable infrastructure.
+Configure the deployment for your availability, privacy and capacity requirements. The default single-node Compose stack is not an automatically managed multi-region cluster.
 
----
+- Configure HTTPS and restrict database/cache access.
+- Protect secrets, encryption keys and backups.
+- Monitor application health, request failures, provider attempts and usage.
+- Apply suitable provider quotas, credential limits and application budgets.
+- Test updates, restarts, restoration and upstream-provider failure behavior.
 
-## Key Production Capabilities
-
-- **Zero-Downtime Hot Upgrades**: Hot-reload routing policies and credentials without dropping active HTTP/SSE connections.
-- **Distributed Rate Limiting**: Redis-backed token bucket algorithm for cluster-wide enforcement.
-- **Multi-Region Active-Active**: Deploy across multiple geographic regions with global latency routing.
-
----
-
-## Next Steps
-
-- [High Availability & Failover](/production/reliability)
-- [Rate Limiting & Quotas](/production/rate-limits)
-- [Observability & Prometheus Metrics](/production/observability)
+See [installation](/deploy/installation), [reliability](/production/reliability), [observability](/production/observability), [capacity planning](/production/scaling) and [updates](/deployment/upgrades).

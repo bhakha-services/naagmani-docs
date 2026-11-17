@@ -1,105 +1,29 @@
-# Platform Upgrades, Migrations & Recovery
+# Backups, upgrades and recovery
 
-## Overview
+Back up before changing platform images or database schemas. A single-node Compose update can interrupt requests and may require recovery; it is not a zero-downtime guarantee.
 
-Naagmani features an automated, deterministic **12-stage platform upgrade engine** designed for high-availability production deployments across Docker Compose and Coolify.
+## Preserve
 
-Platform upgrades decouple **WHAT** is being upgraded (canonical signed `release.yaml` release manifest) from **HOW** it is deployed (swappable `DeploymentBackend` adapters).
+- Both platform databases and any persistent plugin/model data.
+- Environment/Compose configuration and encryption keys.
+- OS data volume, installation identity, accepted license and verification key.
+- The exact image references and configuration of the working deployment.
 
----
+Protect backups as sensitive data. A database dump without its required encryption keys may not be sufficient to restore encrypted content.
 
-## 1. Upgrade Lifecycle State Machine
+## Update
 
-```text
-[ IDLE ]
-   │
-   ▼
-[ CHECKING ] ──────── (Validate compatibility matrix & release signatures)
-   │
-   ▼
-[ RESOLVING ] ─────── (Resolve target release version & image digests)
-   │
-   ▼
-[ PREFLIGHT ] ─────── (Verify CPU, RAM, Disk, Port availability & Docker status)
-   │
-   ▼
-[ BACKING_UP ] ────── (Snapshot PostgreSQL databases + config + state metadata)
-   │
-   ▼
-[ STAGING ] ───────── (Pre-pull image layers / unpack offline bundle)
-   │
-   ▼
-[ MIGRATING ] ─────── (Apply classified schema migrations)
-   │
-   ▼
-[ DEPLOYING ] ─────── (Rolling zero-downtime container recreation)
-   │
-   ▼
-[ HEALTH_CHECKING ] ─ (Probe OS /v1/health & Cloud /health endpoints)
-   │
-   ├── (Probes Failed) ──► [ ROLLING_BACK ] ──► [ ROLLED_BACK ] (Restore previous version)
-   │
-   ▼ (Probes Passed)
-[ VERIFYING ] ─────── (Validate licensing & plugin sandbox integrity)
-   │
-   ▼
-[ COMMITTING ] ────── (Persist platform_state.json & update_history.json)
-   │
-   ▼
-[ COMPLETED ]
-```
+Use the update procedure that belongs to your installation method and release. For an installer-generated Compose stack, review the target images and configuration, then pull and recreate services from the installation directory:
 
----
-
-## 2. CLI Platform Commands
-
-### Check Available Upgrades
 ```bash
-naagmani platform update check [--channel stable|beta] [--json]
+docker compose pull
+docker compose up -d
+docker compose ps
+docker compose logs --tail 100 os cloud developer
 ```
 
-### Execute Platform Upgrade
-```bash
-naagmani platform update [--version v1.0.1] [--channel stable]
-```
+Test login, provider connectivity, inference, licenses and data persistence after the update. Do not remove named volumes when preserving data.
 
-### Inspect Upgrade History
-```bash
-naagmani platform update history [--json]
-```
+CLI-managed installations also expose update, history, recovery, rollback, backup and restore commands. Use `naagmani platform help` and your installed command's help. Do not assume an automatic rollback can undo every schema change, that manifests are cryptographically signed, or that switching image tags restores database state.
 
-### Recover from Interrupted Upgrade
-If a power failure, kernel panic, or container daemon crash interrupts an in-progress upgrade:
-```bash
-naagmani platform recovery [--force-rollback]
-```
-
-### Manual Rollback
-```bash
-naagmani platform rollback [--version v1.0.0]
-```
-
----
-
-## 3. Database Migration Strategy & Safety
-
-Database schema changes in Naagmani releases are strictly classified:
-
-| Classification | Behavior | Rollback Procedure |
-| :--- | :--- | :--- |
-| **`FORWARD_COMPATIBLE`** | Expand/contract dual-read schema changes. | Instant container rollback; older software can read newer schema. |
-| **`REVERSIBLE`** | Additive columns or non-destructive tables. | Automated container rollback; down-migrations applied if needed. |
-| **`IRREVERSIBLE`** | Destructive column/table drops or breaking transformations. | Requires verified pre-upgrade snapshot. Rollback requires `naagmani platform restore`. |
-
----
-
-## 4. Air-Gapped / Offline Upgrades
-
-For disconnected enterprise installations:
-1. Download official signed release bundle `naagmani-release-<version>.tar.gz`.
-2. Transfer archive to target server via secure bastion.
-3. Run offline upgrade:
-```bash
-naagmani platform update --offline /path/to/naagmani-release-v1.0.1.tar.gz
-```
-4. The updater validates the internal `release.sig` with the local trusted public key before staging container layers.
+For offline updates, stage all required images and configuration before disconnecting. See [offline setup](/deploy/offline).

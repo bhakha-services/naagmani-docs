@@ -1,77 +1,13 @@
-# Connected Self-Hosted Licensing
+# Connected registration and license renewal
 
-This document details how connected self-hosted **Naagmani AI OS** installations interact with Naagmani Cloud for automated registration, licensing, telemetry, and renewal.
+Self-hosted installations can authenticate users and validate an already imported license without a vendor connection. Connected registration is an explicit management operation, separate from local login.
 
----
+Registration associates an installation reference with an organization on the selected control plane. Use it only when that endpoint is reachable and your deployment supports the required management authorization. Do not assume a gateway API key or a Project Service Token can perform human organization-administration operations.
 
-## 1. Connected Architecture
+The existence of registration and heartbeat API endpoints does not establish an automatic background heartbeat, remote management agreement or license renewal schedule for every self-hosted installation. Configure only the connected behavior you intend to use.
 
-Connected self-hosted deployments communicate with Naagmani Cloud exclusively via **outbound HTTPS**:
+For renewal, obtain the new signed JSON license from Accounts and import it locally. Do not assume that renewing a subscription automatically replaces an offline installation's artifact. Check the local installation ID and expiry after import.
 
-```text
-Customer VPS / Installation
-        │
-        │ HTTPS Outbound (POST /v1/installations/register)
-        ▼
-Naagmani Cloud (Control Plane)
-        │
-        ▼
-[ Organization Binding & Signed License Envelope ]
-```
+Registration/telemetry can disclose installation identifiers, version and configuration metadata in addition to network source information. Review the configured operation's payload; it is not a zero-disclosure connection.
 
-> [!NOTE]
-> No customer firewall rule or inbound open port is ever required for Naagmani Cloud to reach your installation.
-
----
-
-## 2. Registering an Installation
-
-Connect your local installation to Naagmani Cloud with one command:
-
-```bash
-naagmani platform register \
-  --cloud-url {{CLOUD_URL}} \
-  --org-id org_your_company \
-  --token <your-service-token-or-api-key>
-```
-
-### Registration Behavior:
-1. **Tenancy Verification**: Validates that `os_installation_id` belongs to your organization.
-2. **License Delivery**: Naagmani Cloud issues the latest signed Ed25519 license envelope.
-3. **Environment Update**: The CLI persists `.naagmani/license.json` and updates `.env` (`NAAGMANI_LICENSE_KEY`).
-4. **Audit Logging**: Emits `installation.registered` audit event.
-
----
-
-## 3. Automated Heartbeat
-
-Connected instances periodically transmit a lightweight operational heartbeat:
-
-```bash
-POST /v1/installations/:id/heartbeat
-```
-
-### Heartbeat Payload:
-```json
-{
-  "os_installation_id": "inst_01JXYZ1234",
-  "platform_version": "v1.0.1",
-  "status": "healthy",
-  "timestamp": "2026-09-27T12:00:00Z"
-}
-```
-
-> [!CAUTION]
-> Heartbeats never contain prompts, model outputs, database contents, BYOK keys, or user credentials. Only system liveness and platform version are transmitted.
-
----
-
-## 4. License Renewal
-
-When a subscription is renewed in Naagmani Cloud:
-1. Cloud issues a new signed license envelope with an extended `expires_at`.
-2. The installation automatically downloads the envelope during periodic sync or via CLI:
-   ```bash
-   naagmani platform register --cloud-url {{CLOUD_URL}} --org-id org_your_company
-   naagmani platform restart
-   ```
+See [license import](/licensing/overview), [offline licensing](/licensing/air-gapped) and [network boundaries](/deployment/self-hosted-boundaries).

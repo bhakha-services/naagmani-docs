@@ -1,30 +1,9 @@
-# CLI Diagnostics
+# CLI troubleshooting
 
-Troubleshooting local command execution, network connectivity, and configuration issues.
+Run `naagmani help` or `naagmani platform help` to confirm the commands supported by your installed version. Plugin commands use the singular `plugin` namespace.
 
----
+Check `NAAGMANI_CLOUD_URL` and `NAAGMANI_OS_URL` when targeting a custom installation. Use a credential accepted by the endpoint. For local password login, see [CLI authentication](/build/cli/authentication); the current login command is not an Accounts browser/device flow.
 
-## 1. Resetting Cached CLI Credentials
+Use `naagmani logout` to remove stored CLI credentials rather than deleting arbitrary configuration files. Back up configuration before changing it.
 
-If your session is corrupted:
-```bash
-rm -rf ~/.naagmani/credentials.json
-naagmani auth login
-```
-
----
-
-## 2. Debugging HTTP Payloads
-
-Add the `--verbose` flag to any CLI command to display raw request and response headers:
-
-```bash
-naagmani projects list --verbose
-```
-
----
-
-## Next Steps
-
-- [Common Errors Guide](/troubleshooting/common-errors)
-- [Return to Quickstart](/quickstart/overview)
+See [CLI diagnostics](/build/cli/troubleshooting) and [platform troubleshooting](/deployment/troubleshooting).

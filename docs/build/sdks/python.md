@@ -1,127 +1,31 @@
-# Python SDK
+# Python client
 
-Official Python library for integrating Naagmani into Python 3.9+ applications, FastAPI microservices, LangChain/LlamaIndex agents, and AI data pipelines.
-
----
-
-## Installation & Requirements
-
-- **Supported Python Versions**: Python 3.9, 3.10, 3.11, 3.12, 3.13
-- **Package**: `naagmani-sdk`
-
-```bash
-pip install naagmani-sdk
-```
-
----
-
-## Synchronous Client
+This server-side example uses Python's standard library; no Naagmani-specific client package is required.
 
 ```python
+import json
 import os
-from naagmani import Naagmani
+import urllib.request
 
-client = Naagmani(
-    api_key=os.environ.get("NAAGMANI_API_KEY"),
-    base_url=os.environ.get("NAAGMANI_GATEWAY_URL", "http://localhost:8080/v1"),
-    project_id=os.environ.get("NAAGMANI_PROJECT_ID"),
-    environment="production", # "test" or "production"
-    timeout=30.0,
+base = os.environ["NAAGMANI_GATEWAY_URL"].rstrip("/")
+body = json.dumps({
+    "model": os.environ["NAAGMANI_MODEL"],
+    "messages": [{"role": "user", "content": "Hello"}],
+}).encode("utf-8")
+request = urllib.request.Request(
+    base + "/v1/chat/completions",
+    data=body,
+    headers={
+        "Authorization": "Bearer " + os.environ["NAAGMANI_API_KEY"],
+        "Content-Type": "application/json",
+    },
+    method="POST",
 )
-
-response = client.chat.completions.create(
-    model="smart",
-    messages=[
-        {"role": "system", "content": "You are an enterprise AI assistant."},
-        {"role": "user", "content": "What are the benefits of multi-model routing?"}
-    ],
-    temperature=0.7,
-)
-
-print(response.choices[0].message.content)
+with urllib.request.urlopen(request, timeout=60) as response:
+    result = json.load(response)
+print(result["choices"][0]["message"]["content"])
 ```
 
----
+Set the gateway origin, application credential and configured model in those environment variables. The gateway origin should not include `/v1`; the example adds the request path. Handle HTTP/network failures in your application.
 
-## Asynchronous Client (FastAPI & AsyncIO)
-
-```python
-import asyncio
-import os
-from naagmani import AsyncNaagmani
-
-async def main():
-    client = AsyncNaagmani(
-        api_key=os.environ.get("NAAGMANI_API_KEY"),
-        base_url=os.environ.get("NAAGMANI_GATEWAY_URL", "http://localhost:8080/v1"),
-    )
-    
-    stream = await client.chat.completions.create(
-        model="deepseek-chat",
-        messages=[{"role": "user", "content": "Write a Python quicksort implementation."}],
-        stream=True
-    )
-    
-    async for chunk in stream:
-        content = chunk.choices[0].delta.content or ""
-        print(content, end="", flush=True)
-
-if __name__ == "__main__":
-    asyncio.run(main())
-```
-
----
-
-## Error Handling & Exceptions
-
-```python
-from naagmani import (
-    NaagmaniError,
-    AuthenticationError,
-    RateLimitError,
-    QuotaExceededError,
-    APIConnectionError,
-)
-
-try:
-    response = client.chat.completions.create(model="smart", messages=[...])
-except AuthenticationError as e:
-    print(f"Authentication failed: {e}")
-except RateLimitError as e:
-    print(f"Rate limit exceeded. Retry after: {e.retry_after}")
-except QuotaExceededError as e:
-    print(f"Project spend limit reached: {e}")
-except APIConnectionError as e:
-    print(f"Network error communicating with gateway: {e}")
-except NaagmaniError as e:
-    print(f"API Error ({e.status_code}): {e.message}")
-```
-
----
-
-## OpenAI Python Client Alternative
-
-Because Naagmani adheres to OpenAI specifications, you can use the official `openai` library directly:
-
-```python
-from openai import OpenAI
-import os
-
-client = OpenAI(
-    api_key=os.environ.get("NAAGMANI_API_KEY"),
-    base_url="http://localhost:8080/v1",
-    default_headers={
-        "X-Project-Id": os.environ.get("NAAGMANI_PROJECT_ID"),
-        "X-Environment": "production",
-    }
-)
-```
-
----
-
-## Related Documentation
-
-- [Chat Completions API](/api/chat-completions)
-- [Smart Routing Policies](/developer-portal/governance-routing/routing)
-- [HDK Plugin Development in Python](/build/hdks/development)
-
+See [streaming](/api/streaming) and [authentication](/api/authentication).

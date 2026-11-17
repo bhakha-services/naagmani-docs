@@ -1,42 +1,37 @@
-# CLI Installation & Setup
+# Install the CLI
 
-The **Naagmani CLI (`naagmani`)** is the primary developer entry point for managing platform containers, authoring HDK plugins, inspecting real-time telemetry, and automating CI/CD pipelines.
+The CLI manages local platform operations and supported API workflows. It is separate from the five-service platform itself.
 
----
+## npm distribution
 
-## Installation Methods
-
-### 1. Standalone Binary (Recommended)
-
-Download the pre-compiled binary for your operating system:
+With Node.js 18 or later, install the package named `naagmani`:
 
 ```bash
-# Linux / macOS (curl)
-curl -fsSL https://naagmani.com/install.sh | bash
-
-# Windows (PowerShell)
-iwr -useb https://naagmani.com/install.ps1 | iex
-```
-
-### 2. Via NPM
-
-```bash
-npm install -g @naagmani/cli
-```
----
-
-## Verifying Installation
-
-Verify that the CLI is installed and check system prerequisites:
-
-```bash
+npm install -g naagmani
 naagmani version
-naagmani doctor
+naagmani help
 ```
 
----
+You can also invoke it without a global installation:
 
-## Next Steps
+```bash
+npx naagmani version
+```
 
-- Authenticate the CLI: [CLI Authentication](/build/cli/authentication)
-- Explore all commands: [Command Reference](/build/cli/commands)
+The npm launcher obtains the platform-specific CLI binary; the first run can require network access. Use a released package version available for your operating system and architecture.
+
+The shell and PowerShell commands at `https://naagmani.com/install.sh` and `https://naagmani.com/install.ps1` install the platform and may offer CLI setup; they are not CLI-only installers. See [platform installation](/deploy/installation).
+
+## Local platform installer
+
+```bash
+naagmani platform install --dir ./naagmani
+```
+
+The CLI installer differs from the interactive shell scripts: its portal port defaults to `3000` and control-plane port to `8081`. Use `--port-portal` and `--port-cloud` to override them. The shell script offers portal `3001` by default.
+
+Supported install options include `--dir`, `--version`, `--channel`, `--env-file`, `--manifest`, `--dry-run`, `--no-start` and `--force`. Check the help of your installed CLI version before using flags. Supply a complete secure environment when using `--env-file`; it replaces generated environment content rather than merging individual values.
+
+Do not assume that manifest presence guarantees image signatures or digests have been enforced. Select released image versions, review the generated configuration and verify service health.
+
+See [authentication](/build/cli/authentication) and [commands](/build/cli/commands).

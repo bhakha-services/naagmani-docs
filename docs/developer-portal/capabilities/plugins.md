@@ -9,7 +9,7 @@ Manage local and project-installed capability plugins that extend Naagmani Gatew
 
 ## What are Plugins?
 
-**Plugins** are sandboxed worker processes built using the [Naagmani HDK](/build/hdks/overview). They hook directly into the gateway's execution pipeline to:
+**Plugins** are separate worker processes built using the [Naagmani HDK](/build/hdks/overview). They hook directly into the gateway's execution pipeline to:
 - Intercept and rewrite prompts (`pre_route`, `pre_model_call`).
 - Inspect and redact model outputs (`post_response`, DLP).
 - Expose native functions directly to AI agents.

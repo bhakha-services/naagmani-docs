@@ -90,12 +90,12 @@ graph TD
     Proj1 --> E1["Environment: test"]
     Proj1 --> E2["Environment: production"]
 
-    E1 --> K1["API Key (nak_test_...)"]
-    E2 --> K2["API Key (nak_live_...)"]
+    E1 --> K1["API Key (nm_live_...)"]
+    E2 --> K2["API Key (nm_live_...)"]
     E2 --> R1["Routing Policy ('smart' -> DeepSeek + Claude)"]
 
     Proj2 --> E3["Environment: production"]
-    E3 --> K3["API Key (nak_live_...)"]
+    E3 --> K3["API Key (nm_live_...)"]
     E3 --> R2["Routing Policy ('smart' -> GPT-4o)"]
 ```
 

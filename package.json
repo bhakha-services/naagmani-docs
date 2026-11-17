@@ -8,9 +8,8 @@
     "build": "next build",
     "start": "next start -H 0.0.0.0",
     "lint": "eslint .",
-    "test:docs": "node scripts/check-docs.mjs"
+    "test:docs": "node scripts/check-docs.mjs && node --test tests/*.test.mjs"
   },
-
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.3",
     "@types/marked": "^5.0.2",

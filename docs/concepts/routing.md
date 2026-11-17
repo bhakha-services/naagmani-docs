@@ -78,7 +78,7 @@ In **Priority Routing**:
 # Requires creating a policy named "smart" in Projects > Routing Policies
 curl -X POST https://api.naagmani.com/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer nsk_live_..." \
+  -H "Authorization: Bearer nm_st_..." \
   -d '{
     "model": "smart",
     "messages": [
@@ -93,7 +93,7 @@ curl -X POST https://api.naagmani.com/v1/chat/completions \
 ```bash
 curl -X POST https://api.naagmani.com/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer nsk_live_..." \
+  -H "Authorization: Bearer nm_st_..." \
   -d '{
     "model": "auto",
     "messages": [
@@ -106,7 +106,7 @@ curl -X POST https://api.naagmani.com/v1/chat/completions \
 ```bash
 curl -X POST https://api.naagmani.com/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer nsk_live_..." \
+  -H "Authorization: Bearer nm_st_..." \
   -d '{
     "model": "deepseek-chat",
     "messages": [

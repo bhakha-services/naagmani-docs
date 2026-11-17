@@ -32,5 +32,4 @@ data: [DONE]
 
 ## Next Steps
 
-- Embeddings spec: [Embeddings API](embeddings.md)
 - Telemetry reference: [Provider Attempts API](attempts.md)

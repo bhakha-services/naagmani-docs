@@ -1,0 +1,213 @@
+# Naagmani Self-Hosted Standalone Stack for Coolify PaaS
+# Deploys independent, air-gap compatible standalone stack behind Coolify Traefik reverse proxy.
+# Operates without external SaaS or payment gateway dependencies.
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-naagmani}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set a unique database password}
+      POSTGRES_DB: ${POSTGRES_DB:-${POSTGRES_DB_CLOUD:-naagmani_selfhosted}}
+    volumes:
+      - selfhosted-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-naagmani} -d ${POSTGRES_DB:-${POSTGRES_DB_CLOUD:-naagmani_selfhosted}} && (psql -U ${POSTGRES_USER:-naagmani} -d ${POSTGRES_DB:-${POSTGRES_DB_CLOUD:-naagmani_selfhosted}} -tc \"SELECT 1 FROM pg_database WHERE datname = 'naagmani'\" | grep -q 1 || psql -U ${POSTGRES_USER:-naagmani} -d ${POSTGRES_DB:-${POSTGRES_DB_CLOUD:-naagmani_selfhosted}} -c \"CREATE DATABASE naagmani;\")"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2048M
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    networks:
+      - selfhosted-network
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.2'
+          memory: 128M
+    networks:
+      - selfhosted-network
+
+  os:
+    image: ghcr.io/bhakha-services/naagmani-os:${NAAGMANI_VERSION:-latest}
+    restart: unless-stopped
+    environment:
+      NAAGMANI_ENV: ${NAAGMANI_ENV:-production}
+      NAAGMANI_SERVER_HOST: 0.0.0.0
+      NAAGMANI_SERVER_PORT: 8080
+      NAAGMANI_PORT: 8080
+      DATABASE_URL_OS: ${DATABASE_URL_OS:-postgres://${POSTGRES_USER:-naagmani}:${POSTGRES_PASSWORD:?Set a unique database password}@postgres:5432/${POSTGRES_DB_OS:-naagmani}?sslmode=disable}
+      REDIS_URL_OS: ${REDIS_URL_OS:-redis://redis:6379/1}
+      NAAGMANI_LOG_LEVEL: ${LOG_LEVEL:-info}
+      NAAGMANI_LOG_FORMAT: ${NAAGMANI_LOG_FORMAT:-json}
+      NAAGMANI_ENCRYPTION_KEY: ${NAAGMANI_ENCRYPTION_KEY:-${NAAGMANI_OS_ENCRYPTION_KEY:?Set a random encryption key}}
+      NAAGMANI_DATA_DIR: ${NAAGMANI_DATA_DIR:-/home/naagmani/.naagmani}
+      NAAGMANI_LICENSE_PUBLIC_KEY: ${NAAGMANI_LICENSE_PUBLIC_KEY:-276271788609ea1ec8637e2a1c18efea0c86ec3016acf4b84f08acec525067c3}
+      NAAGMANI_SYSTEM_KEY: ${NAAGMANI_SYSTEM_KEY:?Set a secure control-plane key}
+
+      NAAGMANI_LICENSE_DATA: ${NAAGMANI_LICENSE_DATA:-}
+      NAAGMANI_LICENSE_PATH: ${NAAGMANI_LICENSE_PATH:-}
+      NAAGMANI_INSTALLATION_ID: ${NAAGMANI_INSTALLATION_ID:-}
+    volumes:
+      - selfhosted-os-data:/home/naagmani/.naagmani
+    expose:
+      - "8080"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1:8080/v1/health > /dev/null || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    depends_on:
+      postgres:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2048M
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    networks:
+      - selfhosted-network
+      - coolify
+
+  cloud:
+    image: ghcr.io/bhakha-services/naagmani-cloud:${NAAGMANI_VERSION:-latest}
+    restart: unless-stopped
+    environment:
+      APP_ENV: ${NAAGMANI_ENV:-production}
+      NAAGMANI_ENV: ${NAAGMANI_ENV:-production}
+      PORT: 8080
+      NAAGMANI_CLOUD_PORT: 8080
+      NAAGMANI_CLOUD_HOST: 0.0.0.0
+      DATABASE_URL_CLOUD: ${DATABASE_URL_CLOUD:-postgres://${POSTGRES_USER:-naagmani}:${POSTGRES_PASSWORD:?Set a unique database password}@postgres:5432/${POSTGRES_DB_CLOUD:-${POSTGRES_DB:-naagmani_selfhosted}}?sslmode=disable}
+      REDIS_URL_CLOUD: ${REDIS_URL_CLOUD:-redis://redis:6379/0}
+      JWT_SECRET: ${JWT_SECRET:-${NAAGMANI_SESSION_SECRET:?Set a random session secret of at least 32 characters}}
+      NAAGMANI_SESSION_SECRET: ${NAAGMANI_SESSION_SECRET:?Set a random session secret of at least 32 characters}
+      ACCESS_TOKEN_TTL_SECONDS: ${ACCESS_TOKEN_TTL_SECONDS:-900}
+      NAAGMANI_DEPLOYMENT_MODE: "self_hosted"
+      SELF_HOSTED: "true"
+      COMMERCIAL_BILLING_ENABLED: "false"
+      COMMERCIAL_LICENSE_ENABLED: "false"
+      NAAGMANI_ADMIN_EMAIL: ${NAAGMANI_ADMIN_EMAIL:-admin@selfhosted.local}
+      # Local/self-hosted credentials; not the Accounts SSO password.
+      NAAGMANI_ADMIN_PASSWORD: ${NAAGMANI_ADMIN_PASSWORD:?Set a unique local Owner password}
+      PORTAL_BASE_URL: ${PORTAL_BASE_URL:-http://localhost:3000}
+      NAAGMANI_PORTAL_URL: ${PORTAL_BASE_URL:-http://localhost:3000}
+      CLOUD_BASE_URL: ${CLOUD_BASE_URL:-http://localhost:9081}
+      NAAGMANI_CORS_ALLOWED_ORIGINS: ${NAAGMANI_CORS_ALLOWED_ORIGINS:-http://localhost:3000,http://localhost:9081,http://localhost:9080,http://localhost:3001}
+      NAAGMANI_OS_URL: ${NAAGMANI_OS_URL:-http://os:8080}
+      NAAGMANI_RATE_LIMIT_ENABLED: ${NAAGMANI_RATE_LIMIT_ENABLED:-true}
+      NAAGMANI_SYSTEM_KEY: ${NAAGMANI_SYSTEM_KEY:?Set a secure control-plane key}
+      NAAGMANI_ALLOWED_INTERNAL_HOSTS: ${NAAGMANI_ALLOWED_INTERNAL_HOSTS:-os}
+      NAAGMANI_TRUSTED_PROXIES: ${NAAGMANI_TRUSTED_PROXIES:-127.0.0.1,::1}
+      NAAGMANI_LOG_LEVEL: ${LOG_LEVEL:-info}
+      NAAGMANI_LOG_FORMAT: ${NAAGMANI_LOG_FORMAT:-json}
+      EMAIL_ENABLED: ${EMAIL_ENABLED:-false}
+      EMAIL_FROM: ${EMAIL_FROM:-billing@naagmani.ai}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_SECURITY: ${SMTP_SECURITY:-}
+      SMTP_USERNAME: ${SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_USE_TLS: ${SMTP_USE_TLS:-}
+    expose:
+      - "8080"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1:8080/health > /dev/null || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2048M
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    networks:
+      - selfhosted-network
+      - coolify
+
+  developer:
+    image: ghcr.io/bhakha-services/naagmani-developer:${NAAGMANI_VERSION:-latest}
+    restart: unless-stopped
+    environment:
+      CLOUD_API_URL: http://cloud:8080
+      ACCOUNTS_WEB_URL: ${ACCOUNTS_WEB_URL:-https://accounts.naagmani.com}
+      NEXT_PUBLIC_DEPLOYMENT_MODE: self_hosted
+      NAAGMANI_DEPLOYMENT_MODE: self_hosted
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: 3000
+      HOSTNAME: "0.0.0.0"
+      PORTAL_BASE_URL: ${PORTAL_BASE_URL:-http://localhost:3000}
+      NEXT_PUBLIC_CLOUD_API_URL: ${NEXT_PUBLIC_CLOUD_API_URL:-${NEXT_PUBLIC_API_BASE_URL:-http://cloud:8080}}
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-${NEXT_PUBLIC_CLOUD_API_URL:-http://cloud:8080}}
+      NEXT_PUBLIC_OS_API_URL: ${NEXT_PUBLIC_OS_API_URL:-http://os:8080}
+      NEXT_PUBLIC_DOCS_URL: ${NEXT_PUBLIC_DOCS_URL:-https://docs.naagmani.com}
+      NEXT_PUBLIC_UPSTREAM_CLOUD_URL: ${NEXT_PUBLIC_UPSTREAM_CLOUD_URL:-https://api.naagmani.com}
+      NEXT_PUBLIC_UPSTREAM_CONSOLE_URL: ${NEXT_PUBLIC_UPSTREAM_CONSOLE_URL:-https://console.naagmani.com}
+    expose:
+      - "3000"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1:3000 > /dev/null || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    depends_on:
+      cloud:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 1024M
+        reservations:
+          cpus: '0.2'
+          memory: 256M
+    networks:
+      - selfhosted-network
+      - coolify
+
+networks:
+  selfhosted-network:
+    driver: bridge
+  coolify:
+    external: true
+
+volumes:
+  selfhosted-postgres-data:
+    name: selfhosted-postgres-data
+  selfhosted-os-data:
+    name: selfhosted-os-data

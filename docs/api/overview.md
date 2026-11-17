@@ -1,34 +1,17 @@
-# API Overview & Standards
+# API overview
 
-The Naagmani API suite is split into two primary surfaces:
+Naagmani separates inference from administration.
 
-1. **Gateway Data Plane API (`:8080`)**: Ultra-high-throughput, OpenAI-compatible AI inference proxy handling chat completions, embeddings, streaming SSE, and tool calling.
-2. **Control Plane Management API (`:8081`)**: RESTful JSON API for managing Organizations, Projects, Service Tokens, Members, Budgets, and Telemetry.
+| Surface | Purpose | Typical self-hosted script port |
+| --- | --- | --- |
+| OS gateway | Model listing, chat completions, Responses and streaming | 8080 |
+| Local control-plane API | Organizations, projects, users, permissions, credentials and operations | 8081 |
+| Developer Portal | Browser management interface | 3001 |
 
----
+Your configuration may use different ports or HTTPS hostnames. The hosted control plane can proxy supported gateway requests, but credential requirements still depend on the route. Use the endpoint supplied by your deployment operator.
 
-## Base URLs
+The gateway registers GET /v1/models, POST /v1/chat/completions and POST /v1/responses. Optional parameters and behavior depend on the selected adapter/model; OpenAI compatibility does not cover every OpenAI API.
 
-| Surface | Local Environment | Production Hosted |
-| :--- | :--- | :--- |
-| **Gateway Data Plane** | `{{GATEWAY_URL}}` | `https://gateway.naagmani.com` |
-| **Control Plane API** | `{{API_BASE_URL}}` | `https://api.naagmani.com` |
+Send Authorization: Bearer <credential> to authenticated endpoints and Content-Type: application/json with JSON bodies. Management operations require a permitted management credential or an explicitly supported machine capability; a gateway key does not grant unrestricted administration.
 
----
-
-## Standard Headers
-
-Every API request requires standard headers:
-
-```http
-Authorization: Bearer <YOUR_API_KEY_OR_SERVICE_TOKEN>
-Content-Type: application/json
-X-Request-ID: req_01J8F0A2B3C4D5E6F7G8H9J0K1 (Optional client tracing ID)
-```
-
----
-
-## Next Steps
-
-- Authentication details: [Authentication & Headers](authentication.md)
-- Chat completions spec: [Chat Completions API](chat-completions.md)
+See [authentication](/api/authentication), [chat completions](/api/chat-completions), [response formats](/api/responses), [model listing](/api/models) and [streaming](/api/streaming).

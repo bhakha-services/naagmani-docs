@@ -1,34 +1,9 @@
-# Self-Hosted Models (Ollama, vLLM & LocalAI)
+# Compatible model servers
 
-In addition to managed cloud providers, Naagmani allows you to route traffic to self-hosted, air-gapped, or on-premises model servers.
+Use an endpoint compatible with the selected adapter. The gateway container must be able to reach it; localhost inside the container refers to that container, not your host model server.
 
----
+Configure the provider under **Organization → Providers & Health** in the Developer Portal. Confirm the credential is active and the endpoint is reachable, then select a model offered by your configured provider or create a routing policy.
 
-## Supported Local Runtimes
+Send requests to Naagmani's gateway with your application credential, not the provider key. Supported optional fields depend on the selected adapter/model.
 
-- **vLLM**: High-throughput GPU inference engine.
-- **Ollama**: Lightweight local model runner.
-- **TGI (Text Generation Inference)**: Hugging Face serving engine.
-- **LocalAI**: Drop-in OpenAI alternative.
-
----
-
-## Configuring a Custom Endpoint
-
-In [**Credential Pools**]({{DEVELOPER_PORTAL_URL}}/credentials), select **Custom / Self-Hosted**:
-
-```json
-{
-  "provider": "custom_openai",
-  "base_url": "http://gpu-cluster.internal:8000/v1",
-  "auth_header": "Bearer internal-cluster-secret",
-  "models": ["llama-3.3-70b-instruct", "mistral-large-2411"]
-}
-```
-
----
-
-## Next Steps
-
-- [Security Architecture](/security/overview)
-- [High Availability & Failover](/production/reliability)
+See [provider behavior](/concepts/providers), [quickstart](/get-started/quickstart) and [chat completions](/api/chat-completions).

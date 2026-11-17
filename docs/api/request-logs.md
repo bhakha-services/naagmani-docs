@@ -177,6 +177,6 @@ POST /v1/organizations/{organizationId}/request-logs/{recordId}/reveal
 ### Constraints & Security Invariants
 
 - **Mandatory Justification**: `reason` must be a non-empty string stating the business purpose.
-- **Audit Logging**: Emits an immutable audit event to the Organization Audit Trail recording the caller's email/ID, timestamp, and justification reason.
+- **Audit Logging**: Emits an audit event to the Organization Audit Trail recording the caller's email/ID, timestamp, and justification reason.
 - **Envelope Decryption**: The OS Daemon invokes KMS to decrypt the DEK, then decrypts the AES-256-GCM ciphertext in memory.
 - **Secret Scrubbing**: Even upon privileged reveal, API keys, Bearer tokens, cookies, passwords, and private keys remain masked (`[REDACTED]`).

@@ -58,7 +58,7 @@ Once deployed, your client code simply uses the policy name as the `model` param
 ```bash
 curl -X POST https://api.naagmani.com/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer nsk_live_YOUR_KEY" \
+  -H "Authorization: Bearer nm_st_YOUR_KEY" \
   -d '{
     "model": "smart",
     "messages": [

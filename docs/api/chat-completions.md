@@ -25,7 +25,7 @@ Execute standard or streaming chat completions across any foundational model wit
 
 ```bash
 curl -X POST "{{GATEWAY_URL}}/v1/chat/completions" \
-  -H "Authorization: Bearer nsk_live_YOUR_KEY" \
+  -H "Authorization: Bearer nm_st_YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "gpt-4o",
@@ -72,4 +72,3 @@ curl -X POST "{{GATEWAY_URL}}/v1/chat/completions" \
 ## Next Steps
 
 - Real-time streaming spec: [Streaming (SSE) API](streaming.md)
-- Vector embeddings spec: [Embeddings API](embeddings.md)

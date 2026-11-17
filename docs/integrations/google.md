@@ -1,23 +1,9 @@
-# Google Gemini Integration
+# Google Gemini
 
-Connect Google Vertex AI or Google AI Studio Gemini models (`gemini-1.5-pro`, `gemini-1.5-flash`, `gemini-2.0-flash`) through Naagmani's unified endpoint.
+Select the Google/Gemini adapter and supply a Gemini API key. Do not assume a Google service-account JSON file or Vertex AI authentication is supported by this adapter.
 
----
+Configure the provider under **Organization → Providers & Health** in the Developer Portal. Confirm the credential is active and the endpoint is reachable, then select a model offered by your configured provider or create a routing policy.
 
-## Configuration Options
+Send requests to Naagmani's gateway with your application credential, not the provider key. Supported optional fields depend on the selected adapter/model.
 
-- **Google AI Studio (API Key)**: Pass your Gemini API Key directly into Credential Pools.
-- **Google Cloud Vertex AI (Service Account)**: Provide your GCP Service Account JSON key for enterprise VPC peering and strict data locality.
-
----
-
-## Massive Context Windows (Up to 2M Tokens)
-
-Naagmani streams multi-megabyte prompt payloads directly to Google endpoints with adaptive chunk buffering and zero memory bloat.
-
----
-
-## Next Steps
-
-- [DeepSeek Integration](/integrations/deepseek)
-- [Self-Hosted LLMs (Ollama & vLLM)](/integrations/other-providers)
+See [provider behavior](/concepts/providers), [quickstart](/get-started/quickstart) and [chat completions](/api/chat-completions).

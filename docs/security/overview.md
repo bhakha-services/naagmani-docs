@@ -1,34 +1,14 @@
-# Security & Governance Architecture
+# Security controls
 
-Security is the core architectural pillar of Naagmani. Designed for multi-tenant enterprise deployments, Naagmani guarantees absolute credential isolation, least-privilege token access, end-to-end payload encryption, and immutable audit logs.
+Naagmani includes scoped application credentials, role-based management permissions, provider credential encryption, governance policies and configurable request logging. These controls depend on deployment configuration and the endpoints being used.
 
-```mermaid
-flowchart TD
-    subgraph SecurityPerimeter ["Naagmani Security Perimeter"]
-        direction TB
-        A[Client Request] --> B[TLS 1.3 Termination & WAF]
-        B --> C[Project Service Token Authenticator]
-        C --> D[RBAC / Cap Enforcement]
-        D --> E[Multi-Tenant Context Isolation]
-        E --> F[AES-256 Vault Decryption]
-        F --> G[PII / DLP Guardrails]
-        G --> H[Audited Upstream Dispatch]
-    end
-```
+- **Identity separation:** self-hosted local accounts and hosted Accounts sessions have different authorities.
+- **Application scope:** API keys and Project Service Tokens carry application context and permissions.
+- **Management access:** organization/project operations enforce applicable RBAC permissions.
+- **Provider credentials:** encrypted storage protects stored keys; the runtime decrypts them for provider calls.
+- **Observability:** administrative audit events and request logs support investigation, with configurable retention and payload policies.
+- **Deployment protection:** configure HTTPS, network restrictions, key management, backups and updates for your environment.
 
----
+An application feature is not a compliance certification. Do not infer SOC 2, ISO 27001, HIPAA or GDPR compliance from the presence of logging or encryption controls alone. Audit records have retention and cleanup operations; do not assume a cryptographically immutable archive.
 
-## Security Highlights
-
-1. **Hardware-Grade Cryptographic Vault**: Provider API keys and connection secrets are encrypted using AES-256-GCM with envelope encryption.
-2. **Short-Lived Service Tokens**: Granular capabilities and automatic TTL expiration.
-3. **Zero-Trust Network Model**: Master keys never leak to client code or plugin daemons.
-4. **Comprehensive Audit Logs**: Every administrative configuration change and credential retrieval event is permanently journaled.
-
----
-
-## Next Steps
-
-- [Authentication & BYOK Model](/security/authentication)
-- [Role-Based Access Control (RBAC)](/security/authorization)
-- [Tenant Isolation & Sandboxing](/security/isolation)
+See [authentication](/security/authentication), [authorization](/security/authorization), [audit logs](/security/audit-logs) and [data protection](/security/data-protection).

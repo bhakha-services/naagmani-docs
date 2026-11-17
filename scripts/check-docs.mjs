@@ -23,6 +23,11 @@ function resolveDocTarget(targetPath, sourceFile) {
   const cleanTarget = targetPath.split('#')[0].split('?')[0].trim();
   if (!cleanTarget) return true; // Just an anchor on same page
 
+  if (cleanTarget.startsWith('/downloads/')) {
+    const asset = path.resolve(rootDir, 'public', cleanTarget.slice(1));
+    return asset.startsWith(path.join(rootDir, 'public') + path.sep) && fs.existsSync(asset) && fs.statSync(asset).isFile();
+  }
+
   let candidate = '';
   if (cleanTarget.startsWith('/docs/')) {
     const rel = cleanTarget.replace('/docs/', '');
@@ -43,12 +48,8 @@ function resolveDocTarget(targetPath, sourceFile) {
       if (fs.existsSync(appPage)) return true;
       candidate = docCandidate;
     }
-  } else if (cleanTarget.startsWith('file:///')) {
-    // Local workspace link: strip scheme and normalize
-    let localPath = cleanTarget.replace('file:///', '');
-    // Handle Windows drive paths like e:/... or E:/...
-    localPath = decodeURIComponent(localPath);
-    return fs.existsSync(localPath);
+  } else if (cleanTarget.startsWith('file:')) {
+    return false; // Public documentation must not link to a local workspace.
   } else {
     // Relative link
     const sourceDir = path.dirname(sourceFile);

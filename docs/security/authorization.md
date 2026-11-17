@@ -15,7 +15,7 @@ Naagmani enforces a comprehensive, multi-tiered authorization and identity archi
 
 ---
 
-## 2. Dynamic RBAC Domain Model (Phase 2 Foundation)
+## 2. Dynamic RBAC Domain Model
 
 Human access control for Developer Portal users is backed by a first-class dynamic RBAC architecture:
 

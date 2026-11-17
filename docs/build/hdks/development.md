@@ -24,13 +24,13 @@ Use the Naagmani CLI to scaffold your project:
 
 ```bash
 # For Go
-naagmani plugin create email-guardrail --language go
+naagmani plugin create --language go email-guardrail
 
 # For Node.js / TypeScript
-naagmani plugin create email-guardrail --language node
+naagmani plugin create --language node email-guardrail
 
 # For Python
-naagmani plugin create email-guardrail --language python
+naagmani plugin create --language python email-guardrail
 ```
 
 The CLI initializes the canonical project directory:

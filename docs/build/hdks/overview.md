@@ -1,57 +1,9 @@
-# HDK Overview & Architecture
+# Plugin HDK
 
-The **Naagmani Host Development Kit (HDK)** provides the runtime specifications, protocols, and toolkits for building native capability plugins and request interceptors that run inside the Naagmani Gateway Data Plane.
+The Host Development Kit helps implement plugins in Go, Node.js/TypeScript and Python. Plugins run as worker processes and communicate with the gateway using newline-framed JSON-RPC 2.0 over standard input/output.
 
----
+Plugins declare metadata, hooks, permissions, capabilities and runtime configuration in `plugin.json`. Runtime policy and entitlements determine whether they can execute for a request. Installing a package alone does not enable every capability.
 
-## What is an HDK Plugin?
+The supervisor manages process startup, registration, health and termination. Hook failure behavior depends on configured timeouts and failure policy. A worker crash can still fail the affected request. Process separation does not establish a complete host-security sandbox; apply deployment restrictions for untrusted code.
 
-An HDK plugin is an out-of-process, sandboxed worker daemon written in **Go**, **Node.js/TypeScript**, or **Python**. 
-
-The gateway spawns the plugin process upon startup and communicates with it using a high-throughput **JSON-RPC 2.0 wire protocol** over standard I/O pipes (`stdin`/`stdout`) or Unix domain sockets:
-
-```mermaid
-flowchart TD
-    subgraph Gateway ["Naagmani Gateway Data Plane (Go)"]
-        Ingress[Inbound Client Request] --> Pipeline[Pipeline Controller]
-        Pipeline --> Dispatcher{Hook Dispatcher}
-        Dispatcher -->|IPC Pipe| Supervisor[Plugin Supervisor]
-        Dispatcher -->|Direct| Adapter[Upstream AI Adapter]
-    end
-
-    subgraph Sandboxes ["Sandboxed Plugin Worker Processes"]
-        Supervisor -->|JSON-RPC| P1["Plugin A: Auth Validator"]
-        Supervisor -->|JSON-RPC| P2["Plugin B: DLP Masker"]
-    end
-
-    Adapter --> UpstreamLLM[(Upstream Model)]
-```
-
----
-
-## Core HDK Capabilities
-
-1. **Pipeline Interception**: Inspect, mutate, or short-circuit requests at `request.before`, `provider.before`, and `response.before` execution phases.
-2. **Crash Resilience & Auto-Restart**: If a plugin process panics, the gateway supervisor isolates the failure, logs a diagnostic event, and restarts the worker without dropping active HTTP client connections.
-3. **Strict Resource Sandboxing**: Plugins execute with CPU/memory cgroup limits and restricted network access.
-
----
-
-## The Plugin Structure
-
-Every HDK plugin consists of:
-```text
-my-plugin/
-├── plugin.json         # Manifest defining capabilities, hooks & config schema
-├── src/                # Implementation code (Go, Node, Python)
-├── Makefile / build.sh # Compilation script producing target binary
-└── README.md           # Plugin documentation
-```
-
----
-
-## Next Steps
-
-- Review the [Plugin Manifest Schema (plugin.json)](/build/hdks/manifest)
-- Learn about the [Wire Protocol v1](/build/hdks/protocol)
-- Follow the step-by-step [Plugin Development Tutorial](/build/hdks/development)
+Start with [manifest format](/build/hdks/manifest), [protocol](/build/hdks/protocol), [development](/build/hdks/development), [testing](/build/hdks/testing) and [publishing](/build/hdks/publishing).

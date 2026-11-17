@@ -1,10 +1,10 @@
 # Wire Protocol v1 Specification (`naagmani.plugin/v1`)
 
-The **Naagmani Wire Protocol v1** specifies the asynchronous, high-throughput communication format between the Naagmani OS kernel and sandboxed plugin worker processes.
+The **Naagmani Wire Protocol v1** specifies the asynchronous, high-throughput communication format between the Naagmani OS kernel and plugin worker processes.
 
 - **Protocol Version**: `naagmani.plugin/v1`
 - **Framing**: Single-line JSON-RPC 2.0 objects terminated by newline (`\n`)
-- **Transport**: Standard I/O (`stdin` / `stdout`) pipes or Unix Domain Sockets
+- **Transport**: Standard I/O (`stdin` / `stdout`) pipes
 
 ---
 

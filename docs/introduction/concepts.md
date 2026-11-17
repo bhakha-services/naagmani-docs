@@ -26,7 +26,7 @@ A logical workspace dedicated to a specific application or product line. Project
 ### 3. Environment
 An execution boundary inside a project (`Test` and `Production`). Environments allow teams to safely test experimental model weights without affecting production workloads.
 
-### 4. Project Service Token (`nst_...`)
+### 4. Project Service Token (`nm_st_...`)
 A specialized machine-to-machine credential bound to a project and environment. Supports fine-grained capability matrices (e.g., `inference:chat`, `tools:execute`), TTL expiration, and human member attribution.
 
 ### 5. Smart Model Routing

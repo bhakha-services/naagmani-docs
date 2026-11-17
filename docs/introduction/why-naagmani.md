@@ -15,14 +15,14 @@ graph LR
 
 ---
 
-## 1. Zero-Downtime Reliability & Failovers
+## 1. Provider routing and failover
 
 When foundational model providers suffer API outages, elevated 5xx error rates, or capacity throttling (HTTP 429 / 529), direct client applications break.
 
 With Naagmani:
 - **Intelligent Cascade Routing**: If Anthropic Claude returns an `OVERLOADED` error, Naagmani instantly routes the prompt to OpenAI GPT-4o or Google Gemini with zero application code changes.
 - **Provider Health Probing**: Background probes monitor upstream provider latency and error rates, proactively routing traffic away from degraded regions.
-- **Sub-50ms Failover Overhead**: Retries happen at the gateway layer, preserving client connections and streaming pipelines.
+- **Gateway-managed failover**: Eligible retries happen at the gateway layer. Timing and success depend on upstream errors, configured timeouts, streaming state and available candidates.
 
 ---
 

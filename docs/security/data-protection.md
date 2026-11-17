@@ -1,26 +1,19 @@
-# Data Protection & DLP
+# Data protection and privacy controls
 
-Protecting proprietary enterprise data, user privacy, and compliance integrity is built directly into Naagmani's data pipeline.
+Request handling, logging, plugins and upstream providers have separate data-handling behavior. Review all of them when configuring a deployment.
 
----
+## Payload logging
 
-## Zero Data Retention (ZDR)
+The default `metadata_only` request-logging policy excludes request/response bodies from those logs. `redacted_payload` stores sanitized snapshots; `encrypted_payload` stores encrypted snapshots with permission-controlled reveal. Retention and cleanup apply to stored records.
 
-Naagmani does **not** persist request prompt contents or generated completions to persistent disk unless explicitly enabled via audit tap configurations. All payload transformations occur purely in-memory.
+This is not a platform-wide zero-data-retention guarantee. Agent conversation/memory features, plugins, application databases, backups and upstream providers can retain data independently. Disable or configure those features to meet your requirements.
 
----
+## Privacy plugins and governance
 
-## PII Masking & Guardrail Filters
+Privacy protection depends on the installed plugin, its enabled capabilities and its policy. Install/configure the intended protection and test representative inputs before relying on masking, tokenization or blocking. Do not assume that every request automatically detects all PII, secrets, prompt injections or harmful content.
 
-- Mask Social Security Numbers, phone numbers, and email addresses.
-- Redact database connection strings, JWT tokens, and private RSA keys before external model transmission.
+The project's **Governance** page manages policy rules and simulation. It is not a universal DLP toggle panel. See [governance and privacy plugins](/developer-portal/governance-routing/guardrails).
 
-Configure guardrails in the Portal:
-- **AI Guardrails**: [{{DEVELOPER_PORTAL_URL}}/guardrails]({{DEVELOPER_PORTAL_URL}}/guardrails)
+Protect configuration and encryption keys, and configure HTTPS for traffic crossing network trust boundaries. Encrypted storage does not make a malicious runtime administrator unable to access decrypted data.
 
----
-
-## Next Steps
-
-- [Security Audit Logs](/security/audit-logs)
-- [Production Operations Overview](/production/overview)
+See [request-log privacy](/security/inference-observability) and [offline deployment](/deploy/offline).

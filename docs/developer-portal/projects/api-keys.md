@@ -1,85 +1,19 @@
-# API Keys & Credential Vault
+# Application API keys
 
-**API Keys** are environment-scoped secrets used by client applications, scripts, and SDKs to authenticate inference requests with the Naagmani Gateway.
+Open **Projects → your project → Workspace → API Keys** to create an application credential for the selected environment. A key is separate from your portal session, upstream provider credentials and the API-to-OS machine credential.
 
-- **Portal Location**: `Projects > [Your Project] > Workspace > API Keys` (`/projects/[slug]/api-keys`)
-- **API Endpoint**: `/v1/api-keys`
+## Format and scope
 
----
+Application keys use the `nm_live_` prefix. Test/production scope comes from the key's configured environment, not a `nm_live_` or `nm_live_` prefix. Keep the entire key secret. Store it server-side and send it as `Authorization: Bearer <key>` to supported gateway endpoints.
 
-## What is an API Key?
+## Create and use
 
-An API Key is a high-entropy secret token tied to a specific **Project** and **Environment** (`test` or `production`). 
+1. Select the project and environment.
+2. Create a named key with the scopes, limits and optional member attribution offered by the form.
+3. Copy the secret at creation time and store it in your secret manager.
+4. Use the gateway URL for inference; a key does not grant unrestricted management access.
+5. Revoke credentials you no longer need and verify rejection against your deployed gateway. No fixed cross-instance revocation latency is promised.
 
-When an API Key is used in the `Authorization: Bearer <key>` header, Naagmani's gateway automatically resolves:
-1. The caller's **Organization ID**.
-2. The caller's **Project ID** and **Environment ID**.
-3. The applicable **Routing Policies**, **Budget Limits**, and **AI Guardrails**.
+Keys are stored as hashes rather than recoverable plaintext. If the secret is lost, issue a replacement and revoke the old key.
 
-```mermaid
-graph LR
-    Client["Client with API Key (nak_live_...)"] --> Gateway["Naagmani Gateway"]
-    Gateway -->|SHA-256 Hash Lookup| DB["Vault Cache"]
-    DB -->|Resolves Context| Context["Org: Acme | Proj: Search | Env: Prod"]
-    Context --> Policy["Applies 'Prod' Rate Limits & Routing"]
-```
-
----
-
-## Key Format & Prefix Standards
-
-Naagmani API Keys follow a strict prefix convention for security and automated secret scanning:
-
-| Prefix | Environment | Purpose | Example |
-|---|---|---|---|
-| `nak_test_...` | Test / Staging | Development & CI/CD testing | `nak_test_8f7e6d5c4b3a2109...` |
-| `nak_live_...` | Production | Live customer production traffic | `nak_live_1a2b3c4d5e6f7a8b...` |
-
----
-
-## Security Architecture
-
-1. **One-Way SHA-256 Hashing**: Plaintext keys are never stored in the database. Only cryptographic SHA-256 hashes are persisted.
-2. **One-Time Plaintext Display**: The full secret is shown strictly once upon creation. If lost, the key must be rotated.
-3. **Instant Revocation**: Revoking a key in the portal instantly purges it from the gateway's distributed Redis memory cache within < 50ms.
-
----
-
-## Creating & Managing API Keys
-
-1. Inside your active project workspace, click **Workspace > API Keys**.
-2. Click **Generate API Key**.
-3. Configure:
-   - **Key Name**: A meaningful label (e.g. `Backend Chat Service`).
-   - **Environment**: Select `test` or `production`.
-   - **Rate Limit (RPM)** *(Optional)*: Set a dedicated Requests-Per-Minute cap for this specific key.
-   - **Expiration** *(Optional)*: Set an automatic expiry date (e.g. 30 days, 90 days, or Never).
-4. Click **Create Key** and copy the plaintext secret into your environment secrets manager.
-
----
-
-## API Keys vs Project Service Tokens
-
-| Feature | API Key (`nak_...`) | Project Service Token (`nsk_...`) |
-|---|---|---|
-| **Primary Use Case** | Application inference (`/v1/chat/completions`) | Machine-to-machine automation & granular capability scoping |
-| **Capability Scopes** | Full inference access within target environment | Strict capability allowlists (`inference.execute`, `models.read`, etc.) |
-| **Rotation Mechanism** | Manual delete & recreate | Automated zero-downtime rotation with configurable grace period |
-| **Identity Context** | Project + Environment | Dedicated machine Service Principal + Project + Environment |
-
----
-
-## Troubleshooting
-
-| Error | Cause | Resolution |
-|---|---|---|
-| `401 Unauthorized: invalid api key` | Key string is mistyped or revoked. | Verify the key prefix (`nak_...`) and check key status in the Developer Portal. |
-| `403 Forbidden: project quota exceeded` | The project has reached its monthly token budget. | Increase the project budget in **Usage & FinOps > Budgets**. |
-| `429 Too Many Requests` | Key exceeded its configured RPM limit. | Upgrade rate limits or distribute requests across multiple keys. |
-
----
-
-## Related Documentation
-
-- [Project Service Tokens](/developer-portal/projects/service-tokens)
-- [API Authentication Reference](/api/authentication)
+For machine capability allowlists and partner token operations, see [Project Service Tokens](/developer-portal/projects/service-tokens). See [application authentication](/api/authentication) and [first request](/get-started/first-request).

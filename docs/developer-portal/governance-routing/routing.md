@@ -1,6 +1,6 @@
 # Smart Routing Policies & Failover
 
-Create virtual model aliases (such as `smart`, `fast`, `code-gen`), configure dynamic routing strategies, and establish automated multi-provider failover cascades to guarantee high availability and cost optimization.
+Create virtual model aliases (such as `smart`, `fast`, `code-gen`), configure dynamic routing strategies, and establish automated multi-provider failover cascades to configure provider selection and eligible fallback behavior.
 
 - **Portal Location**: `Projects > [Your Project] > Governance & Routing > Routing Policies` (`/projects/[slug]/routing-policies`)
 - **API Endpoint**: `/v1/projects/{projectId}/environments/{envId}/routing-policies`
@@ -65,7 +65,7 @@ When a candidate model is selected:
      - *Row 1*: Provider: `deepseek`, Model: `deepseek-chat`, Priority: `1`.
      - *Row 2*: Provider: `anthropic`, Model: `claude-3-5-sonnet`, Priority: `2`.
      - *Row 3*: Provider: `openai`, Model: `gpt-4o`, Priority: `3`.
-4. Click **Save Policy**. The policy is immediately active across all gateway instances within < 50ms.
+4. Click **Save Policy**. Verify that the policy is applied by the target gateway before depending on it for production traffic.
 
 ---
 
@@ -76,7 +76,7 @@ Client code specifies the policy name as the `model` parameter:
 ```bash
 curl -X POST http://localhost:8080/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer nak_live_your_key_here" \
+  -H "Authorization: Bearer nm_live_your_key_here" \
   -d '{
     "model": "smart",
     "messages": [{"role": "user", "content": "Explain quantum computing simply."}]

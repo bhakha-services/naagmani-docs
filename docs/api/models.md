@@ -16,7 +16,7 @@ Retrieve a list of all active models and routing policy aliases available to the
 ### Request Headers
 | Header | Type | Description |
 |---|---|---|
-| `Authorization` | `string` | **Required**. `Bearer nak_...` or `Bearer nsk_...`. |
+| `Authorization` | `string` | **Required**. `Bearer nm_live_...` or `Bearer nm_st_...`. |
 | `X-Environment-ID` | `string` | *Optional*. Environment override (`test` or `production`). |
 
 ### Response Schema (`200 OK`)
@@ -77,7 +77,7 @@ Retrieve metadata for a specific model or virtual policy alias.
 
 ```bash
 curl -X GET http://localhost:8080/v1/models/smart \
-  -H "Authorization: Bearer nak_live_your_key_here"
+  -H "Authorization: Bearer nm_live_your_key_here"
 ```
 
 ### Response Schema (`200 OK`)

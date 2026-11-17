@@ -1,81 +1,11 @@
-# Air-Gapped & Offline Licensing
+# Offline licensing
 
-This guide provides the complete end-to-end operational procedure for activating enterprise licenses in disconnected or air-gapped environments.
+Obtain a signed JSON license from Accounts on a connected workstation, bound to the target installation ID. Transfer it and the issuer's public verification key through your approved process. The private signing key must remain with the issuer.
 
----
+On the isolated installation, import the artifact using the local **License & Sync** page. For file-based startup configuration, mount the license and set `NAAGMANI_LICENSE_PATH` to its OS-container path. `NAAGMANI_LICENSE_DATA` accepts inline JSON and takes precedence.
 
-## 1. Air-Gapped Licensing Architecture
+The OS performs the actual signature, installation-ID and expiry checks. Keep its data volume and identity persistent, and maintain an accurate host clock. There is no fixed 14-day grace guarantee.
 
-In air-gapped or restricted network environments, Naagmani uses **self-contained, digitally signed Ed25519 license artifacts**:
+The CLI's `platform license verify` command inspects the JSON envelope; do not treat that output as cryptographic acceptance by the runtime. Local OS acceptance and reported entitlement state are authoritative. Older CLI activation/registration workflows may write a different environment field; use the supported local import or runtime configuration above.
 
-```text
-1. Customer Portal (Online) ──► Generate & Download "naagmani-license-lic_xxx.json"
-                                          │
-                                          ▼ (Secure Optical Media / USB)
-2. Air-Gapped Server        ──► naagmani platform license activate naagmani-license.json
-                                          │
-                                          ▼
-3. Local OS Engine          ──► Verifies Ed25519 signature against bundled public key
-                                          │
-                                          ▼
-                                [ Enterprise Entitlements Active ]
-```
-
----
-
-## 2. Generating & Downloading Offline License
-
-1. Log into the **Developer Portal** ([{{DEVELOPER_PORTAL_URL}}]({{DEVELOPER_PORTAL_URL}})).
-2. Navigate to **Settings ➔ License & Entitlements**.
-3. Click **Download Signed License (.json)**.
-4. Save the generated file `naagmani-license-<licID>.json`.
-
----
-
-## 3. Transferring & Activating on Air-Gapped Server
-
-### Step 1: Verify the Cryptographic Envelope
-Before activation, verify the signature structure using the standalone CLI:
-
-```bash
-naagmani platform license verify naagmani-license-lic_xxx.json
-```
-
-Output:
-```text
-================================================================================
-🔍 License Envelope Verification
-================================================================================
-License ID:       lic_01JXYZ9999
-Installation ID:  inst_01JABC1234
-Edition:          enterprise
-Issued At:        2026-09-27T00:00:00Z
-Expires At:       2027-09-27T00:00:00Z
-Signature:        dGVzdC1zaW...VkLXZhbGlk (valid base64 envelope)
-
-✓ License structure and cryptographic envelope are valid.
-```
-
-### Step 2: Activate the License
-```bash
-naagmani platform license activate naagmani-license-lic_xxx.json --dir /opt/naagmani
-```
-
-### Step 3: Restart Platform Containers
-```bash
-naagmani platform restart --dir /opt/naagmani
-```
-
-### Step 4: Check Active Status
-```bash
-naagmani platform license status --dir /opt/naagmani
-```
-
----
-
-## 4. Offline Clock & Expiration Considerations
-
-In air-gapped environments:
-- The platform uses the host system clock to evaluate `expires_at`.
-- Ensure the server clock is synchronized via a local air-gapped NTP source.
-- When an offline license expires, the platform grants a **14-day grace period** followed by a seamless fallback to `DefaultFree`. Core AI inference and existing plugins remain fully operational.
+Offline licenses do not make remote model services available without a network. See [offline deployment](/deploy/offline) and [licensing overview](/licensing/overview).

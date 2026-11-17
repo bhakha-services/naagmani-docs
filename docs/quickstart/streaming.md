@@ -31,7 +31,7 @@ sequenceDiagram
 import OpenAI from "openai";
 
 const client = new OpenAI({
-  apiKey: process.env.NAAGMANI_API_KEY || "nsk_live_YOUR_KEY",
+  apiKey: process.env.NAAGMANI_API_KEY || "nm_st_YOUR_KEY",
   baseURL: "{{GATEWAY_URL}}/v1",
 });
 
@@ -62,7 +62,7 @@ from openai import OpenAI
 import os
 
 client = OpenAI(
-    api_key=os.environ.get("NAAGMANI_API_KEY", "nsk_live_YOUR_KEY"),
+    api_key=os.environ.get("NAAGMANI_API_KEY", "nm_st_YOUR_KEY"),
     base_url="{{GATEWAY_URL}}/v1"
 )
 

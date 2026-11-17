@@ -1,27 +1,9 @@
-# Anthropic Claude Integration
+# Anthropic
 
-Naagmani transparently bridges OpenAI-compatible client payloads with Anthropic's native Messages API for `claude-3-5-sonnet-20241022`, `claude-3-5-haiku-20241022`, and `claude-3-opus-20240229`.
+Select the Anthropic adapter and supply its provider API key.
 
----
+Configure the provider under **Organization → Providers & Health** in the Developer Portal. Confirm the credential is active and the endpoint is reachable, then select a model offered by your configured provider or create a routing policy.
 
-## Automatic Protocol Translation
+Send requests to Naagmani's gateway with your application credential, not the provider key. Supported optional fields depend on the selected adapter/model.
 
-When a client sends a standard OpenAI JSON body with `model: "claude-3-5-sonnet-20241022"`, Naagmani automatically:
-1. Extracts `system` messages and maps them to Anthropic's top-level `system` parameter.
-2. Converts `tools` definitions into Anthropic tool schemas.
-3. Translates `tool_calls` and `tool_results` into native blocks.
-4. Normalizes streaming SSE events into OpenAI-compatible delta chunks.
-
----
-
-## Credential Setup
-
-Add your `sk-ant-...` key in the Portal:
-- **Credential Pools**: [{{DEVELOPER_PORTAL_URL}}/credentials]({{DEVELOPER_PORTAL_URL}}/credentials)
-
----
-
-## Next Steps
-
-- [Google Gemini Integration](/integrations/google)
-- [DeepSeek Integration](/integrations/deepseek)
+See [provider behavior](/concepts/providers), [quickstart](/get-started/quickstart) and [chat completions](/api/chat-completions).

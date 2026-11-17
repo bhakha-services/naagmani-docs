@@ -11,23 +11,23 @@ export const siteConfig = {
   url: (
     process.env.NEXT_PUBLIC_SITE_URL ||
     process.env.NEXT_PUBLIC_DOCS_URL ||
-    'https://docs.naagmani.ai'
+    'https://docs.naagmani.com'
   ).replace(/\/$/, ''),
 
   apiUrl: (
     process.env.NEXT_PUBLIC_API_BASE_URL ||
-    'https://api.naagmani.ai'
+    'https://api.naagmani.com'
   ).replace(/\/$/, ''),
 
   gatewayUrl: (
     process.env.NEXT_PUBLIC_GATEWAY_URL ||
     process.env.NEXT_PUBLIC_API_BASE_URL ||
-    'https://gateway.naagmani.ai'
+    'https://api.naagmani.com'
   ).replace(/\/$/, ''),
 
   developerPortalUrl: (
     process.env.NEXT_PUBLIC_DEVELOPER_PORTAL_URL ||
-    'https://cloud.naagmani.ai'
+    'https://console.naagmani.com'
   ).replace(/\/$/, ''),
 
   get cloudUrl() {

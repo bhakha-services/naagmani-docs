@@ -1,23 +1,9 @@
-# Rate Limiting & Quotas
+# Limits and quotas
 
-Protect upstream provider quotas and prevent noisy-neighbor congestion across internal teams.
+Configure provider credentials under **Organization → Providers & Health** and application credentials under the selected project's **API Keys** or **Service Tokens** page. Use the controls exposed by your installed version.
 
----
+Provider quotas, application request limits, concurrency, budgets and license capacity are separate constraints. Increasing one does not override the others. Check the actual error code/body and provider-attempt records when a request is rejected.
 
-## Rate Limiting Algorithms
+The inference runtime and the management API can apply different rate-limit policies. Configure shared infrastructure consistently when using multiple instances, then test burst and sustained traffic against your own deployment.
 
-1. **Token Bucket Algorithm**: Allows smooth bursts while maintaining steady sustained throughput.
-2. **Concurrency Limiter**: Restricts maximum concurrent in-flight requests per project or member.
-
----
-
-## Configuration
-
-Set rate limits directly per credential in [**Credential Pools**]({{DEVELOPER_PORTAL_URL}}/credentials) or per token in [**Project Service Tokens**]({{DEVELOPER_PORTAL_URL}}/service-tokens).
-
----
-
-## Next Steps
-
-- [Observability & Metrics](/production/observability)
-- [Scaling & Concurrency](/production/scaling)
+See [providers](/concepts/providers), [budgets](/developer-portal/operations/budgets) and [monitoring](/production/observability).

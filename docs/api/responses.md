@@ -1,6 +1,6 @@
 # Responses & Payload Formats
 
-Naagmani returns standard JSON response payloads complying strictly with OpenAI wire protocols.
+The examples below show the supported chat-completion response format. Optional fields and values depend on the selected model, adapter and execution path.
 
 ---
 

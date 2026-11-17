@@ -88,22 +88,16 @@ Configured per project environment via the Developer Portal or Naagmani CLI:
 
 ---
 
-## Installation via Naagmani CLI
+## Installation
 
-```bash
-# Install into a project for the test environment
-naagmani plugins install naagmani-privacy-shield --project <project_id> --env test
-
-# Install into production after staging verification
-naagmani plugins install naagmani-privacy-shield --project <project_id> --env production
-```
+Select the available Privacy Shield artifact in Marketplace, review its permissions/configuration, and install it into the intended project and environment. See [marketplace installation](/marketplace/installation) and [CLI workflows](/build/cli/plugins).
 
 ---
 
 ## Verification via cURL
 
 ```bash
-curl -X POST https://api.naagmani.ai/v1/chat/completions \
+curl -X POST {{GATEWAY_URL}}/v1/chat/completions \
   -H "Authorization: Bearer $NAAGMANI_API_KEY" \
   -H "X-Project-Id: prj_your_project" \
   -H "X-Environment: test" \
