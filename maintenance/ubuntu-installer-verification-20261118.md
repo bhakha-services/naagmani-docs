@@ -15,6 +15,14 @@ Environment: Ubuntu 24.04 WSL 2, Docker Desktop engine 29.7.2, Compose 5.1.4. Is
 
 ## Limits
 
-This is Ubuntu/WSL validation, not a native macOS or ARM run. Docker package installation on a clean host, destructive uninstall, credential-changing reconfiguration, legacy Linux Compose migration, SMTP delivery, model inference and paid-license issuance were not certified by this run. Windows installer repair has separate evidence. No source changes from this run were pushed or deployed.
+This is Ubuntu/WSL validation, not a native macOS or ARM run. Docker package installation on a clean host, destructive uninstall, credential-changing reconfiguration, SMTP delivery, model inference and paid-license issuance were not certified by this run. Windows installer repair has separate evidence. No source changes from this run were pushed or publicly deployed.
+
+## Actual legacy Ubuntu upgrade follow-up
+
+The user subsequently reproduced an update failure in `/home/i-linux/naagmani`. Logs showed the old generic database variables being ignored, causing connection attempts to localhost inside the API container. The shell updater now backs up and migrates scoped database/cache settings, a missing random machine credential, local deployment mode, private API routing and optional SMTP fields. Existing database URLs, secrets, custom settings, ports and volumes are retained. A new regression test verifies preservation and idempotency.
+
+This actual installation shared the Docker project and Postgres volume with the Windows installation. Its old Ubuntu environment had a different database password. The matching credential from the existing Windows configuration was verified against Postgres over the service network and restored only into Ubuntu connection configuration; no database role password was changed. A private SQL backup and configuration backups were saved inside the Ubuntu installation before repair. Database preflight uses `-h postgres`, because loopback connections can use a trust rule and incorrectly pass with a mismatched password.
+
+The repaired actual installation passed all doctor checks, existing owner login, HttpOnly/session checks, and API-to-OS entitlement authentication. A complete online image-pull update with the patched local installer also passed. The fixed script was staged as `/home/i-linux/naagmani/install.sh`; the public URL remains unchanged pending explicit push/deployment authorization. Actual portal is now localhost:3001, API:9081 and OS:9080, following the user's Ubuntu configuration. The prior port 4001 described above belonged to the Windows configuration before the user's Ubuntu update replaced the shared project's containers.
 
 Private test configurations and raw logs are under `tmp/ubuntu-installer-verification-20261117` in the local workspace, outside public documentation. The two test portals are localhost ports 13601 and 13602. The user's existing portal remains on port 4001.
