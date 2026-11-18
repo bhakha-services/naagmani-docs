@@ -76,6 +76,14 @@ If an older installer starts containers that repeatedly report a PostgreSQL conn
 - Back up database volumes, configuration, encryption keys, installation identity and any signed license before updates.
 - Keep the same machine credential on the local API and OS. It is separate from application API keys and portal passwords.
 
+## Uninstall and reinstall
+
+Uninstall asks separately whether to permanently delete the installation database and storage. The default is **No**: containers stop, while data and the matching configuration remain together. Run the installer again to resume that installation with its existing accounts and credentials.
+
+For a clean reinstall, explicitly confirm permanent data deletion, then confirm removal of the installation directory. This deletes local accounts, database contents and persisted installation data. Back up anything you need first. A fresh installation creates new credentials; it does not reset accounts inside a retained database.
+
+Removing only the installation folder does not remove Docker volumes. If a database volume remains but its configuration is missing, restore its matching `.env` backup before continuing.
+
 ## Other installation paths
 
 - [Docker Compose operations](/deploy/docker-compose)

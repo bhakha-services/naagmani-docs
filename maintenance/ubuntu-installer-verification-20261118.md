@@ -17,6 +17,14 @@ Environment: Ubuntu 24.04 WSL 2, Docker Desktop engine 29.7.2, Compose 5.1.4. Is
 
 This is Ubuntu/WSL validation, not a native macOS or ARM run. Docker package installation on a clean host, destructive uninstall, credential-changing reconfiguration, SMTP delivery, model inference and paid-license issuance were not certified by this run. Windows installer repair has separate evidence. No source changes from this run were pushed or publicly deployed.
 
+## Uninstall/reinstall follow-up
+
+The user clarified that the failure followed menu option 7 with Yes to every question. The old wizard asked whether to **preserve** volumes and then separately whether to delete the configuration directory. Yes to both orphaned retained database data from its matching credentials, explaining the reinstall failure.
+
+Shell and PowerShell now ask explicitly whether to permanently delete data, default No. Preserving data also preserves the configuration directory; only explicit data deletion enables the directory-removal question. Failed Compose removal retains configuration. Directory deletion rejects the home directory and filesystem root.
+
+On the isolated Ubuntu test project, real menu option 7 with all Yes removed containers, both volumes and the installation directory. Fresh interactive installation then passed health, owner login and session checks. A separate preserve-data uninstall retained configuration; staged-image update resumed it, and health/login/session passed again. Windows PowerShell 5 regression tests covered retention, full removal and failed Compose removal; no real user installation was uninstalled. Public documentation was updated. These source changes remain unpublished.
+
 ## Actual legacy Ubuntu upgrade follow-up
 
 The user subsequently reproduced an update failure in `/home/i-linux/naagmani`. Logs showed the old generic database variables being ignored, causing connection attempts to localhost inside the API container. The shell updater now backs up and migrates scoped database/cache settings, a missing random machine credential, local deployment mode, private API routing and optional SMTP fields. Existing database URLs, secrets, custom settings, ports and volumes are retained. A new regression test verifies preservation and idempotency.
